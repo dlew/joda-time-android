@@ -8,8 +8,15 @@ Usage
 
 TODO
 
-Why?
-====
+Why Joda-Time?
+==============
+
+Android has built-in date and time handling - why bother with a library?  If you've worked with Java's Date and Calendar classes you can probably answer this question yourself, but if not, check out [Joda-Time's list of benefits](http://www.joda.org/joda-time/#Why_Joda-Time).
+
+For Android developers in particular Joda-Time solves one critical problem: stale timezone data.  Built-in timezone data is only updated when the OS is updated, and we all know how often that happens for most devices.  [Countries modify their timezones all the time](http://www.bbc.co.uk/news/world-europe-15512177); being able to update your own data keeps your app accurate on all devices.
+
+Why This Library?
+=================
 
 I know what you are thinking: Joda-Time is a great library and it's just a single JAR, so why make things more complex by wrapping it in an Android library?
 
