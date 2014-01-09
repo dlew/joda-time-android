@@ -28,6 +28,8 @@ import java.util.Map;
 import java.util.Set;
 import java.util.TimeZone;
 
+import net.danlew.android.joda.ResourceZoneInfoProvider;
+
 import org.joda.convert.FromString;
 import org.joda.convert.ToString;
 import org.joda.time.chrono.BaseChronology;
@@ -485,7 +487,7 @@ public abstract class DateTimeZone implements Serializable {
 
         if (provider == null) {
             try {
-                provider = new ZoneInfoProvider("org/joda/time/tz/data");
+                provider = new ResourceZoneInfoProvider();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
