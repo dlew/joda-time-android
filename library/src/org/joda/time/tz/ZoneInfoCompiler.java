@@ -33,6 +33,8 @@ import java.util.StringTokenizer;
 import java.util.TreeMap;
 import java.util.Map.Entry;
 
+import net.danlew.android.joda.ResUtils;
+
 import org.joda.time.Chronology;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeField;
@@ -396,10 +398,11 @@ public class ZoneInfoCompiler {
             if (test(tz.getID(), tz)) {
                 map.put(tz.getID(), tz);
                 if (outputDir != null) {
+                	String fileName = ResUtils.getTzResource(tz.getID());
                     if (ZoneInfoCompiler.verbose()) {
-                        System.out.println("Writing " + tz.getID());
+                        System.out.println("Writing " + fileName);
                     }
-                    File file = new File(outputDir, tz.getID());
+                    File file = new File(outputDir, fileName);
                     if (!file.getParentFile().exists()) {
                         file.getParentFile().mkdirs();
                     }
@@ -440,8 +443,8 @@ public class ZoneInfoCompiler {
         }
 
         if (outputDir != null) {
-            System.out.println("Writing ZoneInfoMap");
-            File file = new File(outputDir, "ZoneInfoMap");
+            System.out.println("Writing " + ResUtils.getZoneInfoMapResource());
+            File file = new File(outputDir, ResUtils.getZoneInfoMapResource());
             if (!file.getParentFile().exists()) {
                 file.getParentFile().mkdirs();
             }
