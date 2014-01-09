@@ -6,7 +6,11 @@ This library is a version of [Joda-Time](https://github.com/JodaOrg/joda-time) b
 Usage
 =====
 
-TODO
+Currently, the only way to use it is to import it into your project as a library.  Coming soon: apklib/aar support.
+
+Once it's building, you will need to initialize the timezone provider (via `ResourceZoneInfoProvider.init()`) before you can start using DateTime objects.  I suggest putting this code in `Application.onCreate()`:
+
+    ResourceZoneInfoProvider.init(this);
 
 Why Joda-Time?
 ==============
