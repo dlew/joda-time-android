@@ -1,9 +1,14 @@
 package net.danlew.android.joda;
 
 import java.io.File;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+import android.util.Log;
 
 /**
  * Utilities for translating the normal output of ZoneInfoCompiler/
@@ -60,6 +65,56 @@ public class ResUtils {
      */
     public static String getZoneInfoMapResource() {
         return TZDATA_PREFIX + convertPathToResource("ZoneInfoMap");
+    }
+
+    /** Cache of resources ids, for speed */
+    private static Map<Class<?>, Map<String, Integer>> sIdentifierCache = new ConcurrentHashMap<Class<?>, Map<String, Integer>>();
+
+    /**
+     * Retrieves a resource id dynamically, via reflection.  It's much faster
+     * than Resources.getIdentifier(), however it only allows you to get
+     * identifiers from your own package. 
+     * 
+     * Note that this method is still slower than retrieving resources
+     * directly (e.g., R.drawable.MyResource) - it should only be used
+     * when dynamically retrieving ids.
+     * 
+     * Originally sourced from https://github.com/dlew/android-utils/
+     * 
+     * @param type the type of resource (e.g. R.drawable.class, R.layout.class, etc.)
+     * @param name the name of the resource
+     * @return the resource id, or 0 if not found
+     */
+    public static int getIdentifier(Class<?> type, String name) {
+        // See if the cache already contains this identifier
+        Map<String, Integer> typeCache;
+        if (!sIdentifierCache.containsKey(type)) {
+            typeCache = new ConcurrentHashMap<String, Integer>();
+            sIdentifierCache.put(type, typeCache);
+        }
+        else {
+            typeCache = sIdentifierCache.get(type);
+        }
+
+        if (typeCache.containsKey(name)) {
+            return typeCache.get(name);
+        }
+
+        // Retrieve the identifier
+        try {
+            Field field = type.getField(name);
+            int resId = field.getInt(null);
+
+            if (resId != 0) {
+                typeCache.put(name, resId);
+            }
+
+            return resId;
+        }
+        catch (Exception e) {
+            Log.e("JodaTimeAndroid", "Failed to retrieve identifier: type=" + type + " name=" + name, e);
+            return 0;
+        }
     }
 
 }
