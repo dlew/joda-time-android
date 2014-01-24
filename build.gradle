@@ -44,4 +44,8 @@ android {
 
         instrumentTest.setRoot('test/src/test')
     }
+
+    lintOptions {
+        lintConfig file("library/lint.xml")
+    }
 }
