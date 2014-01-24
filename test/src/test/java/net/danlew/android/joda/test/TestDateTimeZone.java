@@ -44,6 +44,10 @@ import java.util.TimeZone;
  * There are some subtle differences between the original TestDateTimeZone
  * and this one due to the need to initialize the ResourceZoneInfoProvider;
  * namely some variables are lazily initialized.
+ *
+ * Also, a lot of the "name" tests have been removed because they aren't the
+ * same between the normal JDK and Android (as the Locales are implemented
+ * slightly differently; e.g., different names).
  */
 public class TestDateTimeZone extends InstrumentationTestCase {
 
@@ -233,53 +237,6 @@ public class TestDateTimeZone extends InstrumentationTestCase {
             DateTimeZone.forID("+0");
             fail();
         } catch (IllegalArgumentException ex) {}
-    }
-
-    public void testForID_String_old() {
-        Map<String, String> map = new LinkedHashMap<String, String>();
-        map.put("GMT", "UTC");
-        map.put("WET", "WET");
-        map.put("CET", "CET");
-        map.put("MET", "CET");
-        map.put("ECT", "CET");
-        map.put("EET", "EET");
-        map.put("MIT", "Pacific/Apia");
-        map.put("HST", "Pacific/Honolulu");
-        map.put("AST", "America/Anchorage");
-        map.put("PST", "America/Los_Angeles");
-        map.put("MST", "America/Denver");
-        map.put("PNT", "America/Phoenix");
-        map.put("CST", "America/Chicago");
-        map.put("EST", "America/New_York");
-        map.put("IET", "America/Indiana/Indianapolis");
-        map.put("PRT", "America/Puerto_Rico");
-        map.put("CNT", "America/St_Johns");
-        map.put("AGT", "America/Argentina/Buenos_Aires");
-        map.put("BET", "America/Sao_Paulo");
-        map.put("ART", "Africa/Cairo");
-        map.put("CAT", "Africa/Harare");
-        map.put("EAT", "Africa/Addis_Ababa");
-        map.put("NET", "Asia/Yerevan");
-        map.put("PLT", "Asia/Karachi");
-        map.put("IST", "Asia/Kolkata");
-        map.put("BST", "Asia/Dhaka");
-        map.put("VST", "Asia/Ho_Chi_Minh");
-        map.put("CTT", "Asia/Shanghai");
-        map.put("JST", "Asia/Tokyo");
-        map.put("ACT", "Australia/Darwin");
-        map.put("AET", "Australia/Sydney");
-        map.put("SST", "Pacific/Guadalcanal");
-        map.put("NST", "Pacific/Auckland");
-        for (String key : map.keySet()) {
-            String value = map.get(key);
-            TimeZone juZone = TimeZone.getTimeZone(key);
-            DateTimeZone zone = DateTimeZone.forTimeZone(juZone);
-            assertEquals(value, zone.getID());
-//            System.out.println(juZone);
-//            System.out.println(juZone.getDisplayName());
-//            System.out.println(zone);
-//            System.out.println("------");
-        }
     }
 
     //-----------------------------------------------------------------------
@@ -658,26 +615,6 @@ public class TestDateTimeZone extends InstrumentationTestCase {
         JDK6 = jdk6;
     }
 
-    public void testGetShortName() {
-        DateTimeZone zone = DateTimeZone.forID("Europe/London");
-        assertEquals("BST", zone.getShortName(TEST_TIME_SUMMER));
-        assertEquals("GMT", zone.getShortName(TEST_TIME_WINTER));
-        assertEquals("BST", zone.getShortName(TEST_TIME_SUMMER, Locale.ENGLISH));
-    }
-
-    public void testGetShortName_berlin() {
-        DateTimeZone berlin = DateTimeZone.forID("Europe/Berlin");
-        assertEquals("CET", berlin.getShortName(TEST_TIME_WINTER, Locale.ENGLISH));
-        assertEquals("CEST", berlin.getShortName(TEST_TIME_SUMMER, Locale.ENGLISH));
-        if (JDK6) {
-            assertEquals("MEZ", berlin.getShortName(TEST_TIME_WINTER, Locale.GERMAN));
-            assertEquals("MESZ", berlin.getShortName(TEST_TIME_SUMMER, Locale.GERMAN));
-        } else {
-            assertEquals("CET", berlin.getShortName(TEST_TIME_WINTER, Locale.GERMAN));
-            assertEquals("CEST", berlin.getShortName(TEST_TIME_SUMMER, Locale.GERMAN));
-        }
-    }
-
     public void testGetShortNameProviderName() {
         assertEquals(null, DateTimeZone.getNameProvider().getShortName(null, "Europe/London", "BST"));
         assertEquals(null, DateTimeZone.getNameProvider().getShortName(Locale.ENGLISH, null, "BST"));
@@ -688,26 +625,6 @@ public class TestDateTimeZone extends InstrumentationTestCase {
     public void testGetShortNameNullKey() {
         DateTimeZone zone = new MockDateTimeZone("Europe/London");
         assertEquals("Europe/London", zone.getShortName(TEST_TIME_SUMMER, Locale.ENGLISH));
-    }
-
-    public void testGetName() {
-        DateTimeZone zone = DateTimeZone.forID("Europe/London");
-        assertEquals("British Summer Time", zone.getName(TEST_TIME_SUMMER));
-        assertEquals("Greenwich Mean Time", zone.getName(TEST_TIME_WINTER));
-        assertEquals("British Summer Time", zone.getName(TEST_TIME_SUMMER, Locale.ENGLISH));
-    }
-
-    public void testGetName_berlin() {
-        DateTimeZone berlin = DateTimeZone.forID("Europe/Berlin");
-        assertEquals("Central European Time", berlin.getName(TEST_TIME_WINTER, Locale.ENGLISH));
-        assertEquals("Central European Summer Time", berlin.getName(TEST_TIME_SUMMER, Locale.ENGLISH));
-        if (JDK6) {
-            assertEquals("Mitteleurop\u00e4ische Zeit", berlin.getName(TEST_TIME_WINTER, Locale.GERMAN));
-            assertEquals("Mitteleurop\u00e4ische Sommerzeit", berlin.getName(TEST_TIME_SUMMER, Locale.GERMAN));
-        } else {
-            assertEquals("Zentraleurop\u00e4ische Zeit", berlin.getName(TEST_TIME_WINTER, Locale.GERMAN));
-            assertEquals("Zentraleurop\u00e4ische Sommerzeit", berlin.getName(TEST_TIME_SUMMER, Locale.GERMAN));
-        }
     }
 
     public void testGetNameProviderName() {
