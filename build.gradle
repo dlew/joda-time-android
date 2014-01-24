@@ -49,3 +49,5 @@ android {
         lintConfig file("library/lint.xml")
     }
 }
+
+apply from: 'https://raw.github.com/dlew/gradle-mvn-push/master/gradle-mvn-push.gradle'
