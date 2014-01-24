@@ -1,0 +1,47 @@
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:0.7.3'
+    }
+}
+
+apply plugin: 'android-library'
+
+dependencies {
+    compile files('library/libs/joda-convert-1.5.jar')
+}
+
+android {
+    compileSdkVersion 15
+    buildToolsVersion "18.0.1"
+
+    sourceSets {
+        main {
+            manifest {
+                srcFile 'library/AndroidManifest.xml'
+            }
+            java {
+                srcDirs = ['library/src']
+            }
+            res {
+                srcDirs = ['library/res']
+            }
+            assets {
+                srcDirs = ['library/assets']
+            }
+            resources {
+                srcDirs = ['library/src']
+            }
+            aidl {
+                srcDirs = ['library/src']
+            }
+            renderscript {
+                srcDirs = ['library/src']
+            }
+        }
+
+        instrumentTest.setRoot('test/src/test')
+    }
+}
