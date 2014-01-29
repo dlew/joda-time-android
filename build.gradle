@@ -18,30 +18,10 @@ android {
     buildToolsVersion "19.0.1"
 
     sourceSets {
-        main {
-            manifest {
-                srcFile 'library/AndroidManifest.xml'
-            }
-            java {
-                srcDirs = ['library/src']
-            }
-            res {
-                srcDirs = ['library/res']
-            }
-            assets {
-                srcDirs = ['library/assets']
-            }
-            resources {
-                srcDirs = ['library/src']
-            }
-            aidl {
-                srcDirs = ['library/src']
-            }
-            renderscript {
-                srcDirs = ['library/src']
-            }
-        }
-
+        main.manifest.srcFile 'library/AndroidManifest.xml'
+        main.java.srcDir 'library/src'
+        main.res.srcDir 'library/res'
+        main.assets.srcDir 'library/assets'
         instrumentTest.setRoot('test/src/test')
     }
 
