@@ -9,8 +9,12 @@ buildscript {
 
 apply plugin: 'android-library'
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
-    compile files('library/libs/joda-convert-1.5.jar')
+    compile 'org.joda:joda-convert:1.6'
 }
 
 android {
