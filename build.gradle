@@ -3,7 +3,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.8.0'
+        classpath 'com.android.tools.build:gradle:0.9.1'
     }
 }
 
@@ -26,7 +26,7 @@ android {
         main.java.srcDir 'library/src'
         main.res.srcDir 'library/res'
         main.assets.srcDir 'library/assets'
-        instrumentTest.setRoot('test/src/test')
+        androidTest.setRoot('test/src/test')
     }
 
     lintOptions {
