@@ -15,7 +15,9 @@ Why This Library?
 
 I know what you are thinking: Joda-Time is a great library and it's just a single JAR, so why make things more complex by wrapping it in an Android library?
 
-There is a particular problem with the JAR setup on Android: due to its usage of [ClassLoader.getResourceAsStream()](http://developer.android.com/reference/java/lang/ClassLoader.html#getResourceAsStream%28java.lang.String%29), it greatly inflates its memory footprint on apps.  (For more details, see [this blog post](http://daniel-codes.blogspot.com/2013/08/joda-times-memory-issue-in-android.html).)  This library avoids the problem for Android by loading from resources instead of a JAR.
+There is a particular problem with the JAR setup on Android: due to its usage of [ClassLoader.getResourceAsStream()](http://developer.android.com/reference/java/lang/ClassLoader.html#getResourceAsStream%28java.lang.String%29), it greatly inflates its memory footprint on apps.  (For more details, see [this blog post](http://blog.danlew.net/2013/08/20/joda_time_s_memory_issue_in_android/).)  This library avoids the problem for Android by loading from resources instead of a JAR.
+
+This library also has extra utilities designed for Android.  For example, see [DateUtils](library/src/net/danlew/android/joda/DateUtils.java), a port of Android's [DateUtils](http://developer.android.com/reference/android/text/format/DateUtils.html).
 
 Usage
 =====
