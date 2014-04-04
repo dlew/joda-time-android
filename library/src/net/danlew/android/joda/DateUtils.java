@@ -1,6 +1,9 @@
 package net.danlew.android.joda;
 
+import android.content.Context;
+import org.joda.time.DateTime;
 import org.joda.time.DateTimeFieldType;
+import org.joda.time.DateTimeZone;
 import org.joda.time.LocalDate;
 import org.joda.time.ReadableDuration;
 import org.joda.time.ReadableInstant;
@@ -28,11 +31,55 @@ public class DateUtils {
     public static final int FORMAT_ABBREV_RELATIVE = android.text.format.DateUtils.FORMAT_ABBREV_RELATIVE;
     public static final int FORMAT_ABBREV_ALL = android.text.format.DateUtils.FORMAT_ABBREV_ALL;
 
+
     /**
      * We don't want consumers of DateUtils to use this, but we do need it internally to calibrate
      * times to UTC for formatting purposes.
      */
     private static final int FORMAT_UTC = android.text.format.DateUtils.FORMAT_UTC;
+
+    private static final DateTime EPOCH = new DateTime(0, DateTimeZone.UTC);
+
+    /**
+     * Formats a date or a time according to the local conventions.
+     *
+     * Since ReadablePartials don't support all fields, we fill in any blanks
+     * needed for formatting by using the epoch (1970-01-01T00:00:00Z).
+     *
+     * See {@link android.text.format.DateUtils#formatDateTime} for full docs.
+     *
+     * @param context the context is required only if the time is shown
+     * @param time a point in time
+     * @param flags a bit mask of formatting options
+     * @return a string containing the formatted date/time.
+     */
+    public static String formatDateTime(Context context, ReadablePartial time, int flags) {
+        return android.text.format.DateUtils.formatDateTime(context, toMillis(time), flags | FORMAT_UTC);
+    }
+
+    /**
+     * Formats a date or a time according to the local conventions.
+     *
+     * See {@link android.text.format.DateUtils#formatDateTime} for full docs.
+     *
+     * @param context the context is required only if the time is shown
+     * @param time a point in time
+     * @param flags a bit mask of formatting options
+     * @return a string containing the formatted date/time.
+     */
+    public static String formatDateTime(Context context, ReadableInstant time, int flags) {
+        return android.text.format.DateUtils.formatDateTime(context, toMillis(time), flags | FORMAT_UTC);
+    }
+
+    private static long toMillis(ReadablePartial time) {
+        return time.toDateTime(EPOCH).getMillis();
+    }
+
+    private static long toMillis(ReadableInstant time) {
+        DateTime dateTime = time instanceof DateTime ? (DateTime) time : new DateTime(time);
+        DateTime utcDateTime = dateTime.withZoneRetainFields(DateTimeZone.UTC);
+        return utcDateTime.getMillis();
+    }
 
     /**
      * Formats an elapsed time in the form "MM:SS" or "H:MM:SS"
