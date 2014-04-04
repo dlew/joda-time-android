@@ -1,5 +1,7 @@
 package net.danlew.android.joda;
 
+import org.joda.time.ReadableDuration;
+
 /**
  * A replacement for android.text.format.DateUtils that uses Joda-Time classes.
  */
@@ -28,4 +30,30 @@ public class DateUtils {
      */
     private static final int FORMAT_UTC = android.text.format.DateUtils.FORMAT_UTC;
 
+    /**
+     * Formats an elapsed time in the form "MM:SS" or "H:MM:SS"
+     * for display on the call-in-progress screen.
+     *
+     * See {@link android.text.format.DateUtils#formatElapsedTime} for full docs.
+     *
+     * @param elapsedDuration the elapsed duration
+     */
+    public static String formatElapsedTime(ReadableDuration elapsedDuration) {
+        return formatElapsedTime(null, elapsedDuration);
+    }
+
+    /**
+     * Formats an elapsed time in a format like "MM:SS" or "H:MM:SS" (using a form
+     * suited to the current locale), similar to that used on the call-in-progress
+     * screen.
+     *
+     * See {@link android.text.format.DateUtils#formatElapsedTime} for full docs.
+     *
+     * @param recycle {@link StringBuilder} to recycle, or null to use a temporary one.
+     * @param elapsedDuration the elapsed duration
+     */
+    public static String formatElapsedTime(StringBuilder recycle, ReadableDuration elapsedDuration) {
+        return android.text.format.DateUtils.formatElapsedTime(recycle,
+            elapsedDuration.toDuration().toStandardSeconds().getSeconds());
+    }
 }
