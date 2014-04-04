@@ -2,6 +2,7 @@ package net.danlew.android.joda.test;
 
 import android.content.Context;
 import android.test.InstrumentationTestCase;
+import android.util.Log;
 import net.danlew.android.joda.DateUtils;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
@@ -71,6 +72,52 @@ public class TestDateUtils extends InstrumentationTestCase {
             int flags = FORMAT_DATE_RANGE_FLAGS[a];
             assertEquals(android.text.format.DateUtils.formatDateTime(ctx, millis, flags),
                 DateUtils.formatDateTime(ctx, localDate, flags));
+        }
+    }
+
+    public void testFormatDateRange() {
+        Calendar startPartialCal = new GregorianCalendar(TimeZone.getTimeZone("America/Chicago"));
+        startPartialCal.set(1985, 10, 27, 0, 0, 0);
+        long startPartialMs = startPartialCal.getTimeInMillis();
+
+        Calendar endPartialCal = new GregorianCalendar(TimeZone.getTimeZone("America/Chicago"));
+        endPartialCal.set(1985, 11, 25, 0, 0, 0);
+        long endPartialMs = endPartialCal.getTimeInMillis() + 1000; // Include buffer for formatDateRange() bug
+
+        LocalDate startLocalDate = new LocalDate(1985, 11, 27);
+        LocalDate endLocalDate = new LocalDate(1985, 12, 25);
+
+        Calendar startCal = new GregorianCalendar(TimeZone.getTimeZone("America/Chicago"));
+        startCal.set(1985, 10, 27, 5, 23, 5);
+        long startMillis = startCal.getTimeInMillis();
+
+        Calendar endCal = new GregorianCalendar(TimeZone.getTimeZone("America/Chicago"));
+        endCal.set(1985, 11, 25, 20, 14, 25);
+        long endMillis = endCal.getTimeInMillis();
+
+        DateTime startDateTime = new DateTime(1985, 11, 27, 5, 23, 5, DateTimeZone.forID("America/Chicago"));
+        DateTime endDateTime = new DateTime(1985, 12, 25, 20, 14, 25, DateTimeZone.forID("America/Chicago"));
+
+        Context ctx = getInstrumentation().getContext();
+
+        for (int a = 0; a < FORMAT_DATE_RANGE_FLAGS.length; a++) {
+            int flags = FORMAT_DATE_RANGE_FLAGS[a];
+
+            // Start partial, end partial
+            assertEquals(android.text.format.DateUtils.formatDateRange(ctx, startPartialMs, endPartialMs, flags),
+                DateUtils.formatDateRange(ctx, startLocalDate, endLocalDate, flags));
+
+            // Start partial, end instant
+            assertEquals(android.text.format.DateUtils.formatDateRange(ctx, startPartialMs, endMillis, flags),
+                DateUtils.formatDateRange(ctx, startLocalDate, endDateTime, flags));
+
+            // Start instant, end partial
+            assertEquals(android.text.format.DateUtils.formatDateRange(ctx, startMillis, endPartialMs, flags),
+                DateUtils.formatDateRange(ctx, startDateTime, endLocalDate, flags));
+
+            // Start instant, end instant
+            assertEquals(android.text.format.DateUtils.formatDateRange(ctx, startMillis, endMillis, flags),
+                DateUtils.formatDateRange(ctx, startDateTime, endDateTime, flags));
         }
     }
 

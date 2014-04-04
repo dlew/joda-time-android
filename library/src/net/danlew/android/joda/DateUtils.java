@@ -71,6 +71,84 @@ public class DateUtils {
         return android.text.format.DateUtils.formatDateTime(context, toMillis(time), flags | FORMAT_UTC);
     }
 
+    /**
+     * Formats a date or a time range according to the local conventions.
+     *
+     * You should ensure that start/end are in the same timezone; formatDateRange()
+     * doesn't handle start/end in different timezones well.
+     *
+     * See {@link android.text.format.DateUtils#formatDateRange} for full docs.
+     *
+     * @param context the context is required only if the time is shown
+     * @param start the start time
+     * @param end the end time
+     * @param flags a bit mask of options
+     * @return a string containing the formatted date/time range
+     */
+    public static String formatDateRange(Context context, ReadablePartial start, ReadablePartial end, int flags) {
+        return formatDateRange(context, toMillis(start), toMillis(end), flags);
+    }
+
+    /**
+     * Formats a date or a time range according to the local conventions.
+     *
+     * You should ensure that start/end are in the same timezone; formatDateRange()
+     * doesn't handle start/end in different timezones well.
+     *
+     * See {@link android.text.format.DateUtils#formatDateRange} for full docs.
+     *
+     * @param context the context is required only if the time is shown
+     * @param start the start time
+     * @param end the end time
+     * @param flags a bit mask of options
+     * @return a string containing the formatted date/time range
+     */
+    public static String formatDateRange(Context context, ReadablePartial start, ReadableInstant end, int flags) {
+        return formatDateRange(context, toMillis(start), toMillis(end), flags);
+    }
+
+    /**
+     * Formats a date or a time range according to the local conventions.
+     *
+     * You should ensure that start/end are in the same timezone; formatDateRange()
+     * doesn't handle start/end in different timezones well.
+     *
+     * See {@link android.text.format.DateUtils#formatDateRange} for full docs.
+     *
+     * @param context the context is required only if the time is shown
+     * @param start the start time
+     * @param end the end time
+     * @param flags a bit mask of options
+     * @return a string containing the formatted date/time range
+     */
+    public static String formatDateRange(Context context, ReadableInstant start, ReadablePartial end, int flags) {
+        return formatDateRange(context, toMillis(start), toMillis(end), flags);
+    }
+
+    /**
+     * Formats a date or a time range according to the local conventions.
+     *
+     * You should ensure that start/end are in the same timezone; formatDateRange()
+     * doesn't handle start/end in different timezones well.
+     *
+     * See {@link android.text.format.DateUtils#formatDateRange} for full docs.
+     *
+     * @param context the context is required only if the time is shown
+     * @param start the start time
+     * @param end the end time
+     * @param flags a bit mask of options
+     * @return a string containing the formatted date/time range
+     */
+    public static String formatDateRange(Context context, ReadableInstant start, ReadableInstant end, int flags) {
+        return formatDateRange(context, toMillis(start), toMillis(end), flags);
+    }
+
+    private static String formatDateRange(Context context, long startMillis, long endMillis, int flags) {
+        // Buffer is needed, otherwise end time is off by 1 crucial second
+        return android.text.format.DateUtils.formatDateRange(context, startMillis, endMillis + 1000,
+            flags | FORMAT_UTC);
+    }
+
     private static long toMillis(ReadablePartial time) {
         return time.toDateTime(EPOCH).getMillis();
     }
