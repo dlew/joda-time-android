@@ -1,6 +1,10 @@
 package net.danlew.android.joda;
 
+import org.joda.time.DateTimeFieldType;
+import org.joda.time.LocalDate;
 import org.joda.time.ReadableDuration;
+import org.joda.time.ReadableInstant;
+import org.joda.time.ReadablePartial;
 
 /**
  * A replacement for android.text.format.DateUtils that uses Joda-Time classes.
@@ -55,5 +59,31 @@ public class DateUtils {
     public static String formatElapsedTime(StringBuilder recycle, ReadableDuration elapsedDuration) {
         return android.text.format.DateUtils.formatElapsedTime(recycle,
             elapsedDuration.toDuration().toStandardSeconds().getSeconds());
+    }
+
+    /**
+     * See {@link android.text.format.DateUtils#isToday} for full docs.
+     *
+     * @return true if the supplied when is today else false
+     */
+    public static boolean isToday(ReadablePartial time) {
+        if (!time.isSupported(DateTimeFieldType.dayOfMonth())
+            || !time.isSupported(DateTimeFieldType.monthOfYear())
+            || !time.isSupported(DateTimeFieldType.year())) {
+            throw new IllegalArgumentException("isToday() must be passed a ReadablePartial that supports day of " +
+                "month, month of year and year.");
+        }
+
+        LocalDate localDate = time instanceof LocalDate ? (LocalDate) time : new LocalDate(time);
+        return LocalDate.now().compareTo(localDate) == 0;
+    }
+
+    /**
+     * See {@link android.text.format.DateUtils#isToday} for full docs.
+     *
+     * @return true if the supplied when is today else false
+     */
+    public static boolean isToday(ReadableInstant time) {
+        return LocalDate.now().compareTo(new LocalDate(time)) == 0;
     }
 }
