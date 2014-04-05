@@ -1,19 +1,23 @@
 package net.danlew.android.joda.test;
 
+import android.app.Application;
 import android.content.Context;
+import android.content.res.Configuration;
+import android.content.res.Resources;
 import android.test.InstrumentationTestCase;
-import android.util.Log;
 import net.danlew.android.joda.DateUtils;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.joda.time.Duration;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
+import org.joda.time.LocalTime;
 import org.joda.time.MonthDay;
 import org.joda.time.YearMonth;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Locale;
 import java.util.TimeZone;
 
 /**
@@ -44,6 +48,19 @@ public class TestDateUtils extends InstrumentationTestCase {
         DateUtils.FORMAT_SHOW_WEEKDAY | DateUtils.FORMAT_ABBREV_WEEKDAY,
         DateUtils.FORMAT_SHOW_YEAR,
     };
+
+    @Override
+    protected void setUp() throws Exception {
+        super.setUp();
+
+        // Force all tests to be in the US locale; that way we can test output in consistent manner
+        Application app = (Application) getInstrumentation().getContext().getApplicationContext();
+        Resources res = app.getBaseContext().getResources();
+        Configuration config = res.getConfiguration();
+        Locale.setDefault(Locale.US);
+        config.locale = Locale.US;
+        res.updateConfiguration(config, res.getDisplayMetrics());
+    }
 
     public void testFormatDateTime() {
         Calendar cal = new GregorianCalendar(TimeZone.getTimeZone("America/Chicago"));
@@ -200,5 +217,80 @@ public class TestDateUtils extends InstrumentationTestCase {
         catch (Exception e) {
 
         }
+    }
+
+    public void testGetRelativeTimeSpanString() {
+        Context ctx = getInstrumentation().getContext();
+
+        DateTime dateTime = new DateTime(1988, 3, 4, 5, 6, 15, DateTimeZone.UTC);
+
+        // Test all output strings
+        assertEquals("in 1 second", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusSeconds(1), dateTime));
+        assertEquals("in 30 seconds", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusSeconds(30), dateTime));
+        assertEquals("1 second ago", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusSeconds(1), dateTime));
+        assertEquals("30 seconds ago", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusSeconds(30), dateTime));
+        assertEquals("in 1 sec", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusSeconds(1), dateTime,
+            DateUtils.FORMAT_ABBREV_RELATIVE));
+        assertEquals("in 30 secs", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusSeconds(30), dateTime,
+            DateUtils.FORMAT_ABBREV_RELATIVE));
+        assertEquals("1 sec ago", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusSeconds(1), dateTime,
+            DateUtils.FORMAT_ABBREV_RELATIVE));
+        assertEquals("30 secs ago", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusSeconds(30), dateTime,
+            DateUtils.FORMAT_ABBREV_RELATIVE));
+
+        assertEquals("in 1 minute", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusMinutes(1), dateTime));
+        assertEquals("in 30 minutes", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusMinutes(30), dateTime));
+        assertEquals("1 minute ago", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusMinutes(1), dateTime));
+        assertEquals("30 minutes ago", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusMinutes(30), dateTime));
+        assertEquals("in 1 min", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusMinutes(1), dateTime,
+            DateUtils.FORMAT_ABBREV_RELATIVE));
+        assertEquals("in 30 mins", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusMinutes(30), dateTime,
+            DateUtils.FORMAT_ABBREV_RELATIVE));
+        assertEquals("1 min ago", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusMinutes(1), dateTime,
+            DateUtils.FORMAT_ABBREV_RELATIVE));
+        assertEquals("30 mins ago", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusMinutes(30), dateTime,
+            DateUtils.FORMAT_ABBREV_RELATIVE));
+
+        assertEquals("in 1 hour", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusHours(1), dateTime));
+        assertEquals("in 3 hours", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusHours(3), dateTime));
+        assertEquals("1 hour ago", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusHours(1), dateTime));
+        assertEquals("3 hours ago", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusHours(3), dateTime));
+        assertEquals("in 1 hour", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusHours(1), dateTime,
+            DateUtils.FORMAT_ABBREV_RELATIVE));
+        assertEquals("in 3 hours", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusHours(3), dateTime,
+            DateUtils.FORMAT_ABBREV_RELATIVE));
+        assertEquals("1 hour ago", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusHours(1), dateTime,
+            DateUtils.FORMAT_ABBREV_RELATIVE));
+        assertEquals("3 hours ago", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusHours(3), dateTime,
+            DateUtils.FORMAT_ABBREV_RELATIVE));
+
+        assertEquals("tomorrow", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusDays(1), dateTime));
+        assertEquals("in 3 days", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusDays(3), dateTime));
+        assertEquals("yesterday", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusDays(1), dateTime));
+        assertEquals("3 days ago", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusDays(3), dateTime));
+        assertEquals("tomorrow", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusDays(1), dateTime,
+            DateUtils.FORMAT_ABBREV_RELATIVE));
+        assertEquals("in 3 days", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusDays(3), dateTime,
+            DateUtils.FORMAT_ABBREV_RELATIVE));
+        assertEquals("yesterday", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusDays(1), dateTime,
+            DateUtils.FORMAT_ABBREV_RELATIVE));
+        assertEquals("3 days ago", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusDays(3), dateTime,
+            DateUtils.FORMAT_ABBREV_RELATIVE));
+
+        assertEquals("Mar 11, 1988", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusWeeks(1), dateTime));
+        assertEquals("Feb 26, 1988", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusWeeks(1), dateTime));
+
+        // Test partial inputs
+        LocalDate localDate = dateTime.toLocalDate();
+        assertEquals("tomorrow", DateUtils.getRelativeTimeSpanString(ctx, localDate.plusDays(1), localDate));
+        assertEquals("in 3 days", DateUtils.getRelativeTimeSpanString(ctx, localDate.plusDays(3), localDate));
+        assertEquals("yesterday", DateUtils.getRelativeTimeSpanString(ctx, localDate.minusDays(1), localDate));
+        assertEquals("3 days ago", DateUtils.getRelativeTimeSpanString(ctx, localDate.minusDays(3), localDate));
+
+        LocalTime localTime = LocalTime.now();
+        assertEquals("in 1 hour", DateUtils.getRelativeTimeSpanString(ctx, localTime.plusHours(1), localTime));
+        assertEquals("in 3 hours", DateUtils.getRelativeTimeSpanString(ctx, localTime.plusHours(3), localTime));
+        assertEquals("1 hour ago", DateUtils.getRelativeTimeSpanString(ctx, localTime.minusHours(1), localTime));
+        assertEquals("3 hours ago", DateUtils.getRelativeTimeSpanString(ctx, localTime.minusHours(3), localTime));
     }
 }

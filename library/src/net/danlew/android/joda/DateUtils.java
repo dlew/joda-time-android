@@ -4,13 +4,30 @@ import android.content.Context;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeFieldType;
 import org.joda.time.DateTimeZone;
+import org.joda.time.Days;
+import org.joda.time.Hours;
+import org.joda.time.Interval;
 import org.joda.time.LocalDate;
+import org.joda.time.Minutes;
 import org.joda.time.ReadableDuration;
 import org.joda.time.ReadableInstant;
 import org.joda.time.ReadablePartial;
+import org.joda.time.Seconds;
+import org.joda.time.Weeks;
 
 /**
  * A replacement for android.text.format.DateUtils that uses Joda-Time classes.
+ *
+ * It is not a 1:1 implementation of Android's DateUtils.  There are a few improvements made:
+ *
+ * - Deprecated constants have been removed.
+ *
+ * - Constants which are better represented by Joda-Time classes have been removed.
+ *
+ * - minResolution has been removed from relative time span methods because they make no sense.
+ * All it does is remove meaningful information from the string.  E.g., it turns
+ * "in 30 seconds" into "in 0 minutes", or "in 5 hours" into "in 0 days".  Having 0 of anything
+ * doesn't tell the user anything and should not be encouraged.
  */
 public class DateUtils {
 
@@ -30,7 +47,6 @@ public class DateUtils {
     public static final int FORMAT_NUMERIC_DATE = android.text.format.DateUtils.FORMAT_NUMERIC_DATE;
     public static final int FORMAT_ABBREV_RELATIVE = android.text.format.DateUtils.FORMAT_ABBREV_RELATIVE;
     public static final int FORMAT_ABBREV_ALL = android.text.format.DateUtils.FORMAT_ABBREV_ALL;
-
 
     /**
      * We don't want consumers of DateUtils to use this, but we do need it internally to calibrate
@@ -211,4 +227,173 @@ public class DateUtils {
     public static boolean isToday(ReadableInstant time) {
         return LocalDate.now().compareTo(new LocalDate(time)) == 0;
     }
+
+    /**
+     * Returns a string describing 'startTime' as a time relative to the current time.
+     *
+     * Missing fields from 'startTime' are filled in with values from the current time.
+     *
+     * @see #getRelativeTimeSpanString(Context, ReadableInstant, ReadableInstant, int)
+     */
+    public static CharSequence getRelativeTimeSpanString(Context context, ReadablePartial startTime) {
+        return getRelativeTimeSpanString(context, startTime, LocalDate.now());
+    }
+
+    /**
+     * Returns a string describing 'startTime' as a time relative to the current time.
+     *
+     * @see #getRelativeTimeSpanString(Context, ReadableInstant, ReadableInstant, int)
+     */
+    public static CharSequence getRelativeTimeSpanString(Context context, ReadableInstant startTime) {
+        return getRelativeTimeSpanString(context, startTime, DateTime.now());
+    }
+
+    /**
+     * Returns a string describing 'time' as a time relative to 'now'.
+     *
+     * Missing fields from 'time' are filled in with values from 'now'
+     *
+     * @see #getRelativeTimeSpanString(Context, ReadableInstant, ReadableInstant, int)
+     */
+    public static CharSequence getRelativeTimeSpanString(Context context, ReadablePartial time, ReadableInstant now) {
+        return getRelativeTimeSpanString(context, time.toDateTime(now), now);
+    }
+
+    /**
+     * Returns a string describing 'time' as a time relative to 'now'.
+     *
+     * Missing fields from 'now' are filled in with values from 'time'
+     *
+     * @see #getRelativeTimeSpanString(Context, ReadableInstant, ReadableInstant, int)
+     */
+    public static CharSequence getRelativeTimeSpanString(Context context, ReadableInstant time, ReadablePartial now) {
+        return getRelativeTimeSpanString(context, time, now.toDateTime(time));
+    }
+
+    /**
+     * Returns a string describing 'time' as a time relative to 'now'.
+     *
+     * Missing fields from 'time' and 'now' are filled in with values from the current time.
+     *
+     * @see #getRelativeTimeSpanString(Context, ReadableInstant, ReadableInstant, int)
+     */
+    public static CharSequence getRelativeTimeSpanString(Context context, ReadablePartial time, ReadablePartial now) {
+        DateTime dtNow = DateTime.now();
+        return getRelativeTimeSpanString(context, time.toDateTime(dtNow), now.toDateTime(dtNow));
+    }
+
+    /**
+     * Returns a string describing 'time' as a time relative to 'now'.
+     *
+     * @see #getRelativeTimeSpanString(Context, ReadableInstant, ReadableInstant, int)
+     */
+    public static CharSequence getRelativeTimeSpanString(Context context, ReadableInstant time, ReadableInstant now) {
+        int flags = FORMAT_SHOW_DATE | FORMAT_SHOW_YEAR | FORMAT_ABBREV_MONTH;
+        return getRelativeTimeSpanString(context, time, now, flags);
+    }
+
+    /**
+     * Returns a string describing 'time' as a time relative to 'now'.
+     *
+     * See {@link android.text.format.DateUtils#getRelativeTimeSpanString} for full docs.
+     *
+     * @param context the context
+     * @param time the time to describe
+     * @param now the current time
+     * @param flags a bit mask for formatting options
+     * @return a string describing 'time' as a time relative to 'now'.
+     */
+    public static CharSequence getRelativeTimeSpanString(Context context, ReadableInstant time, ReadableInstant now,
+                                                         int flags) {
+        boolean abbrevRelative = (flags & (FORMAT_ABBREV_RELATIVE | FORMAT_ABBREV_ALL)) != 0;
+
+        boolean past = !now.isBefore(time);
+        Interval interval = past ? new Interval(time, now) : new Interval(now, time);
+
+        int resId;
+        long count;
+        if (Minutes.minutesIn(interval).isLessThan(Minutes.ONE)) {
+            count = Seconds.secondsIn(interval).getSeconds();
+            if (past) {
+                if (abbrevRelative) {
+                    resId = R.plurals.abbrev_num_seconds_ago;
+                }
+                else {
+                    resId = R.plurals.num_seconds_ago;
+                }
+            }
+            else {
+                if (abbrevRelative) {
+                    resId = R.plurals.abbrev_in_num_seconds;
+                }
+                else {
+                    resId = R.plurals.in_num_seconds;
+                }
+            }
+        }
+        else if (Hours.hoursIn(interval).isLessThan(Hours.ONE)) {
+            count = Minutes.minutesIn(interval).getMinutes();
+            if (past) {
+                if (abbrevRelative) {
+                    resId = R.plurals.abbrev_num_minutes_ago;
+                }
+                else {
+                    resId = R.plurals.num_minutes_ago;
+                }
+            }
+            else {
+                if (abbrevRelative) {
+                    resId = R.plurals.abbrev_in_num_minutes;
+                }
+                else {
+                    resId = R.plurals.in_num_minutes;
+                }
+            }
+        }
+        else if (Days.daysIn(interval).isLessThan(Days.ONE)) {
+            count = Hours.hoursIn(interval).getHours();
+            if (past) {
+                if (abbrevRelative) {
+                    resId = R.plurals.abbrev_num_hours_ago;
+                }
+                else {
+                    resId = R.plurals.num_hours_ago;
+                }
+            }
+            else {
+                if (abbrevRelative) {
+                    resId = R.plurals.abbrev_in_num_hours;
+                }
+                else {
+                    resId = R.plurals.in_num_hours;
+                }
+            }
+        }
+        else if (Weeks.weeksIn(interval).isLessThan(Weeks.ONE)) {
+            count = Days.daysIn(interval).getDays();
+            if (past) {
+                if (abbrevRelative) {
+                    resId = R.plurals.abbrev_num_days_ago;
+                }
+                else {
+                    resId = R.plurals.num_days_ago;
+                }
+            }
+            else {
+                if (abbrevRelative) {
+                    resId = R.plurals.abbrev_in_num_days;
+                }
+                else {
+                    resId = R.plurals.in_num_days;
+                }
+            }
+        }
+        else {
+            return formatDateRange(context, time, time, flags);
+        }
+
+        String format = context.getResources().getQuantityString(resId, (int) count);
+        return String.format(format, count);
+    }
+
 }
