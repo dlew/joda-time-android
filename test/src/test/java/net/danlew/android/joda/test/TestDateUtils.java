@@ -10,6 +10,7 @@ import net.danlew.android.joda.ResourceZoneInfoProvider;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeUtils;
 import org.joda.time.DateTimeZone;
+import org.joda.time.Days;
 import org.joda.time.Duration;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
@@ -333,5 +334,47 @@ public class TestDateUtils extends InstrumentationTestCase {
         assertEquals("on Oct 23, 1995", DateUtils.getRelativeTimeSpanString(ctx, tomorrowDt, true));
         assertEquals("10/22/1996", DateUtils.getRelativeTimeSpanString(ctx, nextYearDt, false));
         assertEquals("on 10/22/1996", DateUtils.getRelativeTimeSpanString(ctx, nextYearDt, true));
+    }
+
+    public void testGetRelativeDateTimeString() {
+        Context ctx = getInstrumentation().getContext();
+
+        assertEquals("0 seconds ago, 12:35", DateUtils.getRelativeDateTimeString(ctx, mNow, null, 0));
+        assertEquals("in 30 seconds, 12:35", DateUtils.getRelativeDateTimeString(ctx, mNow.plusSeconds(30), null, 0));
+        assertEquals("30 seconds ago, 12:34", DateUtils.getRelativeDateTimeString(ctx, mNow.minusSeconds(30), null, 0));
+        assertEquals("in 30 minutes, 13:05", DateUtils.getRelativeDateTimeString(ctx, mNow.plusMinutes(30), null, 0));
+        assertEquals("30 minutes ago, 12:05", DateUtils.getRelativeDateTimeString(ctx, mNow.minusMinutes(30), null, 0));
+        assertEquals("in 3 hours, 15:35", DateUtils.getRelativeDateTimeString(ctx, mNow.plusHours(3), null, 0));
+        assertEquals("3 hours ago, 09:35", DateUtils.getRelativeDateTimeString(ctx, mNow.minusHours(3), null, 0));
+        assertEquals("Oct 25, 1995, 12:35", DateUtils.getRelativeDateTimeString(ctx, mNow.plusDays(3), null, 0));
+        assertEquals("Oct 19, 1995, 12:35", DateUtils.getRelativeDateTimeString(ctx, mNow.minusDays(3), null, 0));
+
+        // Test abbreviation
+        assertEquals("in 30 secs, 12:35",
+            DateUtils.getRelativeDateTimeString(ctx, mNow.plusSeconds(30), null, DateUtils.FORMAT_ABBREV_RELATIVE));
+        assertEquals("30 secs ago, 12:34",
+            DateUtils.getRelativeDateTimeString(ctx, mNow.minusSeconds(30), null, DateUtils.FORMAT_ABBREV_RELATIVE));
+
+        // Test transition resolution
+        DateTime dt = DateTime.now().plusDays(2);
+        assertEquals("in 2 days, 12:35", DateUtils.getRelativeDateTimeString(ctx, dt, Days.TWO, 0));
+        assertEquals("Oct 24, 1995, 12:35", DateUtils.getRelativeDateTimeString(ctx, dt.plusSeconds(1), Days.TWO, 0));
+        assertEquals("in 2 days, 12:35", DateUtils.getRelativeDateTimeString(ctx, dt, Days.THREE, 0));
+
+        // Test partial input
+        LocalTime lt = LocalTime.now();
+        assertEquals("in 30 seconds, 12:35", DateUtils.getRelativeDateTimeString(ctx, lt.plusSeconds(30), null, 0));
+        assertEquals("30 seconds ago, 12:34", DateUtils.getRelativeDateTimeString(ctx, lt.minusSeconds(30), null, 0));
+        assertEquals("in 30 minutes, 13:05", DateUtils.getRelativeDateTimeString(ctx, lt.plusMinutes(30), null, 0));
+        assertEquals("30 minutes ago, 12:05", DateUtils.getRelativeDateTimeString(ctx, lt.minusMinutes(30), null, 0));
+
+        // Test bad partial input
+        try {
+            assertEquals("Oct 24, 1995, 12:35", DateUtils.getRelativeDateTimeString(ctx, LocalDate.now(), null, 0));
+            fail("DateUtils.getRelativeDateTimeString() should have thrown an error since LocalDate has no time.");
+        }
+        catch (Exception e) {
+
+        }
     }
 }

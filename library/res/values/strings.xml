@@ -119,4 +119,9 @@
     <string name="preposition_for_date">on <xliff:g id="date" example="May 29">%s</xliff:g></string>
     <!-- String used to display the date. Preposition for time display ("at 2:33am") -->
     <string name="preposition_for_time">at <xliff:g id="time" example="2:33 am">%s</xliff:g></string>
+
+    <!-- Format indicating a relative expression and time.
+     Example: "4 hours ago, 11:00 am" -->
+    <string name="relative_time">"<xliff:g id="date" example="4 hours ago">%1$s</xliff:g>, <xliff:g id="time" example="11:00 am">%2$s</xliff:g>"</string>
+
 </resources>

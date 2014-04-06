@@ -1,10 +1,12 @@
 package net.danlew.android.joda;
 
 import android.content.Context;
+import android.content.res.Resources;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeFieldType;
 import org.joda.time.DateTimeZone;
 import org.joda.time.Days;
+import org.joda.time.Duration;
 import org.joda.time.Hours;
 import org.joda.time.Interval;
 import org.joda.time.LocalDate;
@@ -12,6 +14,7 @@ import org.joda.time.Minutes;
 import org.joda.time.ReadableDuration;
 import org.joda.time.ReadableInstant;
 import org.joda.time.ReadablePartial;
+import org.joda.time.ReadablePeriod;
 import org.joda.time.Seconds;
 import org.joda.time.Weeks;
 import org.joda.time.Years;
@@ -237,7 +240,7 @@ public class DateUtils {
      *
      * @param context the context
      * @param time the time to describe
-     * @param flags a bit mask for formatting options
+     * @param flags a bit mask for formatting options, usually FORMAT_ABBREV_RELATIVE
      * @return a string describing 'time' as a time relative to 'now'.
      */
     public static CharSequence getRelativeTimeSpanString(Context context, ReadableInstant time, int flags) {
@@ -386,6 +389,87 @@ public class DateUtils {
 
         if (withPreposition) {
             result = ctx.getString(prepositionId, result);
+        }
+
+        return result;
+    }
+
+    /**
+     * Return string describing the time until/elapsed time since 'time' formatted like
+     * "[relative time/date], [time]".
+     *
+     * See {@link android.text.format.DateUtils#getRelativeDateTimeString} for full docs.
+     *
+     * @see #getRelativeDateTimeString(Context, ReadableInstant, ReadablePeriod, int)
+     * @throws IllegalArgumentException if using a ReadablePartial without a time component
+     */
+    public static CharSequence getRelativeDateTimeString(Context context, ReadablePartial time,
+                                                         ReadablePeriod transitionResolution, int flags) {
+        if (!time.isSupported(DateTimeFieldType.hourOfDay())
+            || !time.isSupported(DateTimeFieldType.minuteOfHour())) {
+            throw new IllegalArgumentException("getRelativeDateTimeString() must be passed a ReadablePartial that " +
+                "supports time, otherwise it makes no sense");
+        }
+
+        return getRelativeDateTimeString(context, time.toDateTime(DateTime.now()), transitionResolution, flags);
+    }
+
+    /**
+     * Return string describing the time until/elapsed time since 'time' formatted like
+     * "[relative time/date], [time]".
+     *
+     * See {@link android.text.format.DateUtils#getRelativeDateTimeString} for full docs.
+     *
+     * @param context the context
+     * @param time some time
+     * @param transitionResolution the elapsed time (period) at which
+     * to stop reporting relative measurements. Periods greater
+     * than this resolution will default to normal date formatting.
+     * For example, will transition from "6 days ago" to "Dec 12"
+     * when using Weeks.ONE.  If null, defaults to Days.ONE.
+     * Clamps to min value of Days.ONE, max of Weeks.ONE.
+     * @param flags flags for getRelativeTimeSpanString() (if duration is less than transitionResolution)
+     */
+    public static CharSequence getRelativeDateTimeString(Context context, ReadableInstant time,
+                                                         ReadablePeriod transitionResolution, int flags) {
+        Resources r = context.getResources();
+
+        // We set the millis to 0 so we aren't off by a fraction of a second when counting duration
+        DateTime now = DateTime.now(time.getZone()).withMillisOfSecond(0);
+        DateTime timeDt = new DateTime(time).withMillisOfSecond(0);
+        boolean past = !now.isBefore(timeDt);
+        Duration duration = past ? new Duration(timeDt, now) : new Duration(now, timeDt);
+
+        // getRelativeTimeSpanString() doesn't correctly format relative dates
+        // above a week or exact dates below a day, so clamp
+        // transitionResolution as needed.
+        Duration transitionDuration;
+        Duration minDuration = Days.ONE.toPeriod().toDurationTo(timeDt);
+        if (transitionResolution == null) {
+            transitionDuration = minDuration;
+        }
+        else {
+            transitionDuration = past ? transitionResolution.toPeriod().toDurationTo(now) :
+                transitionResolution.toPeriod().toDurationFrom(now);
+            Duration maxDuration = Weeks.ONE.toPeriod().toDurationTo(timeDt);
+            if (transitionDuration.isLongerThan(maxDuration)) {
+                transitionDuration = maxDuration;
+            }
+            else if (transitionDuration.isShorterThan(minDuration)) {
+                transitionDuration = minDuration;
+            }
+        }
+
+        CharSequence timeClause = formatDateRange(context, time, time, FORMAT_SHOW_TIME);
+
+        String result;
+        if (!duration.isLongerThan(transitionDuration)) {
+            CharSequence relativeClause = getRelativeTimeSpanString(context, time, flags);
+            result = r.getString(R.string.relative_time, relativeClause, timeClause);
+        }
+        else {
+            CharSequence dateClause = getRelativeTimeSpanString(context, time, false);
+            result = r.getString(R.string.date_time, dateClause, timeClause);
         }
 
         return result;
