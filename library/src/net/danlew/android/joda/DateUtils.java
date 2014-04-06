@@ -120,42 +120,6 @@ public class DateUtils {
      * @param flags a bit mask of options
      * @return a string containing the formatted date/time range
      */
-    public static String formatDateRange(Context context, ReadablePartial start, ReadableInstant end, int flags) {
-        return formatDateRange(context, toMillis(start), toMillis(end), flags);
-    }
-
-    /**
-     * Formats a date or a time range according to the local conventions.
-     *
-     * You should ensure that start/end are in the same timezone; formatDateRange()
-     * doesn't handle start/end in different timezones well.
-     *
-     * See {@link android.text.format.DateUtils#formatDateRange} for full docs.
-     *
-     * @param context the context is required only if the time is shown
-     * @param start the start time
-     * @param end the end time
-     * @param flags a bit mask of options
-     * @return a string containing the formatted date/time range
-     */
-    public static String formatDateRange(Context context, ReadableInstant start, ReadablePartial end, int flags) {
-        return formatDateRange(context, toMillis(start), toMillis(end), flags);
-    }
-
-    /**
-     * Formats a date or a time range according to the local conventions.
-     *
-     * You should ensure that start/end are in the same timezone; formatDateRange()
-     * doesn't handle start/end in different timezones well.
-     *
-     * See {@link android.text.format.DateUtils#formatDateRange} for full docs.
-     *
-     * @param context the context is required only if the time is shown
-     * @param start the start time
-     * @param end the end time
-     * @param flags a bit mask of options
-     * @return a string containing the formatted date/time range
-     */
     public static String formatDateRange(Context context, ReadableInstant start, ReadableInstant end, int flags) {
         return formatDateRange(context, toMillis(start), toMillis(end), flags);
     }
@@ -234,45 +198,23 @@ public class DateUtils {
     }
 
     /**
-     * Returns a string describing 'startTime' as a time relative to the current time.
+     * Returns a string describing 'time' as a time relative to the current time.
      *
-     * Missing fields from 'startTime' are filled in with values from the current time.
+     * Missing fields from 'time' are filled in with values from the current time.
      *
      * @see #getRelativeTimeSpanString(Context, ReadableInstant, ReadableInstant, int)
      */
-    public static CharSequence getRelativeTimeSpanString(Context context, ReadablePartial startTime) {
-        return getRelativeTimeSpanString(context, startTime, LocalDate.now());
+    public static CharSequence getRelativeTimeSpanString(Context context, ReadablePartial time) {
+        return getRelativeTimeSpanString(context, time, LocalDate.now());
     }
 
     /**
-     * Returns a string describing 'startTime' as a time relative to the current time.
+     * Returns a string describing 'time' as a time relative to the current time.
      *
      * @see #getRelativeTimeSpanString(Context, ReadableInstant, ReadableInstant, int)
      */
-    public static CharSequence getRelativeTimeSpanString(Context context, ReadableInstant startTime) {
-        return getRelativeTimeSpanString(context, startTime, DateTime.now());
-    }
-
-    /**
-     * Returns a string describing 'time' as a time relative to 'now'.
-     *
-     * Missing fields from 'time' are filled in with values from 'now'
-     *
-     * @see #getRelativeTimeSpanString(Context, ReadableInstant, ReadableInstant, int)
-     */
-    public static CharSequence getRelativeTimeSpanString(Context context, ReadablePartial time, ReadableInstant now) {
-        return getRelativeTimeSpanString(context, time.toDateTime(now), now);
-    }
-
-    /**
-     * Returns a string describing 'time' as a time relative to 'now'.
-     *
-     * Missing fields from 'now' are filled in with values from 'time'
-     *
-     * @see #getRelativeTimeSpanString(Context, ReadableInstant, ReadableInstant, int)
-     */
-    public static CharSequence getRelativeTimeSpanString(Context context, ReadableInstant time, ReadablePartial now) {
-        return getRelativeTimeSpanString(context, time, now.toDateTime(time));
+    public static CharSequence getRelativeTimeSpanString(Context context, ReadableInstant time) {
+        return getRelativeTimeSpanString(context, time, DateTime.now());
     }
 
     /**
