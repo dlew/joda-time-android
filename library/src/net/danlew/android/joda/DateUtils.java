@@ -160,9 +160,13 @@ public class DateUtils {
     }
 
     private static String formatDateRange(Context context, long startMillis, long endMillis, int flags) {
-        // Buffer is needed, otherwise end time is off by 1 crucial second
-        return android.text.format.DateUtils.formatDateRange(context, startMillis, endMillis + 1000,
-            flags | FORMAT_UTC);
+        // Buffer is needed, otherwise end time is off by 1 crucial second; however, don't do this
+        // if they are already equal (that indicates a point in time rather than a range).
+        if (startMillis != endMillis) {
+            endMillis += 1000;
+        }
+
+        return android.text.format.DateUtils.formatDateRange(context, startMillis, endMillis, flags | FORMAT_UTC);
     }
 
     private static long toMillis(ReadablePartial time) {

@@ -135,6 +135,12 @@ public class TestDateUtils extends InstrumentationTestCase {
             // Start instant, end instant
             assertEquals(android.text.format.DateUtils.formatDateRange(ctx, startMillis, endMillis, flags),
                 DateUtils.formatDateRange(ctx, startDateTime, endDateTime, flags));
+
+            // Same start/end time
+            assertEquals(android.text.format.DateUtils.formatDateRange(ctx, startPartialMs, startPartialMs, flags),
+                DateUtils.formatDateRange(ctx, startLocalDate, startLocalDate, flags));
+            assertEquals(android.text.format.DateUtils.formatDateRange(ctx, startMillis, startMillis, flags),
+                DateUtils.formatDateRange(ctx, startDateTime, startDateTime, flags));
         }
     }
 
