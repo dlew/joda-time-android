@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <plurals name="num_seconds_ago">
+        <item msgid="4869870056547896011" quantity="one">"1 ວິນາທີກ່ອນ"</item>
+        <item msgid="3903706804349556379" quantity="other">"<xliff:g id="COUNT">%d</xliff:g> ວິນາທີກ່ອນໜ້ານີ້"</item>
+    </plurals>
+    <plurals name="num_minutes_ago">
+        <item msgid="3306787433088810191" quantity="one">"1 ນາທີກ່ອນໜ້ານີ້"</item>
+        <item msgid="2176942008915455116" quantity="other">"<xliff:g id="COUNT">%d</xliff:g> ນາ​ທີ​ທີ່ຜ່ານມາ"</item>
+    </plurals>
+    <plurals name="num_hours_ago">
+        <item msgid="9150797944610821849" quantity="one">"1 ຊົ່ວໂມງກ່ອນໜ້ານີ້"</item>
+        <item msgid="2467273239587587569" quantity="other">"<xliff:g id="COUNT">%d</xliff:g> ຊົ່ວໂມງທີ່ຜ່ານມາ"</item>
+    </plurals>
+    <plurals name="num_days_ago">
+        <item msgid="861358534398115820" quantity="one">"ມື້​ວານ​ນີ້"</item>
+        <item msgid="2479586466153314633" quantity="other">"<xliff:g id="COUNT">%d</xliff:g> ມື້​ກ່ອນ"</item>
+    </plurals>
+    <plurals name="in_num_seconds">
+        <item msgid="2729745560954905102" quantity="one">"ໃນອີກ 1 ວິນາທີ"</item>
+        <item msgid="1241926116443974687" quantity="other">"ໃນ <xliff:g id="COUNT">%d</xliff:g> ວິ​ນາ​ທີ"</item>
+    </plurals>
+    <plurals name="in_num_minutes">
+        <item msgid="8793095251325200395" quantity="one">"ໃນ 1 ນາທີ"</item>
+        <item msgid="3330713936399448749" quantity="other">"ໃນ <xliff:g id="COUNT">%d</xliff:g> ນາທີ"</item>
+    </plurals>
+    <plurals name="in_num_hours">
+        <item msgid="7164353342477769999" quantity="one">"ໃນ 1 ຊົ່ວໂມງ"</item>
+        <item msgid="547290677353727389" quantity="other">"ໃນ <xliff:g id="COUNT">%d</xliff:g> ຊົ່ວໂມງ"</item>
+    </plurals>
+    <plurals name="in_num_days">
+        <item msgid="5413088743009839518" quantity="one">"ມື້ອື່ນ"</item>
+        <item msgid="5109449375100953247" quantity="other">"ໃນ <xliff:g id="COUNT">%d</xliff:g> ມື້"</item>
+    </plurals>
+    <plurals name="abbrev_num_seconds_ago">
+        <item msgid="1849036840200069118" quantity="one">"1 ວິນາທີກ່ອນ"</item>
+        <item msgid="3699169366650930415" quantity="other">"<xliff:g id="COUNT">%d</xliff:g> ວິ ກ່ອນໜ້ານີ້"</item>
+    </plurals>
+    <plurals name="abbrev_num_minutes_ago">
+        <item msgid="6361490147113871545" quantity="one">"1 ນທ ກ່ອນ"</item>
+        <item msgid="851164968597150710" quantity="other">"<xliff:g id="COUNT">%d</xliff:g> ນທ ກ່ອນໜ້ານີ້"</item>
+    </plurals>
+    <plurals name="abbrev_num_hours_ago">
+        <item msgid="4796212039724722116" quantity="one">"1 ຊົ່ວໂມງກ່ອນ"</item>
+        <item msgid="6889970745748538901" quantity="other">"<xliff:g id="COUNT">%d</xliff:g> ຊົ່ວໂມງກ່ອນໜ້ານີ້"</item>
+    </plurals>
+    <plurals name="abbrev_num_days_ago">
+        <item msgid="8463161711492680309" quantity="one">"ມື້ວານນີ້"</item>
+        <item msgid="3453342639616481191" quantity="other">"<xliff:g id="COUNT">%d</xliff:g> ມື້ກ່ອນໜ້ານີ້"</item>
+    </plurals>
+    <plurals name="abbrev_in_num_seconds">
+        <item msgid="5842225370795066299" quantity="one">"ໃນ 1 ວິ"</item>
+        <item msgid="5495880108825805108" quantity="other">"ໃນ <xliff:g id="COUNT">%d</xliff:g> ວິ"</item>
+    </plurals>
+    <plurals name="abbrev_in_num_minutes">
+        <item msgid="562786149928284878" quantity="one">"ໃນ 1 ນາທີ"</item>
+        <item msgid="4216113292706568726" quantity="other">"ໃນ <xliff:g id="COUNT">%d</xliff:g> ນທ"</item>
+    </plurals>
+    <plurals name="abbrev_in_num_hours">
+        <item msgid="3274708118124045246" quantity="one">"ໃນ 1 ຊົ່ວໂມງ"</item>
+        <item msgid="3705373766798013406" quantity="other">"ໃນ <xliff:g id="COUNT">%d</xliff:g> ຊົ່ວໂມງ"</item>
+    </plurals>
+    <plurals name="abbrev_in_num_days">
+        <item msgid="2178576254385739855" quantity="one">"ມື້ອື່ນ"</item>
+        <item msgid="2973062968038355991" quantity="other">"ໃນ <xliff:g id="COUNT">%d</xliff:g> ມື້"</item>
+    </plurals>
+</resources>

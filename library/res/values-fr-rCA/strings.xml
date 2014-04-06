@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <plurals name="num_seconds_ago">
+        <item msgid="4869870056547896011" quantity="one">"il y a 1 seconde"</item>
+        <item msgid="3903706804349556379" quantity="other">"Il y a <xliff:g id="COUNT">%d</xliff:g> secondes"</item>
+    </plurals>
+    <plurals name="num_minutes_ago">
+        <item msgid="3306787433088810191" quantity="one">"Il y a 1 minute"</item>
+        <item msgid="2176942008915455116" quantity="other">"Il y a <xliff:g id="COUNT">%d</xliff:g> minutes"</item>
+    </plurals>
+    <plurals name="num_hours_ago">
+        <item msgid="9150797944610821849" quantity="one">"Il y a 1 heure"</item>
+        <item msgid="2467273239587587569" quantity="other">"il y a <xliff:g id="COUNT">%d</xliff:g> heures"</item>
+    </plurals>
+    <plurals name="num_days_ago">
+        <item msgid="861358534398115820" quantity="one">"hier"</item>
+        <item msgid="2479586466153314633" quantity="other">"il y a <xliff:g id="COUNT">%d</xliff:g> jours"</item>
+    </plurals>
+    <plurals name="in_num_seconds">
+        <item msgid="2729745560954905102" quantity="one">"dans 1 seconde"</item>
+        <item msgid="1241926116443974687" quantity="other">"dans <xliff:g id="COUNT">%d</xliff:g> secondes"</item>
+    </plurals>
+    <plurals name="in_num_minutes">
+        <item msgid="8793095251325200395" quantity="one">"dans 1 minute"</item>
+        <item msgid="3330713936399448749" quantity="other">"dans <xliff:g id="COUNT">%d</xliff:g> minutes"</item>
+    </plurals>
+    <plurals name="in_num_hours">
+        <item msgid="7164353342477769999" quantity="one">"dans 1 heure"</item>
+        <item msgid="547290677353727389" quantity="other">"dans <xliff:g id="COUNT">%d</xliff:g> heures"</item>
+    </plurals>
+    <plurals name="in_num_days">
+        <item msgid="5413088743009839518" quantity="one">"demain"</item>
+        <item msgid="5109449375100953247" quantity="other">"dans <xliff:g id="COUNT">%d</xliff:g> jours"</item>
+    </plurals>
+    <plurals name="abbrev_num_seconds_ago">
+        <item msgid="1849036840200069118" quantity="one">"il y a 1 seconde"</item>
+        <item msgid="3699169366650930415" quantity="other">"il y a <xliff:g id="COUNT">%d</xliff:g> secondes"</item>
+    </plurals>
+    <plurals name="abbrev_num_minutes_ago">
+        <item msgid="6361490147113871545" quantity="one">"il y a 1 min"</item>
+        <item msgid="851164968597150710" quantity="other">"il y a <xliff:g id="COUNT">%d</xliff:g> minutes"</item>
+    </plurals>
+    <plurals name="abbrev_num_hours_ago">
+        <item msgid="4796212039724722116" quantity="one">"Il y a 1 h."</item>
+        <item msgid="6889970745748538901" quantity="other">"il y a <xliff:g id="COUNT">%d</xliff:g> heures"</item>
+    </plurals>
+    <plurals name="abbrev_num_days_ago">
+        <item msgid="8463161711492680309" quantity="one">"hier"</item>
+        <item msgid="3453342639616481191" quantity="other">"il y a <xliff:g id="COUNT">%d</xliff:g> jours"</item>
+    </plurals>
+    <plurals name="abbrev_in_num_seconds">
+        <item msgid="5842225370795066299" quantity="one">"dans 1 seconde"</item>
+        <item msgid="5495880108825805108" quantity="other">"dans <xliff:g id="COUNT">%d</xliff:g> secondes"</item>
+    </plurals>
+    <plurals name="abbrev_in_num_minutes">
+        <item msgid="562786149928284878" quantity="one">"dans 1 minute"</item>
+        <item msgid="4216113292706568726" quantity="other">"dans <xliff:g id="COUNT">%d</xliff:g> minutes"</item>
+    </plurals>
+    <plurals name="abbrev_in_num_hours">
+        <item msgid="3274708118124045246" quantity="one">"dans 1 heure"</item>
+        <item msgid="3705373766798013406" quantity="other">"dans <xliff:g id="COUNT">%d</xliff:g> heures"</item>
+    </plurals>
+    <plurals name="abbrev_in_num_days">
+        <item msgid="2178576254385739855" quantity="one">"demain"</item>
+        <item msgid="2973062968038355991" quantity="other">"dans <xliff:g id="COUNT">%d</xliff:g> jours"</item>
+    </plurals>
+</resources>
