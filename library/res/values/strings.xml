@@ -115,4 +115,8 @@
         <item quantity="other">in <xliff:g id="count">%d</xliff:g> days</item>
     </plurals>
 
+    <!-- String used to display the date. Preposition for date display ("on May 29") -->
+    <string name="preposition_for_date">on <xliff:g id="date" example="May 29">%s</xliff:g></string>
+    <!-- String used to display the date. Preposition for time display ("at 2:33am") -->
+    <string name="preposition_for_time">at <xliff:g id="time" example="2:33 am">%s</xliff:g></string>
 </resources>

@@ -14,6 +14,7 @@ import org.joda.time.ReadableInstant;
 import org.joda.time.ReadablePartial;
 import org.joda.time.Seconds;
 import org.joda.time.Weeks;
+import org.joda.time.Years;
 
 /**
  * A replacement for android.text.format.DateUtils that uses Joda-Time classes.
@@ -400,4 +401,59 @@ public class DateUtils {
         return String.format(format, count);
     }
 
+    /**
+     * Returns a relative time string to display the time expressed by millis.
+     *
+     * Missing fields from 'time' are filled in with values from the current time.
+     *
+     * See {@link android.text.format.DateUtils#getRelativeTimeSpanString} for full docs.
+     *
+     * @param withPreposition If true, the string returned will include the correct
+     * preposition ("at 9:20am", "on 10/12/2008" or "on May 29").
+     */
+    public static CharSequence getRelativeTimeSpanString(Context ctx, ReadablePartial time, boolean withPreposition) {
+        return getRelativeTimeSpanString(ctx, time.toDateTime(DateTime.now()), withPreposition);
+    }
+
+    /**
+     * Returns a relative time string to display the time expressed by millis.
+     *
+     * See {@link android.text.format.DateUtils#getRelativeTimeSpanString} for full docs.
+     *
+     * @param withPreposition If true, the string returned will include the correct
+     * preposition ("at 9:20am", "on 10/12/2008" or "on May 29").
+     */
+    public static CharSequence getRelativeTimeSpanString(Context ctx, ReadableInstant time, boolean withPreposition) {
+        String result;
+        LocalDate now = LocalDate.now();
+        LocalDate timeDate = new LocalDate(time);
+
+        int prepositionId;
+        if (Days.daysBetween(now, timeDate).getDays() == 0) {
+            // Same day
+            int flags = FORMAT_SHOW_TIME;
+            result = formatDateRange(ctx, time, time, flags);
+            prepositionId = R.string.preposition_for_time;
+        }
+        else if (Years.yearsBetween(now, timeDate).getYears() != 0) {
+            // Different years
+            int flags = FORMAT_SHOW_DATE | FORMAT_SHOW_YEAR | FORMAT_NUMERIC_DATE;
+            result = formatDateRange(ctx, time, time, flags);
+
+            // This is a date (like "10/31/2008" so use the date preposition)
+            prepositionId = R.string.preposition_for_date;
+        }
+        else {
+            // Default
+            int flags = FORMAT_SHOW_DATE | FORMAT_ABBREV_MONTH;
+            result = formatDateRange(ctx, time, time, flags);
+            prepositionId = R.string.preposition_for_date;
+        }
+
+        if (withPreposition) {
+            result = ctx.getString(prepositionId, result);
+        }
+
+        return result;
+    }
 }

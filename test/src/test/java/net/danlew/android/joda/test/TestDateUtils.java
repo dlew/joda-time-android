@@ -299,4 +299,45 @@ public class TestDateUtils extends InstrumentationTestCase {
         assertEquals("1 hour ago", DateUtils.getRelativeTimeSpanString(ctx, localTime.minusHours(1), localTime));
         assertEquals("3 hours ago", DateUtils.getRelativeTimeSpanString(ctx, localTime.minusHours(3), localTime));
     }
+
+    public void testGetRelativeTimeSpanStringWithPreposition() {
+        Context ctx = getInstrumentation().getContext();
+
+        Calendar todayCal = Calendar.getInstance();
+        Calendar tomorrowCal = Calendar.getInstance();
+        tomorrowCal.add(Calendar.DAY_OF_MONTH, 1);
+        Calendar nextYearCal = Calendar.getInstance();
+        nextYearCal.add(Calendar.YEAR, 1);
+
+        long todayMillis = todayCal.getTimeInMillis();
+        long tomorrowMillis = tomorrowCal.getTimeInMillis();
+        long nextYearMillis = nextYearCal.getTimeInMillis();
+
+        LocalDate today = LocalDate.now();
+        LocalDate tomorrow = today.plusDays(1);
+        LocalDate nextYear = today.plusYears(1);
+
+        DateTime todayDt = DateTime.now();
+        DateTime tomorrowDt = todayDt.plusDays(1);
+        DateTime nextYearDt = todayDt.plusYears(1);
+
+        // Test once with prepositions and once without
+        for (int a = 0; a < 2; a++) {
+            boolean withPrepositions = a == 1;
+
+            assertEquals(android.text.format.DateUtils.getRelativeTimeSpanString(ctx, todayMillis, withPrepositions),
+                DateUtils.getRelativeTimeSpanString(ctx, today, withPrepositions));
+            assertEquals(android.text.format.DateUtils.getRelativeTimeSpanString(ctx, tomorrowMillis, withPrepositions),
+                DateUtils.getRelativeTimeSpanString(ctx, tomorrow, withPrepositions));
+            assertEquals(android.text.format.DateUtils.getRelativeTimeSpanString(ctx, nextYearMillis, withPrepositions),
+                DateUtils.getRelativeTimeSpanString(ctx, nextYear, withPrepositions));
+
+            assertEquals(android.text.format.DateUtils.getRelativeTimeSpanString(ctx, todayMillis, withPrepositions),
+                DateUtils.getRelativeTimeSpanString(ctx, todayDt, withPrepositions));
+            assertEquals(android.text.format.DateUtils.getRelativeTimeSpanString(ctx, tomorrowMillis, withPrepositions),
+                DateUtils.getRelativeTimeSpanString(ctx, tomorrowDt, withPrepositions));
+            assertEquals(android.text.format.DateUtils.getRelativeTimeSpanString(ctx, nextYearMillis, withPrepositions),
+                DateUtils.getRelativeTimeSpanString(ctx, nextYearDt, withPrepositions));
+        }
+    }
 }
