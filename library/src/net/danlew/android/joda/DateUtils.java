@@ -29,6 +29,9 @@ import org.joda.time.Years;
  * All it does is remove meaningful information from the string.  E.g., it turns
  * "in 30 seconds" into "in 0 minutes", or "in 5 hours" into "in 0 days".  Having 0 of anything
  * doesn't tell the user anything and should not be encouraged.
+ *
+ * - "now" has been removed from methods as a parameter.  There is (AFAIK) no reason to use any
+ * time but the current time for now, especially when formatting date/times in relation to now.
  */
 public class DateUtils {
 
@@ -202,41 +205,29 @@ public class DateUtils {
      *
      * Missing fields from 'time' are filled in with values from the current time.
      *
-     * @see #getRelativeTimeSpanString(Context, ReadableInstant, ReadableInstant, int)
+     * @see #getRelativeTimeSpanString(Context, ReadableInstant, int)
      */
     public static CharSequence getRelativeTimeSpanString(Context context, ReadablePartial time) {
-        return getRelativeTimeSpanString(context, time, LocalDate.now());
+        return getRelativeTimeSpanString(context, time.toDateTime(DateTime.now()));
     }
 
     /**
      * Returns a string describing 'time' as a time relative to the current time.
      *
-     * @see #getRelativeTimeSpanString(Context, ReadableInstant, ReadableInstant, int)
+     * @see #getRelativeTimeSpanString(Context, ReadableInstant, int)
      */
     public static CharSequence getRelativeTimeSpanString(Context context, ReadableInstant time) {
-        return getRelativeTimeSpanString(context, time, DateTime.now());
-    }
-
-    /**
-     * Returns a string describing 'time' as a time relative to 'now'.
-     *
-     * Missing fields from 'time' and 'now' are filled in with values from the current time.
-     *
-     * @see #getRelativeTimeSpanString(Context, ReadableInstant, ReadableInstant, int)
-     */
-    public static CharSequence getRelativeTimeSpanString(Context context, ReadablePartial time, ReadablePartial now) {
-        DateTime dtNow = DateTime.now();
-        return getRelativeTimeSpanString(context, time.toDateTime(dtNow), now.toDateTime(dtNow));
-    }
-
-    /**
-     * Returns a string describing 'time' as a time relative to 'now'.
-     *
-     * @see #getRelativeTimeSpanString(Context, ReadableInstant, ReadableInstant, int)
-     */
-    public static CharSequence getRelativeTimeSpanString(Context context, ReadableInstant time, ReadableInstant now) {
         int flags = FORMAT_SHOW_DATE | FORMAT_SHOW_YEAR | FORMAT_ABBREV_MONTH;
-        return getRelativeTimeSpanString(context, time, now, flags);
+        return getRelativeTimeSpanString(context, time, flags);
+    }
+
+    /**
+     * Returns a string describing 'time' as a time relative to the current time.
+     *
+     * @see #getRelativeTimeSpanString(Context, ReadableInstant, int)
+     */
+    public static CharSequence getRelativeTimeSpanString(Context context, ReadablePartial time, int flags) {
+        return getRelativeTimeSpanString(context, time.toDateTime(DateTime.now()), flags);
     }
 
     /**
@@ -246,14 +237,13 @@ public class DateUtils {
      *
      * @param context the context
      * @param time the time to describe
-     * @param now the current time
      * @param flags a bit mask for formatting options
      * @return a string describing 'time' as a time relative to 'now'.
      */
-    public static CharSequence getRelativeTimeSpanString(Context context, ReadableInstant time, ReadableInstant now,
-                                                         int flags) {
+    public static CharSequence getRelativeTimeSpanString(Context context, ReadableInstant time, int flags) {
         boolean abbrevRelative = (flags & (FORMAT_ABBREV_RELATIVE | FORMAT_ABBREV_ALL)) != 0;
 
+        DateTime now = DateTime.now(time.getZone());
         boolean past = !now.isBefore(time);
         Interval interval = past ? new Interval(time, now) : new Interval(now, time);
 

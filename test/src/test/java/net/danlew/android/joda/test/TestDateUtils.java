@@ -220,76 +220,84 @@ public class TestDateUtils extends InstrumentationTestCase {
     public void testGetRelativeTimeSpanString() {
         Context ctx = getInstrumentation().getContext();
 
-        DateTime dateTime = new DateTime(1988, 3, 4, 5, 6, 15, DateTimeZone.UTC);
-
         // Test all output strings
-        assertEquals("in 1 second", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusSeconds(1), dateTime));
-        assertEquals("in 30 seconds", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusSeconds(30), dateTime));
-        assertEquals("1 second ago", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusSeconds(1), dateTime));
-        assertEquals("30 seconds ago", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusSeconds(30), dateTime));
-        assertEquals("in 1 sec", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusSeconds(1), dateTime,
+        assertEquals("in 1 second", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().plusSeconds(1)));
+        assertEquals("in 30 seconds", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().plusSeconds(30)));
+        assertEquals("1 second ago", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().minusSeconds(1)));
+        assertEquals("30 seconds ago", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().minusSeconds(30)));
+        assertEquals("in 1 sec", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().plusSeconds(1),
             DateUtils.FORMAT_ABBREV_RELATIVE));
-        assertEquals("in 30 secs", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusSeconds(30), dateTime,
+        assertEquals("in 30 secs", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().plusSeconds(30),
             DateUtils.FORMAT_ABBREV_RELATIVE));
-        assertEquals("1 sec ago", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusSeconds(1), dateTime,
+        assertEquals("1 sec ago", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().minusSeconds(1),
             DateUtils.FORMAT_ABBREV_RELATIVE));
-        assertEquals("30 secs ago", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusSeconds(30), dateTime,
-            DateUtils.FORMAT_ABBREV_RELATIVE));
-
-        assertEquals("in 1 minute", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusMinutes(1), dateTime));
-        assertEquals("in 30 minutes", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusMinutes(30), dateTime));
-        assertEquals("1 minute ago", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusMinutes(1), dateTime));
-        assertEquals("30 minutes ago", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusMinutes(30), dateTime));
-        assertEquals("in 1 min", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusMinutes(1), dateTime,
-            DateUtils.FORMAT_ABBREV_RELATIVE));
-        assertEquals("in 30 mins", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusMinutes(30), dateTime,
-            DateUtils.FORMAT_ABBREV_RELATIVE));
-        assertEquals("1 min ago", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusMinutes(1), dateTime,
-            DateUtils.FORMAT_ABBREV_RELATIVE));
-        assertEquals("30 mins ago", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusMinutes(30), dateTime,
+        assertEquals("30 secs ago", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().minusSeconds(30),
             DateUtils.FORMAT_ABBREV_RELATIVE));
 
-        assertEquals("in 1 hour", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusHours(1), dateTime));
-        assertEquals("in 3 hours", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusHours(3), dateTime));
-        assertEquals("1 hour ago", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusHours(1), dateTime));
-        assertEquals("3 hours ago", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusHours(3), dateTime));
-        assertEquals("in 1 hour", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusHours(1), dateTime,
+        assertEquals("in 1 minute", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().plusMinutes(1)));
+        assertEquals("in 30 minutes", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().plusMinutes(30)));
+        assertEquals("1 minute ago", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().minusMinutes(1)));
+        assertEquals("30 minutes ago", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().minusMinutes(30)));
+        assertEquals("in 1 min", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().plusMinutes(1),
             DateUtils.FORMAT_ABBREV_RELATIVE));
-        assertEquals("in 3 hours", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusHours(3), dateTime,
+        assertEquals("in 30 mins", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().plusMinutes(30),
             DateUtils.FORMAT_ABBREV_RELATIVE));
-        assertEquals("1 hour ago", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusHours(1), dateTime,
+        assertEquals("1 min ago", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().minusMinutes(1),
             DateUtils.FORMAT_ABBREV_RELATIVE));
-        assertEquals("3 hours ago", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusHours(3), dateTime,
-            DateUtils.FORMAT_ABBREV_RELATIVE));
-
-        assertEquals("tomorrow", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusDays(1), dateTime));
-        assertEquals("in 3 days", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusDays(3), dateTime));
-        assertEquals("yesterday", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusDays(1), dateTime));
-        assertEquals("3 days ago", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusDays(3), dateTime));
-        assertEquals("tomorrow", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusDays(1), dateTime,
-            DateUtils.FORMAT_ABBREV_RELATIVE));
-        assertEquals("in 3 days", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusDays(3), dateTime,
-            DateUtils.FORMAT_ABBREV_RELATIVE));
-        assertEquals("yesterday", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusDays(1), dateTime,
-            DateUtils.FORMAT_ABBREV_RELATIVE));
-        assertEquals("3 days ago", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusDays(3), dateTime,
+        assertEquals("30 mins ago", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().minusMinutes(30),
             DateUtils.FORMAT_ABBREV_RELATIVE));
 
-        assertEquals("Mar 11, 1988", DateUtils.getRelativeTimeSpanString(ctx, dateTime.plusWeeks(1), dateTime));
-        assertEquals("Feb 26, 1988", DateUtils.getRelativeTimeSpanString(ctx, dateTime.minusWeeks(1), dateTime));
+        assertEquals("in 1 hour", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().plusHours(1)));
+        assertEquals("in 3 hours", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().plusHours(3)));
+        assertEquals("1 hour ago", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().minusHours(1)));
+        assertEquals("3 hours ago", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().minusHours(3)));
+        assertEquals("in 1 hour", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().plusHours(1),
+            DateUtils.FORMAT_ABBREV_RELATIVE));
+        assertEquals("in 3 hours", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().plusHours(3),
+            DateUtils.FORMAT_ABBREV_RELATIVE));
+        assertEquals("1 hour ago", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().minusHours(1),
+            DateUtils.FORMAT_ABBREV_RELATIVE));
+        assertEquals("3 hours ago", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().minusHours(3),
+            DateUtils.FORMAT_ABBREV_RELATIVE));
+
+        assertEquals("tomorrow", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().plusDays(1)));
+        assertEquals("in 3 days", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().plusDays(3)));
+        assertEquals("yesterday", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().minusDays(1)));
+        assertEquals("3 days ago", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().minusDays(3)));
+        assertEquals("tomorrow", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().plusDays(1),
+            DateUtils.FORMAT_ABBREV_RELATIVE));
+        assertEquals("in 3 days", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().plusDays(3),
+            DateUtils.FORMAT_ABBREV_RELATIVE));
+        assertEquals("yesterday", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().minusDays(1),
+            DateUtils.FORMAT_ABBREV_RELATIVE));
+        assertEquals("3 days ago", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().minusDays(3),
+            DateUtils.FORMAT_ABBREV_RELATIVE));
+
+        int flags = DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR | DateUtils.FORMAT_ABBREV_MONTH;
+        assertEquals(DateUtils.formatDateTime(ctx, DateTime.now().plusWeeks(1), flags),
+            DateUtils.getRelativeTimeSpanString(ctx,  DateTime.now().plusWeeks(1)));
+        assertEquals(DateUtils.formatDateTime(ctx, DateTime.now().minusWeeks(1), flags),
+            DateUtils.getRelativeTimeSpanString(ctx,  DateTime.now().minusWeeks(1)));
 
         // Test partial inputs
-        LocalDate localDate = dateTime.toLocalDate();
-        assertEquals("tomorrow", DateUtils.getRelativeTimeSpanString(ctx, localDate.plusDays(1), localDate));
-        assertEquals("in 3 days", DateUtils.getRelativeTimeSpanString(ctx, localDate.plusDays(3), localDate));
-        assertEquals("yesterday", DateUtils.getRelativeTimeSpanString(ctx, localDate.minusDays(1), localDate));
-        assertEquals("3 days ago", DateUtils.getRelativeTimeSpanString(ctx, localDate.minusDays(3), localDate));
+        assertEquals("tomorrow", DateUtils.getRelativeTimeSpanString(ctx, LocalDate.now().plusDays(1)));
+        assertEquals("in 3 days", DateUtils.getRelativeTimeSpanString(ctx, LocalDate.now().plusDays(3)));
+        assertEquals("yesterday", DateUtils.getRelativeTimeSpanString(ctx, LocalDate.now().minusDays(1)));
+        assertEquals("3 days ago", DateUtils.getRelativeTimeSpanString(ctx, LocalDate.now().minusDays(3)));
 
-        LocalTime localTime = LocalTime.now();
-        assertEquals("in 1 hour", DateUtils.getRelativeTimeSpanString(ctx, localTime.plusHours(1), localTime));
-        assertEquals("in 3 hours", DateUtils.getRelativeTimeSpanString(ctx, localTime.plusHours(3), localTime));
-        assertEquals("1 hour ago", DateUtils.getRelativeTimeSpanString(ctx, localTime.minusHours(1), localTime));
-        assertEquals("3 hours ago", DateUtils.getRelativeTimeSpanString(ctx, localTime.minusHours(3), localTime));
+        assertEquals("in 1 hour", DateUtils.getRelativeTimeSpanString(ctx, LocalTime.now().plusHours(1)));
+        assertEquals("in 3 hours", DateUtils.getRelativeTimeSpanString(ctx, LocalTime.now().plusHours(3)));
+        assertEquals("1 hour ago", DateUtils.getRelativeTimeSpanString(ctx, LocalTime.now().minusHours(1)));
+        assertEquals("3 hours ago", DateUtils.getRelativeTimeSpanString(ctx, LocalTime.now().minusHours(3)));
+
+        assertEquals("in 1 min", DateUtils.getRelativeTimeSpanString(ctx, LocalTime.now().plusMinutes(1),
+            DateUtils.FORMAT_ABBREV_RELATIVE));
+        assertEquals("in 30 mins", DateUtils.getRelativeTimeSpanString(ctx, LocalTime.now().plusMinutes(30),
+            DateUtils.FORMAT_ABBREV_RELATIVE));
+        assertEquals("1 min ago", DateUtils.getRelativeTimeSpanString(ctx, LocalTime.now().minusMinutes(1),
+            DateUtils.FORMAT_ABBREV_RELATIVE));
+        assertEquals("30 mins ago", DateUtils.getRelativeTimeSpanString(ctx, LocalTime.now().minusMinutes(30),
+            DateUtils.FORMAT_ABBREV_RELATIVE));
     }
 
     public void testGetRelativeTimeSpanStringWithPreposition() {
