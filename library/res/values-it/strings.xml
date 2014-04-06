@@ -64,4 +64,6 @@
         <item msgid="2178576254385739855" quantity="one">"domani"</item>
         <item msgid="2973062968038355991" quantity="other">"tra <xliff:g id="COUNT">%d</xliff:g> giorni"</item>
     </plurals>
+    <string name="preposition_for_date" msgid="9093949757757445117">"in data <xliff:g id="DATE">%s</xliff:g>"</string>
+    <string name="preposition_for_time" msgid="5506831244263083793">"alle ore <xliff:g id="TIME">%s</xliff:g>"</string>
 </resources>

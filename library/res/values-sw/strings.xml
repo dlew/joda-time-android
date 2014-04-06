@@ -64,4 +64,6 @@
         <item msgid="2178576254385739855" quantity="one">"kesho"</item>
         <item msgid="2973062968038355991" quantity="other">"kati ya siku <xliff:g id="COUNT">%d</xliff:g>"</item>
     </plurals>
+    <string name="preposition_for_date" msgid="9093949757757445117">"tarehe <xliff:g id="DATE">%s</xliff:g>"</string>
+    <string name="preposition_for_time" msgid="5506831244263083793">"Saa <xliff:g id="TIME">%s</xliff:g>"</string>
 </resources>

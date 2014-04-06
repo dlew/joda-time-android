@@ -64,4 +64,6 @@
         <item msgid="2178576254385739855" quantity="one">"huomenna"</item>
         <item msgid="2973062968038355991" quantity="other">"<xliff:g id="COUNT">%d</xliff:g> päivän kuluttua"</item>
     </plurals>
+    <string name="preposition_for_date" msgid="9093949757757445117">"päivä: <xliff:g id="DATE">%s</xliff:g>"</string>
+    <string name="preposition_for_time" msgid="5506831244263083793">"klo <xliff:g id="TIME">%s</xliff:g>"</string>
 </resources>

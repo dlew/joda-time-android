@@ -64,4 +64,6 @@
         <item msgid="2178576254385739855" quantity="one">"damaun"</item>
         <item msgid="2973062968038355991" quantity="other">"en <xliff:g id="COUNT">%d</xliff:g> dis"</item>
     </plurals>
+    <string name="preposition_for_date" msgid="9093949757757445117">"il(s) <xliff:g id="DATE">%s</xliff:g>"</string>
+    <string name="preposition_for_time" msgid="5506831244263083793">"las <xliff:g id="TIME">%s</xliff:g>"</string>
 </resources>

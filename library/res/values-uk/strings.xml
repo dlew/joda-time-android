@@ -64,4 +64,6 @@
         <item msgid="2178576254385739855" quantity="one">"завтра"</item>
         <item msgid="2973062968038355991" quantity="other">"через <xliff:g id="COUNT">%d</xliff:g> дн."</item>
     </plurals>
+    <string name="preposition_for_date" msgid="9093949757757445117">"<xliff:g id="DATE">%s</xliff:g>"</string>
+    <string name="preposition_for_time" msgid="5506831244263083793">"о <xliff:g id="TIME">%s</xliff:g>"</string>
 </resources>
