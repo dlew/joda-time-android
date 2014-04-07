@@ -243,9 +243,11 @@ public class DateUtils {
     public static CharSequence getRelativeTimeSpanString(Context context, ReadableInstant time, int flags) {
         boolean abbrevRelative = (flags & (FORMAT_ABBREV_RELATIVE | FORMAT_ABBREV_ALL)) != 0;
 
-        DateTime now = DateTime.now(time.getZone());
-        boolean past = !now.isBefore(time);
-        Interval interval = past ? new Interval(time, now) : new Interval(now, time);
+        // We set the millis to 0 so we aren't off by a fraction of a second when counting intervals
+        DateTime now = DateTime.now(time.getZone()).withMillisOfSecond(0);
+        DateTime timeDt = new DateTime(time).withMillisOfSecond(0);
+        boolean past = !now.isBefore(timeDt);
+        Interval interval = past ? new Interval(timeDt, now) : new Interval(now, timeDt);
 
         int resId;
         long count;
