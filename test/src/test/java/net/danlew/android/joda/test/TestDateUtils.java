@@ -6,7 +6,9 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.test.InstrumentationTestCase;
 import net.danlew.android.joda.DateUtils;
+import net.danlew.android.joda.ResourceZoneInfoProvider;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeUtils;
 import org.joda.time.DateTimeZone;
 import org.joda.time.Duration;
 import org.joda.time.LocalDate;
@@ -49,9 +51,26 @@ public class TestDateUtils extends InstrumentationTestCase {
         DateUtils.FORMAT_SHOW_YEAR,
     };
 
+    // Values that will represent "now" during our tests
+    private static final int YEAR = 1995;
+    private static final int MONTH_OF_YEAR = 10;
+    private static final int DAY_OF_MONTH = 22;
+    private static final int HOUR_OF_DAY = 12;
+    private static final int MINUTE_OF_HOUR = 35;
+    private static final int SECOND_OF_MINUTE = 20;
+    private static final int MILLIS_OF_SECOND = 103;
+
+    private DateTime mNow;
+    private DateTimeZone mDefault;
+    private DateTimeZone mOldDefault;
+
     @Override
     protected void setUp() throws Exception {
         super.setUp();
+
+        // Init zone info
+        Context context = getInstrumentation().getContext();
+        ResourceZoneInfoProvider.init(context);
 
         // Force all tests to be in the US locale; that way we can test output in consistent manner
         Application app = (Application) getInstrumentation().getContext().getApplicationContext();
@@ -60,6 +79,25 @@ public class TestDateUtils extends InstrumentationTestCase {
         Locale.setDefault(Locale.US);
         config.locale = Locale.US;
         res.updateConfiguration(config, res.getDisplayMetrics());
+
+        // Force the default timezone
+        mDefault = DateTimeZone.forID("America/New_York");
+        mOldDefault = DateTimeZone.getDefault();
+        DateTimeZone.setDefault(mDefault);
+
+        // Force current "now" time, so all tests can be consistent
+        mNow = new DateTime(YEAR, MONTH_OF_YEAR, DAY_OF_MONTH, HOUR_OF_DAY,
+            MINUTE_OF_HOUR, SECOND_OF_MINUTE, MILLIS_OF_SECOND, mDefault);
+        DateTimeUtils.setCurrentMillisFixed(mNow.getMillis());
+    }
+
+    @Override
+    protected void tearDown() throws Exception {
+        super.tearDown();
+
+        // Restore to normal "now" time
+        DateTimeUtils.setCurrentMillisSystem();
+        DateTimeZone.setDefault(mOldDefault);
     }
 
     public void testFormatDateTime() {
@@ -137,14 +175,13 @@ public class TestDateUtils extends InstrumentationTestCase {
     }
 
     public void testFormatElapsedTime() {
-        int[] secondsToTest = {
-            0, 5, 15, 150, 2000, 15000, 1053333
-        };
-
-        for (int a = 0; a < secondsToTest.length; a++) {
-            assertEquals(android.text.format.DateUtils.formatElapsedTime(secondsToTest[a]),
-                DateUtils.formatElapsedTime(Duration.standardSeconds(secondsToTest[a])));
-        }
+        assertEquals("00:00", DateUtils.formatElapsedTime(Duration.standardSeconds(0)));
+        assertEquals("00:05", DateUtils.formatElapsedTime(Duration.standardSeconds(5)));
+        assertEquals("00:15", DateUtils.formatElapsedTime(Duration.standardSeconds(15)));
+        assertEquals("02:30", DateUtils.formatElapsedTime(Duration.standardSeconds(150)));
+        assertEquals("33:20", DateUtils.formatElapsedTime(Duration.standardSeconds(2000)));
+        assertEquals("4:10:00", DateUtils.formatElapsedTime(Duration.standardSeconds(15000)));
+        assertEquals("292:35:33", DateUtils.formatElapsedTime(Duration.standardSeconds(1053333)));
     }
 
     public void testIsToday() {
@@ -152,53 +189,25 @@ public class TestDateUtils extends InstrumentationTestCase {
         LocalDate yesterday = today.minusDays(1);
         LocalDate tomorrow = today.plusDays(1);
 
-        assertEquals(android.text.format.DateUtils.isToday(today.toDateTimeAtStartOfDay().getMillis()),
-            DateUtils.isToday(today));
-        assertEquals(android.text.format.DateUtils.isToday(yesterday.toDateTimeAtStartOfDay().getMillis()),
-            DateUtils.isToday(yesterday));
-        assertEquals(android.text.format.DateUtils.isToday(tomorrow.toDateTimeAtStartOfDay().getMillis()),
-            DateUtils.isToday(tomorrow));
+        assertEquals(true, DateUtils.isToday(today));
+        assertEquals(false, DateUtils.isToday(yesterday));
+        assertEquals(false, DateUtils.isToday(tomorrow));
 
         LocalDateTime todayLdt = LocalDateTime.now();
         LocalDateTime yesterdayLdt = todayLdt.minusDays(1);
         LocalDateTime tomorrowLdt = todayLdt.plusDays(1);
 
-        assertEquals(android.text.format.DateUtils.isToday(todayLdt.toDateTime().getMillis()),
-            DateUtils.isToday(todayLdt));
-        assertEquals(android.text.format.DateUtils.isToday(yesterdayLdt.toDateTime().getMillis()),
-            DateUtils.isToday(yesterdayLdt));
-        assertEquals(android.text.format.DateUtils.isToday(tomorrowLdt.toDateTime().getMillis()),
-            DateUtils.isToday(tomorrowLdt));
+        assertEquals(true, DateUtils.isToday(todayLdt));
+        assertEquals(false, DateUtils.isToday(yesterdayLdt));
+        assertEquals(false, DateUtils.isToday(tomorrowLdt));
 
         DateTime todayDt = DateTime.now();
         DateTime yesterdayDt = todayDt.minusDays(1);
         DateTime tomorrowDt = todayDt.plusDays(1);
 
-        assertEquals(android.text.format.DateUtils.isToday(todayDt.getMillis()),
-            DateUtils.isToday(todayDt));
-        assertEquals(android.text.format.DateUtils.isToday(yesterdayDt.getMillis()),
-            DateUtils.isToday(yesterdayDt));
-        assertEquals(android.text.format.DateUtils.isToday(tomorrowDt.getMillis()),
-            DateUtils.isToday(tomorrowDt));
-
-        Calendar todayCal = Calendar.getInstance();
-        Calendar yesterdayCal = Calendar.getInstance();
-        yesterdayCal.add(Calendar.DAY_OF_MONTH, -1);
-        Calendar tomorrowCal = Calendar.getInstance();
-        tomorrowCal.add(Calendar.DAY_OF_MONTH, 1);
-
-        assertEquals(android.text.format.DateUtils.isToday(todayCal.getTimeInMillis()),
-            DateUtils.isToday(new LocalDate(todayCal)));
-        assertEquals(android.text.format.DateUtils.isToday(todayCal.getTimeInMillis()),
-            DateUtils.isToday(new DateTime(todayCal)));
-        assertEquals(android.text.format.DateUtils.isToday(yesterdayCal.getTimeInMillis()),
-            DateUtils.isToday(new LocalDate(yesterdayCal)));
-        assertEquals(android.text.format.DateUtils.isToday(yesterdayCal.getTimeInMillis()),
-            DateUtils.isToday(new DateTime(yesterdayCal)));
-        assertEquals(android.text.format.DateUtils.isToday(tomorrowCal.getTimeInMillis()),
-            DateUtils.isToday(new LocalDate(tomorrowCal)));
-        assertEquals(android.text.format.DateUtils.isToday(tomorrowCal.getTimeInMillis()),
-            DateUtils.isToday(new DateTime(tomorrowCal)));
+        assertEquals(true, DateUtils.isToday(todayDt));
+        assertEquals(false, DateUtils.isToday(yesterdayDt));
+        assertEquals(false, DateUtils.isToday(tomorrowDt));
 
         try {
             DateUtils.isToday(new MonthDay());
@@ -275,9 +284,9 @@ public class TestDateUtils extends InstrumentationTestCase {
 
         int flags = DateUtils.FORMAT_SHOW_DATE | DateUtils.FORMAT_SHOW_YEAR | DateUtils.FORMAT_ABBREV_MONTH;
         assertEquals(DateUtils.formatDateTime(ctx, DateTime.now().plusWeeks(1), flags),
-            DateUtils.getRelativeTimeSpanString(ctx,  DateTime.now().plusWeeks(1)));
+            DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().plusWeeks(1)));
         assertEquals(DateUtils.formatDateTime(ctx, DateTime.now().minusWeeks(1), flags),
-            DateUtils.getRelativeTimeSpanString(ctx,  DateTime.now().minusWeeks(1)));
+            DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().minusWeeks(1)));
 
         // Test partial inputs
         assertEquals("tomorrow", DateUtils.getRelativeTimeSpanString(ctx, LocalDate.now().plusDays(1)));
@@ -303,41 +312,26 @@ public class TestDateUtils extends InstrumentationTestCase {
     public void testGetRelativeTimeSpanStringWithPreposition() {
         Context ctx = getInstrumentation().getContext();
 
-        Calendar todayCal = Calendar.getInstance();
-        Calendar tomorrowCal = Calendar.getInstance();
-        tomorrowCal.add(Calendar.DAY_OF_MONTH, 1);
-        Calendar nextYearCal = Calendar.getInstance();
-        nextYearCal.add(Calendar.YEAR, 1);
-
-        long todayMillis = todayCal.getTimeInMillis();
-        long tomorrowMillis = tomorrowCal.getTimeInMillis();
-        long nextYearMillis = nextYearCal.getTimeInMillis();
-
         LocalDate today = LocalDate.now();
         LocalDate tomorrow = today.plusDays(1);
         LocalDate nextYear = today.plusYears(1);
+
+        assertEquals("12:35", DateUtils.getRelativeTimeSpanString(ctx, today, false));
+        assertEquals("at 12:35", DateUtils.getRelativeTimeSpanString(ctx, today, true));
+        assertEquals("Oct 23, 1995", DateUtils.getRelativeTimeSpanString(ctx, tomorrow, false));
+        assertEquals("on Oct 23, 1995", DateUtils.getRelativeTimeSpanString(ctx, tomorrow, true));
+        assertEquals("10/22/1996", DateUtils.getRelativeTimeSpanString(ctx, nextYear, false));
+        assertEquals("on 10/22/1996", DateUtils.getRelativeTimeSpanString(ctx, nextYear, true));
 
         DateTime todayDt = DateTime.now();
         DateTime tomorrowDt = todayDt.plusDays(1);
         DateTime nextYearDt = todayDt.plusYears(1);
 
-        // Test once with prepositions and once without
-        for (int a = 0; a < 2; a++) {
-            boolean withPrepositions = a == 1;
-
-            assertEquals(android.text.format.DateUtils.getRelativeTimeSpanString(ctx, todayMillis, withPrepositions),
-                DateUtils.getRelativeTimeSpanString(ctx, today, withPrepositions));
-            assertEquals(android.text.format.DateUtils.getRelativeTimeSpanString(ctx, tomorrowMillis, withPrepositions),
-                DateUtils.getRelativeTimeSpanString(ctx, tomorrow, withPrepositions));
-            assertEquals(android.text.format.DateUtils.getRelativeTimeSpanString(ctx, nextYearMillis, withPrepositions),
-                DateUtils.getRelativeTimeSpanString(ctx, nextYear, withPrepositions));
-
-            assertEquals(android.text.format.DateUtils.getRelativeTimeSpanString(ctx, todayMillis, withPrepositions),
-                DateUtils.getRelativeTimeSpanString(ctx, todayDt, withPrepositions));
-            assertEquals(android.text.format.DateUtils.getRelativeTimeSpanString(ctx, tomorrowMillis, withPrepositions),
-                DateUtils.getRelativeTimeSpanString(ctx, tomorrowDt, withPrepositions));
-            assertEquals(android.text.format.DateUtils.getRelativeTimeSpanString(ctx, nextYearMillis, withPrepositions),
-                DateUtils.getRelativeTimeSpanString(ctx, nextYearDt, withPrepositions));
-        }
+        assertEquals("12:35", DateUtils.getRelativeTimeSpanString(ctx, todayDt, false));
+        assertEquals("at 12:35", DateUtils.getRelativeTimeSpanString(ctx, todayDt, true));
+        assertEquals("Oct 23, 1995", DateUtils.getRelativeTimeSpanString(ctx, tomorrowDt, false));
+        assertEquals("on Oct 23, 1995", DateUtils.getRelativeTimeSpanString(ctx, tomorrowDt, true));
+        assertEquals("10/22/1996", DateUtils.getRelativeTimeSpanString(ctx, nextYearDt, false));
+        assertEquals("on 10/22/1996", DateUtils.getRelativeTimeSpanString(ctx, nextYearDt, true));
     }
 }
