@@ -30,7 +30,7 @@ android {
     }
 }
 
-apply from: 'https://raw.github.com/dlew/gradle-mvn-push/master/gradle-mvn-push.gradle'
+apply from: 'gradle-mvn-push.gradle'
 
 task updateTzData(dependsOn:assembleDebug, type: JavaExec) {
     main = "org.joda.time.tz.ZoneInfoCompiler"
