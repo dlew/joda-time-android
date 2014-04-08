@@ -15,6 +15,8 @@
  */
 package org.joda.convert;
 
+import android.util.Base64;
+
 import java.io.File;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -35,8 +37,6 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
-
-import javax.xml.bind.DatatypeConverter;
 
 /**
  * Conversion between JDK classes and a {@code String}.
@@ -116,10 +116,10 @@ enum JDKStringConverter implements StringConverter<Object> {
     BYTE_ARRAY(byte[].class) {
         @Override
         public String convertToString(Object object) {
-            return DatatypeConverter.printBase64Binary((byte[]) object);
+            return Base64.encodeToString((byte[]) object, Base64.DEFAULT);
         }
         public Object convertFromString(Class<?> cls, String str) {
-            return DatatypeConverter.parseBase64Binary(str);
+            return Base64.decode(str, Base64.DEFAULT);
         }
     },
     /**
