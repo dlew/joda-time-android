@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
-	<!-- org.joda.convert uses javax.xml.bind, but it's not an issue so we can ignore -->
-    <issue id="InvalidPackage" severity="warning" />
+    <!-- A lot of the Google translations are missing quantities, but there's not much I can do about it-->
+    <issue id="MissingQuantity" severity="warning" />
 </lint>
