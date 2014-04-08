@@ -29,14 +29,14 @@ If you're using maven:
     <dependency>
       <groupId>net.danlew</groupId>
       <artifactId>android.joda</artifactId>
-      <version>2.3</version>
+      <version>2.3.1</version>
       <type>aar</type>
     </dependency>
 
 If you're using gradle:
 
     dependencies {
-      compile 'net.danlew:android.joda:2.3@aar'
+      compile 'net.danlew:android.joda:2.3.1'
     }
 
 Once the project is imported, you **must** initialize the timezone provider with a `Context` (via `ResourceZoneInfoProvider.init()`) before you can start using this library.  I suggest putting this code in `Application.onCreate()`:
