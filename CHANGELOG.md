@@ -1,5 +1,7 @@
 # Changelog
 
+## 2.3.2
+
 * `#7` Added DateUtils.formatDuration()
 
 ## 2.3.1
