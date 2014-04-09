@@ -1,5 +1,7 @@
 # Changelog
 
+* `#7` Added DateUtils.formatDuration()
+
 ## 2.3.1
 
 * `#5` Add compatibility version of DateUtils
