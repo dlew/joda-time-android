@@ -377,4 +377,21 @@ public class TestDateUtils extends InstrumentationTestCase {
 
         }
     }
+
+    public void testFormatDuration() {
+        Context ctx = getInstrumentation().getContext();
+
+        assertEquals("1 second", DateUtils.formatDuration(ctx, Duration.standardSeconds(1)));
+        assertEquals("-1 seconds", DateUtils.formatDuration(ctx, Duration.standardSeconds(-1)));
+        assertEquals("30 seconds", DateUtils.formatDuration(ctx, Duration.standardSeconds(30)));
+        assertEquals("-30 seconds", DateUtils.formatDuration(ctx, Duration.standardSeconds(-30)));
+        assertEquals("1 minute", DateUtils.formatDuration(ctx, Duration.standardMinutes(1)));
+        assertEquals("-1 minutes", DateUtils.formatDuration(ctx, Duration.standardMinutes(-1)));
+        assertEquals("30 minutes", DateUtils.formatDuration(ctx, Duration.standardMinutes(30)));
+        assertEquals("-30 minutes", DateUtils.formatDuration(ctx, Duration.standardMinutes(-30)));
+        assertEquals("1 hour", DateUtils.formatDuration(ctx, Duration.standardHours(1)));
+        assertEquals("-1 hours", DateUtils.formatDuration(ctx, Duration.standardHours(-1)));
+        assertEquals("12 hours", DateUtils.formatDuration(ctx, Duration.standardHours(12)));
+        assertEquals("-12 hours", DateUtils.formatDuration(ctx, Duration.standardHours(-12)));
+    }
 }

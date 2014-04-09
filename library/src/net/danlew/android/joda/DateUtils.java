@@ -400,8 +400,8 @@ public class DateUtils {
      *
      * See {@link android.text.format.DateUtils#getRelativeDateTimeString} for full docs.
      *
-     * @see #getRelativeDateTimeString(Context, ReadableInstant, ReadablePeriod, int)
      * @throws IllegalArgumentException if using a ReadablePartial without a time component
+     * @see #getRelativeDateTimeString(Context, ReadableInstant, ReadablePeriod, int)
      */
     public static CharSequence getRelativeDateTimeString(Context context, ReadablePartial time,
                                                          ReadablePeriod transitionResolution, int flags) {
@@ -474,4 +474,34 @@ public class DateUtils {
 
         return result;
     }
+
+    /**
+     * Return given duration in a human-friendly format. For example, "4
+     * minutes" or "1 second". Returns only largest meaningful unit of time,
+     * from seconds up to hours.
+     *
+     * The longest duration it supports is hours.
+     *
+     * This method assumes that there are 60 minutes in an hour,
+     * 60 seconds in a minute and 1000 milliseconds in a second.
+     * All currently supplied chronologies use this definition.
+     */
+    public static CharSequence formatDuration(Context context, ReadableDuration readableDuration) {
+        Resources res = context.getResources();
+        Duration duration = readableDuration.toDuration();
+
+        final int hours = (int) duration.getStandardHours();
+        if (hours != 0) {
+            return res.getQuantityString(R.plurals.duration_hours, hours, hours);
+        }
+
+        final int minutes = (int) duration.getStandardMinutes();
+        if (minutes != 0) {
+            return res.getQuantityString(R.plurals.duration_minutes, minutes, minutes);
+        }
+
+        final int seconds = (int) duration.getStandardSeconds();
+        return res.getQuantityString(R.plurals.duration_seconds, seconds, seconds);
+    }
+
 }
