@@ -66,5 +66,17 @@
     </plurals>
     <string name="preposition_for_date" msgid="9093949757757445117">"ngo-<xliff:g id="DATE">%s</xliff:g>"</string>
     <string name="preposition_for_time" msgid="5506831244263083793">"e-<xliff:g id="TIME">%s</xliff:g>"</string>
+    <plurals name="duration_seconds">
+        <item msgid="6962015528372969481" quantity="one">"1 isekhondi"</item>
+        <item msgid="1886107766577166786" quantity="other">"<xliff:g id="COUNT">%d</xliff:g> amasekhondi"</item>
+    </plurals>
+    <plurals name="duration_minutes">
+        <item msgid="4915414002546085617" quantity="one">"1 iminithi"</item>
+        <item msgid="3165187169224908775" quantity="other">"<xliff:g id="COUNT">%d</xliff:g> amaminithi"</item>
+    </plurals>
+    <plurals name="duration_hours">
+        <item msgid="8917467491248809972" quantity="one">"1 ihora"</item>
+        <item msgid="3863962854246773930" quantity="other">"<xliff:g id="COUNT">%d</xliff:g> amahora"</item>
+    </plurals>
     <string name="relative_time" msgid="1818557177829411417">"<xliff:g id="DATE">%1$s</xliff:g>, <xliff:g id="TIME">%2$s</xliff:g>"</string>
 </resources>
