@@ -1,0 +1,27 @@
+apply plugin: 'android-library'
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.0.3"
+
+    sourceSets {
+        main.manifest.srcFile 'AndroidManifest.xml'
+        main.java.srcDir 'src'
+        main.res.srcDir 'res'
+        main.assets.srcDir 'assets'
+        androidTest.setRoot('tests')
+    }
+
+    lintOptions {
+        lintConfig file("lint.xml")
+    }
+}
+
+apply from: 'gradle-mvn-push.gradle'
+
+task updateTzData(dependsOn:assembleDebug, type: JavaExec) {
+    main = "org.joda.time.tz.ZoneInfoCompiler"
+    classpath = files("build/bundles/debug/classes.jar")
+    systemProperty "org.joda.time.DateTimeZone.Provider", "org.joda.time.tz.UTCProvider"
+    args "-src", "../tzdata", "-dst", "res/raw", "africa",  "antarctica", "asia", "australasia", "europe", "northamerica", "southamerica", "pacificnew", "etcetera", "backward", "systemv"
+}

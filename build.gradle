@@ -7,34 +7,5 @@ buildscript {
     }
 }
 
-apply plugin: 'android-library'
+apply plugin: 'android-reporting'
 
-repositories {
-    mavenCentral()
-}
-
-android {
-    compileSdkVersion 19
-    buildToolsVersion "19.0.3"
-
-    sourceSets {
-        main.manifest.srcFile 'library/AndroidManifest.xml'
-        main.java.srcDir 'library/src'
-        main.res.srcDir 'library/res'
-        main.assets.srcDir 'library/assets'
-        androidTest.setRoot('library/tests')
-    }
-
-    lintOptions {
-        lintConfig file("library/lint.xml")
-    }
-}
-
-apply from: 'gradle-mvn-push.gradle'
-
-task updateTzData(dependsOn:assembleDebug, type: JavaExec) {
-    main = "org.joda.time.tz.ZoneInfoCompiler"
-    classpath = files("build/bundles/debug/classes.jar")
-    systemProperty "org.joda.time.DateTimeZone.Provider", "org.joda.time.tz.UTCProvider"
-    args "-src", "tzdata", "-dst", "library/res/raw", "africa",  "antarctica", "asia", "australasia", "europe", "northamerica", "southamerica", "pacificnew", "etcetera", "backward", "systemv"
-}
