@@ -22,7 +22,7 @@ android {
         main.java.srcDir 'library/src'
         main.res.srcDir 'library/res'
         main.assets.srcDir 'library/assets'
-        androidTest.setRoot('test/src/test')
+        androidTest.setRoot('library/tests')
     }
 
     lintOptions {
