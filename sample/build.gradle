@@ -1,0 +1,17 @@
+apply plugin: 'android'
+
+android {
+    compileSdkVersion 19
+    buildToolsVersion "19.0.3"
+
+    defaultConfig {
+        versionCode 1
+        versionName "1.0"
+        minSdkVersion 9
+        targetSdkVersion 19
+    }
+}
+
+dependencies {
+    compile project(':library')
+}
