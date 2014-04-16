@@ -1,5 +1,7 @@
 # Changelog
 
+* `#9` Reset default DateTimeZone when TIMEZONE_CHANGED broadcast is received
+
 ## 2.3.2
 
 * `#7` Added DateUtils.formatDuration()
