@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="net.danlew.android.joda.sample">
+<manifest
+    package="net.danlew.android.joda.sample"
+    xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
+        android:name=".JodaApplication"
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name">
         <activity
