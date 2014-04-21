@@ -1,5 +1,7 @@
 # Changelog
 
+# 2.3.3
+
 * `#4` Added library sample app
 * `#9` Reset default DateTimeZone when TIMEZONE_CHANGED broadcast is received
 
