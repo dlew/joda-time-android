@@ -39,14 +39,14 @@ If you're using gradle:
       compile 'net.danlew:android.joda:2.3.3'
     }
 
-Once the project is imported, you **must** initialize the timezone provider with a `Context` (via `ResourceZoneInfoProvider.init()`) before you can start using this library.  I suggest putting this code in `Application.onCreate()`:
+Once the project is imported, you **must** initialize the timezone provider and TIMEZONE_CHANGED broadcast receiver with a `Context` (via `JodaTimeAndroid.init()`) before you can start using this library.  I suggest putting this code in `Application.onCreate()`:
 
     public class MyApp extends Application {
         @Override
         public void onCreate() {
             super.onCreate();
           
-            ResourceZoneInfoProvider.init(this);
+            JodaTimeAndroid.init(this);
         }
     }
 
