@@ -32,30 +32,13 @@ public class ResourceZoneInfoProvider implements Provider {
     private final Map<String, Object> iZoneInfoMap;
 
     public static void init(Context context) {
-        if (!calledFromJodaTimeAndroid()) {
+        if (!JodaTimeAndroid.hasInitBeenCalled()) {
             Log.w("joda-time-android",
                     "Calling ResourceZoneInfoProvider.init() directly is deprecated. Use JodaTimeAndroid.init()");
             JodaTimeAndroid.init(context);
         }
 
         sAppContext = context.getApplicationContext();
-    }
-
-    /**
-     * @return true if the {@link JodaTimeAndroid} class is on the current
-     * thread's stack trace.
-     */
-    private static boolean calledFromJodaTimeAndroid() {
-        StackTraceElement[] elements = Thread.currentThread().getStackTrace();
-        String className = JodaTimeAndroid.class.getName();
-
-        for (int i = 0; i < elements.length; i++) {
-            if (className.equals(elements[i].getClassName())) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     public ResourceZoneInfoProvider() throws IOException {
