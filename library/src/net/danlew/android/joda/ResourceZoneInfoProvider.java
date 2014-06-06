@@ -9,6 +9,7 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 
+import android.util.Log;
 import org.joda.time.DateTimeZone;
 import org.joda.time.tz.DateTimeZoneBuilder;
 import org.joda.time.tz.Provider;
@@ -20,8 +21,7 @@ import android.content.Context;
  * Android resources.
  * 
  * In order to give it access to Resources, you must call
- * ResourceZoneInfoProvider.init() before starting to use
- * Joda-Time.
+ * JodaTimeAndroid.init() before starting to use Joda-Time.
  */
 public class ResourceZoneInfoProvider implements Provider {
 
@@ -32,6 +32,12 @@ public class ResourceZoneInfoProvider implements Provider {
     private final Map<String, Object> iZoneInfoMap;
 
     public static void init(Context context) {
+        if (!JodaTimeAndroid.hasInitBeenCalled()) {
+            Log.w("joda-time-android",
+                    "Calling ResourceZoneInfoProvider.init() directly is deprecated. Use JodaTimeAndroid.init()");
+            JodaTimeAndroid.init(context);
+        }
+
         sAppContext = context.getApplicationContext();
     }
 
@@ -107,7 +113,7 @@ public class ResourceZoneInfoProvider implements Provider {
      */
     private InputStream openResource(String name) throws IOException {
         if (sAppContext == null) {
-            throw new RuntimeException("Need to call ResourceZoneInfoProvider.init() before using joda-time-android");
+            throw new RuntimeException("Need to call JodaTimeAndroid.init() before using joda-time-android");
         }
 
         String resName = ResUtils.getTzResource(name);
