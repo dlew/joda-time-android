@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <lint>
-    <!-- A lot of the Google translations are missing quantities, but there's not much I can do about it-->
+    <!-- A lot of the Google translations are missing quantities, but there's not much I can do about it -->
     <issue id="MissingQuantity" severity="warning" />
+
+    <!-- Again, many Google translations have implied quantities as well -->
+    <issue id="ImpliedQuantity" severity="warning" />
 </lint>
