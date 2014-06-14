@@ -1,5 +1,7 @@
 # Changelog
 
+# 2.3.4
+
 * `#10` Receive TIMEZONE_CHANGED broadcasts only when running, add JodaTimeAndroid.init
 * Updated to tzdata 2014e
 
