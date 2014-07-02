@@ -21,7 +21,7 @@ apply from: 'gradle-mvn-push.gradle'
 
 task updateTzData(dependsOn:assembleDebug, type: JavaExec) {
     main = "org.joda.time.tz.ZoneInfoCompiler"
-    classpath = files("build/bundles/debug/classes.jar")
+	classpath = files("build/intermediates/bundles/debug/classes.jar")
     systemProperty "org.joda.time.DateTimeZone.Provider", "org.joda.time.tz.UTCProvider"
     args "-src", "../tzdata", "-dst", "res/raw", "africa",  "antarctica", "asia", "australasia", "europe", "northamerica", "southamerica", "pacificnew", "etcetera", "backward", "systemv"
 }
