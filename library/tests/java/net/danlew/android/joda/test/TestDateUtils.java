@@ -6,7 +6,7 @@ import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.test.InstrumentationTestCase;
 import net.danlew.android.joda.DateUtils;
-import net.danlew.android.joda.ResourceZoneInfoProvider;
+import net.danlew.android.joda.JodaTimeAndroid;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeUtils;
 import org.joda.time.DateTimeZone;
@@ -71,7 +71,7 @@ public class TestDateUtils extends InstrumentationTestCase {
 
         // Init zone info
         Context context = getInstrumentation().getContext();
-        ResourceZoneInfoProvider.init(context);
+        JodaTimeAndroid.init(context);
 
         // Force all tests to be in the US locale; that way we can test output in consistent manner
         Application app = (Application) getInstrumentation().getContext().getApplicationContext();
