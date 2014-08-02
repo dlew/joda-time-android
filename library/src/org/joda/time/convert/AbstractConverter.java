@@ -88,7 +88,7 @@ public abstract class AbstractConverter implements Converter {
      * The chrono parameter is a hint to the converter, should it require a
      * chronology to aid in conversion.
      * <p>
-     * This implementation calls {@link #getInstantMillis(Object, Chronology)}.
+     * This implementation calls {@link #getInstantMillis(Object, org.joda.time.Chronology)}.
      * 
      * @param fieldSource  a partial that provides access to the fields.
      *  This partial may be incomplete and only getFieldType(int) should be used
@@ -107,7 +107,7 @@ public abstract class AbstractConverter implements Converter {
      * The chrono parameter is a hint to the converter, should it require a
      * chronology to aid in conversion.
      * <p>
-     * This implementation calls {@link #getPartialValues(ReadablePartial, Object, Chronology)}.
+     * This implementation calls {@link #getPartialValues(org.joda.time.ReadablePartial, Object, org.joda.time.Chronology)}.
      * 
      * @param fieldSource  a partial that provides access to the fields.
      *  This partial may be incomplete and only getFieldType(int) should be used

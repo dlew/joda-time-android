@@ -34,7 +34,7 @@ import org.joda.time.format.ISODateTimeFormat;
  * cannot query the dayOfWeek or centuryOfEra fields for example.
  * The new <code>LocalDate</code> class removes this restriction.
  * <p>
- * Calculations on YearMonthDay are performed using a {@link Chronology}.
+ * Calculations on YearMonthDay are performed using a {@link org.joda.time.Chronology}.
  * This chronology is set to be in the UTC time zone for all calculations.
  * <p>
  * Each individual field can be queried in two ways:
@@ -217,12 +217,12 @@ public final class YearMonthDay
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadableInstant, String, Calendar and Date.
-     * The String formats are described by {@link ISODateTimeFormat#dateOptionalTimeParser()}.
+     * The String formats are described by {@link org.joda.time.format.ISODateTimeFormat#dateOptionalTimeParser()}.
      * <p>
      * The chronology used will be derived from the object, defaulting to ISO.
      * <p>
      * NOTE: Prior to v1.3 the string format was described by
-     * {@link ISODateTimeFormat#dateTimeParser()}. Time ony strings are now rejected.
+     * {@link org.joda.time.format.ISODateTimeFormat#dateTimeParser()}. Time ony strings are now rejected.
      *
      * @param instant  the datetime object, null means now
      * @throws IllegalArgumentException if the instant is invalid
@@ -238,7 +238,7 @@ public final class YearMonthDay
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadableInstant, String, Calendar and Date.
-     * The String formats are described by {@link ISODateTimeFormat#dateOptionalTimeParser()}.
+     * The String formats are described by {@link org.joda.time.format.ISODateTimeFormat#dateOptionalTimeParser()}.
      * <p>
      * The constructor uses the time zone of the chronology specified.
      * Once the constructor is complete, all further calculations are performed
@@ -246,7 +246,7 @@ public final class YearMonthDay
      * The specified chronology overrides that of the object.
      * <p>
      * NOTE: Prior to v1.3 the string format was described by
-     * {@link ISODateTimeFormat#dateTimeParser()}. Time only strings are now rejected.
+     * {@link org.joda.time.format.ISODateTimeFormat#dateTimeParser()}. Time only strings are now rejected.
      *
      * @param instant  the datetime object, null means now
      * @param chronology  the chronology, null means ISO default
@@ -453,7 +453,7 @@ public final class YearMonthDay
      * <p>
      * This method is typically used to add multiple copies of complex
      * period instances. Adding one field is best achieved using methods
-     * like {@link #withFieldAdded(DurationFieldType, int)}
+     * like {@link #withFieldAdded(org.joda.time.DurationFieldType, int)}
      * or {@link #plusYears(int)}.
      * 
      * @param period  the period to add to this one, null means zero

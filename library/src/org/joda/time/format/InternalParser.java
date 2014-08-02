@@ -1,5 +1,5 @@
 /*
- *  Copyright 2001-2005 Stephen Colebourne
+ *  Copyright 2001-2014 Stephen Colebourne
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -18,21 +18,13 @@ package org.joda.time.format;
 /**
  * Internal interface for parsing textual representations of datetimes.
  * <p>
- * Application users will rarely use this class directly. Instead, you
- * will use one of the factory classes to create a {@link org.joda.time.format.DateTimeFormatter}.
- * <p>
- * The factory classes are:<br />
- * - {@link org.joda.time.format.DateTimeFormatterBuilder}<br />
- * - {@link org.joda.time.format.DateTimeFormat}<br />
- * - {@link org.joda.time.format.ISODateTimeFormat}<br />
+ * This has been separated from {@link org.joda.time.format.DateTimeParser} to change to using
+ * {@code CharSequence}.
  *
- * @author Brian S O'Neill
- * @see org.joda.time.format.DateTimeFormatter
- * @see org.joda.time.format.DateTimeFormatterBuilder
- * @see org.joda.time.format.DateTimeFormat
- * @since 1.0
+ * @author Stephen Colebourne
+ * @since 2.4
  */
-public interface DateTimeParser {
+interface InternalParser {
 
     /**
      * Returns the expected maximum number of characters consumed.
@@ -59,6 +51,6 @@ public interface DateTimeParser {
      *  apply complement operator (~) to get position of failure
      * @throws IllegalArgumentException if any field is out of range
      */
-    int parseInto(DateTimeParserBucket bucket, String text, int position);
+    int parseInto(DateTimeParserBucket bucket, CharSequence text, int position);
 
 }

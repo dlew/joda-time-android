@@ -1,5 +1,5 @@
 /*
- *  Copyright 2001-2009 Stephen Colebourne
+ *  Copyright 2001-2014 Stephen Colebourne
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -15,8 +15,7 @@
  */
 package org.joda.time.chrono;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.joda.time.Chronology;
 import org.joda.time.DateTime;
@@ -43,7 +42,7 @@ import org.joda.time.field.SkipDateTimeField;
  * CopticChronology is thread-safe and immutable.
  *
  * @see <a href="http://en.wikipedia.org/wiki/Coptic_calendar">Wikipedia</a>
- * @see JulianChronology
+ * @see org.joda.time.chrono.JulianChronology
  *
  * @author Brian S O'Neill
  * @since 1.0
@@ -69,7 +68,7 @@ public final class CopticChronology extends BasicFixedMonthChronology {
     private static final int MAX_YEAR = 292272708;
 
     /** Cache of zone to chronology arrays */
-    private static final Map<DateTimeZone, CopticChronology[]> cCache = new HashMap<DateTimeZone, CopticChronology[]>();
+    private static final ConcurrentHashMap<DateTimeZone, CopticChronology[]> cCache = new ConcurrentHashMap<DateTimeZone, CopticChronology[]>();
 
     /** Singleton instance of a UTC CopticChronology */
     private static final CopticChronology INSTANCE_UTC;
@@ -120,33 +119,39 @@ public final class CopticChronology extends BasicFixedMonthChronology {
             zone = DateTimeZone.getDefault();
         }
         CopticChronology chrono;
-        synchronized (cCache) {
-            CopticChronology[] chronos = cCache.get(zone);
-            if (chronos == null) {
-                chronos = new CopticChronology[7];
-                cCache.put(zone, chronos);
+        CopticChronology[] chronos = cCache.get(zone);
+        if (chronos == null) {
+            chronos = new CopticChronology[7];
+            CopticChronology[] oldChronos = cCache.putIfAbsent(zone, chronos);
+            if (oldChronos != null) {
+                chronos = oldChronos;
             }
-            try {
+        }
+        try {
+            chrono = chronos[minDaysInFirstWeek - 1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new IllegalArgumentException
+                ("Invalid min days in first week: " + minDaysInFirstWeek);
+        }
+        if (chrono == null) {
+            synchronized (chronos) {
                 chrono = chronos[minDaysInFirstWeek - 1];
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new IllegalArgumentException
-                    ("Invalid min days in first week: " + minDaysInFirstWeek);
-            }
-            if (chrono == null) {
-                if (zone == DateTimeZone.UTC) {
-                    // First create without a lower limit.
-                    chrono = new CopticChronology(null, null, minDaysInFirstWeek);
-                    // Impose lower limit and make another CopticChronology.
-                    DateTime lowerLimit = new DateTime(1, 1, 1, 0, 0, 0, 0, chrono);
-                    chrono = new CopticChronology
-                        (LimitChronology.getInstance(chrono, lowerLimit, null),
-                         null, minDaysInFirstWeek);
-                } else {
-                    chrono = getInstance(DateTimeZone.UTC, minDaysInFirstWeek);
-                    chrono = new CopticChronology
-                        (ZonedChronology.getInstance(chrono, zone), null, minDaysInFirstWeek);
+                if (chrono == null) {
+                    if (zone == DateTimeZone.UTC) {
+                        // First create without a lower limit.
+                        chrono = new CopticChronology(null, null, minDaysInFirstWeek);
+                        // Impose lower limit and make another CopticChronology.
+                        DateTime lowerLimit = new DateTime(1, 1, 1, 0, 0, 0, 0, chrono);
+                        chrono = new CopticChronology
+                            (LimitChronology.getInstance(chrono, lowerLimit, null),
+                             null, minDaysInFirstWeek);
+                    } else {
+                        chrono = getInstance(DateTimeZone.UTC, minDaysInFirstWeek);
+                        chrono = new CopticChronology
+                            (ZonedChronology.getInstance(chrono, zone), null, minDaysInFirstWeek);
+                    }
+                    chronos[minDaysInFirstWeek - 1] = chrono;
                 }
-                chronos[minDaysInFirstWeek - 1] = chrono;
             }
         }
         return chrono;
@@ -198,6 +203,12 @@ public final class CopticChronology extends BasicFixedMonthChronology {
             return this;
         }
         return getInstance(zone);
+    }
+
+    //-----------------------------------------------------------------------
+    @Override
+    boolean isLeapDay(long instant) {
+        return dayOfMonth().get(instant) == 6 && monthOfYear().isLeap(instant);
     }
 
     //-----------------------------------------------------------------------

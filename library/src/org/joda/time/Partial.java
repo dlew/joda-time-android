@@ -34,13 +34,13 @@ import org.joda.time.format.ISODateTimeFormat;
  * A Partial instance can be used to hold any combination of fields.
  * The instance does not contain a time zone, so any datetime is local.
  * <p>
- * A Partial can be matched against an instant using {@link #isMatch(ReadableInstant)}.
+ * A Partial can be matched against an instant using {@link #isMatch(org.joda.time.ReadableInstant)}.
  * This method compares each field on this partial with those of the instant
  * and determines if the partial matches the instant.
  * Given this definition, an empty Partial instance represents any datetime
  * and always matches.
  * <p>
- * Calculations on Partial are performed using a {@link Chronology}.
+ * Calculations on Partial are performed using a {@link org.joda.time.Chronology}.
  * This chronology is set to be in the UTC time zone for all calculations.
  * <p>
  * Each individual field can be queried in two ways:
@@ -164,6 +164,8 @@ public final class Partial
     /**
      * Constructs a Partial with the specified fields and values.
      * The fields must be specified in the order largest to smallest.
+     * For year and weekyear fields with equal duration, year is defined
+     * as being larger than weekyear.
      * <p>
      * The constructor uses the specified chronology.
      * 
@@ -178,6 +180,8 @@ public final class Partial
     /**
      * Constructs a Partial with the specified fields and values.
      * The fields must be specified in the order largest to smallest.
+     * For year and weekyear fields with equal duration, year is defined
+     * as being larger than weekyear.
      * <p>
      * The constructor uses the specified chronology.
      * 
@@ -227,26 +231,36 @@ public final class Partial
                 if (compare < 0) {
                     throw new IllegalArgumentException("Types array must be in order largest-smallest: " +
                             types[i - 1].getName() + " < " + loopType.getName());
-                } else if (compare == 0 && lastUnitField.equals(loopUnitField)) {
-                    if (types[i - 1].getRangeDurationType() == null) {
-                        if (loopType.getRangeDurationType() == null) {
-                            throw new IllegalArgumentException("Types array must not contain duplicate: " +
-                                            types[i - 1].getName() + " and " + loopType.getName());
+                } else if (compare == 0) {
+                    if (lastUnitField.equals(loopUnitField)) {
+                        DurationFieldType lastRangeType = types[i - 1].getRangeDurationType();
+                        DurationFieldType loopRangeType = loopType.getRangeDurationType();
+                        if (lastRangeType == null) {
+                            if (loopRangeType == null) {
+                                throw new IllegalArgumentException("Types array must not contain duplicate: " +
+                                                types[i - 1].getName() + " and " + loopType.getName());
+                            }
+                        } else {
+                            if (loopRangeType == null) {
+                                throw new IllegalArgumentException("Types array must be in order largest-smallest: " +
+                                        types[i - 1].getName() + " < " + loopType.getName());
+                            }
+                            DurationField lastRangeField = lastRangeType.getField(iChronology);
+                            DurationField loopRangeField = loopRangeType.getField(iChronology);
+                            if (lastRangeField.compareTo(loopRangeField) < 0) {
+                                throw new IllegalArgumentException("Types array must be in order largest-smallest: " +
+                                        types[i - 1].getName() + " < " + loopType.getName());
+                            }
+                            if (lastRangeField.compareTo(loopRangeField) == 0) {
+                                throw new IllegalArgumentException("Types array must not contain duplicate: " +
+                                                types[i - 1].getName() + " and " + loopType.getName());
+                            }
                         }
                     } else {
-                        if (loopType.getRangeDurationType() == null) {
-                            throw new IllegalArgumentException("Types array must be in order largest-smallest: " +
-                                    types[i - 1].getName() + " < " + loopType.getName());
-                        }
-                        DurationField lastRangeField = types[i - 1].getRangeDurationType().getField(iChronology);
-                        DurationField loopRangeField = loopType.getRangeDurationType().getField(iChronology);
-                        if (lastRangeField.compareTo(loopRangeField) < 0) {
-                            throw new IllegalArgumentException("Types array must be in order largest-smallest: " +
-                                    types[i - 1].getName() + " < " + loopType.getName());
-                        }
-                        if (lastRangeField.compareTo(loopRangeField) == 0) {
-                            throw new IllegalArgumentException("Types array must not contain duplicate: " +
-                                            types[i - 1].getName() + " and " + loopType.getName());
+                        if (lastUnitField.isSupported() && lastUnitField.getType() != DurationFieldType.YEARS_TYPE) {
+                            throw new IllegalArgumentException("Types array must be in order largest-smallest," +
+                                            " for year-based fields, years is defined as being largest: " +
+                                            types[i - 1].getName() + " < " + loopType.getName());
                         }
                     }
                 }
@@ -323,7 +337,7 @@ public final class Partial
     /**
      * Gets the chronology of the partial which is never null.
      * <p>
-     * The {@link Chronology} is the calculation engine behind the partial and
+     * The {@link org.joda.time.Chronology} is the calculation engine behind the partial and
      * provides conversion and validation of the fields in a particular calendar system.
      * 
      * @return the chronology, never null
@@ -424,7 +438,7 @@ public final class Partial
      * Gets a copy of this date with the specified field set to a new value.
      * <p>
      * If this partial did not previously support the field, the new one will.
-     * Contrast this behaviour with {@link #withField(DateTimeFieldType, int)}.
+     * Contrast this behaviour with {@link #withField(org.joda.time.DateTimeFieldType, int)}.
      * <p>
      * For example, if the field type is <code>dayOfMonth</code> then the day
      * would be changed/added in the returned instance.
@@ -519,7 +533,7 @@ public final class Partial
      * Gets a copy of this Partial with the specified field set to a new value.
      * <p>
      * If this partial does not support the field, an exception is thrown.
-     * Contrast this behaviour with {@link #with(DateTimeFieldType, int)}.
+     * Contrast this behaviour with {@link #with(org.joda.time.DateTimeFieldType, int)}.
      * <p>
      * For example, if the field type is <code>dayOfMonth</code> then the day
      * would be changed in the returned instance if supported.
@@ -595,7 +609,7 @@ public final class Partial
      * <p>
      * This method is typically used to add multiple copies of complex
      * period instances. Adding one field is best achieved using the method
-     * {@link #withFieldAdded(DurationFieldType, int)}.
+     * {@link #withFieldAdded(org.joda.time.DurationFieldType, int)}.
      * 
      * @param period  the period to add to this one, null means zero
      * @param scalar  the amount of times to add, such as -1 to subtract once
@@ -649,7 +663,7 @@ public final class Partial
      * Gets the property object for the specified type, which contains
      * many useful methods for getting and manipulating the partial.
      * <p>
-     * See also {@link ReadablePartial#get(DateTimeFieldType)}.
+     * See also {@link org.joda.time.ReadablePartial#get(org.joda.time.DateTimeFieldType)}.
      *
      * @param type  the field type to get the property for, not null
      * @return the property object

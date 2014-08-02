@@ -33,7 +33,7 @@ import org.joda.time.field.FieldUtils;
  * data in a <code>long</code> duration milliseconds field.
  * <p>
  * This class should generally not be used directly by API users.
- * The {@link ReadableDuration} interface should be used when different 
+ * The {@link org.joda.time.ReadableDuration} interface should be used when different
  * kinds of duration objects are to be referenced.
  * <p>
  * BaseDuration subclasses may be mutable and not thread-safe.
@@ -135,7 +135,7 @@ public abstract class BaseDuration
      * type may restrict the selection further.
      * <p>
      * For more control over the conversion process, you must pair the duration with
-     * an instant, see {@link #toPeriodFrom(ReadableInstant, PeriodType)}.
+     * an instant, see {@link #toPeriodFrom(org.joda.time.ReadableInstant, org.joda.time.PeriodType)}.
      * 
      * @param type  the period type to use, null means standard
      * @return a Period created using the millisecond duration from this instance
@@ -154,8 +154,8 @@ public abstract class BaseDuration
      * However, ISO UTC also has precise days and weeks.
      * <p>
      * For more control over the conversion process, you must pair the duration with
-     * an instant, see {@link #toPeriodFrom(ReadableInstant)} and
-     * {@link #toPeriodTo(ReadableInstant)}
+     * an instant, see {@link #toPeriodFrom(org.joda.time.ReadableInstant)} and
+     * {@link #toPeriodTo(org.joda.time.ReadableInstant)}
      * 
      * @param chrono  the chronology to use, null means ISO default
      * @return a Period created using the millisecond duration from this instance
@@ -174,8 +174,8 @@ public abstract class BaseDuration
      * However, ISO UTC also has precise days and weeks.
      * <p>
      * For more control over the conversion process, you must pair the duration with
-     * an instant, see {@link #toPeriodFrom(ReadableInstant, PeriodType)} and
-     * {@link #toPeriodTo(ReadableInstant, PeriodType)}
+     * an instant, see {@link #toPeriodFrom(org.joda.time.ReadableInstant, org.joda.time.PeriodType)} and
+     * {@link #toPeriodTo(org.joda.time.ReadableInstant, org.joda.time.PeriodType)}
      * 
      * @param type  the period type to use, null means standard
      * @param chrono  the chronology to use, null means ISO default

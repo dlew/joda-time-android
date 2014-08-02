@@ -35,8 +35,8 @@ package org.joda.time;
  * Periods are independent of chronology, and can only be treated as durations
  * when paired with a time via an interval.
  *
- * @see ReadableDuration
- * @see ReadableInterval
+ * @see org.joda.time.ReadableDuration
+ * @see org.joda.time.ReadableInterval
  * @author Brian S O'Neill
  * @author Stephen Colebourne
  * @since 1.0
@@ -128,7 +128,7 @@ public interface ReadablePeriod {
      * at daylight savings boundary).
      * <p>
      * To compare the actual duration of two periods, convert both to
-     * {@link Duration}s, an operation that emphasises that the result may
+     * {@link org.joda.time.Duration}s, an operation that emphasises that the result may
      * differ according to the date you choose.
      *
      * @param readablePeriod  a readable period to check against

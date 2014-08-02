@@ -32,9 +32,9 @@ import org.joda.time.ReadablePeriod;
 /**
  * Factory that creates complex instances of PeriodFormatter via method calls.
  * <p>
- * Period formatting is performed by the {@link PeriodFormatter} class.
+ * Period formatting is performed by the {@link org.joda.time.format.PeriodFormatter} class.
  * Three classes provide factory methods to create formatters, and this is one.
- * The others are {@link PeriodFormat} and {@link ISOPeriodFormat}.
+ * The others are {@link org.joda.time.format.PeriodFormat} and {@link org.joda.time.format.ISOPeriodFormat}.
  * <p>
  * PeriodFormatterBuilder is used for constructing formatters which are then
  * used to print or parse. The formatters are built by appending specific fields
@@ -60,7 +60,7 @@ import org.joda.time.ReadablePeriod;
  *
  * @author Brian S O'Neill
  * @since 1.0
- * @see PeriodFormat
+ * @see org.joda.time.format.PeriodFormat
  */
 public class PeriodFormatterBuilder {
     private static final int PRINT_ZERO_RARELY_FIRST = 1;
@@ -112,8 +112,8 @@ public class PeriodFormatterBuilder {
      * Subsequent changes to this builder do not affect the returned formatter.
      * <p>
      * The returned formatter may not support both printing and parsing.
-     * The methods {@link PeriodFormatter#isPrinter()} and
-     * {@link PeriodFormatter#isParser()} will help you determine the state
+     * The methods {@link org.joda.time.format.PeriodFormatter#isPrinter()} and
+     * {@link org.joda.time.format.PeriodFormatter#isParser()} will help you determine the state
      * of the formatter.
      * 
      * @return the newly created formatter

@@ -36,8 +36,8 @@ import org.joda.time.format.ISODateTimeFormat;
  * Note that midnight is defined as 00:00, which is at the very start of a day.
  * <p>
  * This class does not represent a day, but the millisecond instant at midnight.
- * If you need a class that represents the whole day, then an {@link Interval} or
- * a {@link LocalDate} may be more suitable.
+ * If you need a class that represents the whole day, then an {@link org.joda.time.Interval} or
+ * a {@link org.joda.time.LocalDate} may be more suitable.
  * <p>
  * This class uses a Chronology internally. The Chronology determines how the
  * millisecond instant value is converted into the date time fields.
@@ -69,9 +69,9 @@ import org.joda.time.format.ISODateTimeFormat;
  * @since 1.0
  * @deprecated The time of midnight does not exist in some time zones
  * where the daylight saving time forward shift skips the midnight hour.
- * Use {@link LocalDate} to represent a date without a time zone.
- * Or use {@link DateTime} to represent a full date and time, perhaps
- * using {@link DateTime#withTimeAtStartOfDay()} to get an instant at the
+ * Use {@link org.joda.time.LocalDate} to represent a date without a time zone.
+ * Or use {@link org.joda.time.DateTime} to represent a full date and time, perhaps
+ * using {@link org.joda.time.DateTime#withTimeAtStartOfDay()} to get an instant at the
  * start of a day.
  */
 @Deprecated
@@ -131,7 +131,7 @@ public final class DateMidnight
     /**
      * Parses a {@code DateMidnight} from the specified string.
      * <p>
-     * This uses {@link ISODateTimeFormat#dateTimeParser()}.
+     * This uses {@link org.joda.time.format.ISODateTimeFormat#dateTimeParser()}.
      * 
      * @param str  the string to parse, not null
      * @since 2.0
@@ -172,7 +172,7 @@ public final class DateMidnight
      * If the specified time zone is null, the default zone is used.
      *
      * @param zone  the time zone, null means default zone
-     * @see #now(DateTimeZone)
+     * @see #now(org.joda.time.DateTimeZone)
      */
     public DateMidnight(DateTimeZone zone) {
         super(zone);
@@ -187,7 +187,7 @@ public final class DateMidnight
      * in the default time zone is used.
      *
      * @param chronology  the chronology, null means ISOChronology in default zone
-     * @see #now(Chronology)
+     * @see #now(org.joda.time.Chronology)
      */
     public DateMidnight(Chronology chronology) {
         super(chronology);
@@ -247,7 +247,7 @@ public final class DateMidnight
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadableInstant, String, Calendar and Date.
-     * The String formats are described by {@link ISODateTimeFormat#dateTimeParser()}.
+     * The String formats are described by {@link org.joda.time.format.ISODateTimeFormat#dateTimeParser()}.
      *
      * @param instant  the datetime object, null means now
      * @throws IllegalArgumentException if the instant is invalid
@@ -271,7 +271,7 @@ public final class DateMidnight
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadableInstant, String, Calendar and Date.
-     * The String formats are described by {@link ISODateTimeFormat#dateTimeParser()}.
+     * The String formats are described by {@link org.joda.time.format.ISODateTimeFormat#dateTimeParser()}.
      *
      * @param instant  the datetime object, null means now
      * @param zone  the time zone, null means default time zone
@@ -293,7 +293,7 @@ public final class DateMidnight
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadableInstant, String, Calendar and Date.
-     * The String formats are described by {@link ISODateTimeFormat#dateTimeParser()}.
+     * The String formats are described by {@link org.joda.time.format.ISODateTimeFormat#dateTimeParser()}.
      *
      * @param instant  the datetime object, null means now
      * @param chronology  the chronology, null means ISOChronology in default zone
@@ -393,7 +393,7 @@ public final class DateMidnight
      * (When its midnight in London its the same day in Paris, but when its midnight
      * in Paris its still the previous day in London)
      * <p>
-     * To avoid these unusual effects, use {@link #withZoneRetainFields(DateTimeZone)}
+     * To avoid these unusual effects, use {@link #withZoneRetainFields(org.joda.time.DateTimeZone)}
      * to change time zones.
      *
      * @param newChronology  the new chronology
@@ -541,7 +541,7 @@ public final class DateMidnight
      * <p>
      * This method is typically used to add multiple copies of complex
      * period instances. Adding one field is best achieved using methods
-     * like {@link #withFieldAdded(DurationFieldType, int)}
+     * like {@link #withFieldAdded(org.joda.time.DurationFieldType, int)}
      * or {@link #plusYears(int)}.
      * 
      * @param period  the period to add to this one, null means zero
@@ -1208,7 +1208,7 @@ public final class DateMidnight
      * DateMidnight dt20 = dt.year().addToCopy(20);
      * </pre>
      * Serious modification of dates (ie. more than just changing one or two fields)
-     * should use the {@link org.joda.time.MutableDateTime MutableDateTime} class.
+     * should use the {@link MutableDateTime MutableDateTime} class.
      * <p>
      * DateMidnight.Property itself is thread-safe and immutable.
      *

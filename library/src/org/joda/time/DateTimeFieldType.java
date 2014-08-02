@@ -22,16 +22,16 @@ import java.io.Serializable;
  * <p>
  * A field type defines the type of the field, such as hourOfDay.
  * If does not directly enable any calculations, however it does provide a
- * {@link #getField(Chronology)} method that returns the actual calculation engine
+ * {@link #getField(org.joda.time.Chronology)} method that returns the actual calculation engine
  * for a particular chronology.
- * It also provides access to the related {@link DurationFieldType}s.
+ * It also provides access to the related {@link org.joda.time.DurationFieldType}s.
  * <p>
  * Instances of <code>DateTimeFieldType</code> are singletons.
  * They can be compared using <code>==</code>.
  * <p>
  * If required, you can create your own field, for example a quarterOfYear.
  * You must create a subclass of <code>DateTimeFieldType</code> that defines the field type.
- * This class returns the actual calculation engine from {@link #getField(Chronology)}.
+ * This class returns the actual calculation engine from {@link #getField(org.joda.time.Chronology)}.
  * The subclass should implement equals and hashCode.
  *
  * @author Stephen Colebourne

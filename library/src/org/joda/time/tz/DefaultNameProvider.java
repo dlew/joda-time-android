@@ -24,7 +24,7 @@ import org.joda.time.DateTimeUtils;
 
 /**
  * The default name provider acquires localized names from
- * {@link DateFormatSymbols java.text.DateFormatSymbols}.
+ * {@link java.text.DateFormatSymbols java.text.DateFormatSymbols}.
  * <p>
  * DefaultNameProvider is thread-safe and immutable.
  *

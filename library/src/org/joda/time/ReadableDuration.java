@@ -30,8 +30,8 @@ package org.joda.time;
  * The definition of the comparison is ascending order by millisecond duration.
  * Implementors are recommended to extend {@code AbstractInstant} instead of this interface.
  *
- * @see ReadableInterval
- * @see ReadablePeriod
+ * @see org.joda.time.ReadableInterval
+ * @see org.joda.time.ReadablePeriod
  * @author Brian S O'Neill
  * @author Stephen Colebourne
  * @since 1.0
@@ -73,7 +73,7 @@ public interface ReadableDuration extends Comparable<ReadableDuration> {
      * converted to ((365 + 60 + 5) * 24) hours by this constructor.
      * <p>
      * For more control over the conversion process, you must pair the duration with
-     * an instant, see {@link Period#Period(ReadableInstant,ReadableDuration)}.
+     * an instant, see {@link org.joda.time.Period#Period(org.joda.time.ReadableInstant, org.joda.time.ReadableDuration)}.
      * 
      * @return a Period created using the millisecond duration from this instance
      */
@@ -95,7 +95,7 @@ public interface ReadableDuration extends Comparable<ReadableDuration> {
      * Is the length of this duration equal to the duration passed in.
      *
      * @param duration  another duration to compare to, null means zero milliseconds
-     * @return true if this duration is equal to than the duration passed in
+     * @return true if this duration is equal to the duration passed in
      */
     boolean isEqual(ReadableDuration duration);
 
@@ -103,7 +103,7 @@ public interface ReadableDuration extends Comparable<ReadableDuration> {
      * Is the length of this duration longer than the duration passed in.
      *
      * @param duration  another duration to compare to, null means zero milliseconds
-     * @return true if this duration is equal to than the duration passed in
+     * @return true if this duration is greater than the duration passed in
      */
     boolean isLongerThan(ReadableDuration duration);
 
@@ -111,7 +111,7 @@ public interface ReadableDuration extends Comparable<ReadableDuration> {
      * Is the length of this duration shorter than the duration passed in.
      *
      * @param duration  another duration to compare to, null means zero milliseconds
-     * @return true if this duration is equal to than the duration passed in
+     * @return true if this duration is less than the duration passed in
      */
     boolean isShorterThan(ReadableDuration duration);
 

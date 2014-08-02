@@ -32,7 +32,7 @@ import org.joda.time.format.ISODateTimeFormat;
  * AbstractInterval provides the common behaviour for time intervals.
  * <p>
  * This class should generally not be used directly by API users. The 
- * {@link ReadableInterval} interface should be used when different 
+ * {@link org.joda.time.ReadableInterval} interface should be used when different
  * kinds of intervals are to be referenced.
  * <p>
  * AbstractInterval subclasses may be mutable and not thread-safe.

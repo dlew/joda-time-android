@@ -36,7 +36,7 @@ import org.joda.time.format.ISODateTimeFormat;
  * NOTE: This class only supports the two fields listed above.
  * It is impossible to query any other fields, such as dayOfWeek or centuryOfEra.
  * <p>
- * Calculations on YearMonth are performed using a {@link Chronology}.
+ * Calculations on YearMonth are performed using a {@link org.joda.time.Chronology}.
  * This chronology is set to be in the UTC time zone for all calculations.
  * <p>
  * One use case for this class is to store a credit card expiry date, as that only
@@ -131,7 +131,7 @@ public final class YearMonth
     /**
      * Parses a {@code YearMonth} from the specified string.
      * <p>
-     * This uses {@link ISODateTimeFormat#localDateParser()}.
+     * This uses {@link org.joda.time.format.ISODateTimeFormat#localDateParser()}.
      * 
      * @param str  the string to parse, not null
      * @since 2.0
@@ -222,7 +222,7 @@ public final class YearMonth
      * are performed without reference to a time-zone (by switching to UTC).
      * 
      * @param zone  the zone to use, null means default zone
-     * @see #now(DateTimeZone)
+     * @see #now(org.joda.time.DateTimeZone)
      */
     public YearMonth(DateTimeZone zone) {
         super(ISOChronology.getInstance(zone));
@@ -237,7 +237,7 @@ public final class YearMonth
      * without reference to a time-zone (by switching to UTC).
      *
      * @param chronology  the chronology, null means ISOChronology in the default zone
-     * @see #now(Chronology)
+     * @see #now(org.joda.time.Chronology)
      */
     public YearMonth(Chronology chronology) {
         super(chronology);
@@ -278,7 +278,7 @@ public final class YearMonth
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadableInstant, String, Calendar and Date.
-     * The String formats are described by {@link ISODateTimeFormat#localDateParser()}.
+     * The String formats are described by {@link org.joda.time.format.ISODateTimeFormat#localDateParser()}.
      * <p>
      * The chronology used will be derived from the object, defaulting to ISO.
      *
@@ -296,7 +296,7 @@ public final class YearMonth
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadableInstant, String, Calendar and Date.
-     * The String formats are described by {@link ISODateTimeFormat#localDateParser()}.
+     * The String formats are described by {@link org.joda.time.format.ISODateTimeFormat#localDateParser()}.
      * <p>
      * The constructor uses the time zone of the chronology specified.
      * Once the constructor is complete, all further calculations are performed
@@ -520,7 +520,7 @@ public final class YearMonth
      * <p>
      * This method is typically used to add multiple copies of complex
      * period instances. Adding one field is best achieved using methods
-     * like {@link #withFieldAdded(DurationFieldType, int)}
+     * like {@link #withFieldAdded(org.joda.time.DurationFieldType, int)}
      * or {@link #plusYears(int)}.
      * 
      * @param period  the period to add to this one, null means zero

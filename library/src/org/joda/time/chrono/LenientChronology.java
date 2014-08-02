@@ -27,8 +27,8 @@ import org.joda.time.field.LenientDateTimeField;
  *
  * @author Brian S O'Neill
  * @since 1.0
- * @see LenientDateTimeField
- * @see StrictChronology
+ * @see org.joda.time.field.LenientDateTimeField
+ * @see org.joda.time.chrono.StrictChronology
  */
 public final class LenientChronology extends AssembledChronology {
 
