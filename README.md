@@ -60,3 +60,14 @@ Updating the TimeZone database
         ./gradlew updateTzData
 
 4. Re-compile the library
+
+Files Modified from Joda-Time
+=============================
+
+This is more of a reference for anyone wanting to later update the version of joda-time this is based off of:
+
+`DateTimeZone` - Points to ResourceZoneInfoProvider instead of joda-time's ZoneInfoProvider.
+
+`ZoneInfoCompiler` - Outputs Android-friendly zone info files.
+
+`TestDateTimeZone` - Update tests to work with joda-time-android just make sure all this still works.
