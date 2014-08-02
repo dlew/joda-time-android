@@ -73,8 +73,9 @@ public interface ReadWritablePeriod extends ReadablePeriod {
      * @param millis  amount of milliseconds in this period, which must be zero if unsupported
      * @throws IllegalArgumentException if an unsupported field's value is non-zero
      */
-    void setPeriod(int years, int months, int weeks, int days,
-                       int hours, int minutes, int seconds, int millis);
+    void setPeriod(
+        int years, int months, int weeks, int days,
+        int hours, int minutes, int seconds, int millis);
 
     /**
      * Sets all the fields in one go from an interval dividing the
@@ -121,8 +122,9 @@ public interface ReadWritablePeriod extends ReadablePeriod {
      * not supported by this period
      * @throws ArithmeticException if the addition exceeds the capacity of the period
      */
-    void add(int years, int months, int weeks, int days,
-                    int hours, int minutes, int seconds, int millis);
+    void add(
+        int years, int months, int weeks, int days,
+        int hours, int minutes, int seconds, int millis);
 
     /**
      * Adds an interval to this one by dividing the interval into

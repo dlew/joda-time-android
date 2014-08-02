@@ -30,12 +30,12 @@ import org.joda.time.format.DateTimeFormatter;
  * AbstractPartial provides a standard base implementation of most methods
  * in the ReadablePartial interface.
  * <p>
- * Calculations on are performed using a {@link Chronology}.
+ * Calculations on are performed using a {@link org.joda.time.Chronology}.
  * This chronology is set to be in the UTC time zone for all calculations.
  * <p>
- * The methods on this class use {@link ReadablePartial#size()},
- * {@link AbstractPartial#getField(int, Chronology)} and
- * {@link ReadablePartial#getValue(int)} to calculate their results.
+ * The methods on this class use {@link org.joda.time.ReadablePartial#size()},
+ * {@link org.joda.time.base.AbstractPartial#getField(int, org.joda.time.Chronology)} and
+ * {@link org.joda.time.ReadablePartial#getValue(int)} to calculate their results.
  * Subclasses may have a better implementation.
  * <p>
  * AbstractPartial allows subclasses may be mutable and not thread-safe.

@@ -24,11 +24,11 @@ package org.joda.time;
  * <p>
  * Intervals have a fixed millisecond duration.
  * This is the difference between the start and end instants.
- * The duration is represented separately by {@link ReadableDuration}.
+ * The duration is represented separately by {@link org.joda.time.ReadableDuration}.
  * As a result, intervals are not comparable.
  * To compare the length of two intervals, you should compare their durations.
  * <p>
- * An interval can also be converted to a {@link ReadablePeriod}.
+ * An interval can also be converted to a {@link org.joda.time.ReadablePeriod}.
  * This represents the difference between the start and end points in terms of fields
  * such as years and days.
  * <p>

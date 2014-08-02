@@ -1,5 +1,5 @@
 /*
- *  Copyright 2001-2009 Stephen Colebourne
+ *  Copyright 2001-2014 Stephen Colebourne
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -15,8 +15,7 @@
  */
 package org.joda.time.chrono;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.joda.time.Chronology;
 import org.joda.time.DateTimeConstants;
@@ -39,8 +38,8 @@ import org.joda.time.field.SkipDateTimeField;
  * JulianChronology is thread-safe and immutable.
  *
  * @see <a href="http://en.wikipedia.org/wiki/Julian_calendar">Wikipedia</a>
- * @see GregorianChronology
- * @see GJChronology
+ * @see org.joda.time.chrono.GregorianChronology
+ * @see org.joda.time.chrono.GJChronology
  *
  * @author Guy Allard
  * @author Brian S O'Neill
@@ -68,7 +67,7 @@ public final class JulianChronology extends BasicGJChronology {
     private static final JulianChronology INSTANCE_UTC;
 
     /** Cache of zone to chronology arrays */
-    private static final Map<DateTimeZone, JulianChronology[]> cCache = new HashMap<DateTimeZone, JulianChronology[]>();
+    private static final ConcurrentHashMap<DateTimeZone, JulianChronology[]> cCache = new ConcurrentHashMap<DateTimeZone, JulianChronology[]>();
 
     static {
         INSTANCE_UTC = getInstance(DateTimeZone.UTC);
@@ -126,27 +125,33 @@ public final class JulianChronology extends BasicGJChronology {
             zone = DateTimeZone.getDefault();
         }
         JulianChronology chrono;
-        synchronized (cCache) {
-            JulianChronology[] chronos = cCache.get(zone);
-            if (chronos == null) {
-                chronos = new JulianChronology[7];
-                cCache.put(zone, chronos);
+        JulianChronology[] chronos = cCache.get(zone);
+        if (chronos == null) {
+            chronos = new JulianChronology[7];
+            JulianChronology[] oldChronos = cCache.putIfAbsent(zone, chronos);
+            if (oldChronos != null) {
+                chronos = oldChronos;
             }
-            try {
+        }
+        try {
+            chrono = chronos[minDaysInFirstWeek - 1];
+        } catch (ArrayIndexOutOfBoundsException e) {
+            throw new IllegalArgumentException
+                ("Invalid min days in first week: " + minDaysInFirstWeek);
+        }
+        if (chrono == null) {
+            synchronized (chronos) {
                 chrono = chronos[minDaysInFirstWeek - 1];
-            } catch (ArrayIndexOutOfBoundsException e) {
-                throw new IllegalArgumentException
-                    ("Invalid min days in first week: " + minDaysInFirstWeek);
-            }
-            if (chrono == null) {
-                if (zone == DateTimeZone.UTC) {
-                    chrono = new JulianChronology(null, null, minDaysInFirstWeek);
-                } else {
-                    chrono = getInstance(DateTimeZone.UTC, minDaysInFirstWeek);
-                    chrono = new JulianChronology
-                        (ZonedChronology.getInstance(chrono, zone), null, minDaysInFirstWeek);
+                if (chrono == null) {
+                    if (zone == DateTimeZone.UTC) {
+                        chrono = new JulianChronology(null, null, minDaysInFirstWeek);
+                    } else {
+                        chrono = getInstance(DateTimeZone.UTC, minDaysInFirstWeek);
+                        chrono = new JulianChronology
+                            (ZonedChronology.getInstance(chrono, zone), null, minDaysInFirstWeek);
+                    }
+                    chronos[minDaysInFirstWeek - 1] = chrono;
                 }
-                chronos[minDaysInFirstWeek - 1] = chrono;
             }
         }
         return chrono;

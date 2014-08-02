@@ -1,5 +1,5 @@
 /*
- *  Copyright 2001-2013 Stephen Colebourne
+ *  Copyright 2001-2014 Stephen Colebourne
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -19,8 +19,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.joda.time.Chronology;
 import org.joda.time.DateTimeFieldType;
@@ -35,7 +34,7 @@ import org.joda.time.field.RemainderDateTimeField;
  * it is included.
  * <p>
  * With the exception of century related fields, ISOChronology is exactly the
- * same as {@link GregorianChronology}. In this chronology, centuries and year
+ * same as {@link org.joda.time.chrono.GregorianChronology}. In this chronology, centuries and year
  * of century are zero based. For all years, the century is determined by
  * dropping the last two digits of the year, ignoring sign. The year of century
  * is the value of the last two year digits.
@@ -47,22 +46,16 @@ import org.joda.time.field.RemainderDateTimeField;
  * @since 1.0
  */
 public final class ISOChronology extends AssembledChronology {
-    
+
     /** Serialization lock */
     private static final long serialVersionUID = -6212696554273812441L;
 
     /** Singleton instance of a UTC ISOChronology */
     private static final ISOChronology INSTANCE_UTC;
-        
-    private static final int FAST_CACHE_SIZE = 64;
-
-    /** Fast cache of zone to chronology */
-    private static final ISOChronology[] cFastCache;
 
     /** Cache of zone to chronology */
-    private static final Map<DateTimeZone, ISOChronology> cCache = new HashMap<DateTimeZone, ISOChronology>();
+    private static final ConcurrentHashMap<DateTimeZone, ISOChronology> cCache = new ConcurrentHashMap<DateTimeZone, ISOChronology>();
     static {
-        cFastCache = new ISOChronology[FAST_CACHE_SIZE];
         INSTANCE_UTC = new ISOChronology(GregorianChronology.getInstanceUTC());
         cCache.put(DateTimeZone.UTC, INSTANCE_UTC);
     }
@@ -96,19 +89,14 @@ public final class ISOChronology extends AssembledChronology {
         if (zone == null) {
             zone = DateTimeZone.getDefault();
         }
-        int index = System.identityHashCode(zone) & (FAST_CACHE_SIZE - 1);
-        ISOChronology chrono = cFastCache[index];
-        if (chrono != null && chrono.getZone() == zone) {
-            return chrono;
-        }
-        synchronized (cCache) {
-            chrono = cCache.get(zone);
-            if (chrono == null) {
-                chrono = new ISOChronology(ZonedChronology.getInstance(INSTANCE_UTC, zone));
-                cCache.put(zone, chrono);
+        ISOChronology chrono = cCache.get(zone);
+        if (chrono == null) {
+            chrono = new ISOChronology(ZonedChronology.getInstance(INSTANCE_UTC, zone));
+            ISOChronology oldChrono = cCache.putIfAbsent(zone, chrono);
+            if (oldChrono != null) {
+                chrono = oldChrono;
             }
         }
-        cFastCache[index] = chrono;
         return chrono;
     }
 

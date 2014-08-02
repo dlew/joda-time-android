@@ -1,5 +1,5 @@
 /*
- *  Copyright 2001-2013 Stephen Colebourne
+ *  Copyright 2001-2014 Stephen Colebourne
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -32,16 +32,16 @@ import org.joda.time.format.ISODateTimeFormat;
  * DateTime is the standard implementation of an unmodifiable datetime class.
  * <p>
  * <code>DateTime</code> is the most widely used implementation of
- * {@link ReadableInstant}. As with all instants, it represents an exact
+ * {@link org.joda.time.ReadableInstant}. As with all instants, it represents an exact
  * point on the time-line, but limited to the precision of milliseconds.
  * A <code>DateTime</code> calculates its fields with respect to a
- * {@link DateTimeZone time zone}.
+ * {@link org.joda.time.DateTimeZone time zone}.
  * <p>
  * Internally, the class holds two pieces of data. Firstly, it holds the
  * datetime as milliseconds from the Java epoch of 1970-01-01T00:00:00Z.
- * Secondly, it holds a {@link Chronology} which determines how the
+ * Secondly, it holds a {@link org.joda.time.Chronology} which determines how the
  * millisecond instant value is converted into the date time fields.
- * The default Chronology is {@link ISOChronology} which is the agreed
+ * The default Chronology is {@link org.joda.time.chrono.ISOChronology} which is the agreed
  * international standard and compatible with the modern Gregorian calendar.
  * <p>
  * Each individual field can be queried in two ways:
@@ -68,7 +68,7 @@ import org.joda.time.format.ISODateTimeFormat;
  * @author Kandarp Shah
  * @author Brian S O'Neill
  * @since 1.0
- * @see MutableDateTime
+ * @see org.joda.time.MutableDateTime
  */
 public final class DateTime
         extends BaseDateTime
@@ -123,7 +123,23 @@ public final class DateTime
     /**
      * Parses a {@code DateTime} from the specified string.
      * <p>
-     * This uses {@link ISODateTimeFormat#dateTimeParser()}.
+     * This uses {@link org.joda.time.format.ISODateTimeFormat#dateTimeParser().withOffsetParsed()}
+     * which is different to passing a {@code String} to the constructor.
+     * <p>
+     * Sometimes this method and {@code new DateTime(str)} return different results.
+     * This can be confusing as the different is not visible in {@link #toString()}.
+     * <p>
+     * When passed a date-time string without an offset, such as '2010-06-30T01:20',
+     * both the constructor and this method use the default time-zone.
+     * As such, {@code DateTime.parse("2010-06-30T01:20")} and
+     * {@code new DateTime("2010-06-30T01:20"))} are equal.
+     * <p>
+     * However, when this method is passed a date-time string with an offset,
+     * the offset is directly parsed and stored.
+     * As such, {@code DateTime.parse("2010-06-30T01:20+02:00")} and
+     * {@code new DateTime("2010-06-30T01:20+02:00"))} are NOT equal.
+     * The object produced via this method has a zone of {@code DateTimeZone.forOffsetHours(1)}.
+     * The object produced via the constructor has a zone of {@code DateTimeZone.getDefault()}.
      * 
      * @param str  the string to parse, not null
      * @since 2.0
@@ -162,7 +178,7 @@ public final class DateTime
      * If the specified time zone is null, the default zone is used.
      *
      * @param zone  the time zone, null means default zone
-     * @see #now(DateTimeZone)
+     * @see #now(org.joda.time.DateTimeZone)
      */
     public DateTime(DateTimeZone zone) {
         super(zone);
@@ -176,7 +192,7 @@ public final class DateTime
      * in the default time zone is used.
      *
      * @param chronology  the chronology, null means ISOChronology in default zone
-     * @see #now(Chronology)
+     * @see #now(org.joda.time.Chronology)
      */
     public DateTime(Chronology chronology) {
         super(chronology);
@@ -232,7 +248,7 @@ public final class DateTime
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadableInstant, String, Calendar and Date.
-     * The String formats are described by {@link ISODateTimeFormat#dateTimeParser()}.
+     * The String formats are described by {@link org.joda.time.format.ISODateTimeFormat#dateTimeParser()}.
      *
      * @param instant  the datetime object, null means now
      * @throws IllegalArgumentException if the instant is invalid
@@ -255,7 +271,7 @@ public final class DateTime
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadableInstant, String, Calendar and Date.
-     * The String formats are described by {@link ISODateTimeFormat#dateTimeParser()}.
+     * The String formats are described by {@link org.joda.time.format.ISODateTimeFormat#dateTimeParser()}.
      *
      * @param instant  the datetime object, null means now
      * @param zone  the time zone, null means default time zone
@@ -276,7 +292,7 @@ public final class DateTime
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadableInstant, String, Calendar and Date.
-     * The String formats are described by {@link ISODateTimeFormat#dateTimeParser()}.
+     * The String formats are described by {@link org.joda.time.format.ISODateTimeFormat#dateTimeParser()}.
      *
      * @param instant  the datetime object, null means now
      * @param chronology  the chronology, null means ISO in default zone
@@ -878,7 +894,7 @@ public final class DateTime
      * <p>
      * This method is typically used to add multiple copies of complex
      * period instances. Adding one field is best achieved using methods
-     * like {@link #withFieldAdded(DurationFieldType, int)}
+     * like {@link #withFieldAdded(org.joda.time.DurationFieldType, int)}
      * or {@link #plusYears(int)}.
      * 
      * @param period  the period to add to this one, null means zero
@@ -2018,7 +2034,7 @@ public final class DateTime
      * DateTime dt20 = dt.year().addToCopy(20);
      * </pre>
      * Serious modification of dates (ie. more than just changing one or two fields)
-     * should use the {@link org.joda.time.MutableDateTime MutableDateTime} class.
+     * should use the {@link MutableDateTime MutableDateTime} class.
      * <p>
      * DateTime.Propery itself is thread-safe and immutable, as well as the
      * DateTime being operated on.
@@ -2217,7 +2233,7 @@ public final class DateTime
          * </pre>
          * <p>
          * Where possible, the offset from UTC will be retained, thus applications
-         * may need to call {@link DateTime#withLaterOffsetAtOverlap()} on the result
+         * may need to call {@link org.joda.time.DateTime#withLaterOffsetAtOverlap()} on the result
          * to force the later time during a DST overlap if desired.
          * <p>
          * From v2.2, this method handles a daylight svaings time gap, setting the
@@ -2246,7 +2262,7 @@ public final class DateTime
          * for this field.
          * <p>
          * Where possible, the offset from UTC will be retained, thus applications
-         * may need to call {@link DateTime#withEarlierOffsetAtOverlap()} on the result
+         * may need to call {@link org.joda.time.DateTime#withEarlierOffsetAtOverlap()} on the result
          * to force the earlier time during a DST overlap if desired.
          * <p>
          * From v2.2, this method handles a daylight svaings time gap, setting the

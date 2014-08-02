@@ -40,12 +40,12 @@ import org.joda.time.format.ISODateTimeFormat;
  * LocalTime is an immutable time class representing a time
  * without a time zone.
  * <p>
- * LocalTime implements the {@link ReadablePartial} interface.
+ * LocalTime implements the {@link org.joda.time.ReadablePartial} interface.
  * To do this, the interface methods focus on the key fields -
  * HourOfDay, MinuteOfHour, SecondOfMinute and MillisOfSecond.
  * However, <b>all</b> time fields may in fact be queried.
  * <p>
- * Calculations on LocalTime are performed using a {@link Chronology}.
+ * Calculations on LocalTime are performed using a {@link org.joda.time.Chronology}.
  * This chronology will be set internally to be in the UTC time zone
  * for all calculations.
  *
@@ -154,7 +154,7 @@ public final class LocalTime
     /**
      * Parses a {@code LocalTime} from the specified string.
      * <p>
-     * This uses {@link ISODateTimeFormat#localTimeParser()}.
+     * This uses {@link org.joda.time.format.ISODateTimeFormat#localTimeParser()}.
      * 
      * @param str  the string to parse, not null
      * @since 2.0
@@ -296,7 +296,7 @@ public final class LocalTime
      * Once the constructor is completed, the zone is no longer used.
      *
      * @param zone  the time zone, null means default zone
-     * @see #now(DateTimeZone)
+     * @see #now(org.joda.time.DateTimeZone)
      */
     public LocalTime(DateTimeZone zone) {
         this(DateTimeUtils.currentTimeMillis(), ISOChronology.getInstance(zone));
@@ -310,7 +310,7 @@ public final class LocalTime
      * Once the constructor is completed, the zone is no longer used.
      *
      * @param chronology  the chronology, null means ISOChronology in default zone
-     * @see #now(Chronology)
+     * @see #now(org.joda.time.Chronology)
      */
     public LocalTime(Chronology chronology) {
         this(DateTimeUtils.currentTimeMillis(), chronology);
@@ -373,7 +373,7 @@ public final class LocalTime
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadablePartial, ReadableInstant, String, Calendar and Date.
-     * The String formats are described by {@link ISODateTimeFormat#localTimeParser()}.
+     * The String formats are described by {@link org.joda.time.format.ISODateTimeFormat#localTimeParser()}.
      * The default String converter ignores the zone and only parses the field values.
      *
      * @param instant  the datetime object
@@ -394,7 +394,7 @@ public final class LocalTime
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadablePartial, ReadableInstant, String, Calendar and Date.
-     * The String formats are described by {@link ISODateTimeFormat#localTimeParser()}.
+     * The String formats are described by {@link org.joda.time.format.ISODateTimeFormat#localTimeParser()}.
      * The default String converter ignores the zone and only parses the field values.
      *
      * @param instant  the datetime object
@@ -420,7 +420,7 @@ public final class LocalTime
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadablePartial, ReadableInstant, String, Calendar and Date.
-     * The String formats are described by {@link ISODateTimeFormat#localTimeParser()}.
+     * The String formats are described by {@link org.joda.time.format.ISODateTimeFormat#localTimeParser()}.
      * The default String converter ignores the zone and only parses the field values.
      *
      * @param instant  the datetime object
@@ -613,7 +613,7 @@ public final class LocalTime
     /**
      * Checks if the field type specified is supported by this
      * local time and chronology.
-     * This can be used to avoid exceptions in {@link #get(DateTimeFieldType)}.
+     * This can be used to avoid exceptions in {@link #get(org.joda.time.DateTimeFieldType)}.
      *
      * @param type  a field type, usually obtained from DateTimeFieldType
      * @return true if the field type is supported
@@ -833,7 +833,7 @@ public final class LocalTime
      * <p>
      * This method is typically used to add multiple copies of complex
      * period instances. Adding one field is best achieved using methods
-     * like {@link #withFieldAdded(DurationFieldType, int)}
+     * like {@link #withFieldAdded(org.joda.time.DurationFieldType, int)}
      * or {@link #plusHours(int)}.
      *
      * @param period  the period to add to this one, null means zero

@@ -1,5 +1,5 @@
 /*
- *  Copyright 2001-2010 Stephen Colebourne
+ *  Copyright 2001-2014 Stephen Colebourne
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -39,7 +39,7 @@ import org.joda.time.format.ISODateTimeFormat;
  * millisecond instant.
  * <p>
  * This class should generally not be used directly by API users. The 
- * {@link ReadableInstant} interface should be used when different 
+ * {@link org.joda.time.ReadableInstant} interface should be used when different
  * kinds of date/time objects are to be referenced.
  * <p>
  * Whenever you want to implement <code>ReadableInstant</code> you should
@@ -94,7 +94,7 @@ public abstract class AbstractInstant implements ReadableInstant {
 
     /**
      * Checks if the field type specified is supported by this instant and chronology.
-     * This can be used to avoid exceptions in {@link #get(DateTimeFieldType)}.
+     * This can be used to avoid exceptions in {@link #get(org.joda.time.DateTimeFieldType)}.
      *
      * @param type  a field type, usually obtained from DateTimeFieldType
      * @return true if the field type is supported
@@ -242,10 +242,10 @@ public abstract class AbstractInstant implements ReadableInstant {
      * <p>
      * Two objects which represent the same instant in time, but are in
      * different time zones (based on time zone id), will be considered to
-     * be different. Only two objects with the same {@link DateTimeZone},
-     * {@link Chronology} and instant are equal.
+     * be different. Only two objects with the same {@link org.joda.time.DateTimeZone},
+     * {@link org.joda.time.Chronology} and instant are equal.
      * <p>
-     * See {@link #isEqual(ReadableInstant)} for an equals method that
+     * See {@link #isEqual(org.joda.time.ReadableInstant)} for an equals method that
      * ignores the Chronology and time zone.
      * <p>
      * All ReadableInstant instances are accepted.
@@ -417,7 +417,7 @@ public abstract class AbstractInstant implements ReadableInstant {
     /**
      * Output the date time in ISO8601 format (yyyy-MM-ddTHH:mm:ss.SSSZZ).
      * 
-     * @return ISO8601 time formatted string.
+     * @return ISO8601 time formatted string, not null
      */
     @ToString
     public String toString() {
@@ -429,7 +429,7 @@ public abstract class AbstractInstant implements ReadableInstant {
      * Uses the specified formatter to convert this partial to a String.
      *
      * @param formatter  the formatter to use, null means use <code>toString()</code>.
-     * @return the formatted string
+     * @return the formatted string, not null
      * @since 1.1
      */
     public String toString(DateTimeFormatter formatter) {

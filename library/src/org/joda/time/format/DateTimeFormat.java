@@ -1,5 +1,5 @@
 /*
- *  Copyright 2001-2013 Stephen Colebourne
+ *  Copyright 2001-2014 Stephen Colebourne
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -16,13 +16,11 @@
 package org.joda.time.format;
 
 import java.io.IOException;
-import java.io.Writer;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.Locale;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicReferenceArray;
 
 import org.joda.time.Chronology;
 import org.joda.time.DateTime;
@@ -32,9 +30,9 @@ import org.joda.time.ReadablePartial;
 /**
  * Factory that creates instances of DateTimeFormatter from patterns and styles.
  * <p>
- * Datetime formatting is performed by the {@link DateTimeFormatter} class.
+ * Datetime formatting is performed by the {@link org.joda.time.format.DateTimeFormatter} class.
  * Three classes provide factory methods to create formatters, and this is one.
- * The others are {@link ISODateTimeFormat} and {@link DateTimeFormatterBuilder}.
+ * The others are {@link org.joda.time.format.ISODateTimeFormat} and {@link org.joda.time.format.DateTimeFormatterBuilder}.
  * <p>
  * This class provides two types of factory:
  * <ul>
@@ -127,8 +125,8 @@ import org.joda.time.ReadablePartial;
  * @author Brian S O'Neill
  * @author Maxim Zhao
  * @since 1.0
- * @see ISODateTimeFormat
- * @see DateTimeFormatterBuilder
+ * @see org.joda.time.format.ISODateTimeFormat
+ * @see org.joda.time.format.DateTimeFormatterBuilder
  */
 public class DateTimeFormat {
 
@@ -152,18 +150,10 @@ public class DateTimeFormat {
 
     /** Maximum size of the pattern cache. */
     private static final int PATTERN_CACHE_SIZE = 500;
-
-    /** Maps patterns to formatters via LRU, patterns don't vary by locale. */
-    private static final Map<String, DateTimeFormatter> PATTERN_CACHE = new LinkedHashMap<String, DateTimeFormatter>(7) {
-        private static final long serialVersionUID = 23L;
-        @Override
-        protected boolean removeEldestEntry(final Map.Entry<String, DateTimeFormatter> eldest) {
-            return size() > PATTERN_CACHE_SIZE;
-        }
-    };
-
+    /** Maps patterns to formatters, patterns don't vary by locale. Size capped at PATTERN_CACHE_SIZE*/
+    private static final ConcurrentHashMap<String, DateTimeFormatter> cPatternCache = new ConcurrentHashMap<String, DateTimeFormatter>();
     /** Maps patterns to formatters, patterns don't vary by locale. */
-    private static final DateTimeFormatter[] STYLE_CACHE = new DateTimeFormatter[25];
+    private static final AtomicReferenceArray<DateTimeFormatter> cStyleCache = new AtomicReferenceArray<DateTimeFormatter>(25);
 
     //-----------------------------------------------------------------------
     /**
@@ -173,7 +163,7 @@ public class DateTimeFormat {
      * <p>
      * The format may contain locale specific output, and this will change as
      * you change the locale of the formatter.
-     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+     * Call {@link org.joda.time.format.DateTimeFormatter#withLocale(java.util.Locale)} to switch the locale.
      * For example:
      * <pre>
      * DateTimeFormat.forPattern(pattern).withLocale(Locale.FRANCE).print(dt);
@@ -197,7 +187,7 @@ public class DateTimeFormat {
      * <p>
      * The returned formatter will dynamically adjust to the locale that
      * the print/parse takes place in. Thus you just call
-     * {@link DateTimeFormatter#withLocale(Locale)} and the Short/Medium/Long/Full
+     * {@link org.joda.time.format.DateTimeFormatter#withLocale(java.util.Locale)} and the Short/Medium/Long/Full
      * style for that locale will be output. For example:
      * <pre>
      * DateTimeFormat.forStyle(style).withLocale(Locale.FRANCE).print(dt);
@@ -231,7 +221,7 @@ public class DateTimeFormat {
             locale = Locale.getDefault();
         }
         // Not pretty, but it works.
-        return ((StyleFormatter) formatter.getPrinter()).getPattern(locale);
+        return ((StyleFormatter) formatter.getPrinter0()).getPattern(locale);
     }
 
     //-----------------------------------------------------------------------
@@ -239,7 +229,7 @@ public class DateTimeFormat {
      * Creates a format that outputs a short date format.
      * <p>
      * The format will change as you change the locale of the formatter.
-     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+     * Call {@link org.joda.time.format.DateTimeFormatter#withLocale(java.util.Locale)} to switch the locale.
      * 
      * @return the formatter
      */
@@ -251,7 +241,7 @@ public class DateTimeFormat {
      * Creates a format that outputs a short time format.
      * <p>
      * The format will change as you change the locale of the formatter.
-     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+     * Call {@link org.joda.time.format.DateTimeFormatter#withLocale(java.util.Locale)} to switch the locale.
      * 
      * @return the formatter
      */
@@ -263,7 +253,7 @@ public class DateTimeFormat {
      * Creates a format that outputs a short datetime format.
      * <p>
      * The format will change as you change the locale of the formatter.
-     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+     * Call {@link org.joda.time.format.DateTimeFormatter#withLocale(java.util.Locale)} to switch the locale.
      * 
      * @return the formatter
      */
@@ -276,7 +266,7 @@ public class DateTimeFormat {
      * Creates a format that outputs a medium date format.
      * <p>
      * The format will change as you change the locale of the formatter.
-     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+     * Call {@link org.joda.time.format.DateTimeFormatter#withLocale(java.util.Locale)} to switch the locale.
      * 
      * @return the formatter
      */
@@ -288,7 +278,7 @@ public class DateTimeFormat {
      * Creates a format that outputs a medium time format.
      * <p>
      * The format will change as you change the locale of the formatter.
-     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+     * Call {@link org.joda.time.format.DateTimeFormatter#withLocale(java.util.Locale)} to switch the locale.
      * 
      * @return the formatter
      */
@@ -300,7 +290,7 @@ public class DateTimeFormat {
      * Creates a format that outputs a medium datetime format.
      * <p>
      * The format will change as you change the locale of the formatter.
-     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+     * Call {@link org.joda.time.format.DateTimeFormatter#withLocale(java.util.Locale)} to switch the locale.
      * 
      * @return the formatter
      */
@@ -313,7 +303,7 @@ public class DateTimeFormat {
      * Creates a format that outputs a long date format.
      * <p>
      * The format will change as you change the locale of the formatter.
-     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+     * Call {@link org.joda.time.format.DateTimeFormatter#withLocale(java.util.Locale)} to switch the locale.
      * 
      * @return the formatter
      */
@@ -325,7 +315,7 @@ public class DateTimeFormat {
      * Creates a format that outputs a long time format.
      * <p>
      * The format will change as you change the locale of the formatter.
-     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+     * Call {@link org.joda.time.format.DateTimeFormatter#withLocale(java.util.Locale)} to switch the locale.
      * 
      * @return the formatter
      */
@@ -337,7 +327,7 @@ public class DateTimeFormat {
      * Creates a format that outputs a long datetime format.
      * <p>
      * The format will change as you change the locale of the formatter.
-     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+     * Call {@link org.joda.time.format.DateTimeFormatter#withLocale(java.util.Locale)} to switch the locale.
      * 
      * @return the formatter
      */
@@ -350,7 +340,7 @@ public class DateTimeFormat {
      * Creates a format that outputs a full date format.
      * <p>
      * The format will change as you change the locale of the formatter.
-     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+     * Call {@link org.joda.time.format.DateTimeFormatter#withLocale(java.util.Locale)} to switch the locale.
      * 
      * @return the formatter
      */
@@ -362,7 +352,7 @@ public class DateTimeFormat {
      * Creates a format that outputs a full time format.
      * <p>
      * The format will change as you change the locale of the formatter.
-     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+     * Call {@link org.joda.time.format.DateTimeFormatter#withLocale(java.util.Locale)} to switch the locale.
      * 
      * @return the formatter
      */
@@ -374,7 +364,7 @@ public class DateTimeFormat {
      * Creates a format that outputs a full datetime format.
      * <p>
      * The format will change as you change the locale of the formatter.
-     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
+     * Call {@link org.joda.time.format.DateTimeFormatter#withLocale(java.util.Locale)} to switch the locale.
      * 
      * @return the formatter
      */
@@ -691,15 +681,18 @@ public class DateTimeFormat {
         if (pattern == null || pattern.length() == 0) {
             throw new IllegalArgumentException("Invalid pattern specification");
         }
-        DateTimeFormatter formatter = null;
-        synchronized (PATTERN_CACHE) {
-            formatter = PATTERN_CACHE.get(pattern);
-            if (formatter == null) {
-                DateTimeFormatterBuilder builder = new DateTimeFormatterBuilder();
-                parsePatternTo(builder, pattern);
-                formatter = builder.toFormatter();
-
-                PATTERN_CACHE.put(pattern, formatter);
+        DateTimeFormatter formatter = cPatternCache.get(pattern);
+        if (formatter == null) {
+            DateTimeFormatterBuilder builder = new DateTimeFormatterBuilder();
+            parsePatternTo(builder, pattern);
+            formatter = builder.toFormatter();
+            if (cPatternCache.size() < PATTERN_CACHE_SIZE) {
+                // the size check is not locked against concurrent access,
+                // but is accepted to be slightly off in contention scenarios.
+                DateTimeFormatter oldFormatter = cPatternCache.putIfAbsent(pattern, formatter);
+                if (oldFormatter != null) {
+                    formatter = oldFormatter;
+                }
             }
         }
         return formatter;
@@ -734,24 +727,24 @@ public class DateTimeFormat {
      * @return the formatter
      */
     private static DateTimeFormatter createFormatterForStyleIndex(int dateStyle, int timeStyle) {
-        int index = ((dateStyle << 2) + dateStyle) + timeStyle;
+        int index = ((dateStyle << 2) + dateStyle) + timeStyle;  // (dateStyle * 5 + timeStyle);
         // Should never happen but do a double check...
-        if (index >= STYLE_CACHE.length) {
+        if (index >= cStyleCache.length()) {
             return createDateTimeFormatter(dateStyle, timeStyle);
         }
-        DateTimeFormatter f = null;
-        synchronized (STYLE_CACHE) {
-            f = STYLE_CACHE[index];
-            if (f == null) {
-                f = createDateTimeFormatter(dateStyle, timeStyle);
-                STYLE_CACHE[index] = f;
+        DateTimeFormatter f = cStyleCache.get(index);
+        if (f == null) {
+            f = createDateTimeFormatter(dateStyle, timeStyle);
+            if (cStyleCache.compareAndSet(index, null, f) == false) {
+                f = cStyleCache.get(index);
             }
         }
         return f;
     }
-    
+
     /**
      * Creates a formatter for the specified style.
+     * 
      * @param dateStyle  the date style
      * @param timeStyle  the time style
      * @return the formatter
@@ -792,9 +785,9 @@ public class DateTimeFormat {
 
     //-----------------------------------------------------------------------
     static class StyleFormatter
-            implements DateTimePrinter, DateTimeParser {
+            implements InternalPrinter, InternalParser {
 
-        private static final Map<String, DateTimeFormatter> cCache = new HashMap<String, DateTimeFormatter>();  // manual sync
+        private static final ConcurrentHashMap<StyleFormatterCacheKey, DateTimeFormatter> cCache = new ConcurrentHashMap<StyleFormatterCacheKey, DateTimeFormatter>();
         
         private final int iDateStyle;
         private final int iTimeStyle;
@@ -812,48 +805,35 @@ public class DateTimeFormat {
         }
 
         public void printTo(
-                StringBuffer buf, long instant, Chronology chrono,
-                int displayOffset, DateTimeZone displayZone, Locale locale) {
-            DateTimePrinter p = getFormatter(locale).getPrinter();
-            p.printTo(buf, instant, chrono, displayOffset, displayZone, locale);
-        }
-
-        public void printTo(
-                Writer out, long instant, Chronology chrono,
+                Appendable appenadble, long instant, Chronology chrono,
                 int displayOffset, DateTimeZone displayZone, Locale locale) throws IOException {
-            DateTimePrinter p = getFormatter(locale).getPrinter();
-            p.printTo(out, instant, chrono, displayOffset, displayZone, locale);
+            InternalPrinter p = getFormatter(locale).getPrinter0();
+            p.printTo(appenadble, instant, chrono, displayOffset, displayZone, locale);
         }
 
-        public void printTo(StringBuffer buf, ReadablePartial partial, Locale locale) {
-            DateTimePrinter p = getFormatter(locale).getPrinter();
-            p.printTo(buf, partial, locale);
-        }
-
-        public void printTo(Writer out, ReadablePartial partial, Locale locale) throws IOException {
-            DateTimePrinter p = getFormatter(locale).getPrinter();
-            p.printTo(out, partial, locale);
+        public void printTo(Appendable appendable, ReadablePartial partial, Locale locale) throws IOException {
+            InternalPrinter p = getFormatter(locale).getPrinter0();
+            p.printTo(appendable, partial, locale);
         }
 
         public int estimateParsedLength() {
             return 40;  // guess
         }
 
-        public int parseInto(DateTimeParserBucket bucket, String text, int position) {
-            DateTimeParser p = getFormatter(bucket.getLocale()).getParser();
+        public int parseInto(DateTimeParserBucket bucket, CharSequence text, int position) {
+            InternalParser p = getFormatter(bucket.getLocale()).getParser0();
             return p.parseInto(bucket, text, position);
         }
 
         private DateTimeFormatter getFormatter(Locale locale) {
             locale = (locale == null ? Locale.getDefault() : locale);
-            String key = Integer.toString(iType + (iDateStyle << 4) + (iTimeStyle << 8)) + locale.toString();
-            DateTimeFormatter f = null;
-            synchronized (cCache) {
-                f = cCache.get(key);
-                if (f == null) {
-                    String pattern = getPattern(locale);
-                    f = DateTimeFormat.forPattern(pattern);
-                    cCache.put(key, f);
+            StyleFormatterCacheKey key = new StyleFormatterCacheKey(iType, iDateStyle, iTimeStyle, locale);
+            DateTimeFormatter f = cCache.get(key);
+            if (f == null) {
+                f = DateTimeFormat.forPattern(getPattern(locale));
+                DateTimeFormatter oldFormatter = cCache.putIfAbsent(key, f);
+                if (oldFormatter != null) {
+                    f = oldFormatter;
                 }
             }
             return f;
@@ -879,4 +859,49 @@ public class DateTimeFormat {
         }
     }
 
+    static class StyleFormatterCacheKey {
+        private final int combinedTypeAndStyle;
+        private final Locale locale;
+
+        public StyleFormatterCacheKey(int iType, int iDateStyle,
+                int iTimeStyle, Locale locale) {
+            this.locale = locale;
+            // keeping old key generation logic of shifting type and style
+            this.combinedTypeAndStyle = iType + (iDateStyle << 4) + (iTimeStyle << 8);
+        }
+
+        @Override
+        public int hashCode() {
+            final int prime = 31;
+            int result = 1;
+            result = prime * result + combinedTypeAndStyle;
+            result = prime * result + ((locale == null) ? 0 : locale.hashCode());
+            return result;
+        }
+
+        @Override
+        public boolean equals(Object obj) {
+            if (this == obj) {
+                return true;
+            }
+            if (obj == null) {
+                return false;
+            }
+            if (!(obj instanceof StyleFormatterCacheKey)) {
+                return false;
+            }
+            StyleFormatterCacheKey other = (StyleFormatterCacheKey) obj;
+            if (combinedTypeAndStyle != other.combinedTypeAndStyle) {
+                return false;
+            }
+            if (locale == null) {
+                if (other.locale != null) {
+                    return false;
+                }
+            } else if (!locale.equals(other.locale)) {
+                return false;
+            }
+            return true;
+        }
+    }
 }

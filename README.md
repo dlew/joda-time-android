@@ -29,14 +29,14 @@ If you're using maven:
     <dependency>
       <groupId>net.danlew</groupId>
       <artifactId>android.joda</artifactId>
-      <version>2.3.4</version>
+      <version>2.4.0</version>
       <type>aar</type>
     </dependency>
 
 If you're using gradle:
 
     dependencies {
-      compile 'net.danlew:android.joda:2.3.4'
+      compile 'net.danlew:android.joda:2.4.0'
     }
 
 Once the project is imported, you **must** initialize the timezone provider and TIMEZONE_CHANGED broadcast receiver with a `Context` (via `JodaTimeAndroid.init()`) before you can start using this library.  I suggest putting this code in `Application.onCreate()`:
@@ -60,3 +60,14 @@ Updating the TimeZone database
         ./gradlew updateTzData
 
 4. Re-compile the library
+
+Files Modified from Joda-Time
+=============================
+
+This is more of a reference for anyone wanting to later update the version of joda-time this is based off of:
+
+`DateTimeZone` - Points to ResourceZoneInfoProvider instead of joda-time's ZoneInfoProvider.
+
+`ZoneInfoCompiler` - Outputs Android-friendly zone info files.
+
+`TestDateTimeZone` - Update tests to work with joda-time-android just make sure all this still works.

@@ -48,7 +48,7 @@ public interface ReadableInstant extends Comparable<ReadableInstant> {
     /**
      * Gets the chronology of the instant.
      * <p>
-     * The {@link Chronology} provides conversion from the millisecond
+     * The {@link org.joda.time.Chronology} provides conversion from the millisecond
      * value to meaningful fields in a particular calendar system.
      * 
      * @return the Chronology, never null
@@ -144,7 +144,7 @@ public interface ReadableInstant extends Comparable<ReadableInstant> {
      * instances are accepted.
      * <p>
      * To compare two instants for absolute time (ie. UTC milliseconds 
-     * ignoring the chronology), use {@link #isEqual(ReadableInstant)} or
+     * ignoring the chronology), use {@link #isEqual(org.joda.time.ReadableInstant)} or
      * {@link #compareTo(Object)}.
      *
      * @param readableInstant  a readable instant to check against

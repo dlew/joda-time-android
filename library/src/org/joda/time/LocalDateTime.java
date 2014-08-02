@@ -40,7 +40,7 @@ import org.joda.time.format.ISODateTimeFormat;
  * LocalDateTime is an unmodifiable datetime class representing a
  * datetime without a time zone.
  * <p>
- * LocalDateTime implements the {@link ReadablePartial} interface.
+ * LocalDateTime implements the {@link org.joda.time.ReadablePartial} interface.
  * To do this, certain methods focus on key fields Year, MonthOfYear,
  * DayOfYear and MillisOfDay.
  * However, <b>all</b> fields may in fact be queried.
@@ -49,7 +49,7 @@ import org.joda.time.format.ISODateTimeFormat;
  * represent the local datetime. This value is only used internally and
  * is not exposed to applications.
  * <p>
- * Calculations on LocalDateTime are performed using a {@link Chronology}.
+ * Calculations on LocalDateTime are performed using a {@link org.joda.time.Chronology}.
  * This chronology will be set internally to be in the UTC time zone
  * for all calculations.
  *
@@ -147,7 +147,7 @@ public final class LocalDateTime
     /**
      * Parses a {@code LocalDateTime} from the specified string.
      * <p>
-     * This uses {@link ISODateTimeFormat#localDateOptionalTimeParser()}.
+     * This uses {@link org.joda.time.format.ISODateTimeFormat#localDateOptionalTimeParser()}.
      * 
      * @param str  the string to parse, not null
      * @since 2.0
@@ -272,7 +272,7 @@ public final class LocalDateTime
      * Once the constructor is completed, the zone is no longer used.
      *
      * @param zone  the time zone, null means default zone
-     * @see #now(DateTimeZone)
+     * @see #now(org.joda.time.DateTimeZone)
      */
     public LocalDateTime(DateTimeZone zone) {
         this(DateTimeUtils.currentTimeMillis(), ISOChronology.getInstance(zone));
@@ -286,7 +286,7 @@ public final class LocalDateTime
      * Once the constructor is completed, the zone is no longer used.
      *
      * @param chronology  the chronology, null means ISOChronology in default zone
-     * @see #now(Chronology)
+     * @see #now(org.joda.time.Chronology)
      */
     public LocalDateTime(Chronology chronology) {
         this(DateTimeUtils.currentTimeMillis(), chronology);
@@ -348,7 +348,7 @@ public final class LocalDateTime
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadablePartial, ReadableInstant, String, Calendar and Date.
-     * The String formats are described by {@link ISODateTimeFormat#localDateOptionalTimeParser()}.
+     * The String formats are described by {@link org.joda.time.format.ISODateTimeFormat#localDateOptionalTimeParser()}.
      * The default String converter ignores the zone and only parses the field values.
      *
      * @param instant  the datetime object
@@ -369,7 +369,7 @@ public final class LocalDateTime
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadablePartial, ReadableInstant, String, Calendar and Date.
-     * The String formats are described by {@link ISODateTimeFormat#localDateOptionalTimeParser()}.
+     * The String formats are described by {@link org.joda.time.format.ISODateTimeFormat#localDateOptionalTimeParser()}.
      * The default String converter ignores the zone and only parses the field values.
      *
      * @param instant  the datetime object
@@ -399,7 +399,7 @@ public final class LocalDateTime
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadablePartial, ReadableInstant, String, Calendar and Date.
-     * The String formats are described by {@link ISODateTimeFormat#localDateOptionalTimeParser()}.
+     * The String formats are described by {@link org.joda.time.format.ISODateTimeFormat#localDateOptionalTimeParser()}.
      * The default String converter ignores the zone and only parses the field values.
      *
      * @param instant  the datetime object
@@ -613,7 +613,7 @@ public final class LocalDateTime
     /**
      * Checks if the field type specified is supported by this
      * local datetime and chronology.
-     * This can be used to avoid exceptions in {@link #get(DateTimeFieldType)}.
+     * This can be used to avoid exceptions in {@link #get(org.joda.time.DateTimeFieldType)}.
      *
      * @param type  a field type, usually obtained from DateTimeFieldType
      * @return true if the field type is supported
@@ -1039,7 +1039,7 @@ public final class LocalDateTime
      * <p>
      * This method is typically used to add multiple copies of complex
      * period instances. Adding one field is best achieved using methods
-     * like {@link #withFieldAdded(DurationFieldType, int)}
+     * like {@link #withFieldAdded(org.joda.time.DurationFieldType, int)}
      * or {@link #plusYears(int)}.
      *
      * @param period  the period to add to this one, null means zero
@@ -1604,7 +1604,7 @@ public final class LocalDateTime
     /**
      * Get the day of month field value.
      * <p>
-     * The values for the day of month are defined in {@link org.joda.time.DateTimeConstants}.
+     * The values for the day of month are defined in {@link DateTimeConstants}.
      *
      * @return the day of month
      */
@@ -1615,7 +1615,7 @@ public final class LocalDateTime
     /**
      * Get the day of week field value.
      * <p>
-     * The values for the day of week are defined in {@link org.joda.time.DateTimeConstants}.
+     * The values for the day of week are defined in {@link DateTimeConstants}.
      *
      * @return the day of week
      */

@@ -240,7 +240,7 @@ public abstract class BasePartial
     /**
      * Gets the chronology of the partial which is never null.
      * <p>
-     * The {@link Chronology} is the calculation engine behind the partial and
+     * The {@link org.joda.time.Chronology} is the calculation engine behind the partial and
      * provides conversion and validation of the fields in a particular calendar system.
      * 
      * @return the chronology, never null

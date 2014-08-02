@@ -31,11 +31,11 @@ import org.joda.time.format.ISOPeriodFormat;
  * <p>
  * Intervals have a fixed millisecond duration.
  * This is the difference between the start and end instants.
- * The duration is represented separately by {@link ReadableDuration}.
+ * The duration is represented separately by {@link org.joda.time.ReadableDuration}.
  * As a result, intervals are not comparable.
  * To compare the length of two intervals, you should compare their durations.
  * <p>
- * An interval can also be converted to a {@link ReadablePeriod}.
+ * An interval can also be converted to a {@link org.joda.time.ReadablePeriod}.
  * This represents the difference between the start and end points in terms of fields
  * such as years and days.
  * <p>
@@ -58,8 +58,8 @@ public final class Interval
     /**
      * Parses a {@code Interval} from the specified string.
      * <p>
-     * The String formats are described by {@link ISODateTimeFormat#dateTimeParser()}
-     * and {@link ISOPeriodFormat#standard()}, and may be 'datetime/datetime',
+     * The String formats are described by {@link org.joda.time.format.ISODateTimeFormat#dateTimeParser()}
+     * and {@link org.joda.time.format.ISOPeriodFormat#standard()}, and may be 'datetime/datetime',
      * 'datetime/period' or 'period/datetime'.
      * 
      * @param str  the string to parse, not null
@@ -182,8 +182,8 @@ public final class Interval
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadableInterval and String.
-     * The String formats are described by {@link ISODateTimeFormat#dateTimeParser()}
-     * and {@link ISOPeriodFormat#standard()}, and may be 'datetime/datetime',
+     * The String formats are described by {@link org.joda.time.format.ISODateTimeFormat#dateTimeParser()}
+     * and {@link org.joda.time.format.ISOPeriodFormat#standard()}, and may be 'datetime/datetime',
      * 'datetime/period' or 'period/datetime'.
      * 
      * @param interval  the time interval to copy
@@ -200,8 +200,8 @@ public final class Interval
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadableInterval and String.
-     * The String formats are described by {@link ISODateTimeFormat#dateTimeParser()}
-     * and {@link ISOPeriodFormat#standard()}, and may be 'datetime/datetime',
+     * The String formats are described by {@link org.joda.time.format.ISODateTimeFormat#dateTimeParser()}
+     * and {@link org.joda.time.format.ISOPeriodFormat#standard()}, and may be 'datetime/datetime',
      * 'datetime/period' or 'period/datetime'.
      * 
      * @param interval  the time interval to copy
@@ -432,8 +432,8 @@ public final class Interval
     /**
      * Creates a new interval with the specified duration before the end instant.
      *
-     * @param duration  the duration to add to the start to get the new end instant, null means zero
-     * @return an interval with the start from this interval and a calculated end
+     * @param duration  the duration to subtract from the end to get the new start instant, null means zero
+     * @return an interval with the end from this interval and a calculated start
      * @throws IllegalArgumentException if the duration is negative
      */
     public Interval withDurationBeforeEnd(ReadableDuration duration) {
@@ -468,8 +468,8 @@ public final class Interval
     /**
      * Creates a new interval with the specified period before the end instant.
      *
-     * @param period  the period to add to the start to get the new end instant, null means zero
-     * @return an interval with the start from this interval and a calculated end
+     * @param period the period to subtract from the end to get the new start instant, null means zero
+     * @return an interval with the end from this interval and a calculated start
      * @throws IllegalArgumentException if the period is negative
      */
     public Interval withPeriodBeforeEnd(ReadablePeriod period) {

@@ -23,17 +23,17 @@ import java.util.concurrent.ConcurrentMap;
 /**
  * Factory that creates instances of PeriodFormatter.
  * <p>
- * Period formatting is performed by the {@link PeriodFormatter} class.
+ * Period formatting is performed by the {@link org.joda.time.format.PeriodFormatter} class.
  * Three classes provide factory methods to create formatters, and this is one.
- * The others are {@link ISOPeriodFormat} and {@link PeriodFormatterBuilder}.
+ * The others are {@link org.joda.time.format.ISOPeriodFormat} and {@link org.joda.time.format.PeriodFormatterBuilder}.
  * <p>
  * PeriodFormat is thread-safe and immutable, and the formatters it returns
  * are as well.
  *
  * @author Brian S O'Neill
  * @since 1.0
- * @see ISOPeriodFormat
- * @see PeriodFormatterBuilder
+ * @see org.joda.time.format.ISOPeriodFormat
+ * @see org.joda.time.format.PeriodFormatterBuilder
  */
 public class PeriodFormat {
 
@@ -59,7 +59,7 @@ public class PeriodFormat {
     /**
      * Gets the default formatter that outputs words in English.
      * <p>
-     * This calls {@link #wordBased(Locale)} using a locale of {@code ENGLISH}.
+     * This calls {@link #wordBased(java.util.Locale)} using a locale of {@code ENGLISH}.
      * 
      * @return the formatter, not null
      */
@@ -70,7 +70,7 @@ public class PeriodFormat {
     /**
      * Returns a word based formatter for the JDK default locale.
      * <p>
-     * This calls {@link #wordBased(Locale)} using the {@link Locale#getDefault() default locale}.
+     * This calls {@link #wordBased(java.util.Locale)} using the {@link java.util.Locale#getDefault() default locale}.
      * 
      * @return the formatter, not null
      * @since 2.0

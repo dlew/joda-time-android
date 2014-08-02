@@ -31,6 +31,9 @@ public class ResourceZoneInfoProvider implements Provider {
     /** Maps ids to strings or SoftReferences to DateTimeZones. */
     private final Map<String, Object> iZoneInfoMap;
 
+    /**
+     * You should not call this directly; instead, call JodaTimeAndroid.init() (as it does more).
+     */
     public static void init(Context context) {
         if (!JodaTimeAndroid.hasInitBeenCalled()) {
             Log.w("joda-time-android",

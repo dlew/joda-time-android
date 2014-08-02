@@ -36,7 +36,7 @@ import org.joda.time.ReadablePartial;
  *
  * @author Brian S O'Neill
  * @since 1.0
- * @see DecoratedDateTimeField
+ * @see org.joda.time.field.DecoratedDateTimeField
  */
 public abstract class BaseDateTimeField extends DateTimeField {
 
@@ -97,7 +97,7 @@ public abstract class BaseDateTimeField extends DateTimeField {
     /**
      * Get the human-readable, text value of this field from the milliseconds.
      * <p>
-     * The default implementation calls {@link #getAsText(long, Locale)}.
+     * The default implementation calls {@link #getAsText(long, java.util.Locale)}.
      *
      * @param instant  the milliseconds from 1970-01-01T00:00:00Z to query
      * @return the text value of the field
@@ -125,8 +125,8 @@ public abstract class BaseDateTimeField extends DateTimeField {
      * Get the human-readable, text value of this field from a partial instant.
      * If the specified locale is null, the default locale is used.
      * <p>
-     * The default implementation calls {@link ReadablePartial#get(DateTimeFieldType)}
-     * and {@link #getAsText(ReadablePartial, int, Locale)}.
+     * The default implementation calls {@link org.joda.time.ReadablePartial#get(org.joda.time.DateTimeFieldType)}
+     * and {@link #getAsText(org.joda.time.ReadablePartial, int, java.util.Locale)}.
      *
      * @param partial  the partial instant to query
      * @param locale  the locale to use for selecting a text symbol, null for default
@@ -171,7 +171,7 @@ public abstract class BaseDateTimeField extends DateTimeField {
     /**
      * Get the human-readable, short text value of this field from the milliseconds.
      * <p>
-     * The default implementation calls {@link #getAsShortText(long, Locale)}.
+     * The default implementation calls {@link #getAsShortText(long, java.util.Locale)}.
      *
      * @param instant  the milliseconds from 1970-01-01T00:00:00Z to query
      * @return the text value of the field
@@ -199,8 +199,8 @@ public abstract class BaseDateTimeField extends DateTimeField {
      * Get the human-readable, short text value of this field from a partial instant.
      * If the specified locale is null, the default locale is used.
      * <p>
-     * The default implementation calls {@link ReadablePartial#get(DateTimeFieldType)}
-     * and {@link #getAsText(ReadablePartial, int, Locale)}.
+     * The default implementation calls {@link org.joda.time.ReadablePartial#get(org.joda.time.DateTimeFieldType)}
+     * and {@link #getAsText(org.joda.time.ReadablePartial, int, java.util.Locale)}.
      *
      * @param partial  the partial instant to query
      * @param locale  the locale to use for selecting a text symbol, null for default
@@ -622,7 +622,7 @@ public abstract class BaseDateTimeField extends DateTimeField {
     /**
      * Sets a value in the milliseconds supplied from a human-readable, text value.
      * <p>
-     * This implementation uses {@link #set(long, String, Locale)}.
+     * This implementation uses {@link #set(long, String, java.util.Locale)}.
      * <p>
      * Note: subclasses that override this method should also override getAsText.
      *
@@ -640,7 +640,7 @@ public abstract class BaseDateTimeField extends DateTimeField {
      * If the specified locale is null, the default locale is used.
      * <p>
      * This implementation uses <code>convertText(String, Locale)</code> and
-     * {@link #set(ReadablePartial, int, int[], int)}.
+     * {@link #set(org.joda.time.ReadablePartial, int, int[], int)}.
      *
      * @param instant  the partial instant
      * @param fieldIndex  the index of this field in the instant
@@ -762,7 +762,7 @@ public abstract class BaseDateTimeField extends DateTimeField {
      * Get the minimum value for this field using the partial instant and
      * the specified values.
      * <p>
-     * This implementation returns the same as {@link #getMinimumValue(ReadablePartial)}.
+     * This implementation returns the same as {@link #getMinimumValue(org.joda.time.ReadablePartial)}.
      * 
      * @param instant  the partial instant to query
      * @param values  the values to use
@@ -808,7 +808,7 @@ public abstract class BaseDateTimeField extends DateTimeField {
      * Get the maximum value for this field using the partial instant and
      * the specified values.
      * <p>
-     * This implementation returns the same as {@link #getMaximumValue(ReadablePartial)}.
+     * This implementation returns the same as {@link #getMaximumValue(org.joda.time.ReadablePartial)}.
      * 
      * @param instant  the partial instant to query
      * @param values  the values to use

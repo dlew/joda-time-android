@@ -30,7 +30,7 @@ import org.joda.time.convert.InstantConverter;
  * data in <code>long</code> and <code>Chronology</code> fields.
  * <p>
  * This class should generally not be used directly by API users.
- * The {@link ReadableDateTime} interface should be used when different 
+ * The {@link org.joda.time.ReadableDateTime} interface should be used when different
  * kinds of date/time objects are to be referenced.
  * <p>
  * BaseDateTime subclasses may be mutable and not thread-safe.
@@ -124,6 +124,10 @@ public abstract class BaseDateTime
         super();
         iChronology = checkChronology(chronology);
         iMillis = checkInstant(instant, iChronology);
+        // validate not over maximum
+        if (iChronology.year().isSupported()) {
+            iChronology.year().set(iMillis, iChronology.year().get(iMillis));
+        }
     }
 
     //-----------------------------------------------------------------------

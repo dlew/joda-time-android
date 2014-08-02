@@ -1,5 +1,6 @@
 package net.danlew.android.joda.test;
 
+import net.danlew.android.joda.JodaTimeAndroid;
 import net.danlew.android.joda.ResourceZoneInfoProvider;
 
 import org.joda.time.DateTime;
@@ -138,7 +139,7 @@ public class TestDateTimeZone extends InstrumentationTestCase {
 
     protected void setUp() throws Exception {
         Context context = getInstrumentation().getContext();
-        ResourceZoneInfoProvider.init(context);
+        JodaTimeAndroid.init(context);
 
         // Need to initialize these after ResourceZoneInfoProvider.init()
         PARIS = DateTimeZone.forID("Europe/Paris");

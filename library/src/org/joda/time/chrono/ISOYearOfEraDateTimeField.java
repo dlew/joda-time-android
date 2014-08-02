@@ -28,7 +28,7 @@ import org.joda.time.field.FieldUtils;
  * the year.
  *
  * @author Brian S O'Neill
- * @see GJYearOfEraDateTimeField
+ * @see org.joda.time.chrono.GJYearOfEraDateTimeField
  * @since 1.0
  */
 class ISOYearOfEraDateTimeField extends DecoratedDateTimeField {

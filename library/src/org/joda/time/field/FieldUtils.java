@@ -226,7 +226,7 @@ public class FieldUtils {
      * @param value  the value to check
      * @param lowerBound  the lower bound allowed for value
      * @param upperBound  the upper bound allowed for value
-     * @throws IllegalFieldValueException if value is not in the specified bounds
+     * @throws org.joda.time.IllegalFieldValueException if value is not in the specified bounds
      */
     public static void verifyValueBounds(DateTimeField field, 
                                          int value, int lowerBound, int upperBound) {
@@ -243,7 +243,7 @@ public class FieldUtils {
      * @param value  the value to check
      * @param lowerBound  the lower bound allowed for value
      * @param upperBound  the upper bound allowed for value
-     * @throws IllegalFieldValueException if value is not in the specified bounds
+     * @throws org.joda.time.IllegalFieldValueException if value is not in the specified bounds
      * @since 1.1
      */
     public static void verifyValueBounds(DateTimeFieldType fieldType, 
@@ -261,7 +261,7 @@ public class FieldUtils {
      * @param value  the value to check
      * @param lowerBound  the lower bound allowed for value
      * @param upperBound  the upper bound allowed for value
-     * @throws IllegalFieldValueException if value is not in the specified bounds
+     * @throws org.joda.time.IllegalFieldValueException if value is not in the specified bounds
      */
     public static void verifyValueBounds(String fieldName,
                                          int value, int lowerBound, int upperBound) {

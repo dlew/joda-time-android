@@ -114,7 +114,7 @@ public abstract class AbstractReadableInstantFieldProperty implements Serializab
      * </pre>
      * 
      * @return the current value
-     * @see DateTimeField#get
+     * @see org.joda.time.DateTimeField#get
      */
     public int get() {
         return getField().get(getMillis());
@@ -129,7 +129,7 @@ public abstract class AbstractReadableInstantFieldProperty implements Serializab
      * See {@link #getAsText()} and {@link #getAsShortText()} for those.
      * 
      * @return the current value
-     * @see DateTimeField#get
+     * @see org.joda.time.DateTimeField#get
      * @since 1.1
      */
     public String getAsString() {
@@ -145,7 +145,7 @@ public abstract class AbstractReadableInstantFieldProperty implements Serializab
      * Thus, a day of week of 1 would return 'Monday' in English.
      * 
      * @return the current text value
-     * @see DateTimeField#getAsText
+     * @see org.joda.time.DateTimeField#getAsText
      */
     public String getAsText() {
         return getAsText(null);
@@ -161,7 +161,7 @@ public abstract class AbstractReadableInstantFieldProperty implements Serializab
      * 
      * @param locale  locale to use for selecting a text symbol, null means default
      * @return the current text value
-     * @see DateTimeField#getAsText
+     * @see org.joda.time.DateTimeField#getAsText
      */
     public String getAsText(Locale locale) {
         return getField().getAsText(getMillis(), locale);
@@ -176,7 +176,7 @@ public abstract class AbstractReadableInstantFieldProperty implements Serializab
      * Thus, a day of week of 1 would return 'Mon' in English.
      * 
      * @return the current text value
-     * @see DateTimeField#getAsShortText
+     * @see org.joda.time.DateTimeField#getAsShortText
      */
     public String getAsShortText() {
         return getAsShortText(null);
@@ -192,7 +192,7 @@ public abstract class AbstractReadableInstantFieldProperty implements Serializab
      * 
      * @param locale  locale to use for selecting a text symbol, null means default
      * @return the current text value
-     * @see DateTimeField#getAsShortText
+     * @see org.joda.time.DateTimeField#getAsShortText
      */
     public String getAsShortText(Locale locale) {
         return getField().getAsShortText(getMillis(), locale);
@@ -207,7 +207,7 @@ public abstract class AbstractReadableInstantFieldProperty implements Serializab
      *
      * @param instant  the subtrahend, null means now
      * @return the difference in the units of this field
-     * @see DateTimeField#getDifference
+     * @see org.joda.time.DateTimeField#getDifference
      */
     public int getDifference(ReadableInstant instant) {
         if (instant == null) {
@@ -224,7 +224,7 @@ public abstract class AbstractReadableInstantFieldProperty implements Serializab
      *
      * @param instant  the subtrahend, null means now
      * @return the difference in the units of this field
-     * @see DateTimeField#getDifference
+     * @see org.joda.time.DateTimeField#getDifference
      */
     public long getDifferenceAsLong(ReadableInstant instant) {
         if (instant == null) {
@@ -258,7 +258,7 @@ public abstract class AbstractReadableInstantFieldProperty implements Serializab
      * Gets whether this field is leap.
      * 
      * @return true if a leap field
-     * @see DateTimeField#isLeap
+     * @see org.joda.time.DateTimeField#isLeap
      */
     public boolean isLeap() {
         return getField().isLeap(getMillis());
@@ -268,7 +268,7 @@ public abstract class AbstractReadableInstantFieldProperty implements Serializab
      * Gets the amount by which this field is leap.
      * 
      * @return the amount by which the field is leap
-     * @see DateTimeField#getLeapAmount
+     * @see org.joda.time.DateTimeField#getLeapAmount
      */
     public int getLeapAmount() {
         return getField().getLeapAmount(getMillis());
@@ -287,7 +287,7 @@ public abstract class AbstractReadableInstantFieldProperty implements Serializab
      * Gets the minimum value for the field ignoring the current time.
      * 
      * @return the minimum value
-     * @see DateTimeField#getMinimumValue
+     * @see org.joda.time.DateTimeField#getMinimumValue
      */
     public int getMinimumValueOverall() {
         return getField().getMinimumValue();
@@ -297,7 +297,7 @@ public abstract class AbstractReadableInstantFieldProperty implements Serializab
      * Gets the minimum value for the field.
      * 
      * @return the minimum value
-     * @see DateTimeField#getMinimumValue
+     * @see org.joda.time.DateTimeField#getMinimumValue
      */
     public int getMinimumValue() {
         return getField().getMinimumValue(getMillis());
@@ -307,7 +307,7 @@ public abstract class AbstractReadableInstantFieldProperty implements Serializab
      * Gets the maximum value for the field ignoring the current time.
      * 
      * @return the maximum value
-     * @see DateTimeField#getMaximumValue
+     * @see org.joda.time.DateTimeField#getMaximumValue
      */
     public int getMaximumValueOverall() {
         return getField().getMaximumValue();
@@ -317,7 +317,7 @@ public abstract class AbstractReadableInstantFieldProperty implements Serializab
      * Gets the maximum value for the field.
      * 
      * @return the maximum value
-     * @see DateTimeField#getMaximumValue
+     * @see org.joda.time.DateTimeField#getMaximumValue
      */
     public int getMaximumValue() {
         return getField().getMaximumValue(getMillis());
@@ -328,7 +328,7 @@ public abstract class AbstractReadableInstantFieldProperty implements Serializab
      * 
      * @param locale  optional locale to use for selecting a text symbol
      * @return the maximum length
-     * @see DateTimeField#getMaximumTextLength
+     * @see org.joda.time.DateTimeField#getMaximumTextLength
      */
     public int getMaximumTextLength(Locale locale) {
         return getField().getMaximumTextLength(locale);
@@ -339,7 +339,7 @@ public abstract class AbstractReadableInstantFieldProperty implements Serializab
      * 
      * @param locale  optional locale to use for selecting a text symbol
      * @return the maximum length
-     * @see DateTimeField#getMaximumShortTextLength
+     * @see org.joda.time.DateTimeField#getMaximumShortTextLength
      */
     public int getMaximumShortTextLength(Locale locale) {
         return getField().getMaximumShortTextLength(locale);
@@ -349,7 +349,7 @@ public abstract class AbstractReadableInstantFieldProperty implements Serializab
     /**
      * Returns the fractional duration milliseconds of this field.
      *
-     * @see DateTimeField#remainder
+     * @see org.joda.time.DateTimeField#remainder
      * @return remainder duration, in milliseconds
      */
     public long remainder() {

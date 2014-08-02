@@ -24,7 +24,7 @@ import org.joda.time.DurationFieldType;
  * <p>
  * ScaledDurationField is thread-safe and immutable.
  *
- * @see PreciseDurationField
+ * @see org.joda.time.field.PreciseDurationField
  *
  * @author Brian S O'Neill
  * @since 1.0

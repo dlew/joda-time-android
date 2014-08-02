@@ -1,5 +1,5 @@
 /*
- *  Copyright 2001-2013 Stephen Colebourne
+ *  Copyright 2001-2014 Stephen Colebourne
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -15,10 +15,8 @@
  */
 package org.joda.time.chrono;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Locale;
-import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.joda.time.Chronology;
 import org.joda.time.DateTimeField;
@@ -38,7 +36,7 @@ import org.joda.time.format.ISODateTimeFormat;
 /**
  * Implements the Gregorian/Julian calendar system which is the calendar system
  * used in most of the world. Wherever possible, it is recommended to use the
- * {@link ISOChronology} instead.
+ * {@link org.joda.time.chrono.ISOChronology} instead.
  * <p>
  * The Gregorian calendar replaced the Julian calendar, and the point in time
  * when this chronology switches can be controlled using the second parameter
@@ -62,9 +60,9 @@ import org.joda.time.format.ISODateTimeFormat;
  * (Julian), year zero is defined. In other words, the proleptic Gregorian
  * chronology used by this class has a year zero.
  * <p>
- * To create a pure proleptic Julian chronology, use {@link JulianChronology},
+ * To create a pure proleptic Julian chronology, use {@link org.joda.time.chrono.JulianChronology},
  * and to create a pure proleptic Gregorian chronology, use
- * {@link GregorianChronology}.
+ * {@link org.joda.time.chrono.GregorianChronology}.
  * <p>
  * GJChronology is thread-safe and immutable.
  * 
@@ -106,7 +104,7 @@ public final class GJChronology extends AssembledChronology {
     static final Instant DEFAULT_CUTOVER = new Instant(-12219292800000L);
 
     /** Cache of zone to chronology list */
-    private static final Map<DateTimeZone, ArrayList<GJChronology>> cCache = new HashMap<DateTimeZone, ArrayList<GJChronology>>();
+    private static final ConcurrentHashMap<GJCacheKey, GJChronology> cCache = new ConcurrentHashMap<GJCacheKey, GJChronology>();
 
     /**
      * Factory method returns instances of the default GJ cutover
@@ -182,7 +180,7 @@ public final class GJChronology extends AssembledChronology {
      * @param gregorianCutover  the cutover to use, null means default
      * @param minDaysInFirstWeek  minimum number of days in first week of the year; default is 4
      */
-    public static synchronized GJChronology getInstance(
+    public static GJChronology getInstance(
             DateTimeZone zone,
             ReadableInstant gregorianCutover,
             int minDaysInFirstWeek) {
@@ -199,22 +197,9 @@ public final class GJChronology extends AssembledChronology {
             }
         }
 
-        GJChronology chrono;
-        synchronized (cCache) {
-            ArrayList<GJChronology> chronos = cCache.get(zone);
-            if (chronos == null) {
-                chronos = new ArrayList<GJChronology>(2);
-                cCache.put(zone, chronos);
-            } else {
-                for (int i = chronos.size(); --i >= 0;) {
-                    chrono = chronos.get(i);
-                    if (minDaysInFirstWeek == chrono.getMinimumDaysInFirstWeek() &&
-                        cutoverInstant.equals(chrono.getGregorianCutover())) {
-                        
-                        return chrono;
-                    }
-                }
-            }
+        GJCacheKey cacheKey = new GJCacheKey(zone, cutoverInstant, minDaysInFirstWeek);
+        GJChronology chrono = cCache.get(cacheKey);
+        if (chrono == null) {
             if (zone == DateTimeZone.UTC) {
                 chrono = new GJChronology
                     (JulianChronology.getInstance(zone, minDaysInFirstWeek),
@@ -228,7 +213,10 @@ public final class GJChronology extends AssembledChronology {
                      chrono.iGregorianChronology,
                      chrono.iCutoverInstant);
             }
-            chronos.add(chrono);
+            GJChronology oldChrono = cCache.putIfAbsent(cacheKey, chrono);
+            if (oldChrono != null) {
+                chrono = oldChrono;
+            }
         }
         return chrono;
     }
