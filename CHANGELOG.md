@@ -1,5 +1,7 @@
 # Changelog
 
+* Updated to tzdata 2014h
+
 # 2.4.0
 
 * Updated to joda-time 2.4

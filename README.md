@@ -29,14 +29,14 @@ If you're using maven:
     <dependency>
       <groupId>net.danlew</groupId>
       <artifactId>android.joda</artifactId>
-      <version>2.4.0</version>
+      <version>2.4.1</version>
       <type>aar</type>
     </dependency>
 
 If you're using gradle:
 
     dependencies {
-      compile 'net.danlew:android.joda:2.4.0'
+      compile 'net.danlew:android.joda:2.4.1'
     }
 
 Once the project is imported, you **must** initialize the timezone provider and TIMEZONE_CHANGED broadcast receiver with a `Context` (via `JodaTimeAndroid.init()`) before you can start using this library.  I suggest putting this code in `Application.onCreate()`:
