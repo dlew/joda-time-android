@@ -25,7 +25,7 @@ import org.joda.time.DateTimeField;
  *
  * @author Brian S O'Neill
  * @see org.joda.time.chrono.StrictChronology
- * @see org.joda.time.field.LenientDateTimeField
+ * @see LenientDateTimeField
  * @since 1.0
  */
 public class StrictDateTimeField extends DelegatedDateTimeField {

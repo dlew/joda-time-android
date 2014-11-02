@@ -35,7 +35,7 @@ import org.joda.time.field.FieldUtils;
  * manages a single duration field, such as days or minutes.
  * <p>
  * This class should generally not be used directly by API users.
- * The {@link org.joda.time.ReadablePeriod} interface should be used when different
+ * The {@link ReadablePeriod} interface should be used when different 
  * kinds of period objects are to be referenced.
  * <p>
  * BaseSingleFieldPeriod subclasses may be mutable and not thread-safe.

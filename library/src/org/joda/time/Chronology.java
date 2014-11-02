@@ -355,7 +355,7 @@ public abstract class Chronology {
     /**
      * Get the day of week field for this chronology.
      *
-     * <p>DayOfWeek values are defined in {@link org.joda.time.DateTimeConstants}.
+     * <p>DayOfWeek values are defined in {@link DateTimeConstants}.
      * They use the ISO definitions, where 1 is Monday and 7 is Sunday.
      * 
      * @return DateTimeField or UnsupportedDateTimeField if unsupported

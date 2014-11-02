@@ -38,9 +38,9 @@ import org.joda.time.field.PreciseDateTimeField;
 /**
  * Factory that creates complex instances of DateTimeFormatter via method calls.
  * <p>
- * Datetime formatting is performed by the {@link org.joda.time.format.DateTimeFormatter} class.
+ * Datetime formatting is performed by the {@link DateTimeFormatter} class.
  * Three classes provide factory methods to create formatters, and this is one.
- * The others are {@link org.joda.time.format.DateTimeFormat} and {@link org.joda.time.format.ISODateTimeFormat}.
+ * The others are {@link DateTimeFormat} and {@link ISODateTimeFormat}.
  * <p>
  * DateTimeFormatterBuilder is used for constructing formatters which are then
  * used to print or parse. The formatters are built by appending specific fields
@@ -64,8 +64,8 @@ import org.joda.time.field.PreciseDateTimeField;
  * @author Stephen Colebourne
  * @author Fredrik Borgh
  * @since 1.0
- * @see org.joda.time.format.DateTimeFormat
- * @see org.joda.time.format.ISODateTimeFormat
+ * @see DateTimeFormat
+ * @see ISODateTimeFormat
  */
 public class DateTimeFormatterBuilder {
 
@@ -93,8 +93,8 @@ public class DateTimeFormatterBuilder {
      * Subsequent changes to this builder do not affect the returned formatter.
      * <p>
      * The returned formatter may not support both printing and parsing.
-     * The methods {@link org.joda.time.format.DateTimeFormatter#isPrinter()} and
-     * {@link org.joda.time.format.DateTimeFormatter#isParser()} will help you determine the state
+     * The methods {@link DateTimeFormatter#isPrinter()} and
+     * {@link DateTimeFormatter#isParser()} will help you determine the state
      * of the formatter.
      *
      * @throws UnsupportedOperationException if neither printing nor parsing is supported
@@ -1010,7 +1010,7 @@ public class DateTimeFormatterBuilder {
     /**
      * Instructs the printer to emit a locale-specific time zone name.
      * Using this method prevents parsing, because time zone names are not unique.
-     * See {@link #appendTimeZoneName(java.util.Map)}.
+     * See {@link #appendTimeZoneName(Map)}.
      *
      * @return this DateTimeFormatterBuilder, for chaining
      */
@@ -1035,7 +1035,7 @@ public class DateTimeFormatterBuilder {
     /**
      * Instructs the printer to emit a short locale-specific time zone name.
      * Using this method prevents parsing, because time zone names are not unique.
-     * See {@link #appendTimeZoneShortName(java.util.Map)}.
+     * See {@link #appendTimeZoneShortName(Map)}.
      *
      * @return this DateTimeFormatterBuilder, for chaining
      */
@@ -1050,7 +1050,7 @@ public class DateTimeFormatterBuilder {
      * The names are searched in the order of the map, thus it is strongly recommended
      * to use a {@code LinkedHashMap} or similar.
      *
-     * @param parseLookup  the table of names, null to use the {@link org.joda.time.DateTimeUtils#getDefaultTimeZoneNames() default names}
+     * @param parseLookup  the table of names, null to use the {@link DateTimeUtils#getDefaultTimeZoneNames() default names}
      * @return this DateTimeFormatterBuilder, for chaining
      */
     public DateTimeFormatterBuilder appendTimeZoneShortName(Map<String, DateTimeZone> parseLookup) {
@@ -1121,12 +1121,12 @@ public class DateTimeFormatterBuilder {
 
     //-----------------------------------------------------------------------
     /**
-     * Calls upon {@link org.joda.time.format.DateTimeFormat} to parse the pattern and append the
+     * Calls upon {@link DateTimeFormat} to parse the pattern and append the
      * results into this builder.
      *
      * @param pattern  pattern specification
      * @throws IllegalArgumentException if the pattern is invalid
-     * @see org.joda.time.format.DateTimeFormat
+     * @see DateTimeFormat
      */
     public DateTimeFormatterBuilder appendPattern(String pattern) {
         DateTimeFormat.appendPatternTo(this, pattern);

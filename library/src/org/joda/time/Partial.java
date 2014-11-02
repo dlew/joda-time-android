@@ -34,13 +34,13 @@ import org.joda.time.format.ISODateTimeFormat;
  * A Partial instance can be used to hold any combination of fields.
  * The instance does not contain a time zone, so any datetime is local.
  * <p>
- * A Partial can be matched against an instant using {@link #isMatch(org.joda.time.ReadableInstant)}.
+ * A Partial can be matched against an instant using {@link #isMatch(ReadableInstant)}.
  * This method compares each field on this partial with those of the instant
  * and determines if the partial matches the instant.
  * Given this definition, an empty Partial instance represents any datetime
  * and always matches.
  * <p>
- * Calculations on Partial are performed using a {@link org.joda.time.Chronology}.
+ * Calculations on Partial are performed using a {@link Chronology}.
  * This chronology is set to be in the UTC time zone for all calculations.
  * <p>
  * Each individual field can be queried in two ways:
@@ -337,7 +337,7 @@ public final class Partial
     /**
      * Gets the chronology of the partial which is never null.
      * <p>
-     * The {@link org.joda.time.Chronology} is the calculation engine behind the partial and
+     * The {@link Chronology} is the calculation engine behind the partial and
      * provides conversion and validation of the fields in a particular calendar system.
      * 
      * @return the chronology, never null
@@ -438,7 +438,7 @@ public final class Partial
      * Gets a copy of this date with the specified field set to a new value.
      * <p>
      * If this partial did not previously support the field, the new one will.
-     * Contrast this behaviour with {@link #withField(org.joda.time.DateTimeFieldType, int)}.
+     * Contrast this behaviour with {@link #withField(DateTimeFieldType, int)}.
      * <p>
      * For example, if the field type is <code>dayOfMonth</code> then the day
      * would be changed/added in the returned instance.
@@ -533,7 +533,7 @@ public final class Partial
      * Gets a copy of this Partial with the specified field set to a new value.
      * <p>
      * If this partial does not support the field, an exception is thrown.
-     * Contrast this behaviour with {@link #with(org.joda.time.DateTimeFieldType, int)}.
+     * Contrast this behaviour with {@link #with(DateTimeFieldType, int)}.
      * <p>
      * For example, if the field type is <code>dayOfMonth</code> then the day
      * would be changed in the returned instance if supported.
@@ -609,7 +609,7 @@ public final class Partial
      * <p>
      * This method is typically used to add multiple copies of complex
      * period instances. Adding one field is best achieved using the method
-     * {@link #withFieldAdded(org.joda.time.DurationFieldType, int)}.
+     * {@link #withFieldAdded(DurationFieldType, int)}.
      * 
      * @param period  the period to add to this one, null means zero
      * @param scalar  the amount of times to add, such as -1 to subtract once
@@ -663,7 +663,7 @@ public final class Partial
      * Gets the property object for the specified type, which contains
      * many useful methods for getting and manipulating the partial.
      * <p>
-     * See also {@link org.joda.time.ReadablePartial#get(org.joda.time.DateTimeFieldType)}.
+     * See also {@link ReadablePartial#get(DateTimeFieldType)}.
      *
      * @param type  the field type to get the property for, not null
      * @return the property object

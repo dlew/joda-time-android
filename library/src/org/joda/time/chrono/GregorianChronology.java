@@ -33,8 +33,8 @@ import org.joda.time.DateTimeZone;
  * GregorianChronology is thread-safe and immutable.
  *
  * @see <a href="http://en.wikipedia.org/wiki/Gregorian_calendar">Wikipedia</a>
- * @see org.joda.time.chrono.JulianChronology
- * @see org.joda.time.chrono.GJChronology
+ * @see JulianChronology
+ * @see GJChronology
  * 
  * @author Guy Allard
  * @author Stephen Colebourne

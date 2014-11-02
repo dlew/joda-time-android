@@ -36,7 +36,7 @@ import org.joda.time.format.PeriodFormatter;
  * As a result, this takes into account daylight savings time.
  * Adding a time period of 1 day to the day before daylight savings starts will only add
  * 23 hours rather than 24 to ensure that the time remains the same.
- * If this is not the behaviour you want, then see {@link org.joda.time.Duration}.
+ * If this is not the behaviour you want, then see {@link Duration}.
  * <p>
  * The definition of a period also affects the equals method. A period of 1
  * day is not equal to a period of 24 hours, nor 1 hour equal to 60 minutes.
@@ -52,7 +52,7 @@ import org.joda.time.format.PeriodFormatter;
  * @author Brian S O'Neill
  * @author Stephen Colebourne
  * @since 1.0
- * @see org.joda.time.MutablePeriod
+ * @see MutablePeriod
  */
 public final class Period
         extends BasePeriod
@@ -71,7 +71,7 @@ public final class Period
     /**
      * Parses a {@code Period} from the specified string.
      * <p>
-     * This uses {@link org.joda.time.format.ISOPeriodFormat#standard()}.
+     * This uses {@link ISOPeriodFormat#standard()}.
      * 
      * @param str  the string to parse, not null
      * @since 2.0
@@ -101,7 +101,7 @@ public final class Period
      * For example, <code>Period.years(2).withMonths(6);</code>
      * <p>
      * If you want a year-based period that cannot have other fields added,
-     * then you should consider using {@link org.joda.time.Years}.
+     * then you should consider using {@link Years}.
      *
      * @param years  the amount of years in this period
      * @return the period
@@ -118,7 +118,7 @@ public final class Period
      * For example, <code>Period.months(2).withDays(6);</code>
      * <p>
      * If you want a month-based period that cannot have other fields added,
-     * then you should consider using {@link org.joda.time.Months}.
+     * then you should consider using {@link Months}.
      *
      * @param months  the amount of months in this period
      * @return the period
@@ -135,7 +135,7 @@ public final class Period
      * For example, <code>Period.weeks(2).withDays(6);</code>
      * <p>
      * If you want a week-based period that cannot have other fields added,
-     * then you should consider using {@link org.joda.time.Weeks}.
+     * then you should consider using {@link Weeks}.
      *
      * @param weeks  the amount of weeks in this period
      * @return the period
@@ -152,7 +152,7 @@ public final class Period
      * For example, <code>Period.days(2).withHours(6);</code>
      * <p>
      * If you want a day-based period that cannot have other fields added,
-     * then you should consider using {@link org.joda.time.Days}.
+     * then you should consider using {@link Days}.
      *
      * @param days  the amount of days in this period
      * @return the period
@@ -169,7 +169,7 @@ public final class Period
      * For example, <code>Period.hours(2).withMinutes(30);</code>
      * <p>
      * If you want a hour-based period that cannot have other fields added,
-     * then you should consider using {@link org.joda.time.Hours}.
+     * then you should consider using {@link Hours}.
      *
      * @param hours  the amount of hours in this period
      * @return the period
@@ -186,7 +186,7 @@ public final class Period
      * For example, <code>Period.minutes(2).withSeconds(30);</code>
      * <p>
      * If you want a minute-based period that cannot have other fields added,
-     * then you should consider using {@link org.joda.time.Minutes}.
+     * then you should consider using {@link Minutes}.
      *
      * @param minutes  the amount of minutes in this period
      * @return the period
@@ -203,7 +203,7 @@ public final class Period
      * For example, <code>Period.seconds(2).withMillis(30);</code>
      * <p>
      * If you want a second-based period that cannot have other fields added,
-     * then you should consider using {@link org.joda.time.Seconds}.
+     * then you should consider using {@link Seconds}.
      *
      * @param seconds  the amount of seconds in this period
      * @return the period
@@ -371,7 +371,7 @@ public final class Period
      * <p>
      * For more control over the conversion process, you have two options:
      * <ul>
-     * <li>convert the duration to an {@link org.joda.time.Interval}, and from there obtain the period
+     * <li>convert the duration to an {@link Interval}, and from there obtain the period
      * <li>specify a period type that contains precise definitions of the day and larger
      * fields, such as UTC
      * </ul>
@@ -537,7 +537,7 @@ public final class Period
      * As these are Partial objects, time zones have no effect on the result.
      * <p>
      * The two partials must also both be contiguous - see
-     * {@link org.joda.time.DateTimeUtils#isContiguous(org.joda.time.ReadablePartial)} for a definition.
+     * {@link DateTimeUtils#isContiguous(ReadablePartial)} for a definition.
      * Both <code>LocalDate</code> and <code>LocalTime</code> are contiguous.
      * <p>
      * Most calculations performed by this method have obvious results.
@@ -550,7 +550,7 @@ public final class Period
      * calculated period result in the end date.
      * <p>
      * An alternative way of constructing a Period from two Partials
-     * is {@link #fieldDifference(org.joda.time.ReadablePartial, org.joda.time.ReadablePartial)}.
+     * is {@link #fieldDifference(ReadablePartial, ReadablePartial)}.
      * That method handles all kinds of partials.
      *
      * @param start  the start of the period, must not be null
@@ -571,7 +571,7 @@ public final class Period
      * As these are Partial objects, time zones have no effect on the result.
      * <p>
      * The two partials must also both be contiguous - see
-     * {@link org.joda.time.DateTimeUtils#isContiguous(org.joda.time.ReadablePartial)} for a definition.
+     * {@link DateTimeUtils#isContiguous(ReadablePartial)} for a definition.
      * Both <code>LocalDate</code> and <code>LocalTime</code> are contiguous.
      * <p>
      * Most calculations performed by this method have obvious results.
@@ -583,7 +583,7 @@ public final class Period
      * calculated period result in the end date.
      * <p>
      * An alternative way of constructing a Period from two Partials
-     * is {@link #fieldDifference(org.joda.time.ReadablePartial, org.joda.time.ReadablePartial)}.
+     * is {@link #fieldDifference(ReadablePartial, ReadablePartial)}.
      * That method handles all kinds of partials.
      *
      * @param start  the start of the period, must not be null
@@ -644,7 +644,7 @@ public final class Period
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadablePeriod, ReadableInterval and String.
-     * The String formats are described by {@link org.joda.time.format.ISOPeriodFormat#standard()}.
+     * The String formats are described by {@link ISOPeriodFormat#standard()}.
      *
      * @param period  period to convert
      * @throws IllegalArgumentException if period is invalid
@@ -660,7 +660,7 @@ public final class Period
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadablePeriod, ReadableInterval and String.
-     * The String formats are described by {@link org.joda.time.format.ISOPeriodFormat#standard()}.
+     * The String formats are described by {@link ISOPeriodFormat#standard()}.
      *
      * @param period  period to convert
      * @param type  which set of fields this period supports, null means use converter
@@ -677,7 +677,7 @@ public final class Period
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadablePeriod, ReadableInterval and String.
-     * The String formats are described by {@link org.joda.time.format.ISOPeriodFormat#standard()}.
+     * The String formats are described by {@link ISOPeriodFormat#standard()}.
      *
      * @param period  period to convert
      * @param chrono  the chronology to use, null means ISO in default zone
@@ -694,7 +694,7 @@ public final class Period
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadablePeriod, ReadableInterval and String.
-     * The String formats are described by {@link org.joda.time.format.ISOPeriodFormat#standard()}.
+     * The String formats are described by {@link ISOPeriodFormat#standard()}.
      *
      * @param period  period to convert
      * @param type  which set of fields this period supports, null means use converter

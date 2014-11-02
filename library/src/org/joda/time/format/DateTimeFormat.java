@@ -30,9 +30,9 @@ import org.joda.time.ReadablePartial;
 /**
  * Factory that creates instances of DateTimeFormatter from patterns and styles.
  * <p>
- * Datetime formatting is performed by the {@link org.joda.time.format.DateTimeFormatter} class.
+ * Datetime formatting is performed by the {@link DateTimeFormatter} class.
  * Three classes provide factory methods to create formatters, and this is one.
- * The others are {@link org.joda.time.format.ISODateTimeFormat} and {@link org.joda.time.format.DateTimeFormatterBuilder}.
+ * The others are {@link ISODateTimeFormat} and {@link DateTimeFormatterBuilder}.
  * <p>
  * This class provides two types of factory:
  * <ul>
@@ -125,8 +125,8 @@ import org.joda.time.ReadablePartial;
  * @author Brian S O'Neill
  * @author Maxim Zhao
  * @since 1.0
- * @see org.joda.time.format.ISODateTimeFormat
- * @see org.joda.time.format.DateTimeFormatterBuilder
+ * @see ISODateTimeFormat
+ * @see DateTimeFormatterBuilder
  */
 public class DateTimeFormat {
 
@@ -163,7 +163,7 @@ public class DateTimeFormat {
      * <p>
      * The format may contain locale specific output, and this will change as
      * you change the locale of the formatter.
-     * Call {@link org.joda.time.format.DateTimeFormatter#withLocale(java.util.Locale)} to switch the locale.
+     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
      * For example:
      * <pre>
      * DateTimeFormat.forPattern(pattern).withLocale(Locale.FRANCE).print(dt);
@@ -187,7 +187,7 @@ public class DateTimeFormat {
      * <p>
      * The returned formatter will dynamically adjust to the locale that
      * the print/parse takes place in. Thus you just call
-     * {@link org.joda.time.format.DateTimeFormatter#withLocale(java.util.Locale)} and the Short/Medium/Long/Full
+     * {@link DateTimeFormatter#withLocale(Locale)} and the Short/Medium/Long/Full
      * style for that locale will be output. For example:
      * <pre>
      * DateTimeFormat.forStyle(style).withLocale(Locale.FRANCE).print(dt);
@@ -229,7 +229,7 @@ public class DateTimeFormat {
      * Creates a format that outputs a short date format.
      * <p>
      * The format will change as you change the locale of the formatter.
-     * Call {@link org.joda.time.format.DateTimeFormatter#withLocale(java.util.Locale)} to switch the locale.
+     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
      * 
      * @return the formatter
      */
@@ -241,7 +241,7 @@ public class DateTimeFormat {
      * Creates a format that outputs a short time format.
      * <p>
      * The format will change as you change the locale of the formatter.
-     * Call {@link org.joda.time.format.DateTimeFormatter#withLocale(java.util.Locale)} to switch the locale.
+     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
      * 
      * @return the formatter
      */
@@ -253,7 +253,7 @@ public class DateTimeFormat {
      * Creates a format that outputs a short datetime format.
      * <p>
      * The format will change as you change the locale of the formatter.
-     * Call {@link org.joda.time.format.DateTimeFormatter#withLocale(java.util.Locale)} to switch the locale.
+     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
      * 
      * @return the formatter
      */
@@ -266,7 +266,7 @@ public class DateTimeFormat {
      * Creates a format that outputs a medium date format.
      * <p>
      * The format will change as you change the locale of the formatter.
-     * Call {@link org.joda.time.format.DateTimeFormatter#withLocale(java.util.Locale)} to switch the locale.
+     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
      * 
      * @return the formatter
      */
@@ -278,7 +278,7 @@ public class DateTimeFormat {
      * Creates a format that outputs a medium time format.
      * <p>
      * The format will change as you change the locale of the formatter.
-     * Call {@link org.joda.time.format.DateTimeFormatter#withLocale(java.util.Locale)} to switch the locale.
+     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
      * 
      * @return the formatter
      */
@@ -290,7 +290,7 @@ public class DateTimeFormat {
      * Creates a format that outputs a medium datetime format.
      * <p>
      * The format will change as you change the locale of the formatter.
-     * Call {@link org.joda.time.format.DateTimeFormatter#withLocale(java.util.Locale)} to switch the locale.
+     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
      * 
      * @return the formatter
      */
@@ -303,7 +303,7 @@ public class DateTimeFormat {
      * Creates a format that outputs a long date format.
      * <p>
      * The format will change as you change the locale of the formatter.
-     * Call {@link org.joda.time.format.DateTimeFormatter#withLocale(java.util.Locale)} to switch the locale.
+     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
      * 
      * @return the formatter
      */
@@ -315,7 +315,7 @@ public class DateTimeFormat {
      * Creates a format that outputs a long time format.
      * <p>
      * The format will change as you change the locale of the formatter.
-     * Call {@link org.joda.time.format.DateTimeFormatter#withLocale(java.util.Locale)} to switch the locale.
+     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
      * 
      * @return the formatter
      */
@@ -327,7 +327,7 @@ public class DateTimeFormat {
      * Creates a format that outputs a long datetime format.
      * <p>
      * The format will change as you change the locale of the formatter.
-     * Call {@link org.joda.time.format.DateTimeFormatter#withLocale(java.util.Locale)} to switch the locale.
+     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
      * 
      * @return the formatter
      */
@@ -340,7 +340,7 @@ public class DateTimeFormat {
      * Creates a format that outputs a full date format.
      * <p>
      * The format will change as you change the locale of the formatter.
-     * Call {@link org.joda.time.format.DateTimeFormatter#withLocale(java.util.Locale)} to switch the locale.
+     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
      * 
      * @return the formatter
      */
@@ -352,7 +352,7 @@ public class DateTimeFormat {
      * Creates a format that outputs a full time format.
      * <p>
      * The format will change as you change the locale of the formatter.
-     * Call {@link org.joda.time.format.DateTimeFormatter#withLocale(java.util.Locale)} to switch the locale.
+     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
      * 
      * @return the formatter
      */
@@ -364,7 +364,7 @@ public class DateTimeFormat {
      * Creates a format that outputs a full datetime format.
      * <p>
      * The format will change as you change the locale of the formatter.
-     * Call {@link org.joda.time.format.DateTimeFormatter#withLocale(java.util.Locale)} to switch the locale.
+     * Call {@link DateTimeFormatter#withLocale(Locale)} to switch the locale.
      * 
      * @return the formatter
      */

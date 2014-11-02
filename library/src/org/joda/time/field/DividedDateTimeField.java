@@ -26,7 +26,7 @@ import org.joda.time.DurationField;
  * <p>
  * DividedDateTimeField is thread-safe and immutable.
  *
- * @see org.joda.time.field.RemainderDateTimeField
+ * @see RemainderDateTimeField
  * 
  * @author Stephen Colebourne
  * @author Brian S O'Neill

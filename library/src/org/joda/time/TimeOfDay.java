@@ -34,7 +34,7 @@ import org.joda.time.format.ISODateTimeFormat;
  * cannot query the millisOfDay or secondOfDay fields for example.
  * The new <code>LocalTime</code> class removes this restriction.
  * <p>
- * Calculations on TimeOfDay are performed using a {@link org.joda.time.Chronology}.
+ * Calculations on TimeOfDay are performed using a {@link Chronology}.
  * This chronology is set to be in the UTC time zone for all calculations.
  * <p>
  * Each individual field can be queried in two ways:
@@ -263,12 +263,12 @@ public final class TimeOfDay
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadableInstant, String, Calendar and Date.
-     * The String formats are described by {@link org.joda.time.format.ISODateTimeFormat#timeParser()}.
+     * The String formats are described by {@link ISODateTimeFormat#timeParser()}.
      * <p>
      * The chronology used will be derived from the object, defaulting to ISO.
      * <p>
      * NOTE: Prior to v1.3 the string format was described by
-     * {@link org.joda.time.format.ISODateTimeFormat#dateTimeParser()}. Dates are now rejected.
+     * {@link ISODateTimeFormat#dateTimeParser()}. Dates are now rejected.
      *
      * @param instant  the datetime object, null means now
      * @throws IllegalArgumentException if the instant is invalid
@@ -284,7 +284,7 @@ public final class TimeOfDay
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadableInstant, String, Calendar and Date.
-     * The String formats are described by {@link org.joda.time.format.ISODateTimeFormat#timeParser()}.
+     * The String formats are described by {@link ISODateTimeFormat#timeParser()}.
      * <p>
      * The constructor uses the time zone of the chronology specified.
      * Once the constructor is complete, all further calculations are performed
@@ -292,7 +292,7 @@ public final class TimeOfDay
      * The specified chronology overrides that of the object.
      * <p>
      * NOTE: Prior to v1.3 the string format was described by
-     * {@link org.joda.time.format.ISODateTimeFormat#dateTimeParser()}. Dates are now rejected.
+     * {@link ISODateTimeFormat#dateTimeParser()}. Dates are now rejected.
      *
      * @param instant  the datetime object, null means now
      * @param chronology  the chronology, null means ISO default
@@ -568,7 +568,7 @@ public final class TimeOfDay
      * <p>
      * This method is typically used to add multiple copies of complex
      * period instances. Adding one field is best achieved using methods
-     * like {@link #withFieldAdded(org.joda.time.DurationFieldType, int)}
+     * like {@link #withFieldAdded(DurationFieldType, int)}
      * or {@link #plusHours(int)}.
      * 
      * @param period  the period to add to this one, null means zero

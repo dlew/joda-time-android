@@ -18,17 +18,17 @@ package org.joda.time.format;
 /**
  * Factory that creates instances of PeriodFormatter for the ISO8601 standard.
  * <p>
- * Period formatting is performed by the {@link org.joda.time.format.PeriodFormatter} class.
+ * Period formatting is performed by the {@link PeriodFormatter} class.
  * Three classes provide factory methods to create formatters, and this is one.
- * The others are {@link org.joda.time.format.PeriodFormat} and {@link org.joda.time.format.PeriodFormatterBuilder}.
+ * The others are {@link PeriodFormat} and {@link PeriodFormatterBuilder}.
  * <p>
  * ISOPeriodFormat is thread-safe and immutable, and the formatters it
  * returns are as well.
  *
  * @author Brian S O'Neill
  * @since 1.0
- * @see org.joda.time.format.PeriodFormat
- * @see org.joda.time.format.PeriodFormatterBuilder
+ * @see PeriodFormat
+ * @see PeriodFormatterBuilder
  */
 public class ISOPeriodFormat {
 

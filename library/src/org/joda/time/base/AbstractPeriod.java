@@ -27,7 +27,7 @@ import org.joda.time.format.PeriodFormatter;
  * AbstractPeriod provides the common behaviour for period classes.
  * <p>
  * This class should generally not be used directly by API users. The 
- * {@link org.joda.time.ReadablePeriod} interface should be used when different
+ * {@link ReadablePeriod} interface should be used when different 
  * kinds of periods are to be referenced.
  * <p>
  * AbstractPeriod subclasses may be mutable and not thread-safe.

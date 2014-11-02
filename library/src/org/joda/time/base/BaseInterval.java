@@ -35,7 +35,7 @@ import org.joda.time.field.FieldUtils;
  * data in two <code>long</code> millisecond fields.
  * <p>
  * This class should generally not be used directly by API users.
- * The {@link org.joda.time.ReadableInterval} interface should be used when different
+ * The {@link ReadableInterval} interface should be used when different 
  * kinds of interval objects are to be referenced.
  * <p>
  * BaseInterval subclasses may be mutable and not thread-safe.

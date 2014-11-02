@@ -38,7 +38,7 @@ import org.joda.time.field.FieldUtils;
  * data in a <code>PeriodType</code> and an <code>int[]</code>.
  * <p>
  * This class should generally not be used directly by API users.
- * The {@link org.joda.time.ReadablePeriod} interface should be used when different
+ * The {@link ReadablePeriod} interface should be used when different 
  * kinds of period objects are to be referenced.
  * <p>
  * BasePeriod subclasses may be mutable and not thread-safe.
@@ -142,7 +142,7 @@ public abstract class BasePeriod
      * As these are Partial objects, time zones have no effect on the result.
      * <p>
      * The two partials must also both be contiguous - see
-     * {@link org.joda.time.DateTimeUtils#isContiguous(org.joda.time.ReadablePartial)} for a
+     * {@link DateTimeUtils#isContiguous(ReadablePartial)} for a
      * definition. Both <code>LocalDate</code> and <code>LocalTime</code> are contiguous.
      *
      * @param start  the start of the period, must not be null
@@ -259,7 +259,7 @@ public abstract class BasePeriod
     }
 
     /**
-     * Creates a new period based on another using the {@link org.joda.time.convert.ConverterManager}.
+     * Creates a new period based on another using the {@link ConverterManager}.
      *
      * @param period  the period to convert
      * @param type  which set of fields this period supports, null means use type from object

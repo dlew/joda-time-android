@@ -27,7 +27,7 @@ import org.joda.time.field.FieldUtils;
  * A duration is defined by a fixed number of milliseconds.
  * There is no concept of fields, such as days or seconds, as these fields can vary in length.
  * <p>
- * A duration may be converted to a {@link org.joda.time.Period} to obtain field values.
+ * A duration may be converted to a {@link Period} to obtain field values.
  * This conversion will typically cause a loss of precision.
  * <p>
  * Duration is thread-safe and immutable.
@@ -71,7 +71,7 @@ public final class Duration
      * Savings changes will not have 24 hours, so use this method with care.
      * <p>
      * A Duration is a representation of an amount of time. If you want to express
-     * the concept of 'days' you should consider using the {@link org.joda.time.Days} class.
+     * the concept of 'days' you should consider using the {@link Days} class.
      *
      * @param days  the number of standard days in this duration
      * @return the duration, never null
@@ -94,7 +94,7 @@ public final class Duration
      * All currently supplied chronologies use this definition.
      * <p>
      * A Duration is a representation of an amount of time. If you want to express
-     * the concept of 'hours' you should consider using the {@link org.joda.time.Hours} class.
+     * the concept of 'hours' you should consider using the {@link Hours} class.
      *
      * @param hours  the number of standard hours in this duration
      * @return the duration, never null
@@ -117,7 +117,7 @@ public final class Duration
      * All currently supplied chronologies use this definition.
      * <p>
      * A Duration is a representation of an amount of time. If you want to express
-     * the concept of 'minutes' you should consider using the {@link org.joda.time.Minutes} class.
+     * the concept of 'minutes' you should consider using the {@link Minutes} class.
      *
      * @param minutes  the number of standard minutes in this duration
      * @return the duration, never null
@@ -139,7 +139,7 @@ public final class Duration
      * All currently supplied chronologies use this definition.
      * <p>
      * A Duration is a representation of an amount of time. If you want to express
-     * the concept of 'seconds' you should consider using the {@link org.joda.time.Seconds} class.
+     * the concept of 'seconds' you should consider using the {@link Seconds} class.
      *
      * @param seconds  the number of standard seconds in this duration
      * @return the duration, never null

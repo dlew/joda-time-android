@@ -37,9 +37,9 @@ import org.joda.time.ReadablePartial;
  * This class is the main API for printing and parsing used by most applications.
  * Instances of this class are created via one of three factory classes:
  * <ul>
- * <li>{@link org.joda.time.format.DateTimeFormat} - formats by pattern and style</li>
- * <li>{@link org.joda.time.format.ISODateTimeFormat} - ISO8601 formats</li>
- * <li>{@link org.joda.time.format.DateTimeFormatterBuilder} - complex formats created via method calls</li>
+ * <li>{@link DateTimeFormat} - formats by pattern and style</li>
+ * <li>{@link ISODateTimeFormat} - ISO8601 formats</li>
+ * <li>{@link DateTimeFormatterBuilder} - complex formats created via method calls</li>
  * </ul>
  * <p>
  * An instance of this class holds a reference internally to one printer and
@@ -50,9 +50,9 @@ import org.joda.time.ReadablePartial;
  * The underlying printer/parser can be altered to behave exactly as required
  * by using one of the decorator modifiers:
  * <ul>
- * <li>{@link #withLocale(java.util.Locale)} - returns a new formatter that uses the specified locale</li>
- * <li>{@link #withZone(org.joda.time.DateTimeZone)} - returns a new formatter that uses the specified time zone</li>
- * <li>{@link #withChronology(org.joda.time.Chronology)} - returns a new formatter that uses the specified chronology</li>
+ * <li>{@link #withLocale(Locale)} - returns a new formatter that uses the specified locale</li>
+ * <li>{@link #withZone(DateTimeZone)} - returns a new formatter that uses the specified time zone</li>
+ * <li>{@link #withChronology(Chronology)} - returns a new formatter that uses the specified chronology</li>
  * <li>{@link #withOffsetParsed()} - returns a new formatter that returns the parsed time zone offset</li>
  * <li>{@link #withPivotYear(int)} - returns a new formatter with the specified pivot year</li>
  * <li>{@link #withDefaultYear(int)} - returns a new formatter with the specified default year</li>
@@ -374,7 +374,7 @@ public class DateTimeFormatter {
      * digit year parsing in preference to that stored in the parser.
      * <p>
      * This setting is useful for changing the pivot year of formats built
-     * using a pattern - {@link org.joda.time.format.DateTimeFormat#forPattern(String)}.
+     * using a pattern - {@link DateTimeFormat#forPattern(String)}.
      * <p>
      * When parsing, this pivot year is used. Null means no-override.
      * There is no effect when printing.
@@ -411,7 +411,7 @@ public class DateTimeFormatter {
      * digit year parsing in preference to that stored in the parser.
      * <p>
      * This setting is useful for changing the pivot year of formats built
-     * using a pattern - {@link org.joda.time.format.DateTimeFormat#forPattern(String)}.
+     * using a pattern - {@link DateTimeFormat#forPattern(String)}.
      * <p>
      * When parsing, this pivot year is used.
      * There is no effect when printing.

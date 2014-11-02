@@ -21,7 +21,7 @@ import org.joda.time.JodaTimePermission;
  * ConverterManager controls the date and time converters.
  * <p>
  * This class enables additional conversion classes to be added via
- * {@link #addInstantConverter(org.joda.time.convert.InstantConverter)}, which may replace an
+ * {@link #addInstantConverter(InstantConverter)}, which may replace an
  * existing converter. Similar methods exist for duration, time period and
  * interval converters.
  * <p>

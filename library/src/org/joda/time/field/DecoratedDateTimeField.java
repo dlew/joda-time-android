@@ -20,7 +20,7 @@ import org.joda.time.DateTimeFieldType;
 import org.joda.time.DurationField;
 
 /**
- * <code>DecoratedDateTimeField</code> extends {@link org.joda.time.field.BaseDateTimeField},
+ * <code>DecoratedDateTimeField</code> extends {@link BaseDateTimeField},
  * implementing only the minimum required set of methods. These implemented
  * methods delegate to a wrapped field.
  * <p>
@@ -34,7 +34,7 @@ import org.joda.time.DurationField;
  *
  * @author Brian S O'Neill
  * @since 1.0
- * @see org.joda.time.field.DelegatedDateTimeField
+ * @see DelegatedDateTimeField
  */
 public abstract class DecoratedDateTimeField extends BaseDateTimeField {
 

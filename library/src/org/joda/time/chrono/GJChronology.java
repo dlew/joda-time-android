@@ -36,7 +36,7 @@ import org.joda.time.format.ISODateTimeFormat;
 /**
  * Implements the Gregorian/Julian calendar system which is the calendar system
  * used in most of the world. Wherever possible, it is recommended to use the
- * {@link org.joda.time.chrono.ISOChronology} instead.
+ * {@link ISOChronology} instead.
  * <p>
  * The Gregorian calendar replaced the Julian calendar, and the point in time
  * when this chronology switches can be controlled using the second parameter
@@ -60,9 +60,9 @@ import org.joda.time.format.ISODateTimeFormat;
  * (Julian), year zero is defined. In other words, the proleptic Gregorian
  * chronology used by this class has a year zero.
  * <p>
- * To create a pure proleptic Julian chronology, use {@link org.joda.time.chrono.JulianChronology},
+ * To create a pure proleptic Julian chronology, use {@link JulianChronology},
  * and to create a pure proleptic Gregorian chronology, use
- * {@link org.joda.time.chrono.GregorianChronology}.
+ * {@link GregorianChronology}.
  * <p>
  * GJChronology is thread-safe and immutable.
  * 
