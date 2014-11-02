@@ -1,8 +1,25 @@
+/*
+ *  Copyright 2001-2014 Stephen Colebourne
+ *
+ *  Licensed under the Apache License, Version 2.0 (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ *  Unless required by applicable law or agreed to in writing, software
+ *  distributed under the License is distributed on an "AS IS" BASIS,
+ *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
 package net.danlew.android.joda.test;
 
+import android.content.Context;
+import android.test.InstrumentationTestCase;
+import junit.framework.TestSuite;
 import net.danlew.android.joda.JodaTimeAndroid;
 import net.danlew.android.joda.ResourceZoneInfoProvider;
-
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
 import org.joda.time.DateTimeUtils;
@@ -14,9 +31,7 @@ import org.joda.time.tz.DefaultNameProvider;
 import org.joda.time.tz.NameProvider;
 import org.joda.time.tz.Provider;
 import org.joda.time.tz.UTCProvider;
-
-import android.content.Context;
-import android.test.InstrumentationTestCase;
+import org.joda.time.tz.ZoneInfoProvider;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -31,6 +46,7 @@ import java.security.Permissions;
 import java.security.Policy;
 import java.security.ProtectionDomain;
 import java.text.DateFormatSymbols;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.Locale;
@@ -51,20 +67,19 @@ import java.util.TimeZone;
  * slightly differently; e.g., different names).
  */
 public class TestDateTimeZone extends InstrumentationTestCase {
-
     private static final boolean OLD_JDK;
     static {
         String str = System.getProperty("java.version");
         boolean old = true;
         if (str.length() > 3 &&
-                str.charAt(0) == '1' &&
-                str.charAt(1) == '.' &&
-                (str.charAt(2) == '4' || str.charAt(2) == '5' || str.charAt(2) == '6')) {
+            str.charAt(0) == '1' &&
+            str.charAt(1) == '.' &&
+            (str.charAt(2) == '4' || str.charAt(2) == '5' || str.charAt(2) == '6')) {
             old = false;
         }
         OLD_JDK = old;
     }
-
+    
     // Test in 2002/03 as time zones are more well known
     // (before the late 90's they were all over the place)
 
@@ -73,36 +88,36 @@ public class TestDateTimeZone extends InstrumentationTestCase {
     // no longer final
     private static DateTimeZone PARIS;
     private static DateTimeZone LONDON;
-
-    long y2002days = 365 + 365 + 366 + 365 + 365 + 365 + 366 + 365 + 365 + 365 +
-            366 + 365 + 365 + 365 + 366 + 365 + 365 + 365 + 366 + 365 +
-            365 + 365 + 366 + 365 + 365 + 365 + 366 + 365 + 365 + 365 +
-            366 + 365;
-    long y2003days = 365 + 365 + 366 + 365 + 365 + 365 + 366 + 365 + 365 + 365 +
-            366 + 365 + 365 + 365 + 366 + 365 + 365 + 365 + 366 + 365 +
-            365 + 365 + 366 + 365 + 365 + 365 + 366 + 365 + 365 + 365 +
-            366 + 365 + 365;
-
+    
+    long y2002days = 365 + 365 + 366 + 365 + 365 + 365 + 366 + 365 + 365 + 365 + 
+                     366 + 365 + 365 + 365 + 366 + 365 + 365 + 365 + 366 + 365 + 
+                     365 + 365 + 366 + 365 + 365 + 365 + 366 + 365 + 365 + 365 +
+                     366 + 365;
+    long y2003days = 365 + 365 + 366 + 365 + 365 + 365 + 366 + 365 + 365 + 365 + 
+                     366 + 365 + 365 + 365 + 366 + 365 + 365 + 365 + 366 + 365 + 
+                     365 + 365 + 366 + 365 + 365 + 365 + 366 + 365 + 365 + 365 +
+                     366 + 365 + 365;
+    
     // 2002-06-09
     private long TEST_TIME_SUMMER =
             (y2002days + 31L + 28L + 31L + 30L + 31L + 9L -1L) * DateTimeConstants.MILLIS_PER_DAY;
-
+            
     // 2002-01-09
     private long TEST_TIME_WINTER =
             (y2002days + 9L -1L) * DateTimeConstants.MILLIS_PER_DAY;
-
+            
 //    // 2002-04-05 Fri
 //    private long TEST_TIME1 =
 //            (y2002days + 31L + 28L + 31L + 5L -1L) * DateTimeConstants.MILLIS_PER_DAY
 //            + 12L * DateTimeConstants.MILLIS_PER_HOUR
 //            + 24L * DateTimeConstants.MILLIS_PER_MINUTE;
-//
+//        
 //    // 2003-05-06 Tue
 //    private long TEST_TIME2 =
 //            (y2003days + 31L + 28L + 31L + 30L + 6L -1L) * DateTimeConstants.MILLIS_PER_DAY
 //            + 14L * DateTimeConstants.MILLIS_PER_HOUR
 //            + 28L * DateTimeConstants.MILLIS_PER_MINUTE;
-
+    
     private static final Policy RESTRICT;
     private static final Policy ALLOW;
     static {
@@ -133,7 +148,7 @@ public class TestDateTimeZone extends InstrumentationTestCase {
             }
         };
     }
-
+    
     private DateTimeZone zone;
     private Locale locale;
 
@@ -158,16 +173,16 @@ public class TestDateTimeZone extends InstrumentationTestCase {
     //-----------------------------------------------------------------------
     public void testDefault() {
         assertNotNull(DateTimeZone.getDefault());
-
+        
         DateTimeZone.setDefault(PARIS);
         assertSame(PARIS, DateTimeZone.getDefault());
-
+        
         try {
             DateTimeZone.setDefault(null);
             fail();
         } catch (IllegalArgumentException ex) {}
     }
-
+            
     public void testDefaultSecurity() {
         if (OLD_JDK) {
             return;
@@ -188,36 +203,36 @@ public class TestDateTimeZone extends InstrumentationTestCase {
     //-----------------------------------------------------------------------
     public void testForID_String() {
         assertEquals(DateTimeZone.getDefault(), DateTimeZone.forID((String) null));
-
+        
         DateTimeZone zone = DateTimeZone.forID("Europe/London");
         assertEquals("Europe/London", zone.getID());
-
+        
         zone = DateTimeZone.forID("UTC");
         assertSame(DateTimeZone.UTC, zone);
-
+        
         zone = DateTimeZone.forID("+00:00");
         assertSame(DateTimeZone.UTC, zone);
-
+        
         zone = DateTimeZone.forID("+00");
         assertSame(DateTimeZone.UTC, zone);
-
+        
         zone = DateTimeZone.forID("+01:23");
         assertEquals("+01:23", zone.getID());
         assertEquals(DateTimeConstants.MILLIS_PER_HOUR + (23L * DateTimeConstants.MILLIS_PER_MINUTE),
                 zone.getOffset(TEST_TIME_SUMMER));
-
+        
         zone = DateTimeZone.forID("-02:00");
         assertEquals("-02:00", zone.getID());
         assertEquals((-2L * DateTimeConstants.MILLIS_PER_HOUR),
                 zone.getOffset(TEST_TIME_SUMMER));
-
+        
         zone = DateTimeZone.forID("-07:05:34.0");
         assertEquals("-07:05:34", zone.getID());
         assertEquals((-7L * DateTimeConstants.MILLIS_PER_HOUR) +
-                (-5L * DateTimeConstants.MILLIS_PER_MINUTE) +
-                (-34L * DateTimeConstants.MILLIS_PER_SECOND),
-                zone.getOffset(TEST_TIME_SUMMER));
-
+                    (-5L * DateTimeConstants.MILLIS_PER_MINUTE) +
+                    (-34L * DateTimeConstants.MILLIS_PER_SECOND),
+                    zone.getOffset(TEST_TIME_SUMMER));
+        
         try {
             DateTimeZone.forID("SST");
             fail();
@@ -240,6 +255,60 @@ public class TestDateTimeZone extends InstrumentationTestCase {
         } catch (IllegalArgumentException ex) {}
     }
 
+    // This entire test is invalid for the Android version
+    /*
+    public void testForID_String_old() {
+        Map<String, String> map = new LinkedHashMap<String, String>();
+        map.put("GMT", "UTC");
+        map.put("WET", "WET");
+        map.put("CET", "CET");
+        map.put("MET", "CET");
+        map.put("ECT", "CET");
+        map.put("EET", "EET");
+        map.put("MIT", "Pacific/Apia");
+        map.put("HST", "Pacific/Honolulu");
+        map.put("AST", "America/Anchorage");
+        map.put("PST", "America/Los_Angeles");
+        map.put("MST", "America/Denver");
+        map.put("PNT", "America/Phoenix");
+        map.put("CST", "America/Chicago");
+        map.put("EST", "America/New_York");
+        map.put("IET", "America/Indiana/Indianapolis");
+        map.put("PRT", "America/Puerto_Rico");
+        map.put("CNT", "America/St_Johns");
+        map.put("AGT", "America/Argentina/Buenos_Aires");
+        map.put("BET", "America/Sao_Paulo");
+        map.put("ART", "Africa/Cairo");
+        map.put("EAT", "Africa/Addis_Ababa");
+        map.put("NET", "Asia/Yerevan");
+        map.put("PLT", "Asia/Karachi");
+        map.put("IST", "Asia/Kolkata");
+        map.put("BST", "Asia/Dhaka");
+        map.put("VST", "Asia/Ho_Chi_Minh");
+        map.put("CTT", "Asia/Shanghai");
+        map.put("JST", "Asia/Tokyo");
+        map.put("ACT", "Australia/Darwin");
+        map.put("AET", "Australia/Sydney");
+        map.put("SST", "Pacific/Guadalcanal");
+        map.put("NST", "Pacific/Auckland");
+        for (String key : map.keySet()) {
+            String value = map.get(key);
+            TimeZone juZone = TimeZone.getTimeZone(key);
+            DateTimeZone zone = DateTimeZone.forTimeZone(juZone);
+            assertEquals(value, zone.getID());
+//            System.out.println(juZone);
+//            System.out.println(juZone.getDisplayName());
+//            System.out.println(zone);
+//            System.out.println("------");
+        }
+        // gee thanks time-zone db maintainer for damaging the database
+        // and breaking the long-standing  association with CAT
+        TimeZone juZone = TimeZone.getTimeZone("CAT");
+        DateTimeZone zone = DateTimeZone.forTimeZone(juZone);
+        assertTrue(zone.getID().equals("Africa/Harare") || zone.getID().equals("Africa/Maputo"));
+    }
+    */
+
     //-----------------------------------------------------------------------
     public void testForOffsetHours_int() {
         assertEquals(DateTimeZone.UTC, DateTimeZone.forOffsetHours(0));
@@ -249,28 +318,28 @@ public class TestDateTimeZone extends InstrumentationTestCase {
             DateTimeZone.forOffsetHours(999999);
             fail();
         } catch (IllegalArgumentException ex) {}
-    }
+    }        
 
     //-----------------------------------------------------------------------
     public void testForOffsetHoursMinutes_int_int() {
         assertEquals(DateTimeZone.UTC, DateTimeZone.forOffsetHoursMinutes(0, 0));
         assertEquals(DateTimeZone.forID("+23:59"), DateTimeZone.forOffsetHoursMinutes(23, 59));
-
+        
         assertEquals(DateTimeZone.forID("+02:15"), DateTimeZone.forOffsetHoursMinutes(2, 15));
         assertEquals(DateTimeZone.forID("+02:00"), DateTimeZone.forOffsetHoursMinutes(2, 0));
         try {
             DateTimeZone.forOffsetHoursMinutes(2, -15);
             fail();
         } catch (IllegalArgumentException ex) {}
-
+        
         assertEquals(DateTimeZone.forID("+00:15"), DateTimeZone.forOffsetHoursMinutes(0, 15));
         assertEquals(DateTimeZone.forID("+00:00"), DateTimeZone.forOffsetHoursMinutes(0, 0));
         assertEquals(DateTimeZone.forID("-00:15"), DateTimeZone.forOffsetHoursMinutes(0, -15));
-
+        
         assertEquals(DateTimeZone.forID("-02:00"), DateTimeZone.forOffsetHoursMinutes(-2, 0));
         assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, -15));
         assertEquals(DateTimeZone.forID("-02:15"), DateTimeZone.forOffsetHoursMinutes(-2, 15));
-
+        
         assertEquals(DateTimeZone.forID("-23:59"), DateTimeZone.forOffsetHoursMinutes(-23, 59));
         try {
             DateTimeZone.forOffsetHoursMinutes(2, 60);
@@ -288,7 +357,7 @@ public class TestDateTimeZone extends InstrumentationTestCase {
             DateTimeZone.forOffsetHoursMinutes(-24, 0);
             fail();
         } catch (IllegalArgumentException ex) {}
-    }
+    }        
 
     //-----------------------------------------------------------------------
     public void testForOffsetMillis_int() {
@@ -300,61 +369,96 @@ public class TestDateTimeZone extends InstrumentationTestCase {
         assertEquals(DateTimeZone.forID("+04:45:17.045"),
                 DateTimeZone.forOffsetMillis(
                         4 * 60 * 60 * 1000 + 45 * 60 * 1000 + 17 * 1000 + 45));
-    }
+    }        
 
     //-----------------------------------------------------------------------
     public void testForTimeZone_TimeZone() {
         assertEquals(DateTimeZone.getDefault(), DateTimeZone.forTimeZone((TimeZone) null));
-
+        
         DateTimeZone zone = DateTimeZone.forTimeZone(TimeZone.getTimeZone("Europe/London"));
         assertEquals("Europe/London", zone.getID());
         assertSame(DateTimeZone.UTC, DateTimeZone.forTimeZone(TimeZone.getTimeZone("UTC")));
-
+        
         zone = DateTimeZone.forTimeZone(TimeZone.getTimeZone("+00:00"));
         assertSame(DateTimeZone.UTC, zone);
-
+        
         zone = DateTimeZone.forTimeZone(TimeZone.getTimeZone("GMT+00:00"));
         assertSame(DateTimeZone.UTC, zone);
-
+        
         zone = DateTimeZone.forTimeZone(TimeZone.getTimeZone("GMT+00:00"));
         assertSame(DateTimeZone.UTC, zone);
-
+        
         zone = DateTimeZone.forTimeZone(TimeZone.getTimeZone("GMT+00"));
         assertSame(DateTimeZone.UTC, zone);
-
+        
         zone = DateTimeZone.forTimeZone(TimeZone.getTimeZone("GMT+01:23"));
         assertEquals("+01:23", zone.getID());
         assertEquals(DateTimeConstants.MILLIS_PER_HOUR + (23L * DateTimeConstants.MILLIS_PER_MINUTE),
                 zone.getOffset(TEST_TIME_SUMMER));
-
+        
         zone = DateTimeZone.forTimeZone(TimeZone.getTimeZone("GMT+1:23"));
         assertEquals("+01:23", zone.getID());
         assertEquals(DateTimeConstants.MILLIS_PER_HOUR + (23L * DateTimeConstants.MILLIS_PER_MINUTE),
                 zone.getOffset(TEST_TIME_SUMMER));
-
+        
         zone = DateTimeZone.forTimeZone(TimeZone.getTimeZone("GMT-02:00"));
         assertEquals("-02:00", zone.getID());
         assertEquals((-2L * DateTimeConstants.MILLIS_PER_HOUR), zone.getOffset(TEST_TIME_SUMMER));
-
+        
         zone = DateTimeZone.forTimeZone(TimeZone.getTimeZone("GMT+2"));
         assertEquals("+02:00", zone.getID());
         assertEquals((2L * DateTimeConstants.MILLIS_PER_HOUR), zone.getOffset(TEST_TIME_SUMMER));
-
+        
         zone = DateTimeZone.forTimeZone(TimeZone.getTimeZone("EST"));
         assertEquals("America/New_York", zone.getID());
+    }
+
+    public void testFromTimeZoneInvalid() throws Exception {
+        TimeZone jdkZone = new TimeZone() {
+            private static final long serialVersionUID = 1L;
+            @Override
+            public String getID() {
+                return null;
+            }
+            @Override
+            public int getOffset(int era, int year, int month, int day, int dayOfWeek, int milliseconds) {
+                return 0;
+            }
+            @Override
+            public void setRawOffset(int offsetMillis) {
+            }
+            @Override
+            public int getRawOffset() {
+                return 0;
+            }
+            @Override
+            public boolean useDaylightTime() {
+                return false;
+            }
+            @Override
+            public boolean inDaylightTime(Date date) {
+                return false;
+            }
+        };
+        try {
+            DateTimeZone.forTimeZone(jdkZone);
+            fail();
+        } catch (IllegalArgumentException ex) {
+            // expected
+        }
     }
 
     public void testTimeZoneConversion() {
         TimeZone jdkTimeZone = TimeZone.getTimeZone("GMT-10");
         assertEquals("GMT-10:00", jdkTimeZone.getID());
-
+        
         DateTimeZone jodaTimeZone = DateTimeZone.forTimeZone(jdkTimeZone);
         assertEquals("-10:00", jodaTimeZone.getID());
         assertEquals(jdkTimeZone.getRawOffset(), jodaTimeZone.getOffset(0L));
-
+        
         TimeZone convertedTimeZone = jodaTimeZone.toTimeZone();
         assertEquals("GMT-10:00", jdkTimeZone.getID());
-
+        
         assertEquals(jdkTimeZone.getID(), convertedTimeZone.getID());
         assertEquals(jdkTimeZone.getRawOffset(), convertedTimeZone.getRawOffset());
     }
@@ -368,11 +472,11 @@ public class TestDateTimeZone extends InstrumentationTestCase {
     public void testProvider() {
         try {
             assertNotNull(DateTimeZone.getProvider());
-
+        
             Provider provider = DateTimeZone.getProvider();
             DateTimeZone.setProvider(null);
             assertEquals(provider.getClass(), DateTimeZone.getProvider().getClass());
-
+        
             try {
                 DateTimeZone.setProvider(new MockNullIDSProvider());
                 fail();
@@ -389,7 +493,7 @@ public class TestDateTimeZone extends InstrumentationTestCase {
                 DateTimeZone.setProvider(new MockBadUTCProvider());
                 fail();
             } catch (IllegalArgumentException ex) {}
-
+        
             Provider prov = new MockOKProvider();
             DateTimeZone.setProvider(prov);
             assertSame(prov, DateTimeZone.getProvider());
@@ -400,7 +504,7 @@ public class TestDateTimeZone extends InstrumentationTestCase {
             DateTimeZone.setProvider(null);
             assertEquals(ResourceZoneInfoProvider.class, DateTimeZone.getProvider().getClass());
         }
-
+        
         try {
             System.setProperty("org.joda.time.DateTimeZone.Provider", "org.joda.time.tz.UTCProvider");
             DateTimeZone.setProvider(null);
@@ -416,7 +520,7 @@ public class TestDateTimeZone extends InstrumentationTestCase {
         try {
             System.setProperty("org.joda.time.DateTimeZone.Provider", "xxx");
             DateTimeZone.setProvider(null);
-
+            
         } catch (RuntimeException ex) {
             // expected
             assertEquals(ResourceZoneInfoProvider.class, DateTimeZone.getProvider().getClass());
@@ -425,7 +529,7 @@ public class TestDateTimeZone extends InstrumentationTestCase {
             DateTimeZone.setProvider(null);
         }
     }
-
+    
     public void testProviderSecurity() {
         if (OLD_JDK) {
             return;
@@ -496,21 +600,21 @@ public class TestDateTimeZone extends InstrumentationTestCase {
     public void testNameProvider() {
         try {
             assertNotNull(DateTimeZone.getNameProvider());
-
+        
             NameProvider provider = DateTimeZone.getNameProvider();
             DateTimeZone.setNameProvider(null);
             assertEquals(provider.getClass(), DateTimeZone.getNameProvider().getClass());
-
+        
             provider = new MockOKButNullNameProvider();
             DateTimeZone.setNameProvider(provider);
             assertSame(provider, DateTimeZone.getNameProvider());
-
+            
             assertEquals("+00:00", DateTimeZone.UTC.getShortName(TEST_TIME_SUMMER));
             assertEquals("+00:00", DateTimeZone.UTC.getName(TEST_TIME_SUMMER));
         } finally {
             DateTimeZone.setNameProvider(null);
         }
-
+        
         try {
             System.setProperty("org.joda.time.DateTimeZone.NameProvider", "org.joda.time.tz.DefaultNameProvider");
             DateTimeZone.setNameProvider(null);
@@ -526,7 +630,7 @@ public class TestDateTimeZone extends InstrumentationTestCase {
         try {
             System.setProperty("org.joda.time.DateTimeZone.NameProvider", "xxx");
             DateTimeZone.setProvider(null);
-
+            
         } catch (RuntimeException ex) {
             // expected
             assertEquals(DefaultNameProvider.class, DateTimeZone.getNameProvider().getClass());
@@ -607,14 +711,37 @@ public class TestDateTimeZone extends InstrumentationTestCase {
 
     static final boolean JDK6;
     static {
-        boolean jdk6 = true;
-        try {
-            DateFormatSymbols.class.getMethod("getInstance", new Class[] {Locale.class});
-        } catch (Exception ex) {
-            jdk6 = false;
-        }
-        JDK6 = jdk6;
+      boolean jdk6 = true;
+      try {
+        DateFormatSymbols.class.getMethod("getInstance", new Class[] {Locale.class});
+      } catch (Exception ex) {
+        jdk6 = false;
+      } 
+      JDK6 = jdk6;
     }
+
+    // Names are not the same between JDK and Android
+    /*
+    public void testGetShortName() {
+        DateTimeZone zone = DateTimeZone.forID("Europe/London");
+        assertEquals("BST", zone.getShortName(TEST_TIME_SUMMER));
+        assertEquals("GMT", zone.getShortName(TEST_TIME_WINTER));
+        assertEquals("BST", zone.getShortName(TEST_TIME_SUMMER, Locale.ENGLISH));
+    }
+
+    public void testGetShortName_berlin() {
+        DateTimeZone berlin = DateTimeZone.forID("Europe/Berlin");
+        assertEquals("CET", berlin.getShortName(TEST_TIME_WINTER, Locale.ENGLISH));
+        assertEquals("CEST", berlin.getShortName(TEST_TIME_SUMMER, Locale.ENGLISH));
+        if (JDK6) {
+          assertEquals("MEZ", berlin.getShortName(TEST_TIME_WINTER, Locale.GERMAN));
+          assertEquals("MESZ", berlin.getShortName(TEST_TIME_SUMMER, Locale.GERMAN));
+        } else {
+          assertEquals("CET", berlin.getShortName(TEST_TIME_WINTER, Locale.GERMAN));
+          assertEquals("CEST", berlin.getShortName(TEST_TIME_SUMMER, Locale.GERMAN));
+        }
+    }
+    */
 
     public void testGetShortNameProviderName() {
         assertEquals(null, DateTimeZone.getNameProvider().getShortName(null, "Europe/London", "BST"));
@@ -627,6 +754,29 @@ public class TestDateTimeZone extends InstrumentationTestCase {
         DateTimeZone zone = new MockDateTimeZone("Europe/London");
         assertEquals("Europe/London", zone.getShortName(TEST_TIME_SUMMER, Locale.ENGLISH));
     }
+
+    // Names are not the same between JDK and Android
+    /*
+    public void testGetName() {
+        DateTimeZone zone = DateTimeZone.forID("Europe/London");
+        assertEquals("British Summer Time", zone.getName(TEST_TIME_SUMMER));
+        assertEquals("Greenwich Mean Time", zone.getName(TEST_TIME_WINTER));
+        assertEquals("British Summer Time", zone.getName(TEST_TIME_SUMMER, Locale.ENGLISH));
+    }
+
+    public void testGetName_berlin() {
+      DateTimeZone berlin = DateTimeZone.forID("Europe/Berlin");
+      assertEquals("Central European Time", berlin.getName(TEST_TIME_WINTER, Locale.ENGLISH));
+      assertEquals("Central European Summer Time", berlin.getName(TEST_TIME_SUMMER, Locale.ENGLISH));
+      if (JDK6) {
+        assertEquals("Mitteleurop\u00e4ische Zeit", berlin.getName(TEST_TIME_WINTER, Locale.GERMAN));
+        assertEquals("Mitteleurop\u00e4ische Sommerzeit", berlin.getName(TEST_TIME_SUMMER, Locale.GERMAN));
+      } else {
+        assertEquals("Zentraleurop\u00e4ische Zeit", berlin.getName(TEST_TIME_WINTER, Locale.GERMAN));
+        assertEquals("Zentraleurop\u00e4ische Sommerzeit", berlin.getName(TEST_TIME_SUMMER, Locale.GERMAN));
+      }
+  }
+  */
 
     public void testGetNameProviderName() {
         assertEquals(null, DateTimeZone.getNameProvider().getName(null, "Europe/London", "BST"));
@@ -672,13 +822,13 @@ public class TestDateTimeZone extends InstrumentationTestCase {
         DateTimeZone zone = DateTimeZone.forID("Europe/Paris");
         assertEquals(2L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffset(TEST_TIME_SUMMER));
         assertEquals(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffset(TEST_TIME_WINTER));
-
+        
         assertEquals(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getStandardOffset(TEST_TIME_SUMMER));
         assertEquals(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getStandardOffset(TEST_TIME_WINTER));
-
+        
         assertEquals(2L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffsetFromLocal(TEST_TIME_SUMMER));
         assertEquals(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffsetFromLocal(TEST_TIME_WINTER));
-
+        
         assertEquals(false, zone.isStandardOffset(TEST_TIME_SUMMER));
         assertEquals(true, zone.isStandardOffset(TEST_TIME_WINTER));
     }
@@ -687,7 +837,7 @@ public class TestDateTimeZone extends InstrumentationTestCase {
         DateTimeZone zone = DateTimeZone.forID("Europe/Paris");
         assertEquals(2L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffset(new Instant(TEST_TIME_SUMMER)));
         assertEquals(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffset(new Instant(TEST_TIME_WINTER)));
-
+        
         assertEquals(zone.getOffset(DateTimeUtils.currentTimeMillis()), zone.getOffset(null));
     }
 
@@ -695,13 +845,13 @@ public class TestDateTimeZone extends InstrumentationTestCase {
         DateTimeZone zone = DateTimeZone.forID("+01:00");
         assertEquals(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffset(TEST_TIME_SUMMER));
         assertEquals(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffset(TEST_TIME_WINTER));
-
+        
         assertEquals(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getStandardOffset(TEST_TIME_SUMMER));
         assertEquals(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getStandardOffset(TEST_TIME_WINTER));
-
+        
         assertEquals(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffsetFromLocal(TEST_TIME_SUMMER));
         assertEquals(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffsetFromLocal(TEST_TIME_WINTER));
-
+        
         assertEquals(true, zone.isStandardOffset(TEST_TIME_SUMMER));
         assertEquals(true, zone.isStandardOffset(TEST_TIME_WINTER));
     }
@@ -710,7 +860,7 @@ public class TestDateTimeZone extends InstrumentationTestCase {
         DateTimeZone zone = DateTimeZone.forID("+01:00");
         assertEquals(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffset(new Instant(TEST_TIME_SUMMER)));
         assertEquals(1L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffset(new Instant(TEST_TIME_WINTER)));
-
+        
         assertEquals(zone.getOffset(DateTimeUtils.currentTimeMillis()), zone.getOffset(null));
     }
 
@@ -718,15 +868,15 @@ public class TestDateTimeZone extends InstrumentationTestCase {
     public void testGetMillisKeepLocal() {
         long millisLondon = TEST_TIME_SUMMER;
         long millisParis = TEST_TIME_SUMMER - 1L * DateTimeConstants.MILLIS_PER_HOUR;
-
+        
         assertEquals(millisLondon, LONDON.getMillisKeepLocal(LONDON, millisLondon));
         assertEquals(millisParis, LONDON.getMillisKeepLocal(LONDON, millisParis));
         assertEquals(millisLondon, PARIS.getMillisKeepLocal(PARIS, millisLondon));
         assertEquals(millisParis, PARIS.getMillisKeepLocal(PARIS, millisParis));
-
+        
         assertEquals(millisParis, LONDON.getMillisKeepLocal(PARIS, millisLondon));
         assertEquals(millisLondon, PARIS.getMillisKeepLocal(LONDON, millisParis));
-
+        
         DateTimeZone zone = DateTimeZone.getDefault();
         try {
             DateTimeZone.setDefault(LONDON);
@@ -762,7 +912,7 @@ public class TestDateTimeZone extends InstrumentationTestCase {
 //        assertEquals(true, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 10, 28, 2, 59, 59, 99)));
 //        assertEquals(false, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 10, 28, 3, 0)));
 //        assertEquals(false, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 10, 28, 4, 0)));
-//
+//        
 //        assertEquals(false, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 3, 25, 1, 30)));  // before gap
 //        assertEquals(false, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 3, 25, 2, 30)));  // gap
 //        assertEquals(false, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 3, 25, 3, 30)));  // after gap
@@ -779,7 +929,7 @@ public class TestDateTimeZone extends InstrumentationTestCase {
 //        assertEquals(true, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 11, 4, 1, 59, 59, 99)));
 //        assertEquals(false, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 11, 4, 2, 0)));
 //        assertEquals(false, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 11, 4, 3, 0)));
-//
+//        
 //        assertEquals(false, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 3, 11, 1, 30)));  // before gap
 //        assertEquals(false, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 3, 11, 2, 30)));  // gap
 //        assertEquals(false, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 3, 11, 3, 30)));  // after gap
@@ -796,7 +946,7 @@ public class TestDateTimeZone extends InstrumentationTestCase {
         assertEquals(true, zone.isLocalDateTimeGap(new LocalDateTime(2007, 3, 25, 2, 59, 59, 99)));
         assertEquals(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 3, 25, 3, 0)));
         assertEquals(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 3, 25, 4, 0)));
-
+        
         assertEquals(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 10, 28, 1, 30)));  // before overlap
         assertEquals(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 10, 28, 2, 30)));  // overlap
         assertEquals(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 10, 28, 3, 30)));  // after overlap
@@ -813,7 +963,7 @@ public class TestDateTimeZone extends InstrumentationTestCase {
         assertEquals(true, zone.isLocalDateTimeGap(new LocalDateTime(2007, 3, 11, 2, 59, 59, 99)));
         assertEquals(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 3, 11, 3, 0)));
         assertEquals(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 3, 11, 4, 0)));
-
+        
         assertEquals(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 11, 4, 0, 30)));  // before overlap
         assertEquals(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 11, 4, 1, 30)));  // overlap
         assertEquals(false, zone.isLocalDateTimeGap(new LocalDateTime(2007, 11, 4, 2, 30)));  // after overlap
@@ -836,7 +986,7 @@ public class TestDateTimeZone extends InstrumentationTestCase {
         assertEquals(true, zone2.equals(zone1));
         assertEquals(true, zone2.equals(zone2));
         assertEquals(true, zone1.hashCode() == zone2.hashCode());
-
+        
         DateTimeZone zone3 = DateTimeZone.forID("Europe/London");
         assertEquals(true, zone3.equals(zone3));
         assertEquals(false, zone1.equals(zone3));
@@ -845,7 +995,7 @@ public class TestDateTimeZone extends InstrumentationTestCase {
         assertEquals(false, zone3.equals(zone2));
         assertEquals(false, zone1.hashCode() == zone3.hashCode());
         assertEquals(true, zone3.hashCode() == zone3.hashCode());
-
+        
         DateTimeZone zone4 = DateTimeZone.forID("+01:00");
         assertEquals(true, zone4.equals(zone4));
         assertEquals(false, zone1.equals(zone4));
@@ -856,7 +1006,7 @@ public class TestDateTimeZone extends InstrumentationTestCase {
         assertEquals(false, zone4.equals(zone3));
         assertEquals(false, zone1.hashCode() == zone4.hashCode());
         assertEquals(true, zone4.hashCode() == zone4.hashCode());
-
+        
         DateTimeZone zone5 = DateTimeZone.forID("+02:00");
         assertEquals(true, zone5.equals(zone5));
         assertEquals(false, zone1.equals(zone5));
@@ -881,36 +1031,36 @@ public class TestDateTimeZone extends InstrumentationTestCase {
     //-----------------------------------------------------------------------
     public void testSerialization1() throws Exception {
         DateTimeZone zone = DateTimeZone.forID("Europe/Paris");
-
+        
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(baos);
         oos.writeObject(zone);
         byte[] bytes = baos.toByteArray();
         oos.close();
-
+        
         ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
         ObjectInputStream ois = new ObjectInputStream(bais);
         DateTimeZone result = (DateTimeZone) ois.readObject();
         ois.close();
-
+        
         assertSame(zone, result);
     }
 
     //-----------------------------------------------------------------------
     public void testSerialization2() throws Exception {
         DateTimeZone zone = DateTimeZone.forID("+01:00");
-
+        
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         ObjectOutputStream oos = new ObjectOutputStream(baos);
         oos.writeObject(zone);
         byte[] bytes = baos.toByteArray();
         oos.close();
-
+        
         ByteArrayInputStream bais = new ByteArrayInputStream(bytes);
         ObjectInputStream ois = new ObjectInputStream(bais);
         DateTimeZone result = (DateTimeZone) ois.readObject();
         ois.close();
-
+        
         assertSame(zone, result);
     }
 
@@ -926,7 +1076,7 @@ public class TestDateTimeZone extends InstrumentationTestCase {
     public void testPatchedNameKeysLondon() throws Exception {
         // the tz database does not have unique name keys [1716305]
         DateTimeZone zone = DateTimeZone.forID("Europe/London");
-
+        
         DateTime now = new DateTime(2007, 1, 1, 0, 0, 0, 0);
         String str1 = zone.getName(now.getMillis());
         String str2 = zone.getName(now.plusMonths(6).getMillis());
@@ -936,7 +1086,7 @@ public class TestDateTimeZone extends InstrumentationTestCase {
     public void testPatchedNameKeysSydney() throws Exception {
         // the tz database does not have unique name keys [1716305]
         DateTimeZone zone = DateTimeZone.forID("Australia/Sydney");
-
+        
         DateTime now = new DateTime(2007, 1, 1, 0, 0, 0, 0);
         String str1 = zone.getName(now.getMillis());
         String str2 = zone.getName(now.plusMonths(6).getMillis());
@@ -946,7 +1096,7 @@ public class TestDateTimeZone extends InstrumentationTestCase {
     public void testPatchedNameKeysSydneyHistoric() throws Exception {
         // the tz database does not have unique name keys [1716305]
         DateTimeZone zone = DateTimeZone.forID("Australia/Sydney");
-
+        
         DateTime now = new DateTime(1996, 1, 1, 0, 0, 0, 0);
         String str1 = zone.getName(now.getMillis());
         String str2 = zone.getName(now.plusMonths(6).getMillis());
@@ -956,10 +1106,11 @@ public class TestDateTimeZone extends InstrumentationTestCase {
     public void testPatchedNameKeysGazaHistoric() throws Exception {
         // the tz database does not have unique name keys [1716305]
         DateTimeZone zone = DateTimeZone.forID("Africa/Johannesburg");
-
+        
         DateTime now = new DateTime(1943, 1, 1, 0, 0, 0, 0);
         String str1 = zone.getName(now.getMillis());
         String str2 = zone.getName(now.plusMonths(6).getMillis());
         assertEquals(false, str1.equals(str2));
     }
+
 }
