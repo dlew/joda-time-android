@@ -23,14 +23,14 @@ import org.joda.time.DurationField;
  * <p>
  * This DateTimeField is useful for defining DateTimeFields that are composed
  * of precise durations, like time of day fields. If either duration field is
- * imprecise, then an {@link org.joda.time.field.ImpreciseDateTimeField} may be used instead.
+ * imprecise, then an {@link ImpreciseDateTimeField} may be used instead.
  * <p>
  * PreciseDateTimeField is thread-safe and immutable.
  *
  * @author Brian S O'Neill
  * @author Stephen Colebourne
  * @since 1.0
- * @see org.joda.time.field.ImpreciseDateTimeField
+ * @see ImpreciseDateTimeField
  */
 public class PreciseDateTimeField extends PreciseDurationDateTimeField {
 

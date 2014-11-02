@@ -29,7 +29,7 @@ import org.joda.time.format.DateTimeFormat;
  * AbstractDateTime provides the common behaviour for datetime classes.
  * <p>
  * This class should generally not be used directly by API users.
- * The {@link org.joda.time.ReadableDateTime} interface should be used when different
+ * The {@link ReadableDateTime} interface should be used when different 
  * kinds of date/time objects are to be referenced.
  * <p>
  * Whenever you want to implement <code>ReadableDateTime</code> you should

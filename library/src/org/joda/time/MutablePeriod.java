@@ -35,7 +35,7 @@ import org.joda.time.format.PeriodFormatter;
  * As a result, this takes into account daylight savings time.
  * Adding a time period of 1 day to the day before daylight savings starts will only add
  * 23 hours rather than 24 to ensure that the time remains the same.
- * If this is not the behaviour you want, then see {@link org.joda.time.Duration}.
+ * If this is not the behaviour you want, then see {@link Duration}.
  * <p>
  * The definition of a period also affects the equals method. A period of 1
  * day is not equal to a period of 24 hours, nor 1 hour equal to 60 minutes.
@@ -51,7 +51,7 @@ import org.joda.time.format.PeriodFormatter;
  * @author Brian S O'Neill
  * @author Stephen Colebourne
  * @since 1.0
- * @see org.joda.time.Period
+ * @see Period
  */
 public class MutablePeriod
         extends BasePeriod
@@ -64,7 +64,7 @@ public class MutablePeriod
     /**
      * Parses a {@code MutablePeriod} from the specified string.
      * <p>
-     * This uses {@link org.joda.time.format.ISOPeriodFormat#standard()}.
+     * This uses {@link ISOPeriodFormat#standard()}.
      * 
      * @param str  the string to parse, not null
      * @since 2.0
@@ -169,7 +169,7 @@ public class MutablePeriod
      * <p>
      * For more control over the conversion process, you have two options:
      * <ul>
-     * <li>convert the duration to an {@link org.joda.time.Interval}, and from there obtain the period
+     * <li>convert the duration to an {@link Interval}, and from there obtain the period
      * <li>specify a period type that contains precise definitions of the day and larger
      * fields, such as the UTC or precise types.
      * </ul>
@@ -364,7 +364,7 @@ public class MutablePeriod
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadablePeriod, ReadableInterval and String.
-     * The String formats are described by {@link org.joda.time.format.ISOPeriodFormat#standard()}.
+     * The String formats are described by {@link ISOPeriodFormat#standard()}.
      *
      * @param period  period to convert
      * @throws IllegalArgumentException if period is invalid
@@ -380,7 +380,7 @@ public class MutablePeriod
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadablePeriod, ReadableInterval and String.
-     * The String formats are described by {@link org.joda.time.format.ISOPeriodFormat#standard()}.
+     * The String formats are described by {@link ISOPeriodFormat#standard()}.
      *
      * @param period  period to convert
      * @param type  which set of fields this period supports, null means use converter
@@ -397,7 +397,7 @@ public class MutablePeriod
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadablePeriod, ReadableInterval and String.
-     * The String formats are described by {@link org.joda.time.format.ISOPeriodFormat#standard()}.
+     * The String formats are described by {@link ISOPeriodFormat#standard()}.
      *
      * @param period  period to convert
      * @param chrono  the chronology to use, null means ISO in default zone
@@ -414,7 +414,7 @@ public class MutablePeriod
      * The recognised object types are defined in
      * {@link org.joda.time.convert.ConverterManager ConverterManager} and
      * include ReadablePeriod, ReadableInterval and String.
-     * The String formats are described by {@link org.joda.time.format.ISOPeriodFormat#standard()}.
+     * The String formats are described by {@link ISOPeriodFormat#standard()}.
      *
      * @param period  period to convert
      * @param type  which set of fields this period supports, null means use converter
@@ -668,7 +668,7 @@ public class MutablePeriod
 
     /**
      * Adds an interval to this one by dividing the interval into
-     * fields and calling {@link #add(org.joda.time.ReadablePeriod)}.
+     * fields and calling {@link #add(ReadablePeriod)}.
      * 
      * @param interval  the interval to add, null means add nothing
      * @throws ArithmeticException if the addition exceeds the capacity of the period
@@ -681,7 +681,7 @@ public class MutablePeriod
 
     /**
      * Adds a duration to this one by dividing the duration into
-     * fields and calling {@link #add(org.joda.time.ReadablePeriod)}.
+     * fields and calling {@link #add(ReadablePeriod)}.
      * 
      * @param duration  the duration to add, null means add nothing
      * @throws ArithmeticException if the addition exceeds the capacity of the period
@@ -694,7 +694,7 @@ public class MutablePeriod
 
     /**
      * Adds a millisecond duration to this one by dividing the duration into
-     * fields and calling {@link #add(org.joda.time.ReadablePeriod)}.
+     * fields and calling {@link #add(ReadablePeriod)}.
      * <p>
      * When dividing the duration, only precise fields in the period type will be used.
      * For large durations, all the remaining duration will be stored in the largest
@@ -709,7 +709,7 @@ public class MutablePeriod
 
     /**
      * Adds a millisecond duration to this one by dividing the duration into
-     * fields and calling {@link #add(org.joda.time.ReadablePeriod)}.
+     * fields and calling {@link #add(ReadablePeriod)}.
      * <p>
      * When dividing the duration, only precise fields in the period type will be used.
      * For large durations, all the remaining duration will be stored in the largest

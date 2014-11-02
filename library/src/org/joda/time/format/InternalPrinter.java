@@ -25,7 +25,7 @@ import org.joda.time.ReadablePartial;
 /**
  * Internal interface for creating textual representations of datetimes.
  * <p>
- * This has been separated from {@link org.joda.time.format.DateTimePrinter} to avoid code duplication.
+ * This has been separated from {@link DateTimePrinter} to avoid code duplication.
  *
  * @author Stephen Colebourne
  * @since 2.4
@@ -53,9 +53,8 @@ interface InternalPrinter {
      * @param displayZone  the time zone to use, null means local time
      * @param locale  the locale to use, null means default locale
      */
-    void printTo(
-        Appendable appendable, long instant, Chronology chrono,
-        int displayOffset, DateTimeZone displayZone, Locale locale) throws IOException;
+    void printTo(Appendable appendable, long instant, Chronology chrono,
+                 int displayOffset, DateTimeZone displayZone, Locale locale) throws IOException;
 
     /**
      * Prints a ReadablePartial.

@@ -18,7 +18,7 @@ package org.joda.time.format;
 /**
  * Internal interface for parsing textual representations of datetimes.
  * <p>
- * This has been separated from {@link org.joda.time.format.DateTimeParser} to change to using
+ * This has been separated from {@link DateTimeParser} to change to using
  * {@code CharSequence}.
  *
  * @author Stephen Colebourne

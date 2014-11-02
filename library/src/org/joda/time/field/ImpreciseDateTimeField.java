@@ -25,7 +25,7 @@ import org.joda.time.DurationFieldType;
  * <p>
  * This DateTimeField is useful for defining DateTimeFields that are composed
  * of imprecise durations. If both duration fields are precise, then a
- * {@link org.joda.time.field.PreciseDateTimeField} should be used instead.
+ * {@link PreciseDateTimeField} should be used instead.
  * <p>
  * When defining imprecise DateTimeFields where a matching DurationField is
  * already available, just extend BaseDateTimeField directly so as not to
@@ -35,7 +35,7 @@ import org.joda.time.DurationFieldType;
  * be as well.
  *
  * @author Brian S O'Neill
- * @see org.joda.time.field.PreciseDateTimeField
+ * @see PreciseDateTimeField
  * @since 1.0
  */
 public abstract class ImpreciseDateTimeField extends BaseDateTimeField {

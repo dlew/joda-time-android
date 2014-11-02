@@ -27,18 +27,18 @@ import org.joda.time.ReadablePartial;
  * Internal interface for creating textual representations of datetimes.
  * <p>
  * Application users will rarely use this class directly. Instead, you
- * will use one of the factory classes to create a {@link org.joda.time.format.DateTimeFormatter}.
+ * will use one of the factory classes to create a {@link DateTimeFormatter}.
  * <p>
  * The factory classes are:<br />
- * - {@link org.joda.time.format.DateTimeFormatterBuilder}<br />
- * - {@link org.joda.time.format.DateTimeFormat}<br />
- * - {@link org.joda.time.format.ISODateTimeFormat}<br />
+ * - {@link DateTimeFormatterBuilder}<br />
+ * - {@link DateTimeFormat}<br />
+ * - {@link ISODateTimeFormat}<br />
  *
  * @author Brian S O'Neill
  * @author Stephen Colebourne
- * @see org.joda.time.format.DateTimeFormatterBuilder
- * @see org.joda.time.format.DateTimeFormat
- * @see org.joda.time.format.ISODateTimeFormat
+ * @see DateTimeFormatterBuilder
+ * @see DateTimeFormat
+ * @see ISODateTimeFormat
  * @since 1.0
  */
 public interface DateTimePrinter {
@@ -64,9 +64,8 @@ public interface DateTimePrinter {
      * @param displayZone  the time zone to use, null means local time
      * @param locale  the locale to use, null means default locale
      */
-    void printTo(
-        StringBuffer buf, long instant, Chronology chrono,
-        int displayOffset, DateTimeZone displayZone, Locale locale);
+    void printTo(StringBuffer buf, long instant, Chronology chrono,
+                 int displayOffset, DateTimeZone displayZone, Locale locale);
 
     /**
      * Prints an instant from milliseconds since 1970-01-01T00:00:00Z,
@@ -80,9 +79,8 @@ public interface DateTimePrinter {
      * @param displayZone  the time zone to use, null means local time
      * @param locale  the locale to use, null means default locale
      */
-    void printTo(
-        Writer out, long instant, Chronology chrono,
-        int displayOffset, DateTimeZone displayZone, Locale locale) throws IOException;
+    void printTo(Writer out, long instant, Chronology chrono,
+                 int displayOffset, DateTimeZone displayZone, Locale locale) throws IOException;
 
     //-----------------------------------------------------------------------
     /**

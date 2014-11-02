@@ -47,7 +47,7 @@ import org.joda.time.chrono.ISOChronology;
  * DateTimeZoneBuilder itself is mutable and not thread-safe, but the
  * DateTimeZone objects that it builds are thread-safe and immutable.
  * <p>
- * It is intended that {@link org.joda.time.tz.ZoneInfoCompiler} be used to read time zone data
+ * It is intended that {@link ZoneInfoCompiler} be used to read time zone data
  * files, indirectly calling DateTimeZoneBuilder. The following complex
  * example defines the America/Los_Angeles time zone, with all historical
  * transitions:
@@ -79,8 +79,8 @@ import org.joda.time.chrono.ISOChronology;
  * </pre>
  *
  * @author Brian S O'Neill
- * @see org.joda.time.tz.ZoneInfoCompiler
- * @see org.joda.time.tz.ZoneInfoProvider
+ * @see ZoneInfoCompiler
+ * @see ZoneInfoProvider
  * @since 1.0
  */
 public class DateTimeZoneBuilder {

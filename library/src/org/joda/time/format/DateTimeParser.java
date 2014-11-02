@@ -19,17 +19,17 @@ package org.joda.time.format;
  * Internal interface for parsing textual representations of datetimes.
  * <p>
  * Application users will rarely use this class directly. Instead, you
- * will use one of the factory classes to create a {@link org.joda.time.format.DateTimeFormatter}.
+ * will use one of the factory classes to create a {@link DateTimeFormatter}.
  * <p>
  * The factory classes are:<br />
- * - {@link org.joda.time.format.DateTimeFormatterBuilder}<br />
- * - {@link org.joda.time.format.DateTimeFormat}<br />
- * - {@link org.joda.time.format.ISODateTimeFormat}<br />
+ * - {@link DateTimeFormatterBuilder}<br />
+ * - {@link DateTimeFormat}<br />
+ * - {@link ISODateTimeFormat}<br />
  *
  * @author Brian S O'Neill
- * @see org.joda.time.format.DateTimeFormatter
- * @see org.joda.time.format.DateTimeFormatterBuilder
- * @see org.joda.time.format.DateTimeFormat
+ * @see DateTimeFormatter
+ * @see DateTimeFormatterBuilder
+ * @see DateTimeFormat
  * @since 1.0
  */
 public interface DateTimeParser {

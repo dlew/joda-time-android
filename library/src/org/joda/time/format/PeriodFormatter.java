@@ -31,9 +31,9 @@ import org.joda.time.ReadablePeriod;
  * This class is the main API for printing and parsing used by most applications.
  * Instances of this class are created via one of three factory classes:
  * <ul>
- * <li>{@link org.joda.time.format.PeriodFormat} - formats by pattern and style</li>
- * <li>{@link org.joda.time.format.ISOPeriodFormat} - ISO8601 formats</li>
- * <li>{@link org.joda.time.format.PeriodFormatterBuilder} - complex formats created via method calls</li>
+ * <li>{@link PeriodFormat} - formats by pattern and style</li>
+ * <li>{@link ISOPeriodFormat} - ISO8601 formats</li>
+ * <li>{@link PeriodFormatterBuilder} - complex formats created via method calls</li>
  * </ul>
  * <p>
  * An instance of this class holds a reference internally to one printer and
@@ -44,7 +44,7 @@ import org.joda.time.ReadablePeriod;
  * The underlying printer/parser can be altered to behave exactly as required
  * by using a decorator modifier:
  * <ul>
- * <li>{@link #withLocale(java.util.Locale)} - returns a new formatter that uses the specified locale</li>
+ * <li>{@link #withLocale(Locale)} - returns a new formatter that uses the specified locale</li>
  * </ul>
  * This returns a new formatter (instances of this class are immutable).
  * <p>

@@ -34,7 +34,6 @@ import java.util.TreeMap;
 import java.util.Map.Entry;
 
 import net.danlew.android.joda.ResUtils;
-
 import org.joda.time.Chronology;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeField;
@@ -398,7 +397,7 @@ public class ZoneInfoCompiler {
             if (test(tz.getID(), tz)) {
                 map.put(tz.getID(), tz);
                 if (outputDir != null) {
-                	String fileName = ResUtils.getTzResource(tz.getID());
+                    String fileName = ResUtils.getTzResource(tz.getID());
                     if (ZoneInfoCompiler.verbose()) {
                         System.out.println("Writing " + fileName);
                     }
@@ -587,10 +586,12 @@ public class ZoneInfoCompiler {
                             LocalDate date = (day == -1 ?
                                     new LocalDate(2001, month, 1).plusMonths(1) :
                                     new LocalDate(2001, month, day).plusDays(1));
-                            advance = (day != -1);
+                            advance = (day != -1 && dayOfWeek != 0);
                             month = date.getMonthOfYear();
                             day = date.getDayOfMonth();
-                            dayOfWeek = ((dayOfWeek - 1 + 1) % 7) + 1;
+                            if (dayOfWeek != 0) {
+                                dayOfWeek = ((dayOfWeek - 1 + 1) % 7) + 1;
+                            }
                         } else {
                             millis = parseTime(str);
                         }

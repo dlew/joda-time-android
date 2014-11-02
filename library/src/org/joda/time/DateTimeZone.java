@@ -41,6 +41,7 @@ import org.joda.time.tz.FixedDateTimeZone;
 import org.joda.time.tz.NameProvider;
 import org.joda.time.tz.Provider;
 import org.joda.time.tz.UTCProvider;
+import org.joda.time.tz.ZoneInfoProvider;
 
 /**
  * DateTimeZone represents a time zone.
@@ -91,7 +92,7 @@ public abstract class DateTimeZone implements Serializable {
     private static final long serialVersionUID = 5546345482340108586L;
 
     /** The time zone for Universal Coordinated Time */
-    public static final DateTimeZone UTC = new FixedDateTimeZone("UTC", "UTC", 0, 0);
+    public static final DateTimeZone UTC = UTCDateTimeZone.INSTANCE;
     /** Maximum offset. */
     private static final int MAX_MILLIS = (86400 * 1000) - 1;
 
@@ -1003,7 +1004,7 @@ public abstract class DateTimeZone implements Serializable {
      * @param strict  whether the conversion should reject non-existent local times
      * @return the UTC instant with the same local time, 
      * @throws ArithmeticException if the result overflows a long
-     * @throws org.joda.time.IllegalInstantException if the zone has no equivalent local time
+     * @throws IllegalInstantException if the zone has no equivalent local time
      * @since 1.5
      */
     public long convertLocalToUTC(long instantLocal, boolean strict) {
@@ -1166,7 +1167,7 @@ public abstract class DateTimeZone implements Serializable {
 //    }
 
     /**
-     * Checks if the given {@link org.joda.time.LocalDateTime} is within a gap.
+     * Checks if the given {@link LocalDateTime} is within a gap.
      * <p>
      * When switching from standard time to Daylight Savings Time there is
      * typically a gap where a clock hour is missing. This method identifies
@@ -1264,8 +1265,8 @@ public abstract class DateTimeZone implements Serializable {
      * 
      * @return the closest matching TimeZone object
      */
-    public TimeZone toTimeZone() {
-        return TimeZone.getTimeZone(iID);
+    public java.util.TimeZone toTimeZone() {
+        return java.util.TimeZone.getTimeZone(iID);
     }
 
     /**

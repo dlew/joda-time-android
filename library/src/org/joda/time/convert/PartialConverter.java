@@ -83,8 +83,7 @@ public interface PartialConverter extends Converter {
      * @throws ClassCastException if the object is invalid
      * @since 1.3
      */
-    int[] getPartialValues(
-        ReadablePartial fieldSource, Object object, Chronology chrono,
-        DateTimeFormatter parser);
+    int[] getPartialValues(ReadablePartial fieldSource, Object object, Chronology chrono,
+                           DateTimeFormatter parser);
 
 }

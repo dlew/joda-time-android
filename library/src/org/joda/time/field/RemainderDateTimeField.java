@@ -20,13 +20,13 @@ import org.joda.time.DateTimeFieldType;
 import org.joda.time.DurationField;
 
 /**
- * Counterpart remainder datetime field to {@link org.joda.time.field.DividedDateTimeField}. The
+ * Counterpart remainder datetime field to {@link DividedDateTimeField}. The
  * field's unit duration is unchanged, but the range duration is scaled
  * accordingly.
  * <p>
  * RemainderDateTimeField is thread-safe and immutable.
  *
- * @see org.joda.time.field.DividedDateTimeField
+ * @see DividedDateTimeField
  *
  * @author Brian S O'Neill
  * @since 1.0

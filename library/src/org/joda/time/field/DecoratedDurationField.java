@@ -19,7 +19,7 @@ import org.joda.time.DurationField;
 import org.joda.time.DurationFieldType;
 
 /**
- * <code>DecoratedDurationField</code> extends {@link org.joda.time.field.BaseDurationField},
+ * <code>DecoratedDurationField</code> extends {@link BaseDurationField},
  * implementing only the minimum required set of methods. These implemented
  * methods delegate to a wrapped field.
  * <p>
@@ -32,7 +32,7 @@ import org.joda.time.DurationFieldType;
  * be as well.
  *
  * @author Brian S O'Neill
- * @see org.joda.time.field.DelegatedDurationField
+ * @see DelegatedDurationField
  * @since 1.0
  */
 public class DecoratedDurationField extends BaseDurationField {

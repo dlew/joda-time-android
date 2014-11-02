@@ -76,7 +76,7 @@ public abstract class BaseChronology
      *
      * @return a version of this chronology with a specific time zone
      * @param zone to use, or default if null
-     * @see ZonedChronology
+     * @see org.joda.time.chrono.ZonedChronology
      */
     public abstract Chronology withZone(DateTimeZone zone);
 
@@ -170,8 +170,8 @@ public abstract class BaseChronology
     /**
      * Validates whether the fields stored in a partial instant are valid.
      * <p>
-     * This implementation uses {@link org.joda.time.DateTimeField#getMinimumValue(org.joda.time.ReadablePartial, int[])}
-     * and {@link org.joda.time.DateTimeField#getMaximumValue(org.joda.time.ReadablePartial, int[])}.
+     * This implementation uses {@link DateTimeField#getMinimumValue(ReadablePartial, int[])}
+     * and {@link DateTimeField#getMaximumValue(ReadablePartial, int[])}.
      *
      * @param partial  the partial instant to validate
      * @param values  the values to validate, not null unless the partial is empty

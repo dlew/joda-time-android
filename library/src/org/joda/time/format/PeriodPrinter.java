@@ -25,19 +25,19 @@ import org.joda.time.ReadablePeriod;
  * Internal interface for printing textual representations of time periods.
  * <p>
  * Application users will rarely use this class directly. Instead, you
- * will use one of the factory classes to create a {@link org.joda.time.format.PeriodFormatter}.
+ * will use one of the factory classes to create a {@link PeriodFormatter}.
  * <p>
  * The factory classes are:<br />
- * - {@link org.joda.time.format.PeriodFormatterBuilder}<br />
- * - {@link org.joda.time.format.PeriodFormat}<br />
- * - {@link org.joda.time.format.ISOPeriodFormat}<br />
+ * - {@link PeriodFormatterBuilder}<br />
+ * - {@link PeriodFormat}<br />
+ * - {@link ISOPeriodFormat}<br />
  *
  * @author Brian S O'Neill
  * @author Stephen Colebourne
  * @since 1.0
- * @see org.joda.time.format.PeriodFormatter
- * @see org.joda.time.format.PeriodFormatterBuilder
- * @see org.joda.time.format.PeriodFormat
+ * @see PeriodFormatter
+ * @see PeriodFormatterBuilder
+ * @see PeriodFormat
  */
 public interface PeriodPrinter {
 

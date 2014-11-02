@@ -66,7 +66,7 @@ import org.joda.time.format.ISODateTimeFormat;
  * @author Stephen Colebourne
  * @author Mike Schrag
  * @since 1.0
- * @see org.joda.time.DateTime
+ * @see DateTime
  */
 public class MutableDateTime
         extends BaseDateTime
@@ -77,15 +77,15 @@ public class MutableDateTime
 
     /** Rounding is disabled */
     public static final int ROUND_NONE = 0;
-    /** Rounding mode as described by {@link org.joda.time.DateTimeField#roundFloor} */
+    /** Rounding mode as described by {@link DateTimeField#roundFloor} */
     public static final int ROUND_FLOOR = 1;
-    /** Rounding mode as described by {@link org.joda.time.DateTimeField#roundCeiling} */
+    /** Rounding mode as described by {@link DateTimeField#roundCeiling} */
     public static final int ROUND_CEILING = 2;
-    /** Rounding mode as described by {@link org.joda.time.DateTimeField#roundHalfFloor} */
+    /** Rounding mode as described by {@link DateTimeField#roundHalfFloor} */
     public static final int ROUND_HALF_FLOOR = 3;
-    /** Rounding mode as described by {@link org.joda.time.DateTimeField#roundHalfCeiling} */
+    /** Rounding mode as described by {@link DateTimeField#roundHalfCeiling} */
     public static final int ROUND_HALF_CEILING = 4;
-    /** Rounding mode as described by {@link org.joda.time.DateTimeField#roundHalfEven} */
+    /** Rounding mode as described by {@link DateTimeField#roundHalfEven} */
     public static final int ROUND_HALF_EVEN = 5;
 
     /** The field to round on */
@@ -139,7 +139,7 @@ public class MutableDateTime
     /**
      * Parses a {@code MutableDateTime} from the specified string.
      * <p>
-     * This uses {@link org.joda.time.format.ISODateTimeFormat#dateTimeParser()}.
+     * This uses {@link ISODateTimeFormat#dateTimeParser()}.
      * 
      * @param str  the string to parse, not null
      * @since 2.0
@@ -178,7 +178,7 @@ public class MutableDateTime
      * If the specified time zone is null, the default zone is used.
      *
      * @param zone  the time zone, null means default zone
-     * @see #now(org.joda.time.DateTimeZone)
+     * @see #now(DateTimeZone)
      */
     public MutableDateTime(DateTimeZone zone) {
         super(zone);
@@ -192,7 +192,7 @@ public class MutableDateTime
      * in the default time zone is used.
      *
      * @param chronology  the chronology, null means ISOChronology in default zone
-     * @see #now(org.joda.time.Chronology)
+     * @see #now(Chronology)
      */
     public MutableDateTime(Chronology chronology) {
         super(chronology);
@@ -1131,7 +1131,7 @@ public class MutableDateTime
     /**
      * Get the day of month property.
      * <p>
-     * The values for day of month are defined in {@link org.joda.time.DateTimeConstants}.
+     * The values for day of month are defined in {@link DateTimeConstants}.
      * 
      * @return the day of month property
      */
@@ -1142,7 +1142,7 @@ public class MutableDateTime
     /**
      * Get the day of week property.
      * <p>
-     * The values for day of week are defined in {@link org.joda.time.DateTimeConstants}.
+     * The values for day of week are defined in {@link DateTimeConstants}.
      * 
      * @return the day of week property
      */
@@ -1341,7 +1341,7 @@ public class MutableDateTime
          * 
          * @param value  the value to add
          * @return the mutable datetime being used, so calls can be chained
-         * @see org.joda.time.DateTimeField#add(long,int)
+         * @see DateTimeField#add(long,int)
          */
         public MutableDateTime add(int value) {
             iInstant.setMillis(getField().add(iInstant.getMillis(), value));
@@ -1353,7 +1353,7 @@ public class MutableDateTime
          * 
          * @param value  the value to add
          * @return the mutable datetime being used, so calls can be chained
-         * @see org.joda.time.DateTimeField#add(long,long)
+         * @see DateTimeField#add(long,long)
          */
         public MutableDateTime add(long value) {
             iInstant.setMillis(getField().add(iInstant.getMillis(), value));
@@ -1365,7 +1365,7 @@ public class MutableDateTime
          * 
          * @param value  the value to add
          * @return the mutable datetime being used, so calls can be chained
-         * @see org.joda.time.DateTimeField#addWrapField
+         * @see DateTimeField#addWrapField
          */
         public MutableDateTime addWrapField(int value) {
             iInstant.setMillis(getField().addWrapField(iInstant.getMillis(), value));
@@ -1378,7 +1378,7 @@ public class MutableDateTime
          * 
          * @param value  the value to set.
          * @return the mutable datetime being used, so calls can be chained
-         * @see org.joda.time.DateTimeField#set(long,int)
+         * @see DateTimeField#set(long,int)
          */
         public MutableDateTime set(int value) {
             iInstant.setMillis(getField().set(iInstant.getMillis(), value));
@@ -1392,7 +1392,7 @@ public class MutableDateTime
          * @param locale  optional locale to use for selecting a text symbol
          * @return the mutable datetime being used, so calls can be chained
          * @throws IllegalArgumentException if the text value isn't valid
-         * @see org.joda.time.DateTimeField#set(long,String,java.util.Locale)
+         * @see DateTimeField#set(long,java.lang.String,java.util.Locale)
          */
         public MutableDateTime set(String text, Locale locale) {
             iInstant.setMillis(getField().set(iInstant.getMillis(), text, locale));
@@ -1405,7 +1405,7 @@ public class MutableDateTime
          * @param text  the text value to set
          * @return the mutable datetime being used, so calls can be chained
          * @throws IllegalArgumentException if the text value isn't valid
-         * @see org.joda.time.DateTimeField#set(long,String)
+         * @see DateTimeField#set(long,java.lang.String)
          */
         public MutableDateTime set(String text) {
             set(text, null);
@@ -1417,7 +1417,7 @@ public class MutableDateTime
          * Round to the lowest whole unit of this field.
          *
          * @return the mutable datetime being used, so calls can be chained
-         * @see org.joda.time.DateTimeField#roundFloor
+         * @see DateTimeField#roundFloor
          */
         public MutableDateTime roundFloor() {
             iInstant.setMillis(getField().roundFloor(iInstant.getMillis()));
@@ -1428,7 +1428,7 @@ public class MutableDateTime
          * Round to the highest whole unit of this field.
          *
          * @return the mutable datetime being used, so calls can be chained
-         * @see org.joda.time.DateTimeField#roundCeiling
+         * @see DateTimeField#roundCeiling
          */
         public MutableDateTime roundCeiling() {
             iInstant.setMillis(getField().roundCeiling(iInstant.getMillis()));
@@ -1440,7 +1440,7 @@ public class MutableDateTime
          * halfway.
          *
          * @return the mutable datetime being used, so calls can be chained
-         * @see org.joda.time.DateTimeField#roundHalfFloor
+         * @see DateTimeField#roundHalfFloor
          */
         public MutableDateTime roundHalfFloor() {
             iInstant.setMillis(getField().roundHalfFloor(iInstant.getMillis()));
@@ -1452,7 +1452,7 @@ public class MutableDateTime
          * halfway.
          *
          * @return the mutable datetime being used, so calls can be chained
-         * @see org.joda.time.DateTimeField#roundHalfCeiling
+         * @see DateTimeField#roundHalfCeiling
          */
         public MutableDateTime roundHalfCeiling() {
             iInstant.setMillis(getField().roundHalfCeiling(iInstant.getMillis()));
@@ -1464,7 +1464,7 @@ public class MutableDateTime
          * is favored over the floor only if it makes this field's value even.
          *
          * @return the mutable datetime being used, so calls can be chained
-         * @see org.joda.time.DateTimeField#roundHalfEven
+         * @see DateTimeField#roundHalfEven
          */
         public MutableDateTime roundHalfEven() {
             iInstant.setMillis(getField().roundHalfEven(iInstant.getMillis()));

@@ -42,7 +42,7 @@ import org.joda.time.field.SkipDateTimeField;
  * CopticChronology is thread-safe and immutable.
  *
  * @see <a href="http://en.wikipedia.org/wiki/Coptic_calendar">Wikipedia</a>
- * @see org.joda.time.chrono.JulianChronology
+ * @see JulianChronology
  *
  * @author Brian S O'Neill
  * @since 1.0

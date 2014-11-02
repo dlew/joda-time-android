@@ -99,7 +99,7 @@ public abstract class AbstractPartialFieldProperty {
      * See {@link #getAsText()} and {@link #getAsShortText()} for those.
      * 
      * @return the current value
-     * @see org.joda.time.DateTimeField#get
+     * @see DateTimeField#get
      * @since 1.1
      */
     public String getAsString() {
@@ -115,7 +115,7 @@ public abstract class AbstractPartialFieldProperty {
      * Thus, a day of week of 1 would return 'Monday' in English.
      * 
      * @return the current text value
-     * @see org.joda.time.DateTimeField#getAsText
+     * @see DateTimeField#getAsText
      */
     public String getAsText() {
         return getAsText(null);
@@ -131,7 +131,7 @@ public abstract class AbstractPartialFieldProperty {
      * 
      * @param locale  locale to use for selecting a text symbol, null means default
      * @return the current text value
-     * @see org.joda.time.DateTimeField#getAsText
+     * @see DateTimeField#getAsText
      */
     public String getAsText(Locale locale) {
         return getField().getAsText(getReadablePartial(), get(), locale);
@@ -146,7 +146,7 @@ public abstract class AbstractPartialFieldProperty {
      * Thus, a day of week of 1 would return 'Mon' in English.
      * 
      * @return the current text value
-     * @see org.joda.time.DateTimeField#getAsShortText
+     * @see DateTimeField#getAsShortText
      */
     public String getAsShortText() {
         return getAsShortText(null);
@@ -162,7 +162,7 @@ public abstract class AbstractPartialFieldProperty {
      * 
      * @param locale  locale to use for selecting a text symbol, null means default
      * @return the current text value
-     * @see org.joda.time.DateTimeField#getAsShortText
+     * @see DateTimeField#getAsShortText
      */
     public String getAsShortText(Locale locale) {
         return getField().getAsShortText(getReadablePartial(), get(), locale);
@@ -194,7 +194,7 @@ public abstract class AbstractPartialFieldProperty {
      * Gets the minimum value for the field ignoring the current time.
      * 
      * @return the minimum value
-     * @see org.joda.time.DateTimeField#getMinimumValue
+     * @see DateTimeField#getMinimumValue
      */
     public int getMinimumValueOverall() {
         return getField().getMinimumValue();
@@ -204,7 +204,7 @@ public abstract class AbstractPartialFieldProperty {
      * Gets the minimum value for this field given the current field values.
      * 
      * @return the minimum value
-     * @see org.joda.time.DateTimeField#getMinimumValue
+     * @see DateTimeField#getMinimumValue
      */
     public int getMinimumValue() {
         return getField().getMinimumValue(getReadablePartial());
@@ -214,7 +214,7 @@ public abstract class AbstractPartialFieldProperty {
      * Gets the maximum value for the field ignoring the current time.
      * 
      * @return the maximum value
-     * @see org.joda.time.DateTimeField#getMaximumValue
+     * @see DateTimeField#getMaximumValue
      */
     public int getMaximumValueOverall() {
         return getField().getMaximumValue();
@@ -224,7 +224,7 @@ public abstract class AbstractPartialFieldProperty {
      * Gets the maximum value for this field given the current field values.
      * 
      * @return the maximum value
-     * @see org.joda.time.DateTimeField#getMaximumValue
+     * @see DateTimeField#getMaximumValue
      */
     public int getMaximumValue() {
         return getField().getMaximumValue(getReadablePartial());
@@ -236,7 +236,7 @@ public abstract class AbstractPartialFieldProperty {
      * 
      * @param locale  optional locale to use for selecting a text symbol
      * @return the maximum length
-     * @see org.joda.time.DateTimeField#getMaximumTextLength
+     * @see DateTimeField#getMaximumTextLength
      */
     public int getMaximumTextLength(Locale locale) {
         return getField().getMaximumTextLength(locale);
@@ -247,7 +247,7 @@ public abstract class AbstractPartialFieldProperty {
      * 
      * @param locale  optional locale to use for selecting a text symbol
      * @return the maximum length
-     * @see org.joda.time.DateTimeField#getMaximumShortTextLength
+     * @see DateTimeField#getMaximumShortTextLength
      */
     public int getMaximumShortTextLength(Locale locale) {
         return getField().getMaximumShortTextLength(locale);

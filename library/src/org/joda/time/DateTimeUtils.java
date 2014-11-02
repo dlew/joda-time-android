@@ -186,7 +186,7 @@ public class DateTimeUtils {
      * Gets the chronology from the specified instant object handling null.
      * <p>
      * If the instant object is <code>null</code>, or the instant's chronology is
-     * <code>null</code>, {@link org.joda.time.chrono.ISOChronology#getInstance()} will be returned.
+     * <code>null</code>, {@link ISOChronology#getInstance()} will be returned.
      * Otherwise, the chronology from the object is returned.
      * 
      * @param instant  the instant to examine, null means ISO in the default zone
@@ -209,7 +209,7 @@ public class DateTimeUtils {
      * <p>
      * The chronology is obtained from the start if that is not null, or from the
      * end if the start is null. The result is additionally checked, and if still
-     * null then {@link org.joda.time.chrono.ISOChronology#getInstance()} will be returned.
+     * null then {@link ISOChronology#getInstance()} will be returned.
      * 
      * @param start  the instant to examine and use as the primary source of the chronology
      * @param end  the instant to examine and use as the secondary source of the chronology
@@ -233,7 +233,7 @@ public class DateTimeUtils {
      * Gets the chronology from the specified interval object handling null.
      * <p>
      * If the interval object is <code>null</code>, or the interval's chronology is
-     * <code>null</code>, {@link org.joda.time.chrono.ISOChronology#getInstance()} will be returned.
+     * <code>null</code>, {@link ISOChronology#getInstance()} will be returned.
      * Otherwise, the chronology from the object is returned.
      * 
      * @param interval  the interval to examine, null means ISO in the default zone
@@ -255,7 +255,7 @@ public class DateTimeUtils {
      * Gets the interval handling null.
      * <p>
      * If the interval is <code>null</code>, an interval representing now
-     * to now in the {@link org.joda.time.chrono.ISOChronology#getInstance() ISOChronology}
+     * to now in the {@link ISOChronology#getInstance() ISOChronology}
      * will be returned. Otherwise, the interval specified is returned.
      * 
      * @param interval  the interval to use, null means now to now
@@ -274,7 +274,7 @@ public class DateTimeUtils {
     /**
      * Gets the chronology handling null.
      * <p>
-     * If the chronology is <code>null</code>, {@link org.joda.time.chrono.ISOChronology#getInstance()}
+     * If the chronology is <code>null</code>, {@link ISOChronology#getInstance()}
      * will be returned. Otherwise, the chronology is returned.
      * 
      * @param chrono  the chronology to use, null means ISO in the default zone
@@ -291,7 +291,7 @@ public class DateTimeUtils {
     /**
      * Gets the zone handling null.
      * <p>
-     * If the zone is <code>null</code>, {@link org.joda.time.DateTimeZone#getDefault()}
+     * If the zone is <code>null</code>, {@link DateTimeZone#getDefault()}
      * will be returned. Otherwise, the zone specified is returned.
      * 
      * @param zone  the time zone to use, null means the default zone
@@ -308,7 +308,7 @@ public class DateTimeUtils {
     /**
      * Gets the period type handling null.
      * <p>
-     * If the zone is <code>null</code>, {@link org.joda.time.PeriodType#standard()}
+     * If the zone is <code>null</code>, {@link PeriodType#standard()}
      * will be returned. Otherwise, the type specified is returned.
      * 
      * @param type  the time zone to use, null means the standard type
@@ -381,14 +381,14 @@ public class DateTimeUtils {
 
     //-----------------------------------------------------------------------
     /**
-     * Gets the {@link java.text.DateFormatSymbols} based on the given locale.
+     * Gets the {@link DateFormatSymbols} based on the given locale.
      * <p>
      * If JDK 6 or newer is being used, DateFormatSymbols.getInstance(locale) will
      * be used in order to allow the use of locales defined as extensions.
      * Otherwise, new DateFormatSymbols(locale) will be used.
-     * See JDK 6 {@link java.text.DateFormatSymbols} for further information.
+     * See JDK 6 {@link DateFormatSymbols} for further information.
      * 
-     * @param locale  the {@link java.util.Locale} used to get the correct {@link java.text.DateFormatSymbols}
+     * @param locale  the {@link Locale} used to get the correct {@link DateFormatSymbols}
      * @return the symbols
      * @since 2.0
      */

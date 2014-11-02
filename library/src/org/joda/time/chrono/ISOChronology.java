@@ -34,7 +34,7 @@ import org.joda.time.field.RemainderDateTimeField;
  * it is included.
  * <p>
  * With the exception of century related fields, ISOChronology is exactly the
- * same as {@link org.joda.time.chrono.GregorianChronology}. In this chronology, centuries and year
+ * same as {@link GregorianChronology}. In this chronology, centuries and year
  * of century are zero based. For all years, the century is determined by
  * dropping the last two digits of the year, ignoring sign. The year of century
  * is the value of the last two year digits.

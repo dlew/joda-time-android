@@ -24,9 +24,9 @@ import org.joda.time.DateTimeFieldType;
 /**
  * Factory that creates instances of DateTimeFormatter based on the ISO8601 standard.
  * <p>
- * Date-time formatting is performed by the {@link org.joda.time.format.DateTimeFormatter} class.
+ * Date-time formatting is performed by the {@link DateTimeFormatter} class.
  * Three classes provide factory methods to create formatters, and this is one.
- * The others are {@link org.joda.time.format.DateTimeFormat} and {@link org.joda.time.format.DateTimeFormatterBuilder}.
+ * The others are {@link DateTimeFormat} and {@link DateTimeFormatterBuilder}.
  * <p>
  * ISO8601 is the international standard for data interchange. It defines a
  * framework, rather than an absolute standard. As a result this provider has a
@@ -57,8 +57,8 @@ import org.joda.time.DateTimeFieldType;
  *
  * @author Brian S O'Neill
  * @since 1.0
- * @see org.joda.time.format.DateTimeFormat
- * @see org.joda.time.format.DateTimeFormatterBuilder
+ * @see DateTimeFormat
+ * @see DateTimeFormatterBuilder
  */
 public class ISODateTimeFormat {
 

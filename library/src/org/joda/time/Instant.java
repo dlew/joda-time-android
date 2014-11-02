@@ -28,7 +28,7 @@ import org.joda.time.format.ISODateTimeFormat;
 /**
  * Instant is the standard implementation of a fully immutable instant in time.
  * <p>
- * <code>Instant</code> is an implementation of {@link org.joda.time.ReadableInstant}.
+ * <code>Instant</code> is an implementation of {@link ReadableInstant}.
  * As with all instants, it represents an exact point on the time-line,
  * but limited to the precision of milliseconds. An <code>Instant</code>
  * should be used to represent a point in time irrespective of any other
@@ -77,7 +77,7 @@ public final class Instant
     /**
      * Parses a {@code Instant} from the specified string.
      * <p>
-     * This uses {@link org.joda.time.format.ISODateTimeFormat#dateTimeParser()}.
+     * This uses {@link ISODateTimeFormat#dateTimeParser()}.
      * 
      * @param str  the string to parse, not null
      * @since 2.0
@@ -122,7 +122,7 @@ public final class Instant
     /**
      * Constructs an instance from an Object that represents a datetime.
      * <p>
-     * The recognised object types are defined in {@link org.joda.time.convert.ConverterManager} and
+     * The recognised object types are defined in {@link ConverterManager} and
      * include String, Calendar and Date.
      *
      * @param instant  the datetime object, null means now
@@ -259,7 +259,7 @@ public final class Instant
     /**
      * Gets the chronology of the instant, which is ISO in the UTC zone.
      * <p>
-     * This method returns {@link org.joda.time.chrono.ISOChronology#getInstanceUTC()} which
+     * This method returns {@link ISOChronology#getInstanceUTC()} which
      * corresponds to the definition of the Java epoch 1970-01-01T00:00:00Z.
      * 
      * @return ISO in the UTC zone

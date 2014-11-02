@@ -30,7 +30,7 @@ import org.joda.time.convert.InstantConverter;
  * data in <code>long</code> and <code>Chronology</code> fields.
  * <p>
  * This class should generally not be used directly by API users.
- * The {@link org.joda.time.ReadableDateTime} interface should be used when different
+ * The {@link ReadableDateTime} interface should be used when different 
  * kinds of date/time objects are to be referenced.
  * <p>
  * BaseDateTime subclasses may be mutable and not thread-safe.

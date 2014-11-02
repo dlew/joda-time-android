@@ -26,7 +26,7 @@ import org.joda.time.format.FormatUtils;
  * AbstractDuration provides the common behaviour for duration classes.
  * <p>
  * This class should generally not be used directly by API users. The 
- * {@link org.joda.time.ReadableDuration} interface should be used when different
+ * {@link ReadableDuration} interface should be used when different 
  * kinds of durations are to be referenced.
  * <p>
  * AbstractDuration subclasses may be mutable and not thread-safe.
@@ -72,7 +72,7 @@ public abstract class AbstractDuration implements ReadableDuration {
      * converted to ((365 + 60 + 5) * 24) hours by this constructor.
      * <p>
      * For more control over the conversion process, you must pair the duration with
-     * an instant, see {@link org.joda.time.Period#Period(org.joda.time.ReadableInstant, org.joda.time.ReadableDuration)}.
+     * an instant, see {@link Period#Period(ReadableInstant,ReadableDuration)}.
      * 
      * @return a Period created using the millisecond duration from this instance
      */
@@ -120,7 +120,7 @@ public abstract class AbstractDuration implements ReadableDuration {
      * Is the length of this duration longer than the duration passed in.
      *
      * @param duration  another duration to compare to, null means zero milliseconds
-     * @return true if this duration is equal to than the duration passed in
+     * @return true if this duration is longer than the duration passed in
      */
     public boolean isLongerThan(ReadableDuration duration) {
         if (duration == null) {
@@ -133,7 +133,7 @@ public abstract class AbstractDuration implements ReadableDuration {
      * Is the length of this duration shorter than the duration passed in.
      *
      * @param duration  another duration to compare to, null means zero milliseconds
-     * @return true if this duration is equal to than the duration passed in
+     * @return true if this duration is shorter than the duration passed in
      */
     public boolean isShorterThan(ReadableDuration duration) {
         if (duration == null) {

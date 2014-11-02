@@ -39,7 +39,7 @@ import org.joda.time.format.ISODateTimeFormat;
  * millisecond instant.
  * <p>
  * This class should generally not be used directly by API users. The 
- * {@link org.joda.time.ReadableInstant} interface should be used when different
+ * {@link ReadableInstant} interface should be used when different 
  * kinds of date/time objects are to be referenced.
  * <p>
  * Whenever you want to implement <code>ReadableInstant</code> you should
@@ -94,7 +94,7 @@ public abstract class AbstractInstant implements ReadableInstant {
 
     /**
      * Checks if the field type specified is supported by this instant and chronology.
-     * This can be used to avoid exceptions in {@link #get(org.joda.time.DateTimeFieldType)}.
+     * This can be used to avoid exceptions in {@link #get(DateTimeFieldType)}.
      *
      * @param type  a field type, usually obtained from DateTimeFieldType
      * @return true if the field type is supported
@@ -242,10 +242,10 @@ public abstract class AbstractInstant implements ReadableInstant {
      * <p>
      * Two objects which represent the same instant in time, but are in
      * different time zones (based on time zone id), will be considered to
-     * be different. Only two objects with the same {@link org.joda.time.DateTimeZone},
-     * {@link org.joda.time.Chronology} and instant are equal.
+     * be different. Only two objects with the same {@link DateTimeZone},
+     * {@link Chronology} and instant are equal.
      * <p>
-     * See {@link #isEqual(org.joda.time.ReadableInstant)} for an equals method that
+     * See {@link #isEqual(ReadableInstant)} for an equals method that
      * ignores the Chronology and time zone.
      * <p>
      * All ReadableInstant instances are accepted.

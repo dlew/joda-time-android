@@ -163,7 +163,7 @@ public class DateTimeParserBucket {
      * The bucket is reset before parsing begins, allowing the bucket to be re-used.
      * The bucket must not be shared between threads.
      *
-     * @param parser  the parser to use, see {@link org.joda.time.format.DateTimeFormatter#getParser()}, not null
+     * @param parser  the parser to use, see {@link DateTimeFormatter#getParser()}, not null
      * @param text  text to parse, not null
      * @return parsed value expressed in milliseconds since the epoch
      * @throws UnsupportedOperationException if parsing is not supported

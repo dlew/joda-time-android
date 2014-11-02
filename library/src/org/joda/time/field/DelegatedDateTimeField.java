@@ -31,7 +31,7 @@ import org.joda.time.ReadablePartial;
  *
  * @author Brian S O'Neill
  * @since 1.0
- * @see org.joda.time.field.DecoratedDateTimeField
+ * @see DecoratedDateTimeField
  */
 public class DelegatedDateTimeField extends DateTimeField implements Serializable {
 
