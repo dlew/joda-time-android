@@ -1,5 +1,7 @@
 # Changelog
 
+* Modified how default DateTimeZone is updated by system (#20)
+
 # 2.5.0
 
 * Updated to joda-time 2.5
