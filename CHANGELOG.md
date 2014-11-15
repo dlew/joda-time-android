@@ -1,6 +1,7 @@
 # Changelog
 
 * Modified how default DateTimeZone is updated by system (#20)
+* Updated to tzdata 2014j
 
 # 2.5.0
 
