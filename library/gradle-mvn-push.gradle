@@ -95,6 +95,13 @@ afterEvaluate { project ->
     task androidJavadocs(type: Javadoc) {
         source = android.sourceSets.main.java.srcDirs
         classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+
+        // Exclude files in the source directories that aren't java
+        exclude '**/*.html'
+        exclude '**/*.properties'
+
+        // The joda-time javadocs are full of errors; let's ignore them!
+        failOnError false
     }
 
     task androidJavadocsJar(type: Jar, dependsOn: androidJavadocs) {
