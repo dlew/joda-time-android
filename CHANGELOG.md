@@ -1,5 +1,10 @@
 # Changelog
 
+# 2.5.1
+
+* Modified how default DateTimeZone is updated by system (#20)
+* Updated to tzdata 2014j
+
 # 2.5.0
 
 * Updated to joda-time 2.5
