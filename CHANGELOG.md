@@ -1,5 +1,7 @@
 # Changelog
 
+# 2.6.0
+
 * Updated to joda-time 2.6
 
 # 2.5.1
