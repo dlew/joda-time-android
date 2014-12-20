@@ -17,7 +17,6 @@ package net.danlew.android.joda.test;
 
 import android.content.Context;
 import android.test.InstrumentationTestCase;
-import junit.framework.TestSuite;
 import net.danlew.android.joda.JodaTimeAndroid;
 import net.danlew.android.joda.ResourceZoneInfoProvider;
 import org.joda.time.DateTime;
@@ -31,7 +30,6 @@ import org.joda.time.tz.DefaultNameProvider;
 import org.joda.time.tz.NameProvider;
 import org.joda.time.tz.Provider;
 import org.joda.time.tz.UTCProvider;
-import org.joda.time.tz.ZoneInfoProvider;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -48,9 +46,7 @@ import java.security.ProtectionDomain;
 import java.text.DateFormatSymbols;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.Locale;
-import java.util.Map;
 import java.util.Set;
 import java.util.TimeZone;
 
@@ -1061,7 +1057,7 @@ public class TestDateTimeZone extends InstrumentationTestCase {
         DateTimeZone result = (DateTimeZone) ois.readObject();
         ois.close();
         
-        assertSame(zone, result);
+        assertEquals(zone, result);
     }
 
     public void testCommentParse() throws Exception {
