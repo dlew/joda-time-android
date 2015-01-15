@@ -1,5 +1,11 @@
 package net.danlew.android.joda;
 
+import android.content.Context;
+import android.util.Log;
+import org.joda.time.DateTimeZone;
+import org.joda.time.tz.DateTimeZoneBuilder;
+import org.joda.time.tz.Provider;
+
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -9,24 +15,17 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 
-import android.util.Log;
-import org.joda.time.DateTimeZone;
-import org.joda.time.tz.DateTimeZoneBuilder;
-import org.joda.time.tz.Provider;
-
-import android.content.Context;
-
 /**
  * A version of ZoneInfoProvider that loads its data from
  * Android resources.
- * 
+ *
  * In order to give it access to Resources, you must call
  * JodaTimeAndroid.init() before starting to use Joda-Time.
  */
 public class ResourceZoneInfoProvider implements Provider {
 
     /** The application context, used for retrieving resources */
-    private static Context sAppContext;
+    private Context mAppContext;
 
     /** Maps ids to strings or SoftReferences to DateTimeZones. */
     private final Map<String, Object> iZoneInfoMap;
@@ -37,14 +36,25 @@ public class ResourceZoneInfoProvider implements Provider {
     public static void init(Context context) {
         if (!JodaTimeAndroid.hasInitBeenCalled()) {
             Log.w("joda-time-android",
-                    "Calling ResourceZoneInfoProvider.init() directly is deprecated. Use JodaTimeAndroid.init()");
+                "Calling ResourceZoneInfoProvider.init() directly is deprecated. Use JodaTimeAndroid.init()");
             JodaTimeAndroid.init(context);
+            return;
         }
 
-        sAppContext = context.getApplicationContext();
+        try {
+            DateTimeZone.setProvider(new ResourceZoneInfoProvider(context));
+        }
+        catch (IOException e) {
+            throw new RuntimeException("Could not read ZoneInfoMap");
+        }
     }
 
-    public ResourceZoneInfoProvider() throws IOException {
+    public ResourceZoneInfoProvider(Context context) throws IOException {
+        if (context == null) {
+            throw new IllegalArgumentException("Context must not be null");
+        }
+
+        mAppContext = context.getApplicationContext();
         iZoneInfoMap = loadZoneInfoMap(openResource("ZoneInfoMap"));
     }
 
@@ -52,7 +62,7 @@ public class ResourceZoneInfoProvider implements Provider {
     /**
      * If an error is thrown while loading zone data, the exception is logged
      * to system error and null is returned for this and all future requests.
-     * 
+     *
      * @param id  the id to load
      * @return the loaded zone
      */
@@ -88,7 +98,7 @@ public class ResourceZoneInfoProvider implements Provider {
 
     /**
      * Gets a list of all the available zone ids.
-     * 
+     *
      * @return the zone ids
      */
     public Set<String> getAvailableIDs() {
@@ -100,7 +110,7 @@ public class ResourceZoneInfoProvider implements Provider {
 
     /**
      * Called if an exception is thrown from getZone while loading zone data.
-     * 
+     *
      * @param ex  the exception
      */
     protected void uncaughtException(Exception ex) {
@@ -109,13 +119,13 @@ public class ResourceZoneInfoProvider implements Provider {
 
     /**
      * Opens a resource from file or classpath.
-     * 
+     *
      * @param name  the name to open
      * @return the input stream
      * @throws IOException if an error occurs
      */
     private InputStream openResource(String name) throws IOException {
-        if (sAppContext == null) {
+        if (mAppContext == null) {
             throw new RuntimeException("Need to call JodaTimeAndroid.init() before using joda-time-android");
         }
 
@@ -126,14 +136,14 @@ public class ResourceZoneInfoProvider implements Provider {
             throw new IOException("Resource not found: \"" + name + "\" (resName: \"" + resName + "\"");
         }
 
-        InputStream in = sAppContext.getResources().openRawResource(resId);
+        InputStream in = mAppContext.getResources().openRawResource(resId);
 
         return in;
     }
 
     /**
      * Loads the time zone data for one id.
-     * 
+     *
      * @param id  the id to load
      * @return the zone
      */
@@ -164,7 +174,7 @@ public class ResourceZoneInfoProvider implements Provider {
     //-----------------------------------------------------------------------
     /**
      * Loads the zone info map.
-     * 
+     *
      * @param in  the input stream
      * @return the map
      */
@@ -187,7 +197,7 @@ public class ResourceZoneInfoProvider implements Provider {
 
     /**
      * Reads the zone info map from file.
-     * 
+     *
      * @param din  the input stream
      * @param zimap  gets filled with string id to string id mappings
      */
