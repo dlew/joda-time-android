@@ -19,6 +19,14 @@ android {
 
 apply from: 'gradle-mvn-push.gradle'
 
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'joda-time:joda-time:2.7:no-tzdb'
+}
+
 task updateTzData(dependsOn:assembleDebug, type: JavaExec) {
     main = "org.joda.time.tz.ZoneInfoCompiler"
 	classpath = files("build/intermediates/bundles/debug/classes.jar")
