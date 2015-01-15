@@ -3,6 +3,9 @@ package net.danlew.android.joda;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import org.joda.time.DateTimeZone;
+
+import java.io.IOException;
 
 /**
  * Provides a method to initialize the {@link ResourceZoneInfoProvider}
@@ -17,6 +20,7 @@ public final class JodaTimeAndroid {
 
     private JodaTimeAndroid() {
         // no instances
+        throw new AssertionError();
     }
 
     /**
@@ -31,13 +35,14 @@ public final class JodaTimeAndroid {
 
         sInitCalled = true;
 
-        Context appContext = context.getApplicationContext();
-        ResourceZoneInfoProvider.init(appContext);
-        appContext.registerReceiver(new TimeZoneChangedReceiver(), new IntentFilter(Intent.ACTION_TIMEZONE_CHANGED));
-    }
+        try {
+            DateTimeZone.setProvider(new ResourceZoneInfoProvider(context));
+        }
+        catch (IOException e) {
+            throw new RuntimeException("Could not read ZoneInfoMap");
+        }
 
-    /** Returns whether the init() method has been called. */
-    protected static boolean hasInitBeenCalled() {
-        return sInitCalled;
+        context.getApplicationContext()
+            .registerReceiver(new TimeZoneChangedReceiver(), new IntentFilter(Intent.ACTION_TIMEZONE_CHANGED));
     }
 }
