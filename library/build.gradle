@@ -23,13 +23,18 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
-    compile 'joda-time:joda-time:2.7:no-tzdb'
+configurations {
+    updateTzData
 }
 
-task updateTzData(dependsOn:assembleDebug, type: JavaExec) {
-    main = "org.joda.time.tz.ZoneInfoCompiler"
-	classpath = files("build/intermediates/bundles/debug/classes.jar")
+dependencies {
+    compile 'joda-time:joda-time:2.7:no-tzdb'
+    updateTzData 'joda-time:joda-time:2.7'
+}
+
+task updateTzData(type: JavaExec) {
+    classpath configurations.updateTzData + files("build/intermediates/bundles/debug/classes.jar")
+    main = "net.danlew.android.joda.ZoneInfoCompiler"
     systemProperty "org.joda.time.DateTimeZone.Provider", "org.joda.time.tz.UTCProvider"
     args "-src", "../tzdata", "-dst", "res/raw", "africa",  "antarctica", "asia", "australasia", "europe", "northamerica", "southamerica", "pacificnew", "etcetera", "backward", "systemv"
 }
