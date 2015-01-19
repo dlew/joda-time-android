@@ -6,7 +6,12 @@ your project was configured.
 #### Dependencies
 
 Previously, joda-time-android included joda-time sources itself. Due to improvements made to the main project, it is
-now possible for us to properly use the joda-time dependency. If you weren't
+now possible for us to properly use the joda-time dependency. This means that:
+
+1. If you are using Gradle, nothing should change, unless you were doing something weird.
+
+2. If you're using Eclipse libraries, you will have to manually include joda-time.jar yourself now; make sure to
+   get the no-tzdb artifact.
 
 #### Initialization
 
