@@ -29,14 +29,14 @@ If you're using maven:
     <dependency>
       <groupId>net.danlew</groupId>
       <artifactId>android.joda</artifactId>
-      <version>2.6.0</version>
+      <version>2.7.0</version>
       <type>aar</type>
     </dependency>
 
 If you're using gradle:
 
     dependencies {
-      compile 'net.danlew:android.joda:2.6.0'
+      compile 'net.danlew:android.joda:2.7.0'
     }
 
 In addition, if you're using it as a plain old library project, you must include the joda-time jar on its own (the no-tzdb version).
