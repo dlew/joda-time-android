@@ -17,7 +17,6 @@ package net.danlew.android.joda.test;
 
 import android.content.Context;
 import android.test.InstrumentationTestCase;
-import net.danlew.android.joda.JodaTimeAndroid;
 import net.danlew.android.joda.ResourceZoneInfoProvider;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeConstants;
@@ -29,7 +28,6 @@ import org.joda.time.LocalDateTime;
 import org.joda.time.tz.DefaultNameProvider;
 import org.joda.time.tz.NameProvider;
 import org.joda.time.tz.Provider;
-import org.joda.time.tz.UTCProvider;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -150,7 +148,7 @@ public class TestDateTimeZone extends InstrumentationTestCase {
 
     protected void setUp() throws Exception {
         Context context = getInstrumentation().getContext();
-        JodaTimeAndroid.init(context);
+        DateTimeZone.setProvider(new ResourceZoneInfoProvider(context));
 
         // Need to initialize these after ResourceZoneInfoProvider.init()
         PARIS = DateTimeZone.forID("Europe/Paris");
@@ -465,58 +463,12 @@ public class TestDateTimeZone extends InstrumentationTestCase {
     }
 
     //-----------------------------------------------------------------------
-    public void testProvider() {
-        try {
-            assertNotNull(DateTimeZone.getProvider());
-        
-            Provider provider = DateTimeZone.getProvider();
-            DateTimeZone.setProvider(null);
-            assertEquals(provider.getClass(), DateTimeZone.getProvider().getClass());
-        
-            try {
-                DateTimeZone.setProvider(new MockNullIDSProvider());
-                fail();
-            } catch (IllegalArgumentException ex) {}
-            try {
-                DateTimeZone.setProvider(new MockEmptyIDSProvider());
-                fail();
-            } catch (IllegalArgumentException ex) {}
-            try {
-                DateTimeZone.setProvider(new MockNoUTCProvider());
-                fail();
-            } catch (IllegalArgumentException ex) {}
-            try {
-                DateTimeZone.setProvider(new MockBadUTCProvider());
-                fail();
-            } catch (IllegalArgumentException ex) {}
-        
-            Provider prov = new MockOKProvider();
-            DateTimeZone.setProvider(prov);
-            assertSame(prov, DateTimeZone.getProvider());
-            assertEquals(2, DateTimeZone.getAvailableIDs().size());
-            assertTrue(DateTimeZone.getAvailableIDs().contains("UTC"));
-            assertTrue(DateTimeZone.getAvailableIDs().contains("Europe/London"));
-        } finally {
-            DateTimeZone.setProvider(null);
-            assertEquals(ResourceZoneInfoProvider.class, DateTimeZone.getProvider().getClass());
-        }
-        
-        try {
-            System.setProperty("org.joda.time.DateTimeZone.Provider", "org.joda.time.tz.UTCProvider");
-            DateTimeZone.setProvider(null);
-            assertEquals(UTCProvider.class, DateTimeZone.getProvider().getClass());
-        } finally {
-            System.getProperties().remove("org.joda.time.DateTimeZone.Provider");
-            DateTimeZone.setProvider(null);
-            assertEquals(ResourceZoneInfoProvider.class, DateTimeZone.getProvider().getClass());
-        }
-    }
 
     public void testProvider_badClassName() {
         try {
             System.setProperty("org.joda.time.DateTimeZone.Provider", "xxx");
             DateTimeZone.setProvider(null);
-            
+
         } catch (RuntimeException ex) {
             // expected
             assertEquals(ResourceZoneInfoProvider.class, DateTimeZone.getProvider().getClass());
@@ -525,7 +477,7 @@ public class TestDateTimeZone extends InstrumentationTestCase {
             DateTimeZone.setProvider(null);
         }
     }
-    
+
     public void testProviderSecurity() {
         if (OLD_JDK) {
             return;
@@ -626,7 +578,7 @@ public class TestDateTimeZone extends InstrumentationTestCase {
         try {
             System.setProperty("org.joda.time.DateTimeZone.NameProvider", "xxx");
             DateTimeZone.setProvider(null);
-            
+
         } catch (RuntimeException ex) {
             // expected
             assertEquals(DefaultNameProvider.class, DateTimeZone.getNameProvider().getClass());

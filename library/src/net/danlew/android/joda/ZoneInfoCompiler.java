@@ -13,7 +13,19 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package org.joda.time.tz;
+package net.danlew.android.joda;
+
+import org.joda.time.Chronology;
+import org.joda.time.DateTime;
+import org.joda.time.DateTimeField;
+import org.joda.time.DateTimeZone;
+import org.joda.time.LocalDate;
+import org.joda.time.MutableDateTime;
+import org.joda.time.chrono.ISOChronology;
+import org.joda.time.chrono.LenientChronology;
+import org.joda.time.format.DateTimeFormatter;
+import org.joda.time.format.ISODateTimeFormat;
+import org.joda.time.tz.DateTimeZoneBuilder;
 
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -29,27 +41,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.StringTokenizer;
 import java.util.TreeMap;
-import java.util.Map.Entry;
-
-import net.danlew.android.joda.ResUtils;
-import org.joda.time.Chronology;
-import org.joda.time.DateTime;
-import org.joda.time.DateTimeField;
-import org.joda.time.DateTimeZone;
-import org.joda.time.LocalDate;
-import org.joda.time.MutableDateTime;
-import org.joda.time.chrono.ISOChronology;
-import org.joda.time.chrono.LenientChronology;
-import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.ISODateTimeFormat;
 
 /**
  * Compiles IANA ZoneInfo database files into binary files for each time zone
- * in the database. {@link DateTimeZoneBuilder} is used to construct and encode
- * compiled data files. {@link ZoneInfoProvider} loads the encoded files and
- * converts them back into {@link DateTimeZone} objects.
+ * in the database. {@link org.joda.time.tz.DateTimeZoneBuilder} is used to construct and encode
+ * compiled data files. {@link org.joda.time.tz.ZoneInfoProvider} loads the encoded files and
+ * converts them back into {@link org.joda.time.DateTimeZone} objects.
  * <p>
  * Although this tool is similar to zic, the binary formats are not
  * compatible. The latest IANA time zone database files may be obtained
