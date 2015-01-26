@@ -26,31 +26,35 @@ You can either import this project as a plain old library project, or you can us
 
 If you're using maven:
 
-    <dependency>
-      <groupId>net.danlew</groupId>
-      <artifactId>android.joda</artifactId>
-      <version>2.7.0</version>
-      <type>aar</type>
-    </dependency>
-
+```xml
+<dependency>
+	<groupId>net.danlew</groupId>
+	<artifactId>android.joda</artifactId>
+	<version>2.7.0</version>
+	<type>aar</type>
+</dependency>
+```
 If you're using gradle:
-
-    dependencies {
-      compile 'net.danlew:android.joda:2.7.0'
-    }
+    
+```groovy
+dependencies {
+	     compile 'net.danlew:android.joda:2.7.0'
+}
+```
 
 In addition, if you're using it as a plain old library project, you must include the joda-time jar on its own (the no-tzdb version).
 
 Once the project is imported, you **must** initialize the timezone provider and TIMEZONE_CHANGED broadcast receiver with a `Context` (via `JodaTimeAndroid.init()`) before you can start using this library.  I suggest putting this code in `Application.onCreate()`:
 
-    public class MyApp extends Application {
-        @Override
-        public void onCreate() {
-            super.onCreate();
-          
-            JodaTimeAndroid.init(this);
-        }
-    }
+```java
+public class MyApp extends Application {
+   @Override
+   public void onCreate() {
+      super.onCreate();
+      JodaTimeAndroid.init(this);
+   }
+}
+```
 
 Updating the TimeZone database
 ==============================
@@ -59,6 +63,8 @@ Updating the TimeZone database
 2. Unzip/untar the tzdata package and copy files from the package into the `tzdata/` folder in this repository.
 3. Run the following command
 
-        ./gradlew updateTzData
+```bash
+./gradlew updateTzData
+```
 
 4. Re-compile the library
