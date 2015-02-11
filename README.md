@@ -30,15 +30,16 @@ If you're using maven:
 <dependency>
 	<groupId>net.danlew</groupId>
 	<artifactId>android.joda</artifactId>
-	<version>2.7.0</version>
+	<version>2.7.1</version>
 	<type>aar</type>
 </dependency>
 ```
+
 If you're using gradle:
     
 ```groovy
 dependencies {
-	     compile 'net.danlew:android.joda:2.7.0'
+    compile 'net.danlew:android.joda:2.7.1'
 }
 ```
 

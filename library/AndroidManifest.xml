@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="net.danlew.android.joda"
-    android:versionCode="11"
-    android:versionName="2.7.0">
+    android:versionCode="12"
+    android:versionName="2.7.1">
 
     <uses-sdk
         android:minSdkVersion="9"
