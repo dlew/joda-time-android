@@ -1,0 +1,3 @@
+We need a file in /res/raw in order for the build to work; if you clean the tz data out then we can’t regenerate it since there are no raw resources!
+
+If we could use the gradle java plugin alongside the android plugin then this wouldn’t be necessary… In the meantime this is a quick-and-easy way to solve.

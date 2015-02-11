@@ -1,5 +1,7 @@
 # Changelog
 
+* Use joda-time's ZoneInfoCompiler (for bugfixes/consistency)
+
 # 2.7.0
 
 This release includes couple (possibly) breaking changes to previous versions of joda-time-android, depending on how
