@@ -32,9 +32,58 @@ dependencies {
     updateTzData 'joda-time:joda-time:2.7'
 }
 
-task updateTzData(type: JavaExec) {
-    classpath configurations.updateTzData + files("build/intermediates/bundles/debug/classes.jar")
-    main = "net.danlew.android.joda.ZoneInfoCompiler"
+// Generates TZ data files from source
+task generateTzData(dependsOn:assembleDebug, type: JavaExec) {
+    classpath configurations.updateTzData
+    main = 'org.joda.time.tz.ZoneInfoCompiler'
     systemProperty "org.joda.time.DateTimeZone.Provider", "org.joda.time.tz.UTCProvider"
-    args "-src", "../tzdata", "-dst", "res/raw", "africa",  "antarctica", "asia", "australasia", "europe", "northamerica", "southamerica", "pacificnew", "etcetera", "backward", "systemv"
+    args "-src", "../tzdata", "-dst", "build/intermediates/tz", "africa",  "antarctica", "asia", "australasia", "europe", "northamerica", "southamerica", "pacificnew", "etcetera", "backward", "systemv"
+}
+
+//////////////////////////////////////////////////////////////////////////////
+// Copies the generated TZ data into the correct place
+
+def resFolder = 'res/raw'
+def regions = ['Africa', 'America', 'America/Argentina', 'America/Kentucky', 'America/Indiana', 'America/North_Dakota', 'Antarctica', 'Asia', 'Atlantic', 'Australia', 'Etc', 'Europe', 'Indian', 'Pacific']
+
+// Good to clean before replacing, but not required
+task cleanTzData(type: Delete) {
+    delete fileTree(dir: resFolder, exclude: "__joda_time_dummy_resource" )
+}
+
+task updateTzData(dependsOn: generateTzData, type: Copy) {
+    // Copy each region
+    regions.each { region ->
+        from("build/intermediates/tz/$region") {
+            exclude '*/*'
+            includeEmptyDirs false
+
+            rename { city ->
+                renameFile(region, city)
+            }
+        }
+    }
+
+    // Copy all root directory files (regionless)
+    from("build/intermediates/tz/") {
+        rename { city ->
+            renameFile(null, city)
+        }
+
+        exclude '*/*'
+        includeEmptyDirs false
+    }
+
+    into resFolder
+}
+
+String renameFile(String region, String city) {
+    city = city.toLowerCase().replace('+', 'plus').replace('-', '_')
+    if (region) {
+        region = region.toLowerCase().replace('/', '_')
+        '__tzdata_' + region + '_' + city
+    }
+    else {
+        '__tzdata_' + city
+    }
 }
