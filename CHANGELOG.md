@@ -1,5 +1,6 @@
 # Changelog
 
+* Updated to tzdata 2015a
 * Use joda-time's ZoneInfoCompiler (for bugfixes/consistency)
 
 # 2.7.0
