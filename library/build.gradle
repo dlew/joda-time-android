@@ -37,7 +37,7 @@ task generateTzData(dependsOn:assembleDebug, type: JavaExec) {
     classpath configurations.updateTzData
     main = 'org.joda.time.tz.ZoneInfoCompiler'
     systemProperty "org.joda.time.DateTimeZone.Provider", "org.joda.time.tz.UTCProvider"
-    args "-src", "../tzdata", "-dst", "build/intermediates/tz", "africa",  "antarctica", "asia", "australasia", "europe", "northamerica", "southamerica", "pacificnew", "etcetera", "backward", "systemv"
+    args "-src", "../tzdata", "-dst", "build/intermediates/tz", "africa",  "antarctica", "asia", "australasia", "europe", "northamerica", "southamerica", "pacificnew", "etcetera", "backward", "systemv", 'backzone'
 }
 
 //////////////////////////////////////////////////////////////////////////////
