@@ -2,7 +2,7 @@ apply plugin: 'android-library'
 
 android {
     compileSdkVersion 21
-    buildToolsVersion "21.1.2"
+    buildToolsVersion '21.1.2'
 
     sourceSets {
         main.manifest.srcFile 'AndroidManifest.xml'
@@ -13,7 +13,7 @@ android {
     }
 
     lintOptions {
-        lintConfig file("lint.xml")
+        lintConfig file('lint.xml')
     }
 }
 
@@ -36,8 +36,8 @@ dependencies {
 task generateTzData(dependsOn:assembleDebug, type: JavaExec) {
     classpath configurations.updateTzData
     main = 'org.joda.time.tz.ZoneInfoCompiler'
-    systemProperty "org.joda.time.DateTimeZone.Provider", "org.joda.time.tz.UTCProvider"
-    args "-src", "../tzdata", "-dst", "build/intermediates/tz", "africa",  "antarctica", "asia", "australasia", "europe", "northamerica", "southamerica", "pacificnew", "etcetera", "backward", "systemv", 'backzone'
+    systemProperty 'org.joda.time.DateTimeZone.Provider', 'org.joda.time.tz.UTCProvider'
+    args '-src', '../tzdata', '-dst', 'build/intermediates/tz', 'africa',  'antarctica', 'asia', 'australasia', 'europe', 'northamerica', 'southamerica', 'pacificnew', 'etcetera', 'backward', 'systemv', 'backzone'
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -48,7 +48,7 @@ def regions = ['Africa', 'America', 'America/Argentina', 'America/Kentucky', 'Am
 
 // Good to clean before replacing, but not required
 task cleanTzData(type: Delete) {
-    delete fileTree(dir: resFolder, exclude: "__joda_time_dummy_resource" )
+    delete fileTree(dir: resFolder, exclude: '__joda_time_dummy_resource' )
 }
 
 task updateTzData(dependsOn: generateTzData, type: Copy) {
