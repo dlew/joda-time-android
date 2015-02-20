@@ -32,12 +32,20 @@ dependencies {
     updateTzData 'joda-time:joda-time:2.7'
 }
 
-// Generates TZ data files from source
 task generateTzData(dependsOn:assembleDebug, type: JavaExec) {
+    description = 'Generates TZ data files from the source'
+    group = 'Timezone Data'
+
+    File srcDir = new File(rootDir, 'tzdata')
+    File destDir = new File(buildDir, 'intermediates/tz')
+
+    inputs.dir srcDir
+    outputs.dir destDir
+
     classpath configurations.updateTzData
     main = 'org.joda.time.tz.ZoneInfoCompiler'
     systemProperty 'org.joda.time.DateTimeZone.Provider', 'org.joda.time.tz.UTCProvider'
-    args '-src', '../tzdata', '-dst', 'build/intermediates/tz', 'africa',  'antarctica', 'asia', 'australasia', 'europe', 'northamerica', 'southamerica', 'pacificnew', 'etcetera', 'backward', 'systemv', 'backzone'
+    args '-src', srcDir, '-dst', destDir, 'africa',  'antarctica', 'asia', 'australasia', 'europe', 'northamerica', 'southamerica', 'pacificnew', 'etcetera', 'backward', 'systemv', 'backzone'
 }
 
 //////////////////////////////////////////////////////////////////////////////
