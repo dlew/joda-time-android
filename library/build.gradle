@@ -54,12 +54,10 @@ task generateTzData(dependsOn:assembleDebug, type: JavaExec) {
 def resFolder = 'res/raw'
 def regions = ['Africa', 'America', 'America/Argentina', 'America/Kentucky', 'America/Indiana', 'America/North_Dakota', 'Antarctica', 'Asia', 'Atlantic', 'Australia', 'Etc', 'Europe', 'Indian', 'Pacific']
 
-// Good to clean before replacing, but not required
-task cleanTzData(type: Delete) {
-    delete fileTree(dir: resFolder, exclude: '__joda_time_dummy_resource' )
-}
+task updateTzData(dependsOn: generateTzData, type: Sync) {
+    description = 'Updates the TZ data in the res/raw folder'
+    group = 'Timezone Data'
 
-task updateTzData(dependsOn: generateTzData, type: Copy) {
     // Copy each region
     regions.each { region ->
         from("build/intermediates/tz/$region") {
