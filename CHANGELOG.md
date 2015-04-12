@@ -1,5 +1,7 @@
 # Changelog
 
+# 2.7.2
+
 * Updated to tzdata 2015b
 
 # 2.7.1
