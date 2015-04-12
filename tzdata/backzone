@@ -255,6 +255,11 @@ Zone	Africa/Timbuktu	-0:12:04 -	LMT	1912
 Zone America/Anguilla	-4:12:16 -	LMT	1912 Mar  2
 			-4:00	-	AST
 
+# Antigua and Barbuda
+Zone	America/Antigua	-4:07:12 -	LMT	1912 Mar 2
+			-5:00	-	EST	1951
+			-4:00	-	AST
+
 # Chubut, Argentina
 # The name "Comodoro Rivadavia" exceeds the 14-byte POSIX limit.
 Zone America/Argentina/ComodRivadavia -4:30:00 - LMT	1894 Oct 31
@@ -273,6 +278,11 @@ Zone America/Argentina/ComodRivadavia -4:30:00 - LMT	1894 Oct 31
 Zone	America/Aruba	-4:40:24 -	LMT	1912 Feb 12 # Oranjestad
 			-4:30	-	ANT	1965 # Netherlands Antilles Time
 			-4:00	-	AST
+
+# Cayman Is
+Zone	America/Cayman	-5:25:32 -	LMT	1890     # Georgetown
+			-5:07:11 -	KMT	1912 Feb # Kingston Mean Time
+			-5:00	-	EST
 
 # Canada
 Zone America/Coral_Harbour -5:32:40 -	LMT	1884
@@ -599,3 +609,29 @@ Zone	Indian/Mayotte	3:00:56 -	LMT	1911 Jul # Mamoutzou
 
 # US minor outlying islands
 Zone Pacific/Johnston	-10:00	-	HST
+
+# US minor outlying islands
+#
+# From Mark Brader (2005-01-23):
+# [Fallacies and Fantasies of Air Transport History, by R.E.G. Davies,
+# published 1994 by Paladwr Press, McLean, VA, USA; ISBN 0-9626483-5-3]
+# reproduced a Pan American Airways timetable from 1936, for their weekly
+# "Orient Express" flights between San Francisco and Manila, and connecting
+# flights to Chicago and the US East Coast.  As it uses some time zone
+# designations that I've never seen before:....
+# Fri. 6:30A Lv. HONOLOLU (Pearl Harbor), H.I.   H.L.T. Ar. 5:30P Sun.
+#  "   3:00P Ar. MIDWAY ISLAND . . . . . . . . . M.L.T. Lv. 6:00A  "
+#
+Zone Pacific/Midway	-11:49:28 -	LMT	1901
+			-11:00	-	NST	1956 Jun  3
+			-11:00	1:00	NDT	1956 Sep  2
+			-11:00	-	NST	1967 Apr    # N=Nome
+			-11:00	-	BST	1983 Nov 30 # B=Bering
+			-11:00	-	SST	            # S=Samoa
+
+# N Mariana Is
+Zone Pacific/Saipan	-14:17:00 -	LMT	1844 Dec 31
+			 9:43:00 -	LMT	1901
+			 9:00	-	MPT	1969 Oct    # N Mariana Is Time
+			10:00	-	MPT	2000 Dec 23
+			10:00	-	ChST	# Chamorro Standard Time
