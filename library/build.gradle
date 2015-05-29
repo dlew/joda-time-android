@@ -3,6 +3,7 @@ apply plugin: 'android-library'
 android {
     compileSdkVersion 22
     buildToolsVersion '22.0.1'
+    resourcePrefix 'joda_time_android_'
 
     sourceSets {
         main.manifest.srcFile 'AndroidManifest.xml'
@@ -32,7 +33,7 @@ dependencies {
     updateTzData 'joda-time:joda-time:2.7'
 }
 
-task generateTzData(dependsOn:assembleDebug, type: JavaExec) {
+task generateTzData(dependsOn: assembleDebug, type: JavaExec) {
     description = 'Generates TZ data files from the source'
     group = 'Timezone Data'
 
@@ -45,7 +46,9 @@ task generateTzData(dependsOn:assembleDebug, type: JavaExec) {
     classpath configurations.updateTzData
     main = 'org.joda.time.tz.ZoneInfoCompiler'
     systemProperty 'org.joda.time.DateTimeZone.Provider', 'org.joda.time.tz.UTCProvider'
-    args '-src', srcDir, '-dst', destDir, 'africa',  'antarctica', 'asia', 'australasia', 'europe', 'northamerica', 'southamerica', 'pacificnew', 'etcetera', 'backward', 'systemv', 'backzone'
+    args '-src', srcDir, '-dst', destDir, 'africa', 'antarctica', 'asia', 'australasia', 'europe',
+            'northamerica', 'southamerica', 'pacificnew', 'etcetera', 'backward', 'systemv',
+            'backzone'
 }
 
 //////////////////////////////////////////////////////////////////////////////
@@ -87,9 +90,8 @@ String renameFile(String region, String city) {
     city = city.toLowerCase().replace('+', 'plus').replace('-', '_')
     if (region) {
         region = region.toLowerCase().replace('/', '_')
-        '__tzdata_' + region + '_' + city
-    }
-    else {
-        '__tzdata_' + city
+        'joda_time_android_tzdata_' + region + '_' + city
+    } else {
+        'joda_time_android_tzdata_' + city
     }
 }

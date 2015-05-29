@@ -1,5 +1,7 @@
 package net.danlew.android.joda;
 
+import android.util.Log;
+
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
@@ -8,15 +10,13 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import android.util.Log;
-
 /**
  * Utilities for translating the normal output of ZoneInfoCompiler/
  * ZoneInfoProvider into the raw resources for Android
  */
 public class ResUtils {
 
-    private static final String TZDATA_PREFIX = "__tzdata_";
+    private static final String TZDATA_PREFIX = "joda_time_android_tzdata_";
 
     /**
      * Converts any path into something that can be placed in an Android directory.
