@@ -62,8 +62,11 @@ public class TestDateUtils extends InstrumentationTestCase {
     private static final int MILLIS_OF_SECOND = 103;
 
     private DateTime mNow;
-    private DateTimeZone mDefault;
-    private DateTimeZone mOldDefault;
+    private DateTimeZone mDefaultJodaTz;
+    private DateTimeZone mOldDefaultJodaTz;
+
+    private TimeZone mDefaultSystemTz;
+    private TimeZone mOldDefaultSystemTz;
 
     @Override
     protected void setUp() throws Exception {
@@ -82,13 +85,18 @@ public class TestDateUtils extends InstrumentationTestCase {
         res.updateConfiguration(config, res.getDisplayMetrics());
 
         // Force the default timezone
-        mDefault = DateTimeZone.forID("America/New_York");
-        mOldDefault = DateTimeZone.getDefault();
-        DateTimeZone.setDefault(mDefault);
+        mDefaultJodaTz = DateTimeZone.forID("America/New_York");
+        mOldDefaultJodaTz = DateTimeZone.getDefault();
+        DateTimeZone.setDefault(mDefaultJodaTz);
+
+        // ...And for the system as well
+        mDefaultSystemTz = TimeZone.getTimeZone("America/Chicago");
+        mOldDefaultSystemTz  = TimeZone.getDefault();
+        TimeZone.setDefault(mDefaultSystemTz);
 
         // Force current "now" time, so all tests can be consistent
         mNow = new DateTime(YEAR, MONTH_OF_YEAR, DAY_OF_MONTH, HOUR_OF_DAY,
-            MINUTE_OF_HOUR, SECOND_OF_MINUTE, MILLIS_OF_SECOND, mDefault);
+            MINUTE_OF_HOUR, SECOND_OF_MINUTE, MILLIS_OF_SECOND, mDefaultJodaTz);
         DateTimeUtils.setCurrentMillisFixed(mNow.getMillis());
     }
 
@@ -98,7 +106,8 @@ public class TestDateUtils extends InstrumentationTestCase {
 
         // Restore to normal "now" time
         DateTimeUtils.setCurrentMillisSystem();
-        DateTimeZone.setDefault(mOldDefault);
+        DateTimeZone.setDefault(mOldDefaultJodaTz);
+        TimeZone.setDefault(mOldDefaultSystemTz);
     }
 
     public void testFormatDateTime() {
