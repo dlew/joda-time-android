@@ -1,82 +1,82 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <plurals name="num_seconds_ago">
+    <plurals name="joda_time_android_num_seconds_ago">
         <item msgid="4869870056547896011" quantity="one">"ከ1 ሴኮንድ በፊት"</item>
         <item msgid="3903706804349556379" quantity="other">"<xliff:g id="COUNT">%d</xliff:g> ሰኮንዶች በፊት"</item>
     </plurals>
-    <plurals name="num_minutes_ago">
+    <plurals name="joda_time_android_num_minutes_ago">
         <item msgid="3306787433088810191" quantity="one">"ከ 1 ደቂቃ በፊት"</item>
         <item msgid="2176942008915455116" quantity="other">"<xliff:g id="COUNT">%d</xliff:g> ደቂቃዎች በፊት"</item>
     </plurals>
-    <plurals name="num_hours_ago">
+    <plurals name="joda_time_android_num_hours_ago">
         <item msgid="9150797944610821849" quantity="one">"ከ1 ሰዓት በፊት"</item>
         <item msgid="2467273239587587569" quantity="other">"ከ <xliff:g id="COUNT">%d</xliff:g> ሰዓት በፊት"</item>
     </plurals>
-    <plurals name="num_days_ago">
+    <plurals name="joda_time_android_num_days_ago">
         <item msgid="861358534398115820" quantity="one">"ትላንትና"</item>
         <item msgid="2479586466153314633" quantity="other">"ከ <xliff:g id="COUNT">%d</xliff:g>ቀን በፊት"</item>
     </plurals>
-    <plurals name="in_num_seconds">
+    <plurals name="joda_time_android_in_num_seconds">
         <item msgid="2729745560954905102" quantity="one">"በ1 ሴኮንድ"</item>
         <item msgid="1241926116443974687" quantity="other">"በ<xliff:g id="COUNT">%d</xliff:g> ሰከንዶች ውስጥ"</item>
     </plurals>
-    <plurals name="in_num_minutes">
+    <plurals name="joda_time_android_in_num_minutes">
         <item msgid="8793095251325200395" quantity="one">"በ1 ደቂቃ ውስጥ"</item>
         <item msgid="3330713936399448749" quantity="other">"በ<xliff:g id="COUNT">%d</xliff:g> ደቂቃዎች ውስጥ"</item>
     </plurals>
-    <plurals name="in_num_hours">
+    <plurals name="joda_time_android_in_num_hours">
         <item msgid="7164353342477769999" quantity="one">"በ  1 ሰዓት"</item>
         <item msgid="547290677353727389" quantity="other">"በ <xliff:g id="COUNT">%d</xliff:g> ሰዓቶች"</item>
     </plurals>
-    <plurals name="in_num_days">
+    <plurals name="joda_time_android_in_num_days">
         <item msgid="5413088743009839518" quantity="one">"ነገ"</item>
         <item msgid="5109449375100953247" quantity="other">"በ<xliff:g id="COUNT">%d</xliff:g> ቀናት"</item>
     </plurals>
-    <plurals name="abbrev_num_seconds_ago">
+    <plurals name="joda_time_android_abbrev_num_seconds_ago">
         <item msgid="1849036840200069118" quantity="one">"1 ሴኮንድ በፊት"</item>
         <item msgid="3699169366650930415" quantity="other">"<xliff:g id="COUNT">%d</xliff:g> ሰከንዶች በፊት"</item>
     </plurals>
-    <plurals name="abbrev_num_minutes_ago">
+    <plurals name="joda_time_android_abbrev_num_minutes_ago">
         <item msgid="6361490147113871545" quantity="one">"ከ 1 ደቂቃ በፊት"</item>
         <item msgid="851164968597150710" quantity="other">"ከ <xliff:g id="COUNT">%d</xliff:g> ደቂቃዎች በፊት"</item>
     </plurals>
-    <plurals name="abbrev_num_hours_ago">
+    <plurals name="joda_time_android_abbrev_num_hours_ago">
         <item msgid="4796212039724722116" quantity="one">"ከ1 ሰዓት በፊት"</item>
         <item msgid="6889970745748538901" quantity="other">"ከ <xliff:g id="COUNT">%d</xliff:g> ሰዓት በፊት"</item>
     </plurals>
-    <plurals name="abbrev_num_days_ago">
+    <plurals name="joda_time_android_abbrev_num_days_ago">
         <item msgid="8463161711492680309" quantity="one">"ትላንትና"</item>
         <item msgid="3453342639616481191" quantity="other">"ከ <xliff:g id="COUNT">%d</xliff:g>ቀን በፊት"</item>
     </plurals>
-    <plurals name="abbrev_in_num_seconds">
+    <plurals name="joda_time_android_abbrev_in_num_seconds">
         <item msgid="5842225370795066299" quantity="one">"በ1 ሴኮንድ"</item>
         <item msgid="5495880108825805108" quantity="other">"በ<xliff:g id="COUNT">%d</xliff:g> ሰከንዶች ውስጥ"</item>
     </plurals>
-    <plurals name="abbrev_in_num_minutes">
+    <plurals name="joda_time_android_abbrev_in_num_minutes">
         <item msgid="562786149928284878" quantity="one">"በ1 ደቂቃ ውስጥ"</item>
         <item msgid="4216113292706568726" quantity="other">"በ<xliff:g id="COUNT">%d</xliff:g> ደቂቃዎች ውስጥ"</item>
     </plurals>
-    <plurals name="abbrev_in_num_hours">
+    <plurals name="joda_time_android_abbrev_in_num_hours">
         <item msgid="3274708118124045246" quantity="one">"በ  1 ሰዓት"</item>
         <item msgid="3705373766798013406" quantity="other">"በ <xliff:g id="COUNT">%d</xliff:g> ሰዓቶች"</item>
     </plurals>
-    <plurals name="abbrev_in_num_days">
+    <plurals name="joda_time_android_abbrev_in_num_days">
         <item msgid="2178576254385739855" quantity="one">"ነገ"</item>
         <item msgid="2973062968038355991" quantity="other">"በ<xliff:g id="COUNT">%d</xliff:g> ቀናት"</item>
     </plurals>
-    <string name="preposition_for_date" msgid="9093949757757445117">"በ <xliff:g id="DATE">%s</xliff:g>"</string>
-    <string name="preposition_for_time" msgid="5506831244263083793">"በ <xliff:g id="TIME">%s</xliff:g>"</string>
-    <plurals name="duration_seconds">
+    <string name="joda_time_android_preposition_for_date" msgid="9093949757757445117">"በ <xliff:g id="DATE">%s</xliff:g>"</string>
+    <string name="joda_time_android_preposition_for_time" msgid="5506831244263083793">"በ <xliff:g id="TIME">%s</xliff:g>"</string>
+    <plurals name="joda_time_android_duration_seconds">
         <item msgid="6962015528372969481" quantity="one">"1 ሴኮንድ"</item>
         <item msgid="1886107766577166786" quantity="other">"<xliff:g id="COUNT">%d</xliff:g> ሰከንዶች"</item>
     </plurals>
-    <plurals name="duration_minutes">
+    <plurals name="joda_time_android_duration_minutes">
         <item msgid="4915414002546085617" quantity="one">"1 ደቂቃ"</item>
         <item msgid="3165187169224908775" quantity="other">"<xliff:g id="COUNT">%d</xliff:g> ደቂቃዎች"</item>
     </plurals>
-    <plurals name="duration_hours">
+    <plurals name="joda_time_android_duration_hours">
         <item msgid="8917467491248809972" quantity="one">"1 ሰዓት"</item>
         <item msgid="3863962854246773930" quantity="other">"<xliff:g id="COUNT">%d</xliff:g> ሰዓቶች"</item>
     </plurals>
-    <string name="relative_time" msgid="1818557177829411417">"<xliff:g id="DATE">%1$s</xliff:g>, <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="joda_time_android_relative_time" msgid="1818557177829411417">"<xliff:g id="DATE">%1$s</xliff:g>, <xliff:g id="TIME">%2$s</xliff:g>"</string>
 </resources>

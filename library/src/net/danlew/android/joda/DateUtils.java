@@ -258,18 +258,18 @@ public class DateUtils {
             count = Seconds.secondsIn(interval).getSeconds();
             if (past) {
                 if (abbrevRelative) {
-                    resId = R.plurals.abbrev_num_seconds_ago;
+                    resId = R.plurals.joda_time_android_abbrev_num_seconds_ago;
                 }
                 else {
-                    resId = R.plurals.num_seconds_ago;
+                    resId = R.plurals.joda_time_android_num_seconds_ago;
                 }
             }
             else {
                 if (abbrevRelative) {
-                    resId = R.plurals.abbrev_in_num_seconds;
+                    resId = R.plurals.joda_time_android_abbrev_in_num_seconds;
                 }
                 else {
-                    resId = R.plurals.in_num_seconds;
+                    resId = R.plurals.joda_time_android_in_num_seconds;
                 }
             }
         }
@@ -277,18 +277,18 @@ public class DateUtils {
             count = Minutes.minutesIn(interval).getMinutes();
             if (past) {
                 if (abbrevRelative) {
-                    resId = R.plurals.abbrev_num_minutes_ago;
+                    resId = R.plurals.joda_time_android_abbrev_num_minutes_ago;
                 }
                 else {
-                    resId = R.plurals.num_minutes_ago;
+                    resId = R.plurals.joda_time_android_num_minutes_ago;
                 }
             }
             else {
                 if (abbrevRelative) {
-                    resId = R.plurals.abbrev_in_num_minutes;
+                    resId = R.plurals.joda_time_android_abbrev_in_num_minutes;
                 }
                 else {
-                    resId = R.plurals.in_num_minutes;
+                    resId = R.plurals.joda_time_android_in_num_minutes;
                 }
             }
         }
@@ -296,18 +296,18 @@ public class DateUtils {
             count = Hours.hoursIn(interval).getHours();
             if (past) {
                 if (abbrevRelative) {
-                    resId = R.plurals.abbrev_num_hours_ago;
+                    resId = R.plurals.joda_time_android_abbrev_num_hours_ago;
                 }
                 else {
-                    resId = R.plurals.num_hours_ago;
+                    resId = R.plurals.joda_time_android_num_hours_ago;
                 }
             }
             else {
                 if (abbrevRelative) {
-                    resId = R.plurals.abbrev_in_num_hours;
+                    resId = R.plurals.joda_time_android_abbrev_in_num_hours;
                 }
                 else {
-                    resId = R.plurals.in_num_hours;
+                    resId = R.plurals.joda_time_android_in_num_hours;
                 }
             }
         }
@@ -315,18 +315,18 @@ public class DateUtils {
             count = Days.daysIn(interval).getDays();
             if (past) {
                 if (abbrevRelative) {
-                    resId = R.plurals.abbrev_num_days_ago;
+                    resId = R.plurals.joda_time_android_abbrev_num_days_ago;
                 }
                 else {
-                    resId = R.plurals.num_days_ago;
+                    resId = R.plurals.joda_time_android_num_days_ago;
                 }
             }
             else {
                 if (abbrevRelative) {
-                    resId = R.plurals.abbrev_in_num_days;
+                    resId = R.plurals.joda_time_android_abbrev_in_num_days;
                 }
                 else {
-                    resId = R.plurals.in_num_days;
+                    resId = R.plurals.joda_time_android_in_num_days;
                 }
             }
         }
@@ -370,7 +370,7 @@ public class DateUtils {
             // Same day
             int flags = FORMAT_SHOW_TIME;
             result = formatDateRange(ctx, time, time, flags);
-            prepositionId = R.string.preposition_for_time;
+            prepositionId = R.string.joda_time_android_preposition_for_time;
         }
         else if (Years.yearsBetween(now, timeDate).getYears() != 0) {
             // Different years
@@ -378,13 +378,13 @@ public class DateUtils {
             result = formatDateRange(ctx, time, time, flags);
 
             // This is a date (like "10/31/2008" so use the date preposition)
-            prepositionId = R.string.preposition_for_date;
+            prepositionId = R.string.joda_time_android_preposition_for_date;
         }
         else {
             // Default
             int flags = FORMAT_SHOW_DATE | FORMAT_ABBREV_MONTH;
             result = formatDateRange(ctx, time, time, flags);
-            prepositionId = R.string.preposition_for_date;
+            prepositionId = R.string.joda_time_android_preposition_for_date;
         }
 
         if (withPreposition) {
@@ -465,11 +465,11 @@ public class DateUtils {
         String result;
         if (!duration.isLongerThan(transitionDuration)) {
             CharSequence relativeClause = getRelativeTimeSpanString(context, time, flags);
-            result = r.getString(R.string.relative_time, relativeClause, timeClause);
+            result = r.getString(R.string.joda_time_android_relative_time, relativeClause, timeClause);
         }
         else {
             CharSequence dateClause = getRelativeTimeSpanString(context, time, false);
-            result = r.getString(R.string.date_time, dateClause, timeClause);
+            result = r.getString(R.string.joda_time_android_date_time, dateClause, timeClause);
         }
 
         return result;
@@ -492,16 +492,16 @@ public class DateUtils {
 
         final int hours = (int) duration.getStandardHours();
         if (hours != 0) {
-            return res.getQuantityString(R.plurals.duration_hours, hours, hours);
+            return res.getQuantityString(R.plurals.joda_time_android_duration_hours, hours, hours);
         }
 
         final int minutes = (int) duration.getStandardMinutes();
         if (minutes != 0) {
-            return res.getQuantityString(R.plurals.duration_minutes, minutes, minutes);
+            return res.getQuantityString(R.plurals.joda_time_android_duration_minutes, minutes, minutes);
         }
 
         final int seconds = (int) duration.getStandardSeconds();
-        return res.getQuantityString(R.plurals.duration_seconds, seconds, seconds);
+        return res.getQuantityString(R.plurals.joda_time_android_duration_seconds, seconds, seconds);
     }
 
 }

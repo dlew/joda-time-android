@@ -20,122 +20,122 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <!-- This is used to express that something occurred some number of seconds in the past (e.g., 5 seconds ago). -->
-    <plurals name="num_seconds_ago">
+    <plurals name="joda_time_android_num_seconds_ago">
         <item quantity="one">1 second ago</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> seconds ago</item>
     </plurals>
 
     <!-- This is used to express that something occurred some number of minutes in the past (e.g., 5 minutes ago). -->
-    <plurals name="num_minutes_ago">
+    <plurals name="joda_time_android_num_minutes_ago">
         <item quantity="one">1 minute ago</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> minutes ago</item>
     </plurals>
 
     <!-- This is used to express that something occurred some number of hours in the past (e.g., 5 hours ago). -->
-    <plurals name="num_hours_ago">
+    <plurals name="joda_time_android_num_hours_ago">
         <item quantity="one">1 hour ago</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> hours ago</item>
     </plurals>
 
     <!-- This is used to express that something occurred some number of days in the past (e.g., 5 days ago). -->
-    <plurals name="num_days_ago">
+    <plurals name="joda_time_android_num_days_ago">
         <item quantity="one">yesterday</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> days ago</item>
     </plurals>
 
     <!-- This is used to express that something will occur some number of seconds in the future (e.g., in 5 seconds). -->
-    <plurals name="in_num_seconds">
+    <plurals name="joda_time_android_in_num_seconds">
         <item quantity="one">in 1 second</item>
         <item quantity="other">in <xliff:g id="count">%d</xliff:g> seconds</item>
     </plurals>
 
     <!-- This is used to express that something will occur some number of minutes in the future (e.g., in 5 minutes). -->
-    <plurals name="in_num_minutes">
+    <plurals name="joda_time_android_in_num_minutes">
         <item quantity="one">in 1 minute</item>
         <item quantity="other">in <xliff:g id="count">%d</xliff:g> minutes</item>
     </plurals>
 
     <!-- This is used to express that something will occur some number of hours in the future (e.g., in 5 hours). -->
-    <plurals name="in_num_hours">
+    <plurals name="joda_time_android_in_num_hours">
         <item quantity="one">in 1 hour</item>
         <item quantity="other">in <xliff:g id="count">%d</xliff:g> hours</item>
     </plurals>
 
     <!-- This is used to express that something will occur some number of days in the future (e.g., in 5 days). -->
-    <plurals name="in_num_days">
+    <plurals name="joda_time_android_in_num_days">
         <item quantity="one">tomorrow</item>
         <item quantity="other">in <xliff:g id="count">%d</xliff:g> days</item>
     </plurals>
 
     <!-- This is used to express that something occurred some number of abbreviated seconds in the past (e.g., 5 secs ago). -->
-    <plurals name="abbrev_num_seconds_ago">
+    <plurals name="joda_time_android_abbrev_num_seconds_ago">
         <item quantity="one">1 sec ago</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> secs ago</item>
     </plurals>
 
     <!-- This is used to express that something occurred some number of abbreviated minutes in the past (e.g., 5 mins ago). -->
-    <plurals name="abbrev_num_minutes_ago">
+    <plurals name="joda_time_android_abbrev_num_minutes_ago">
         <item quantity="one">1 min ago</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> mins ago</item>
     </plurals>
 
     <!-- This is used to express that something occurred some number of abbreviated hours in the past (e.g., 5 hrs ago). -->
-    <plurals name="abbrev_num_hours_ago">
+    <plurals name="joda_time_android_abbrev_num_hours_ago">
         <item quantity="one">1 hour ago</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> hours ago</item>
     </plurals>
 
     <!-- This is used to express that something occurred some number of abbreviated days in the past (e.g., 5 days ago). -->
-    <plurals name="abbrev_num_days_ago">
+    <plurals name="joda_time_android_abbrev_num_days_ago">
         <item quantity="one">yesterday</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> days ago</item>
     </plurals>
 
     <!-- This is used to express that something will occur some number of abbreviated seconds in the future (e.g., in 5 secs). -->
-    <plurals name="abbrev_in_num_seconds">
+    <plurals name="joda_time_android_abbrev_in_num_seconds">
         <item quantity="one">in 1 sec</item>
         <item quantity="other">in <xliff:g id="count">%d</xliff:g> secs</item>
     </plurals>
 
     <!-- This is used to express that something will occur some number of abbreviated minutes in the future (e.g., in 5 mins). -->
-    <plurals name="abbrev_in_num_minutes">
+    <plurals name="joda_time_android_abbrev_in_num_minutes">
         <item quantity="one">in 1 min</item>
         <item quantity="other">in <xliff:g id="count">%d</xliff:g> mins</item>
     </plurals>
 
     <!-- This is used to express that something will occur some number of abbreviated hours in the future (e.g., in 5 hrs). -->
-    <plurals name="abbrev_in_num_hours">
+    <plurals name="joda_time_android_abbrev_in_num_hours">
         <item quantity="one">in 1 hour</item>
         <item quantity="other">in <xliff:g id="count">%d</xliff:g> hours</item>
     </plurals>
 
     <!-- This is used to express that something will occur some number of abbreviated days in the future (e.g., in 5 days). -->
-    <plurals name="abbrev_in_num_days">
+    <plurals name="joda_time_android_abbrev_in_num_days">
         <item quantity="one">tomorrow</item>
         <item quantity="other">in <xliff:g id="count">%d</xliff:g> days</item>
     </plurals>
 
     <!-- String used to display the date. Preposition for date display ("on May 29") -->
-    <string name="preposition_for_date">on <xliff:g example="May 29" id="date">%s</xliff:g></string>
+    <string name="joda_time_android_preposition_for_date">on <xliff:g example="May 29" id="date">%s</xliff:g></string>
     <!-- String used to display the date. Preposition for time display ("at 2:33am") -->
-    <string name="preposition_for_time">at <xliff:g example="2:33 am" id="time">%s</xliff:g></string>
+    <string name="joda_time_android_preposition_for_time">at <xliff:g example="2:33 am" id="time">%s</xliff:g></string>
 
     <!-- Format indicating a relative expression and time.
      Example: "4 hours ago, 11:00 am" -->
-    <string name="relative_time">"<xliff:g example="4 hours ago" id="date">%1$s</xliff:g>, <xliff:g example="11:00 am" id="time">%2$s</xliff:g>"</string>
+    <string name="joda_time_android_relative_time">"<xliff:g example="4 hours ago" id="date">%1$s</xliff:g>, <xliff:g example="11:00 am" id="time">%2$s</xliff:g>"</string>
 
     <!-- Phrase describing a time duration using seconds [CHAR LIMIT=16] -->
-    <plurals name="duration_seconds">
+    <plurals name="joda_time_android_duration_seconds">
         <item quantity="one">1 second</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> seconds</item>
     </plurals>
     <!-- Phrase describing a time duration using minutes [CHAR LIMIT=16] -->
-    <plurals name="duration_minutes">
+    <plurals name="joda_time_android_duration_minutes">
         <item quantity="one">1 minute</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> minutes</item>
     </plurals>
     <!-- Phrase describing a time duration using hours [CHAR LIMIT=16] -->
-    <plurals name="duration_hours">
+    <plurals name="joda_time_android_duration_hours">
         <item quantity="one">1 hour</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> hours</item>
     </plurals>
