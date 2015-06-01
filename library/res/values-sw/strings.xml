@@ -1,82 +1,82 @@
 <?xml version='1.0' encoding='utf-8'?>
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <plurals name="num_seconds_ago">
+    <plurals name="joda_time_android_num_seconds_ago">
         <item msgid="4869870056547896011" quantity="one">"Sekunde 1 iliopita"</item>
         <item msgid="3903706804349556379" quantity="other">"sekunde <xliff:g id="COUNT">%d</xliff:g> zilizopita"</item>
     </plurals>
-    <plurals name="num_minutes_ago">
+    <plurals name="joda_time_android_num_minutes_ago">
         <item msgid="3306787433088810191" quantity="one">"Dakika 1 iliyopita"</item>
         <item msgid="2176942008915455116" quantity="other">"Dakika <xliff:g id="COUNT">%d</xliff:g> zilizopita"</item>
     </plurals>
-    <plurals name="num_hours_ago">
+    <plurals name="joda_time_android_num_hours_ago">
         <item msgid="9150797944610821849" quantity="one">"Saa 1 iliyopita"</item>
         <item msgid="2467273239587587569" quantity="other">"Saa <xliff:g id="COUNT">%d</xliff:g> zilizopita"</item>
     </plurals>
-    <plurals name="num_days_ago">
+    <plurals name="joda_time_android_num_days_ago">
         <item msgid="861358534398115820" quantity="one">"jana"</item>
         <item msgid="2479586466153314633" quantity="other">"siku <xliff:g id="COUNT">%d</xliff:g> zilizopita"</item>
     </plurals>
-    <plurals name="in_num_seconds">
+    <plurals name="joda_time_android_in_num_seconds">
         <item msgid="2729745560954905102" quantity="one">"kati ya sekunde 1"</item>
         <item msgid="1241926116443974687" quantity="other">"kati ya sekunde <xliff:g id="COUNT">%d</xliff:g>"</item>
     </plurals>
-    <plurals name="in_num_minutes">
+    <plurals name="joda_time_android_in_num_minutes">
         <item msgid="8793095251325200395" quantity="one">"kati ya dakika  1"</item>
         <item msgid="3330713936399448749" quantity="other">"katika dakika <xliff:g id="COUNT">%d</xliff:g>"</item>
     </plurals>
-    <plurals name="in_num_hours">
+    <plurals name="joda_time_android_in_num_hours">
         <item msgid="7164353342477769999" quantity="one">"kati ya saa 1"</item>
         <item msgid="547290677353727389" quantity="other">"kati ya saa <xliff:g id="COUNT">%d</xliff:g>"</item>
     </plurals>
-    <plurals name="in_num_days">
+    <plurals name="joda_time_android_in_num_days">
         <item msgid="5413088743009839518" quantity="one">"kesho"</item>
         <item msgid="5109449375100953247" quantity="other">"katika siku <xliff:g id="COUNT">%d</xliff:g>"</item>
     </plurals>
-    <plurals name="abbrev_num_seconds_ago">
+    <plurals name="joda_time_android_abbrev_num_seconds_ago">
         <item msgid="1849036840200069118" quantity="one">"Sekunde 1 iliyopita"</item>
         <item msgid="3699169366650930415" quantity="other">"Sekunde <xliff:g id="COUNT">%d</xliff:g> zilizopita"</item>
     </plurals>
-    <plurals name="abbrev_num_minutes_ago">
+    <plurals name="joda_time_android_abbrev_num_minutes_ago">
         <item msgid="6361490147113871545" quantity="one">"Dakika 1 iliyopita"</item>
         <item msgid="851164968597150710" quantity="other">"Dakika <xliff:g id="COUNT">%d</xliff:g> zilizopita"</item>
     </plurals>
-    <plurals name="abbrev_num_hours_ago">
+    <plurals name="joda_time_android_abbrev_num_hours_ago">
         <item msgid="4796212039724722116" quantity="one">"Saa 1 iliyopita"</item>
         <item msgid="6889970745748538901" quantity="other">"Saa <xliff:g id="COUNT">%d</xliff:g> zilizopita"</item>
     </plurals>
-    <plurals name="abbrev_num_days_ago">
+    <plurals name="joda_time_android_abbrev_num_days_ago">
         <item msgid="8463161711492680309" quantity="one">"jana"</item>
         <item msgid="3453342639616481191" quantity="other">"siku <xliff:g id="COUNT">%d</xliff:g> zilizopita"</item>
     </plurals>
-    <plurals name="abbrev_in_num_seconds">
+    <plurals name="joda_time_android_abbrev_in_num_seconds">
         <item msgid="5842225370795066299" quantity="one">"kati ya sekunde 1"</item>
         <item msgid="5495880108825805108" quantity="other">"kati ya sekunde <xliff:g id="COUNT">%d</xliff:g>"</item>
     </plurals>
-    <plurals name="abbrev_in_num_minutes">
+    <plurals name="joda_time_android_abbrev_in_num_minutes">
         <item msgid="562786149928284878" quantity="one">"baada ya dakika 1"</item>
         <item msgid="4216113292706568726" quantity="other">"kati ya dakika<xliff:g id="COUNT">%d</xliff:g>"</item>
     </plurals>
-    <plurals name="abbrev_in_num_hours">
+    <plurals name="joda_time_android_abbrev_in_num_hours">
         <item msgid="3274708118124045246" quantity="one">"kati ya saa 1"</item>
         <item msgid="3705373766798013406" quantity="other">"katika saa <xliff:g id="COUNT">%d</xliff:g>"</item>
     </plurals>
-    <plurals name="abbrev_in_num_days">
+    <plurals name="joda_time_android_abbrev_in_num_days">
         <item msgid="2178576254385739855" quantity="one">"kesho"</item>
         <item msgid="2973062968038355991" quantity="other">"kati ya siku <xliff:g id="COUNT">%d</xliff:g>"</item>
     </plurals>
-    <string name="preposition_for_date" msgid="9093949757757445117">"tarehe <xliff:g id="DATE">%s</xliff:g>"</string>
-    <string name="preposition_for_time" msgid="5506831244263083793">"Saa <xliff:g id="TIME">%s</xliff:g>"</string>
-    <plurals name="duration_seconds">
+    <string name="joda_time_android_preposition_for_date" msgid="9093949757757445117">"tarehe <xliff:g id="DATE">%s</xliff:g>"</string>
+    <string name="joda_time_android_preposition_for_time" msgid="5506831244263083793">"Saa <xliff:g id="TIME">%s</xliff:g>"</string>
+    <plurals name="joda_time_android_duration_seconds">
         <item msgid="6962015528372969481" quantity="one">"Sekunde 1"</item>
         <item msgid="1886107766577166786" quantity="other">"Sekunde <xliff:g id="COUNT">%d</xliff:g>"</item>
     </plurals>
-    <plurals name="duration_minutes">
+    <plurals name="joda_time_android_duration_minutes">
         <item msgid="4915414002546085617" quantity="one">"Dakika 1"</item>
         <item msgid="3165187169224908775" quantity="other">"Dakika <xliff:g id="COUNT">%d</xliff:g>"</item>
     </plurals>
-    <plurals name="duration_hours">
+    <plurals name="joda_time_android_duration_hours">
         <item msgid="8917467491248809972" quantity="one">"Saa 1"</item>
         <item msgid="3863962854246773930" quantity="other">"Saa <xliff:g id="COUNT">%d</xliff:g>"</item>
     </plurals>
-    <string name="relative_time" msgid="1818557177829411417">"<xliff:g id="DATE">%1$s</xliff:g>, <xliff:g id="TIME">%2$s</xliff:g>"</string>
+    <string name="joda_time_android_relative_time" msgid="1818557177829411417">"<xliff:g id="DATE">%1$s</xliff:g>, <xliff:g id="TIME">%2$s</xliff:g>"</string>
 </resources>
