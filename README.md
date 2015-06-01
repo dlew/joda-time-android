@@ -79,8 +79,8 @@ Updating the TimeZone database
 2. Unzip/untar the tzdata package and copy files from the package into the `tzdata/` folder in this repository.
 3. Run the following command
 
-```bash
-./gradlew updateTzData
-```
+    ```bash
+    ./gradlew updateTzData
+    ```
 
 4. Re-compile the library
