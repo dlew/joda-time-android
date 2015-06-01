@@ -311,6 +311,46 @@ Zone	America/Grenada	-4:07:00 -	LMT	1911 Jul # St George's
 Zone America/Guadeloupe	-4:06:08 -	LMT	1911 Jun  8 # Pointe-à-Pitre
 			-4:00	 -	AST
 
+# Canada
+#
+# From Paul Eggert (2015-03-24):
+# Since 1970 most of Quebec has been like Toronto; see
+# America/Toronto.  However, earlier versions of the tz database
+# mistakenly relied on data from Shanks & Pottenger saying that Quebec
+# differed from Ontario after 1970, and the following rules and zone
+# were created for most of Quebec from the incorrect Shanks &
+# Pottenger data.  The post-1970 entries have been corrected, but the
+# pre-1970 entries are unchecked and probably have errors.
+#
+# Rule	NAME	FROM	TO	TYPE	IN	ON	AT	SAVE	LETTER/S
+Rule	Mont	1917	only	-	Mar	25	2:00	1:00	D
+Rule	Mont	1917	only	-	Apr	24	0:00	0	S
+Rule	Mont	1919	only	-	Mar	31	2:30	1:00	D
+Rule	Mont	1919	only	-	Oct	25	2:30	0	S
+Rule	Mont	1920	only	-	May	 2	2:30	1:00	D
+Rule	Mont	1920	1922	-	Oct	Sun>=1	2:30	0	S
+Rule	Mont	1921	only	-	May	 1	2:00	1:00	D
+Rule	Mont	1922	only	-	Apr	30	2:00	1:00	D
+Rule	Mont	1924	only	-	May	17	2:00	1:00	D
+Rule	Mont	1924	1926	-	Sep	lastSun	2:30	0	S
+Rule	Mont	1925	1926	-	May	Sun>=1	2:00	1:00	D
+Rule	Mont	1927	1937	-	Apr	lastSat	24:00	1:00	D
+Rule	Mont	1927	1937	-	Sep	lastSat	24:00	0	S
+Rule	Mont	1938	1940	-	Apr	lastSun	0:00	1:00	D
+Rule	Mont	1938	1939	-	Sep	lastSun	0:00	0	S
+Rule	Mont	1946	1973	-	Apr	lastSun	2:00	1:00	D
+Rule	Mont	1945	1948	-	Sep	lastSun	2:00	0	S
+Rule	Mont	1949	1950	-	Oct	lastSun	2:00	0	S
+Rule	Mont	1951	1956	-	Sep	lastSun	2:00	0	S
+Rule	Mont	1957	1973	-	Oct	lastSun	2:00	0	S
+Zone America/Montreal	-4:54:16 -	LMT	1884
+			-5:00	Mont	E%sT	1918
+			-5:00	Canada	E%sT	1919
+			-5:00	Mont	E%sT	1942 Feb  9  2:00s
+			-5:00	Canada	E%sT	1946
+			-5:00	Mont	E%sT	1974
+			-5:00	Canada	E%sT
+
 # Montserrat
 # From Paul Eggert (2006-03-22):
 # In 1995 volcanic eruptions forced evacuation of Plymouth, the capital.
