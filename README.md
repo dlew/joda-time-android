@@ -57,6 +57,21 @@ public class MyApp extends Application {
 }
 ```
 
+Known Issues
+============
+
+If you are using versions of the Android Gradle plugin previous to 1.3, you may need to exclude some files for
+packaging to work properly:
+
+```groovy
+android {
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+}
+```
+
 Updating the TimeZone database
 ==============================
 
