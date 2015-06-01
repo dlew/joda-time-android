@@ -28,10 +28,10 @@ If you're using maven:
 
 ```xml
 <dependency>
-	<groupId>net.danlew</groupId>
-	<artifactId>android.joda</artifactId>
-	<version>2.7.2</version>
-	<type>aar</type>
+    <groupId>net.danlew</groupId>
+    <artifactId>android.joda</artifactId>
+    <version>2.7.2</version>
+    <type>aar</type>
 </dependency>
 ```
 
@@ -49,11 +49,11 @@ Once the project is imported, you **must** initialize the timezone provider and 
 
 ```java
 public class MyApp extends Application {
-   @Override
-   public void onCreate() {
-      super.onCreate();
-      JodaTimeAndroid.init(this);
-   }
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        JodaTimeAndroid.init(this);
+    }
 }
 ```
 
