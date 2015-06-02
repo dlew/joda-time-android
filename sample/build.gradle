@@ -10,7 +10,7 @@ android {
         minSdkVersion 9
         targetSdkVersion 22
 
-        proguardFiles getDefaultProguardFile('proguard-android.txt')
+        proguardFiles getDefaultProguardFile('proguard-android.txt'), 'config.pro'
     }
 
     // We're enabling proguard just to prove we don't have to do anything
