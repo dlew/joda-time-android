@@ -5,7 +5,7 @@
 * [#47](https://github.com/dlew/joda-time-android/pull/47) Fixed compatibility w/ Android Gradle plugin 1.3
 * [#51](https://github.com/dlew/joda-time-android/pull/51) Updated to joda-time 2.8
 * [#52](https://github.com/dlew/joda-time-android/pull/52) Updated to tzdata 2015
-* [#53](https://github.com/dlew/joda-time-android/pull/53) Properly include joda-convert as dependency
+* [#57](https://github.com/dlew/joda-time-android/pull/57) Added instructions for proguarding and using joda-convert
 
 # 2.7.2
 
