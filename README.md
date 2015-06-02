@@ -57,11 +57,20 @@ public class MyApp extends Application {
 }
 ```
 
-Known Issues
-============
+Joda-Convert and Proguard
+=========================
 
-If you are using versions of the Android Gradle plugin previous to 1.3, you may need to exclude some files for
-packaging to work properly:
+Joda-time classes optionally support [joda-convert](http://www.joda.org/joda-convert/).
+
+**If you do not include joda-convert in your builds and you use Proguard**, you will have to tell Proguard to ignore any
+issues where joda-convert is optionally referenced:
+
+```
+-dontwarn org.joda.convert.FromString
+-dontwarn org.joda.convert.ToString
+```
+
+**If you include joda-convert in your builds**, you will need to use `packagingOptions` to prevent build issues:
 
 ```groovy
 android {

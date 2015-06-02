@@ -16,11 +16,6 @@ android {
     lintOptions {
         lintConfig file('lint.xml')
     }
-
-    packagingOptions {
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/NOTICE.txt'
-    }
 }
 
 apply from: 'gradle-mvn-push.gradle'
@@ -35,7 +30,6 @@ configurations {
 
 dependencies {
     compile 'joda-time:joda-time:2.8:no-tzdb'
-    compile 'org.joda:joda-convert:1.2'
     updateTzData 'joda-time:joda-time:2.8'
 }
 
