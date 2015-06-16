@@ -57,30 +57,6 @@ public class MyApp extends Application {
 }
 ```
 
-Joda-Convert and Proguard
-=========================
-
-Joda-time classes optionally support [joda-convert](http://www.joda.org/joda-convert/).
-
-**If you do not include joda-convert in your builds and you use Proguard**, you will have to tell Proguard to ignore any
-issues where joda-convert is optionally referenced:
-
-```
--dontwarn org.joda.convert.FromString
--dontwarn org.joda.convert.ToString
-```
-
-**If you include joda-convert in your builds**, you will need to use `packagingOptions` to prevent build issues:
-
-```groovy
-android {
-    packagingOptions {
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/NOTICE.txt'
-    }
-}
-```
-
 Updating the TimeZone database
 ==============================
 

@@ -13,6 +13,10 @@ android {
         androidTest.setRoot('tests')
     }
 
+    defaultConfig {
+        consumerProguardFiles 'proguard-rules.txt'
+    }
+
     lintOptions {
         lintConfig file('lint.xml')
     }
