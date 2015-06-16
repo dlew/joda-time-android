@@ -1,10 +1,16 @@
 # Changelog
 
+# 2.8.1
+
+* [#64](https://github.com/dlew/joda-time-android/pull/64) Automatically include proguard files
+* [#65](https://github.com/dlew/joda-time-android/pull/65) Updated to joda-time 2.8.1
+* [#67](https://github.com/dlew/joda-time-android/pull/67) Updated to tzdata 2015e
+
 # 2.8.0
 
 * [#47](https://github.com/dlew/joda-time-android/pull/47) Fixed compatibility w/ Android Gradle plugin 1.3
 * [#51](https://github.com/dlew/joda-time-android/pull/51) Updated to joda-time 2.8
-* [#52](https://github.com/dlew/joda-time-android/pull/52) Updated to tzdata 2015
+* [#52](https://github.com/dlew/joda-time-android/pull/52) Updated to tzdata 2015d
 * [#57](https://github.com/dlew/joda-time-android/pull/57) Added instructions for proguarding and using joda-convert
 
 # 2.7.2
