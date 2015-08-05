@@ -5,14 +5,6 @@ android {
     buildToolsVersion '22.0.1'
     resourcePrefix 'joda_time_android_'
 
-    sourceSets {
-        main.manifest.srcFile 'AndroidManifest.xml'
-        main.java.srcDir 'src'
-        main.res.srcDir 'res'
-        main.assets.srcDir 'assets'
-        androidTest.setRoot('tests')
-    }
-
     defaultConfig {
         consumerProguardFiles 'proguard-rules.txt'
     }

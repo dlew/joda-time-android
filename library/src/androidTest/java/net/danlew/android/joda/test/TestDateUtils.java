@@ -91,7 +91,7 @@ public class TestDateUtils extends InstrumentationTestCase {
 
         // ...And for the system as well
         mDefaultSystemTz = TimeZone.getTimeZone("America/Chicago");
-        mOldDefaultSystemTz  = TimeZone.getDefault();
+        mOldDefaultSystemTz = TimeZone.getDefault();
         TimeZone.setDefault(mDefaultSystemTz);
 
         // Force current "now" time, so all tests can be consistent
