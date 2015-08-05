@@ -1,9 +1,11 @@
 package net.danlew.android.joda.test;
 
 import android.app.Application;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.provider.Settings;
 import android.test.InstrumentationTestCase;
 import net.danlew.android.joda.DateUtils;
 import net.danlew.android.joda.JodaTimeAndroid;
@@ -61,6 +63,8 @@ public class TestDateUtils extends InstrumentationTestCase {
     private static final int SECOND_OF_MINUTE = 20;
     private static final int MILLIS_OF_SECOND = 103;
 
+    private String mOldTime1224Setting;
+
     private DateTime mNow;
     private DateTimeZone mDefaultJodaTz;
     private DateTimeZone mOldDefaultJodaTz;
@@ -75,6 +79,11 @@ public class TestDateUtils extends InstrumentationTestCase {
         // Init zone info
         Context context = getInstrumentation().getContext();
         JodaTimeAndroid.init(context);
+
+        // Force the system into 24-hour time for tests
+        ContentResolver cr = context.getContentResolver();
+        mOldTime1224Setting = Settings.System.getString(cr, Settings.System.TIME_12_24);
+        Settings.System.putString(cr, Settings.System.TIME_12_24, "24");
 
         // Force all tests to be in the US locale; that way we can test output in consistent manner
         Application app = (Application) getInstrumentation().getContext().getApplicationContext();
@@ -108,6 +117,8 @@ public class TestDateUtils extends InstrumentationTestCase {
         DateTimeUtils.setCurrentMillisSystem();
         DateTimeZone.setDefault(mOldDefaultJodaTz);
         TimeZone.setDefault(mOldDefaultSystemTz);
+        ContentResolver cr = getInstrumentation().getContext().getContentResolver();
+        Settings.System.putString(cr, Settings.System.TIME_12_24, mOldTime1224Setting);
     }
 
     public void testFormatDateTime() {
