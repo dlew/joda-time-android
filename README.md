@@ -22,26 +22,15 @@ This library also has extra utilities designed for Android.  For example, see [D
 Usage
 =====
 
-If you're using maven:
+Add the following dependency to `build.gradle`:
 
-```xml
-<dependency>
-    <groupId>net.danlew</groupId>
-    <artifactId>android.joda</artifactId>
-    <version>2.8.1</version>
-    <type>aar</type>
-</dependency>
-```
-
-If you're using gradle:
-    
 ```groovy
 dependencies {
     compile 'net.danlew:android.joda:2.8.1'
 }
 ```
 
-Once the project is imported, you **must** initialize the timezone provider and TIMEZONE_CHANGED broadcast receiver with a `Context` (via `JodaTimeAndroid.init()`) before you can start using this library.  I suggest putting this code in `Application.onCreate()`:
+Once that's done, you **must** initialize the library before using it by calling `JodaTimeAndroid.init()`. I suggest putting this code in `Application.onCreate()`:
 
 ```java
 public class MyApp extends Application {
