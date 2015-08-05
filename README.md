@@ -22,8 +22,6 @@ This library also has extra utilities designed for Android.  For example, see [D
 Usage
 =====
 
-You can either import this project as a plain old library project, or you can use it as an AAR from Maven Central.
-
 If you're using maven:
 
 ```xml
@@ -42,8 +40,6 @@ dependencies {
     compile 'net.danlew:android.joda:2.8.1'
 }
 ```
-
-In addition, if you're using it as a plain old library project, you must include the joda-time jar on its own (the no-tzdb version).
 
 Once the project is imported, you **must** initialize the timezone provider and TIMEZONE_CHANGED broadcast receiver with a `Context` (via `JodaTimeAndroid.init()`) before you can start using this library.  I suggest putting this code in `Application.onCreate()`:
 
