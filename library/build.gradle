@@ -25,8 +25,8 @@ configurations {
 }
 
 dependencies {
-    compile 'joda-time:joda-time:2.8.1:no-tzdb'
-    updateTzData 'joda-time:joda-time:2.8.1'
+    compile 'joda-time:joda-time:2.8.2:no-tzdb'
+    updateTzData 'joda-time:joda-time:2.8.2'
 }
 
 task generateTzData(dependsOn: assembleDebug, type: JavaExec) {
