@@ -41,16 +41,3 @@ public class MyApp extends Application {
     }
 }
 ```
-
-Updating the TimeZone database
-==============================
-
-1. Download the latest Time Zone Data package from [IANA](http://www.iana.org/time-zones).  You will need only the tzdata package.
-2. Unzip/untar the tzdata package and copy files from the package into the `tzdata/` folder in this repository.
-3. Run the following command
-
-    ```bash
-    ./gradlew updateTzData
-    ```
-
-4. Re-compile the library

@@ -1,5 +1,11 @@
 # Changelog
 
+# 2.8.2
+
+* [#76](https://github.com/dlew/joda-time-android/pull/76) Removed Eclipse library support. You'll just have to learn to love Gradle, or you can use an old version of this library and update the tzdata yourself manually.
+* [#80](https://github.com/dlew/joda-time-android/pull/80) Updated to joda-time 2.8.2
+* [#82](https://github.com/dlew/joda-time-android/pull/82) Updated to tzdata 2015f
+
 # 2.8.1
 
 * [#64](https://github.com/dlew/joda-time-android/pull/64) Automatically include proguard files
