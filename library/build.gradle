@@ -14,6 +14,7 @@ android {
     }
 }
 
+apply plugin: net.danlew.android.joda.TzDataPlugin
 apply from: 'gradle-mvn-push.gradle'
 
 repositories {
@@ -27,6 +28,10 @@ configurations {
 dependencies {
     compile 'joda-time:joda-time:2.8.2:no-tzdb'
     updateTzData 'joda-time:joda-time:2.8.2'
+}
+
+tzdata {
+    tzDataDir = new File(project.rootDir, 'tzdata')
 }
 
 task generateTzData(dependsOn: assembleDebug, type: JavaExec) {
