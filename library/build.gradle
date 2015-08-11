@@ -21,78 +21,10 @@ repositories {
     mavenCentral()
 }
 
-configurations {
-    updateTzData
-}
-
 dependencies {
     compile 'joda-time:joda-time:2.8.2:no-tzdb'
-    updateTzData 'joda-time:joda-time:2.8.2'
 }
 
 tzdata {
     tzDataDir = new File(project.rootDir, 'tzdata')
-}
-
-task generateTzData(dependsOn: assembleDebug, type: JavaExec) {
-    description = 'Generates TZ data files from the source'
-    group = 'Timezone Data'
-
-    File srcDir = new File(rootDir, 'tzdata')
-    File destDir = new File(buildDir, 'intermediates/tz')
-
-    inputs.dir srcDir
-    outputs.dir destDir
-
-    classpath configurations.updateTzData
-    main = 'org.joda.time.tz.ZoneInfoCompiler'
-    systemProperty 'org.joda.time.DateTimeZone.Provider', 'org.joda.time.tz.UTCProvider'
-    args '-src', srcDir, '-dst', destDir, 'africa', 'antarctica', 'asia', 'australasia', 'europe',
-            'northamerica', 'southamerica', 'pacificnew', 'etcetera', 'backward', 'systemv',
-            'backzone'
-}
-
-//////////////////////////////////////////////////////////////////////////////
-// Copies the generated TZ data into the correct place
-
-def resFolder = 'res/raw'
-def regions = ['Africa', 'America', 'America/Argentina', 'America/Kentucky', 'America/Indiana', 'America/North_Dakota', 'Antarctica', 'Asia', 'Atlantic', 'Australia', 'Etc', 'Europe', 'Indian', 'Pacific']
-
-task updateTzData(dependsOn: generateTzData, type: Sync) {
-    description = 'Updates the TZ data in the res/raw folder'
-    group = 'Timezone Data'
-
-    // Copy each region
-    regions.each { region ->
-        from("build/intermediates/tz/$region") {
-            exclude '*/*'
-            includeEmptyDirs false
-
-            rename { city ->
-                renameFile(region, city)
-            }
-        }
-    }
-
-    // Copy all root directory files (regionless)
-    from("build/intermediates/tz/") {
-        rename { city ->
-            renameFile(null, city)
-        }
-
-        exclude '*/*'
-        includeEmptyDirs false
-    }
-
-    into resFolder
-}
-
-String renameFile(String region, String city) {
-    city = city.toLowerCase().replace('+', 'plus').replace('-', '_')
-    if (region) {
-        region = region.toLowerCase().replace('/', '_')
-        'joda_time_android_tzdata_' + region + '_' + city
-    } else {
-        'joda_time_android_tzdata_' + city
-    }
 }
