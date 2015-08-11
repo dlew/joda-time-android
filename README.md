@@ -26,7 +26,7 @@ Add the following dependency to `build.gradle`:
 
 ```groovy
 dependencies {
-    compile 'net.danlew:android.joda:2.8.1'
+    compile 'net.danlew:android.joda:2.8.2'
 }
 ```
 
