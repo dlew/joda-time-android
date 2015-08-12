@@ -17,7 +17,7 @@ I know what you are thinking: Joda-Time is a great library and it's just a singl
 
 There is a particular problem with the JAR setup on Android: due to its usage of [ClassLoader.getResourceAsStream()](http://developer.android.com/reference/java/lang/ClassLoader.html#getResourceAsStream%28java.lang.String%29), it greatly inflates its memory footprint on apps.  (For more details, see [this blog post](http://blog.danlew.net/2013/08/20/joda_time_s_memory_issue_in_android/).)  This library avoids the problem for Android by loading from resources instead of a JAR.
 
-This library also has extra utilities designed for Android.  For example, see [DateUtils](library/src/net/danlew/android/joda/DateUtils.java), a port of Android's [DateUtils](http://developer.android.com/reference/android/text/format/DateUtils.html).
+This library also has extra utilities designed for Android.  For example, see [DateUtils](library/src/main/java/net/danlew/android/joda/DateUtils.java), a port of Android's [DateUtils](http://developer.android.com/reference/android/text/format/DateUtils.html).
 
 Usage
 =====
