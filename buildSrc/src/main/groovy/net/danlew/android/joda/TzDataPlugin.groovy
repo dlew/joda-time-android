@@ -103,10 +103,10 @@ class TzDataPlugin implements Plugin<Project> {
         city = city.toLowerCase().replace('+', 'plus').replace('-', '_')
         if (region) {
             region = region.toLowerCase().replace('/', '_')
-            'joda_time_android_tzdata_' + region + '_' + city
+            'joda_' + region + '_' + city
         }
         else {
-            'joda_time_android_tzdata_' + city
+            'joda_' + city
         }
     }
 }
