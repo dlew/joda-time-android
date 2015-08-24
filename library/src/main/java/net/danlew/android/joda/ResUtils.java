@@ -16,7 +16,7 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class ResUtils {
 
-    private static final String TZDATA_PREFIX = "joda_time_android_tzdata_";
+    private static final String TZDATA_PREFIX = "joda_";
 
     /**
      * Converts any path into something that can be placed in an Android directory.
