@@ -41,3 +41,25 @@ public class MyApp extends Application {
     }
 }
 ```
+
+Troubleshooting
+===============
+__Q: My build fails with an error about a duplicate file__
+
+> Duplicate files copied in APK META-INF/LICENSE.txt
+
+or
+
+> Duplicate files copied in APK META-INF/NOTICE.txt
+
+__A: We can safely exclude thoses files from our build. You need to specify these two `exclude`s in your `build.gradle` file and you will be good to go:__
+
+```
+android {
+    ...
+    packagingOptions {
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+}
+```
