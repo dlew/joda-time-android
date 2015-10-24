@@ -1,5 +1,11 @@
 # Changelog
 
+# 2.9.0 *(2015-10-25)*
+
+* [#91](https://github.com/dlew/joda-time-android/pull/91) Updated to joda-time 2.9
+* [#88](https://github.com/dlew/joda-time-android/pull/88) Updated to tzdata 2015g
+* [#85](https://github.com/dlew/joda-time-android/pull/85) Fixed resource handling on some OSes by shortening library prefix
+
 # 2.8.2 *(2015-08-11)*
 
 * [#76](https://github.com/dlew/joda-time-android/pull/76) Removed Eclipse library support. You'll just have to learn to love Gradle, or you can use an old version of this library and update the tzdata yourself manually.
