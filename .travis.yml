@@ -2,8 +2,9 @@ language: android
 
 android:
   components:
-    - build-tools-22.0.1
-    - android-22
+    - platform-tools
+    - build-tools-23.0.1
+    - android-23
 
     # For the emulator
     - sys-img-armeabi-v7a-android-19
