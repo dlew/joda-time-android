@@ -1,8 +1,8 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 22
-    buildToolsVersion '22.0.1'
+    compileSdkVersion 23
+    buildToolsVersion '23.0.1'
     resourcePrefix 'joda_'
 
     defaultConfig {
@@ -11,6 +11,8 @@ android {
 
     lintOptions {
         lintConfig file('lint.xml')
+        textReport true
+        textOutput 'stdout'
     }
 }
 
@@ -22,7 +24,7 @@ repositories {
 }
 
 dependencies {
-    compile 'joda-time:joda-time:2.8.2:no-tzdb'
+    compile 'joda-time:joda-time:2.9:no-tzdb'
 }
 
 tzdata {
