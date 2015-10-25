@@ -1,10 +1,1 @@
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="net.danlew.android.joda">
-
-    <uses-sdk
-        android:minSdkVersion="9"
-        android:targetSdkVersion="22" />
-
-    <application/>
-
-</manifest>
+<manifest package="net.danlew.android.joda" />

@@ -6,6 +6,7 @@ android {
     resourcePrefix 'joda_'
 
     defaultConfig {
+        minSdkVersion 9
         consumerProguardFiles 'proguard-rules.txt'
     }
 
