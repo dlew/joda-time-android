@@ -63,3 +63,22 @@ android {
     }
 }
 ```
+
+__Q: I'm trying to use ProGuard. My app builds fine, but then it exits with a java.lang.RuntimeException__
+
+__A:__ If you are seeing something like this in your logcat:
+
+```java
+java.lang.RuntimeException: Could not read ZoneInfoMap
+```
+
+add these few lines to your `proguard.pro` file:
+
+```java
+# JodaTime
+-dontwarn org.joda.convert.**
+-dontwarn org.joda.time.**
+-keep class org.joda.time.** { *; }
+-keep interface org.joda.time.** { *; }
+-keep class net.danlew.android.** { *; }
+```
