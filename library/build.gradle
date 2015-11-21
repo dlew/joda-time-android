@@ -2,7 +2,7 @@ apply plugin: 'com.android.library'
 
 android {
     compileSdkVersion 23
-    buildToolsVersion '23.0.1'
+    buildToolsVersion '23.0.2'
     resourcePrefix 'joda_'
 
     defaultConfig {
@@ -25,7 +25,7 @@ repositories {
 }
 
 dependencies {
-    compile 'joda-time:joda-time:2.9:no-tzdb'
+    compile 'joda-time:joda-time:2.9.1:no-tzdb'
 }
 
 tzdata {
