@@ -31,6 +31,7 @@ class TzDataPlugin implements Plugin<Project> {
         'America/Indiana',
         'America/North_Dakota',
         'Antarctica',
+        'Arctic',
         'Asia',
         'Atlantic',
         'Australia',
