@@ -1,5 +1,10 @@
 # Changelog
 
+# 2.9.1 *(2015-12-05)*
+
+* [#103](https://github.com/dlew/joda-time-android/pull/103) Fixed missing Arctic/Longyearbyen timezone
+* [#97](https://github.com/dlew/joda-time-android/pull/97) Updated to joda-time 2.9.1
+
 # 2.9.0 *(2015-10-25)*
 
 * [#91](https://github.com/dlew/joda-time-android/pull/91) Updated to joda-time 2.9
