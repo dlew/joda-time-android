@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Timezone data are lazy-loaded by reflection, so we have to explicitly
+    keep shrinkResources from removing any of them.
+-->
+<resources xmlns:tools="http://schemas.android.com/tools"
+           tools:keep="@raw/joda_*" />
