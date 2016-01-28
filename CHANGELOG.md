@@ -1,5 +1,12 @@
 # Changelog
 
+# 2.9.2 *(2016-01-28)*
+
+* [#107](https://github.com/dlew/joda-time-android/pull/107) Updated to joda-time 2.9.2
+* [#109](https://github.com/dlew/joda-time-android/pull/109) Updated to tzdata 2016a
+* [#110](https://github.com/dlew/joda-time-android/pull/110) Prevent tzdata from being removed due to shrinkResources
+* [#111](https://github.com/dlew/joda-time-android/pull/111) Hide all resources in the library from autocomplete
+
 # 2.9.1 *(2015-12-05)*
 
 * [#103](https://github.com/dlew/joda-time-android/pull/103) Fixed missing Arctic/Longyearbyen timezone
