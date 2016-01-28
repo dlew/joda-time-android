@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--
+        None of the resources in joda-time-android should be accessed
+        directly. This generates an empty public.txt that results in
+        all resources being made private.
+    -->
+    <public />
+</resources>
