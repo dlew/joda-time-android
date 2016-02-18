@@ -1,7 +1,6 @@
 package net.danlew.android.joda;
 
 import android.content.Context;
-import android.util.Log;
 import org.joda.time.DateTimeZone;
 import org.joda.time.tz.DateTimeZoneBuilder;
 import org.joda.time.tz.Provider;
@@ -114,7 +113,7 @@ public class ResourceZoneInfoProvider implements Provider {
         int resId = ResUtils.getIdentifier(R.raw.class, resName);
 
         if (resId == 0) {
-            throw new IOException("Resource not found: \"" + name + "\" (resName: \"" + resName + "\"");
+            throw new IOException("Resource not found: \"" + name + "\" (resName: \"" + resName + "\")");
         }
 
         InputStream in = mAppContext.getResources().openRawResource(resId);

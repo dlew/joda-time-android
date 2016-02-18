@@ -39,7 +39,7 @@ public final class JodaTimeAndroid {
             DateTimeZone.setProvider(new ResourceZoneInfoProvider(context));
         }
         catch (IOException e) {
-            throw new RuntimeException("Could not read ZoneInfoMap");
+            throw new RuntimeException("Could not read ZoneInfoMap. You are probably using Proguard wrong.", e);
         }
 
         context.getApplicationContext()
