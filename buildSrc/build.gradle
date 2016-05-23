@@ -10,5 +10,5 @@ repositories {
 }
 
 dependencies {
-    compile 'joda-time:joda-time:2.9.2'
+    compile 'joda-time:joda-time:2.9.3'
 }
