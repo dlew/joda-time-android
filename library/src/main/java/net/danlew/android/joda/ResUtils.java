@@ -16,6 +16,8 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class ResUtils {
 
+    private ResUtils(){}
+
     private static final String TZDATA_PREFIX = "joda_";
 
     /**
