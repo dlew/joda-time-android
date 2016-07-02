@@ -30,7 +30,7 @@ public class ResUtils {
      */
     private static String convertPathToResource(String path) {
         File file = new File(path);
-        List<String> parts = new ArrayList<String>();
+        List<String> parts = new ArrayList<>();
         do {
             parts.add(file.getName());
             file = file.getParentFile();
@@ -68,7 +68,7 @@ public class ResUtils {
     }
 
     /** Cache of resources ids, for speed */
-    private static Map<Class<?>, Map<String, Integer>> sIdentifierCache = new ConcurrentHashMap<Class<?>, Map<String, Integer>>();
+    private static Map<Class<?>, Map<String, Integer>> sIdentifierCache = new ConcurrentHashMap<>();
 
     /**
      * Retrieves a resource id dynamically, via reflection.  It's much faster
@@ -89,7 +89,7 @@ public class ResUtils {
         // See if the cache already contains this identifier
         Map<String, Integer> typeCache;
         if (!sIdentifierCache.containsKey(type)) {
-            typeCache = new ConcurrentHashMap<String, Integer>();
+            typeCache = new ConcurrentHashMap<>();
             sIdentifierCache.put(type, typeCache);
         }
         else {

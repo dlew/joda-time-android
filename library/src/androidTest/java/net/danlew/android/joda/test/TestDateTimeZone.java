@@ -99,18 +99,6 @@ public class TestDateTimeZone extends InstrumentationTestCase {
     // 2002-01-09
     private long TEST_TIME_WINTER =
             (y2002days + 9L -1L) * DateTimeConstants.MILLIS_PER_DAY;
-            
-//    // 2002-04-05 Fri
-//    private long TEST_TIME1 =
-//            (y2002days + 31L + 28L + 31L + 5L -1L) * DateTimeConstants.MILLIS_PER_DAY
-//            + 12L * DateTimeConstants.MILLIS_PER_HOUR
-//            + 24L * DateTimeConstants.MILLIS_PER_MINUTE;
-//        
-//    // 2003-05-06 Tue
-//    private long TEST_TIME2 =
-//            (y2003days + 31L + 28L + 31L + 30L + 6L -1L) * DateTimeConstants.MILLIS_PER_DAY
-//            + 14L * DateTimeConstants.MILLIS_PER_HOUR
-//            + 28L * DateTimeConstants.MILLIS_PER_MINUTE;
     
     private static final Policy RESTRICT;
     private static final Policy ALLOW;
@@ -249,59 +237,7 @@ public class TestDateTimeZone extends InstrumentationTestCase {
         } catch (IllegalArgumentException ex) {}
     }
 
-    // This entire test is invalid for the Android version
-    /*
-    public void testForID_String_old() {
-        Map<String, String> map = new LinkedHashMap<String, String>();
-        map.put("GMT", "UTC");
-        map.put("WET", "WET");
-        map.put("CET", "CET");
-        map.put("MET", "CET");
-        map.put("ECT", "CET");
-        map.put("EET", "EET");
-        map.put("MIT", "Pacific/Apia");
-        map.put("HST", "Pacific/Honolulu");
-        map.put("AST", "America/Anchorage");
-        map.put("PST", "America/Los_Angeles");
-        map.put("MST", "America/Denver");
-        map.put("PNT", "America/Phoenix");
-        map.put("CST", "America/Chicago");
-        map.put("EST", "America/New_York");
-        map.put("IET", "America/Indiana/Indianapolis");
-        map.put("PRT", "America/Puerto_Rico");
-        map.put("CNT", "America/St_Johns");
-        map.put("AGT", "America/Argentina/Buenos_Aires");
-        map.put("BET", "America/Sao_Paulo");
-        map.put("ART", "Africa/Cairo");
-        map.put("EAT", "Africa/Addis_Ababa");
-        map.put("NET", "Asia/Yerevan");
-        map.put("PLT", "Asia/Karachi");
-        map.put("IST", "Asia/Kolkata");
-        map.put("BST", "Asia/Dhaka");
-        map.put("VST", "Asia/Ho_Chi_Minh");
-        map.put("CTT", "Asia/Shanghai");
-        map.put("JST", "Asia/Tokyo");
-        map.put("ACT", "Australia/Darwin");
-        map.put("AET", "Australia/Sydney");
-        map.put("SST", "Pacific/Guadalcanal");
-        map.put("NST", "Pacific/Auckland");
-        for (String key : map.keySet()) {
-            String value = map.get(key);
-            TimeZone juZone = TimeZone.getTimeZone(key);
-            DateTimeZone zone = DateTimeZone.forTimeZone(juZone);
-            assertEquals(value, zone.getID());
-//            System.out.println(juZone);
-//            System.out.println(juZone.getDisplayName());
-//            System.out.println(zone);
-//            System.out.println("------");
-        }
-        // gee thanks time-zone db maintainer for damaging the database
-        // and breaking the long-standing  association with CAT
-        TimeZone juZone = TimeZone.getTimeZone("CAT");
-        DateTimeZone zone = DateTimeZone.forTimeZone(juZone);
-        assertTrue(zone.getID().equals("Africa/Harare") || zone.getID().equals("Africa/Maputo"));
-    }
-    */
+
 
     //-----------------------------------------------------------------------
     public void testForOffsetHours_int() {
@@ -668,29 +604,6 @@ public class TestDateTimeZone extends InstrumentationTestCase {
       JDK6 = jdk6;
     }
 
-    // Names are not the same between JDK and Android
-    /*
-    public void testGetShortName() {
-        DateTimeZone zone = DateTimeZone.forID("Europe/London");
-        assertEquals("BST", zone.getShortName(TEST_TIME_SUMMER));
-        assertEquals("GMT", zone.getShortName(TEST_TIME_WINTER));
-        assertEquals("BST", zone.getShortName(TEST_TIME_SUMMER, Locale.ENGLISH));
-    }
-
-    public void testGetShortName_berlin() {
-        DateTimeZone berlin = DateTimeZone.forID("Europe/Berlin");
-        assertEquals("CET", berlin.getShortName(TEST_TIME_WINTER, Locale.ENGLISH));
-        assertEquals("CEST", berlin.getShortName(TEST_TIME_SUMMER, Locale.ENGLISH));
-        if (JDK6) {
-          assertEquals("MEZ", berlin.getShortName(TEST_TIME_WINTER, Locale.GERMAN));
-          assertEquals("MESZ", berlin.getShortName(TEST_TIME_SUMMER, Locale.GERMAN));
-        } else {
-          assertEquals("CET", berlin.getShortName(TEST_TIME_WINTER, Locale.GERMAN));
-          assertEquals("CEST", berlin.getShortName(TEST_TIME_SUMMER, Locale.GERMAN));
-        }
-    }
-    */
-
     public void testGetShortNameProviderName() {
         assertEquals(null, DateTimeZone.getNameProvider().getShortName(null, "Europe/London", "BST"));
         assertEquals(null, DateTimeZone.getNameProvider().getShortName(Locale.ENGLISH, null, "BST"));
@@ -702,29 +615,6 @@ public class TestDateTimeZone extends InstrumentationTestCase {
         DateTimeZone zone = new MockDateTimeZone("Europe/London");
         assertEquals("Europe/London", zone.getShortName(TEST_TIME_SUMMER, Locale.ENGLISH));
     }
-
-    // Names are not the same between JDK and Android
-    /*
-    public void testGetName() {
-        DateTimeZone zone = DateTimeZone.forID("Europe/London");
-        assertEquals("British Summer Time", zone.getName(TEST_TIME_SUMMER));
-        assertEquals("Greenwich Mean Time", zone.getName(TEST_TIME_WINTER));
-        assertEquals("British Summer Time", zone.getName(TEST_TIME_SUMMER, Locale.ENGLISH));
-    }
-
-    public void testGetName_berlin() {
-      DateTimeZone berlin = DateTimeZone.forID("Europe/Berlin");
-      assertEquals("Central European Time", berlin.getName(TEST_TIME_WINTER, Locale.ENGLISH));
-      assertEquals("Central European Summer Time", berlin.getName(TEST_TIME_SUMMER, Locale.ENGLISH));
-      if (JDK6) {
-        assertEquals("Mitteleurop\u00e4ische Zeit", berlin.getName(TEST_TIME_WINTER, Locale.GERMAN));
-        assertEquals("Mitteleurop\u00e4ische Sommerzeit", berlin.getName(TEST_TIME_SUMMER, Locale.GERMAN));
-      } else {
-        assertEquals("Zentraleurop\u00e4ische Zeit", berlin.getName(TEST_TIME_WINTER, Locale.GERMAN));
-        assertEquals("Zentraleurop\u00e4ische Sommerzeit", berlin.getName(TEST_TIME_SUMMER, Locale.GERMAN));
-      }
-  }
-  */
 
     public void testGetNameProviderName() {
         assertEquals(null, DateTimeZone.getNameProvider().getName(null, "Europe/London", "BST"));
@@ -849,40 +739,6 @@ public class TestDateTimeZone extends InstrumentationTestCase {
         assertEquals(TEST_TIME_SUMMER, zone.previousTransition(TEST_TIME_SUMMER));
         assertEquals(TEST_TIME_WINTER, zone.previousTransition(TEST_TIME_WINTER));
     }
-
-//    //-----------------------------------------------------------------------
-//    public void testIsLocalDateTimeOverlap_Berlin() {
-//        DateTimeZone zone = DateTimeZone.forID("Europe/Berlin");
-//        assertEquals(false, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 10, 28, 1, 0)));
-//        assertEquals(false, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 10, 28, 1, 59, 59, 99)));
-//        assertEquals(true, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 10, 28, 2, 0)));
-//        assertEquals(true, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 10, 28, 2, 30)));
-//        assertEquals(true, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 10, 28, 2, 59, 59, 99)));
-//        assertEquals(false, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 10, 28, 3, 0)));
-//        assertEquals(false, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 10, 28, 4, 0)));
-//        
-//        assertEquals(false, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 3, 25, 1, 30)));  // before gap
-//        assertEquals(false, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 3, 25, 2, 30)));  // gap
-//        assertEquals(false, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 3, 25, 3, 30)));  // after gap
-//        assertEquals(false, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 12, 24, 12, 34)));
-//    }
-//
-//    //-----------------------------------------------------------------------
-//    public void testIsLocalDateTimeOverlap_NewYork() {
-//        DateTimeZone zone = DateTimeZone.forID("America/New_York");
-//        assertEquals(false, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 11, 4, 0, 0)));
-//        assertEquals(false, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 11, 4, 0, 59, 59, 99)));
-//        assertEquals(true, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 11, 4, 1, 0)));
-//        assertEquals(true, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 11, 4, 1, 30)));
-//        assertEquals(true, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 11, 4, 1, 59, 59, 99)));
-//        assertEquals(false, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 11, 4, 2, 0)));
-//        assertEquals(false, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 11, 4, 3, 0)));
-//        
-//        assertEquals(false, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 3, 11, 1, 30)));  // before gap
-//        assertEquals(false, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 3, 11, 2, 30)));  // gap
-//        assertEquals(false, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 3, 11, 3, 30)));  // after gap
-//        assertEquals(false, zone.isLocalDateTimeOverlap(new LocalDateTime(2007, 12, 24, 12, 34)));
-//    }
 
     //-----------------------------------------------------------------------
     public void testIsLocalDateTimeGap_Berlin() {
