@@ -21,6 +21,11 @@ android {
             shrinkResources true
         }
     }
+
+    lintOptions {
+        // We don't care THAT much about lint issues with our sample
+        abortOnError false
+    }
 }
 
 repositories {
