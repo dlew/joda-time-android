@@ -25,7 +25,7 @@ repositories {
 }
 
 dependencies {
-    compile 'joda-time:joda-time:2.9.7:no-tzdb'
+    compile 'joda-time:joda-time:2.9.9:no-tzdb'
 }
 
 tzdata {
