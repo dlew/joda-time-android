@@ -3,7 +3,7 @@
 # 2.9.9 *(2017-03-24)*
 
 * [#173](https://github.com/dlew/joda-time-android/pull/173) Update to joda-time 2.9.9
-* [#174](https://github.com/dlew/joda-time-android/pull/174) Update to tzdata 2017a
+* [#174](https://github.com/dlew/joda-time-android/pull/174) Update to tzdata 2017b
 
 # 2.9.7 *(2017-03-01)*
 
