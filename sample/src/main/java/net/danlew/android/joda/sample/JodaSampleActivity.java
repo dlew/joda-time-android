@@ -46,7 +46,7 @@ public class JodaSampleActivity extends Activity {
     }
 
     private void sampleDateTime() {
-        List<String> text = new ArrayList<String>();
+        List<String> text = new ArrayList<>();
         DateTime now = DateTime.now();
         text.add("Now: " + now);
         text.add("Now + 30 minutes: " + now.plusMinutes(30));
@@ -56,7 +56,7 @@ public class JodaSampleActivity extends Activity {
     }
 
     private void sampleLocalDate() {
-        List<String> text = new ArrayList<String>();
+        List<String> text = new ArrayList<>();
         LocalDate now = LocalDate.now();
         text.add("Now: " + now);
         text.add("Now + 2 days: " + now.plusDays(2));
@@ -66,7 +66,7 @@ public class JodaSampleActivity extends Activity {
 
     // You can mix/match most flags for the desired output format
     private void sampleFormatDateTime() {
-        List<String> text = new ArrayList<String>();
+        List<String> text = new ArrayList<>();
         DateTime now = DateTime.now();
         text.add("Show time: " + DateUtils.formatDateTime(this, now, DateUtils.FORMAT_SHOW_TIME));
         text.add("Show date: " + DateUtils.formatDateTime(this, now, DateUtils.FORMAT_SHOW_DATE));
@@ -82,7 +82,7 @@ public class JodaSampleActivity extends Activity {
 
     // You can mix/match most flags for the desired output format
     private void sampleDateRange() {
-        List<String> text = new ArrayList<String>();
+        List<String> text = new ArrayList<>();
         DateTime start = DateTime.now();
         DateTime end = start.plusMinutes(30).plusHours(2).plusDays(56);
         text.add("Range: " + DateUtils.formatDateRange(this, start, end, 0));
@@ -93,7 +93,7 @@ public class JodaSampleActivity extends Activity {
     }
 
     private void sampleFormatElapsedTime() {
-        List<String> text = new ArrayList<String>();
+        List<String> text = new ArrayList<>();
         text.add("25 seconds: " + DateUtils.formatElapsedTime(Duration.standardSeconds(25)));
         text.add("3 minutes: " + DateUtils.formatElapsedTime(Duration.standardMinutes(3)));
         text.add("3 minutes, 25 seconds: " + DateUtils.formatElapsedTime(
@@ -105,7 +105,7 @@ public class JodaSampleActivity extends Activity {
     }
 
     private void sampleFormatDuration() {
-        List<String> text = new ArrayList<String>();
+        List<String> text = new ArrayList<>();
         text.add("Seconds: " + DateUtils.formatDuration(this, Duration.standardSeconds(25)));
         text.add("Minutes: " + DateUtils.formatDuration(this, Duration.standardMinutes(5)));
         text.add("Hours: " + DateUtils.formatDuration(this, Duration.standardHours(3)));
@@ -113,7 +113,7 @@ public class JodaSampleActivity extends Activity {
     }
 
     private void sampleIsToday() {
-        List<String> text = new ArrayList<String>();
+        List<String> text = new ArrayList<>();
         LocalDate today = LocalDate.now();
         text.add("Today: " + DateUtils.isToday(today));
         text.add("Tomorrow: " + DateUtils.isToday(today.plusDays(1)));
@@ -122,7 +122,7 @@ public class JodaSampleActivity extends Activity {
     }
 
     private void sampleGetRelativeTimeSpanString() {
-        List<String> text = new ArrayList<String>();
+        List<String> text = new ArrayList<>();
         DateTime now = DateTime.now();
         text.add("Short future: " + DateUtils.getRelativeTimeSpanString(this, now.plusMinutes(25)));
         text.add("Medium future: " + DateUtils.getRelativeTimeSpanString(this, now.plusHours(5)));
@@ -134,7 +134,7 @@ public class JodaSampleActivity extends Activity {
     }
 
     private void sampleGetRelativeTimeSpanStringWithPreposition() {
-        List<String> text = new ArrayList<String>();
+        List<String> text = new ArrayList<>();
         DateTime now = DateTime.now();
         text.add("Short future: " + DateUtils.getRelativeTimeSpanString(this, now.plusMinutes(25), true));
         text.add("Medium future: " + DateUtils.getRelativeTimeSpanString(this, now.plusHours(5), true));
@@ -146,7 +146,7 @@ public class JodaSampleActivity extends Activity {
     }
 
     private void sampleGetRelativeDateTimeString() {
-        List<String> text = new ArrayList<String>();
+        List<String> text = new ArrayList<>();
         DateTime now = DateTime.now();
         text.add("Short future: " + DateUtils.getRelativeDateTimeString(this, now.plusMinutes(25), null, 0));
         text.add("Medium future: " + DateUtils.getRelativeDateTimeString(this, now.plusHours(5), null, 0));
