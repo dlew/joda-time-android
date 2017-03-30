@@ -18,6 +18,9 @@ public class ResUtils {
 
     private static final String TZDATA_PREFIX = "joda_";
 
+    /** Cache of resources ids, for speed */
+    private static Map<Class<?>, Map<String, Integer>> sIdentifierCache = new ConcurrentHashMap<Class<?>, Map<String, Integer>>();
+
     /**
      * Converts any path into something that can be placed in an Android directory.
      *
@@ -66,9 +69,6 @@ public class ResUtils {
     public static String getZoneInfoMapResource() {
         return TZDATA_PREFIX + convertPathToResource("ZoneInfoMap");
     }
-
-    /** Cache of resources ids, for speed */
-    private static Map<Class<?>, Map<String, Integer>> sIdentifierCache = new ConcurrentHashMap<Class<?>, Map<String, Integer>>();
 
     /**
      * Retrieves a resource id dynamically, via reflection.  It's much faster

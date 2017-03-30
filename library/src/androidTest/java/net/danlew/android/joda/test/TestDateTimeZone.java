@@ -62,6 +62,7 @@ import java.util.TimeZone;
  */
 public class TestDateTimeZone extends InstrumentationTestCase {
     private static final boolean OLD_JDK;
+    private static final boolean JDK6;
     static {
         String str = System.getProperty("java.version");
         boolean old = true;
@@ -82,23 +83,23 @@ public class TestDateTimeZone extends InstrumentationTestCase {
     // no longer final
     private static DateTimeZone PARIS;
     private static DateTimeZone LONDON;
-    
-    long y2002days = 365 + 365 + 366 + 365 + 365 + 365 + 366 + 365 + 365 + 365 + 
+
+    private static final long Y_2002_DAYS = 365 + 365 + 366 + 365 + 365 + 365 + 366 + 365 + 365 + 365 +
                      366 + 365 + 365 + 365 + 366 + 365 + 365 + 365 + 366 + 365 + 
                      365 + 365 + 366 + 365 + 365 + 365 + 366 + 365 + 365 + 365 +
                      366 + 365;
-    long y2003days = 365 + 365 + 366 + 365 + 365 + 365 + 366 + 365 + 365 + 365 + 
+    private static final long Y_2003_DAYS = 365 + 365 + 366 + 365 + 365 + 365 + 366 + 365 + 365 + 365 +
                      366 + 365 + 365 + 365 + 366 + 365 + 365 + 365 + 366 + 365 + 
                      365 + 365 + 366 + 365 + 365 + 365 + 366 + 365 + 365 + 365 +
                      366 + 365 + 365;
     
     // 2002-06-09
-    private long TEST_TIME_SUMMER =
-            (y2002days + 31L + 28L + 31L + 30L + 31L + 9L -1L) * DateTimeConstants.MILLIS_PER_DAY;
+    private static final long TEST_TIME_SUMMER =
+            (Y_2002_DAYS + 31L + 28L + 31L + 30L + 31L + 9L -1L) * DateTimeConstants.MILLIS_PER_DAY;
             
     // 2002-01-09
     private long TEST_TIME_WINTER =
-            (y2002days + 9L -1L) * DateTimeConstants.MILLIS_PER_DAY;
+            (Y_2002_DAYS + 9L -1L) * DateTimeConstants.MILLIS_PER_DAY;
             
 //    // 2002-04-05 Fri
 //    private long TEST_TIME1 =
@@ -117,13 +118,16 @@ public class TestDateTimeZone extends InstrumentationTestCase {
     static {
         // don't call Policy.getPolicy()
         RESTRICT = new Policy() {
+            @Override
             public PermissionCollection getPermissions(CodeSource codesource) {
                 Permissions p = new Permissions();
                 p.add(new AllPermission());  // enable everything
                 return p;
             }
+            @Override
             public void refresh() {
             }
+            @Override
             public boolean implies(ProtectionDomain domain, Permission permission) {
                 if (permission instanceof JodaTimePermission) {
                     return false;
@@ -133,11 +137,13 @@ public class TestDateTimeZone extends InstrumentationTestCase {
             }
         };
         ALLOW = new Policy() {
+            @Override
             public PermissionCollection getPermissions(CodeSource codesource) {
                 Permissions p = new Permissions();
                 p.add(new AllPermission());  // enable everything
                 return p;
             }
+            @Override
             public void refresh() {
             }
         };
@@ -397,11 +403,11 @@ public class TestDateTimeZone extends InstrumentationTestCase {
         
         zone = DateTimeZone.forTimeZone(TimeZone.getTimeZone("GMT-02:00"));
         assertEquals("-02:00", zone.getID());
-        assertEquals((-2L * DateTimeConstants.MILLIS_PER_HOUR), zone.getOffset(TEST_TIME_SUMMER));
+        assertEquals(-2L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffset(TEST_TIME_SUMMER));
         
         zone = DateTimeZone.forTimeZone(TimeZone.getTimeZone("GMT+2"));
         assertEquals("+02:00", zone.getID());
-        assertEquals((2L * DateTimeConstants.MILLIS_PER_HOUR), zone.getOffset(TEST_TIME_SUMMER));
+        assertEquals(2L * DateTimeConstants.MILLIS_PER_HOUR, zone.getOffset(TEST_TIME_SUMMER));
         
         zone = DateTimeZone.forTimeZone(TimeZone.getTimeZone("EST"));
         assertEquals("America/New_York", zone.getID());
@@ -656,8 +662,6 @@ public class TestDateTimeZone extends InstrumentationTestCase {
         assertEquals("BST", zone.getNameKey(TEST_TIME_SUMMER));
         assertEquals("GMT", zone.getNameKey(TEST_TIME_WINTER));
     }
-
-    static final boolean JDK6;
     static {
       boolean jdk6 = true;
       try {

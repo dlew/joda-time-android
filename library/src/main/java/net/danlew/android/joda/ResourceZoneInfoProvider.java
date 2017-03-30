@@ -116,9 +116,7 @@ public class ResourceZoneInfoProvider implements Provider {
             throw new IOException("Resource not found: \"" + name + "\" (resName: \"" + resName + "\")");
         }
 
-        InputStream in = mAppContext.getResources().openRawResource(resId);
-
-        return in;
+        return mAppContext.getResources().openRawResource(resId);
     }
 
     /**
