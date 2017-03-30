@@ -38,6 +38,8 @@ import org.joda.time.Years;
  */
 public class DateUtils {
 
+    private DateUtils(){}
+
     // The following FORMAT_* symbols are used for specifying the format of
     // dates and times in the formatDateRange method.
     public static final int FORMAT_SHOW_TIME = android.text.format.DateUtils.FORMAT_SHOW_TIME;
