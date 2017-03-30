@@ -143,7 +143,7 @@ public class TestDateTimeZone extends InstrumentationTestCase {
         };
     }
     
-    private DateTimeZone zone;
+    private DateTimeZone defaultZone;
     private Locale locale;
 
     protected void setUp() throws Exception {
@@ -155,13 +155,13 @@ public class TestDateTimeZone extends InstrumentationTestCase {
         LONDON = DateTimeZone.forID("Europe/London");
 
         locale = Locale.getDefault();
-        zone = DateTimeZone.getDefault();
+        defaultZone = DateTimeZone.getDefault();
         Locale.setDefault(Locale.UK);
     }
 
     protected void tearDown() throws Exception {
         Locale.setDefault(locale);
-        DateTimeZone.setDefault(zone);
+        DateTimeZone.setDefault(defaultZone);
     }
 
     //-----------------------------------------------------------------------
