@@ -4,11 +4,13 @@ android:
   components:
     - tools
     - platform-tools
-    - build-tools-25.0.2
-    - android-25
+    - tools
+    - build-tools-26.0.2
+    - android-22
+    - android-26
 
     # For the emulator
-    - sys-img-armeabi-v7a-android-19
+    - sys-img-armeabi-v7a-android-22
 
 jdk: oraclejdk8
 
@@ -27,10 +29,10 @@ before_install:
   - echo y | android update sdk --no-ui --all --filter "platform-tools" # TODO remove when http://b.android.com/230654 is fixed.
 
 before_script:
-  # Get emulator running
-  - echo no | android create avd --force -n test -t android-19 --abi armeabi-v7a
-  - emulator -avd test -no-skin -no-audio -no-window &
+  - android list target
+  - echo no | android create avd --force -n test -t android-22 --abi armeabi-v7a
+  - emulator -avd test -no-audio -no-window &
   - android-wait-for-emulator
-  - adb shell input keyevent 82
+  - adb shell input keyevent 82 &
 
 script: ./gradlew build connectedCheck
