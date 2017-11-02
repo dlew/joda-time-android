@@ -1,5 +1,9 @@
 # Changelog
 
+# 2.9.9.1 *(2017-11-2)*
+
+* [#189](https://github.com/dlew/joda-time-android/pull/189) Updated to tzdata 2017c
+
 # 2.9.9 *(2017-03-24)*
 
 * [#173](https://github.com/dlew/joda-time-android/pull/173) Update to joda-time 2.9.9
