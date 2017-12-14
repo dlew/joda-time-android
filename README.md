@@ -52,14 +52,14 @@ or
 
 > Duplicate files copied in APK META-INF/NOTICE.txt
 
-__A: We can safely exclude thoses files from our build. You need to specify these two `exclude`s in your `build.gradle` file and you will be good to go:__
+__A: We can safely choose to only pick the first ones of thoses files from our build. You need to specify these two `pickFirst`s in your `build.gradle` file and you will be good to go:__
 
 ```
 android {
     ...
     packagingOptions {
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/NOTICE.txt'
+        pickFirst 'META-INF/LICENSE.txt'
+        pickFirst 'META-INF/NOTICE.txt'
     }
 }
 ```
