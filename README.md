@@ -63,3 +63,17 @@ android {
     }
 }
 ```
+
+or 
+
+__B: We can safely choose to add those files to our build. You need to specify these two `merge`s in your `build.gradle` file and you will be good to go:__
+
+```
+android {
+    ...
+    packagingOptions {
+        merge '**/LICENSE.txt'
+        merge '**/NOTICE.txt'
+    }
+}
+```
