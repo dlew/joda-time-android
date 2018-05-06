@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
 
     defaultConfig {
         versionCode 1
         versionName '1.0'
         minSdkVersion 9
-        targetSdkVersion 26
+        targetSdkVersion 27
 
         proguardFiles getDefaultProguardFile('proguard-android.txt')
     }
@@ -29,6 +29,8 @@ android {
 }
 
 repositories {
+    google()
+    jcenter()
     mavenCentral()
 }
 
