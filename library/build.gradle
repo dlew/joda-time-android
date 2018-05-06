@@ -1,8 +1,8 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion '26.0.2'
+    compileSdkVersion 27
+    buildToolsVersion '27.0.3'
     resourcePrefix 'joda_'
 
     defaultConfig {
@@ -21,6 +21,8 @@ apply plugin: net.danlew.android.joda.TzDataPlugin
 apply from: 'gradle-mvn-push.gradle'
 
 repositories {
+    google()
+    jcenter()
     mavenCentral()
 }
 
