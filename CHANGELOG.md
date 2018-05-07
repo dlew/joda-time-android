@@ -1,5 +1,9 @@
 # Changelog
 
+# 2.9.9.4 *(2018-05-06)*
+
+* [#202](https://github.com/dlew/joda-time-android/pull/202) Updated to tzdata 2018e
+
 # 2.9.9.3 *(2018-03-26)*
 
 * [#199](https://github.com/dlew/joda-time-android/pull/199) Updated to tzdata 2018d
