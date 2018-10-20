@@ -27,7 +27,7 @@ repositories {
 }
 
 dependencies {
-    api 'joda-time:joda-time:2.9.9:no-tzdb'
+    api 'joda-time:joda-time:2.10:no-tzdb'
 }
 
 tzdata {
