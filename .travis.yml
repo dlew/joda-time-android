@@ -5,9 +5,9 @@ android:
     - tools
     - platform-tools
     - tools
-    - build-tools-27.0.3
+    - build-tools-28.0.3
     - android-22
-    - android-27
+    - android-28
 
     # For the emulator
     - sys-img-armeabi-v7a-android-22
