@@ -6,7 +6,9 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.provider.Settings;
-import android.test.InstrumentationTestCase;
+import android.support.test.InstrumentationRegistry;
+import android.support.test.runner.AndroidJUnit4;
+
 import net.danlew.android.joda.DateUtils;
 import net.danlew.android.joda.JodaTimeAndroid;
 import org.joda.time.DateTime;
@@ -19,17 +21,25 @@ import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
 import org.joda.time.MonthDay;
 import org.joda.time.YearMonth;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 /**
  * Test our implementation of DateUtils methods against the actual Android
  * DateUtils implementation.
  */
-public class TestDateUtils extends InstrumentationTestCase {
+@RunWith(AndroidJUnit4.class)
+public class TestDateUtils {
 
     /**
      * These are all the different flags we'll pass into formatDateTime()/formatDateRange() for testing
@@ -72,12 +82,10 @@ public class TestDateUtils extends InstrumentationTestCase {
     private TimeZone mDefaultSystemTz;
     private TimeZone mOldDefaultSystemTz;
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
-
+    @Before
+    public void setUp() throws Exception {
         // Init zone info
-        Context context = getInstrumentation().getContext();
+        Context context = InstrumentationRegistry.getContext();
         JodaTimeAndroid.init(context);
 
         // Force the system into 24-hour time for tests
@@ -86,7 +94,7 @@ public class TestDateUtils extends InstrumentationTestCase {
         Settings.System.putString(cr, Settings.System.TIME_12_24, "24");
 
         // Force all tests to be in the US locale; that way we can test output in consistent manner
-        Application app = (Application) getInstrumentation().getContext().getApplicationContext();
+        Application app = (Application) InstrumentationRegistry.getContext().getApplicationContext();
         Resources res = app.getBaseContext().getResources();
         Configuration config = res.getConfiguration();
         Locale.setDefault(Locale.US);
@@ -109,18 +117,17 @@ public class TestDateUtils extends InstrumentationTestCase {
         DateTimeUtils.setCurrentMillisFixed(mNow.getMillis());
     }
 
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
-
+    @After
+    public void tearDown() throws Exception {
         // Restore to normal "now" time
         DateTimeUtils.setCurrentMillisSystem();
         DateTimeZone.setDefault(mOldDefaultJodaTz);
         TimeZone.setDefault(mOldDefaultSystemTz);
-        ContentResolver cr = getInstrumentation().getContext().getContentResolver();
+        ContentResolver cr = InstrumentationRegistry.getContext().getContentResolver();
         Settings.System.putString(cr, Settings.System.TIME_12_24, mOldTime1224Setting);
     }
 
+    @Test
     public void testFormatDateTime() {
         Calendar cal = new GregorianCalendar(TimeZone.getTimeZone("America/Chicago"));
         cal.set(1985, 10, 27, 5, 23, 5);
@@ -128,7 +135,7 @@ public class TestDateUtils extends InstrumentationTestCase {
 
         DateTime dateTime = new DateTime(1985, 11, 27, 5, 23, 5, DateTimeZone.forID("America/Chicago"));
 
-        Context ctx = getInstrumentation().getContext();
+        Context ctx = InstrumentationRegistry.getContext();
         for (int a = 0; a < FORMAT_DATE_RANGE_FLAGS.length; a++) {
             int flags = FORMAT_DATE_RANGE_FLAGS[a];
             assertEquals(android.text.format.DateUtils.formatDateTime(ctx, millis, flags),
@@ -136,6 +143,7 @@ public class TestDateUtils extends InstrumentationTestCase {
         }
     }
 
+    @Test
     public void testFormatDateTimePartial() {
         Calendar cal = new GregorianCalendar(TimeZone.getTimeZone("America/Chicago"));
         cal.set(1985, 10, 27, 0, 0, 0);
@@ -143,7 +151,7 @@ public class TestDateUtils extends InstrumentationTestCase {
 
         LocalDate localDate = new LocalDate(1985, 11, 27);
 
-        Context ctx = getInstrumentation().getContext();
+        Context ctx = InstrumentationRegistry.getContext();
         for (int a = 0; a < FORMAT_DATE_RANGE_FLAGS.length; a++) {
             int flags = FORMAT_DATE_RANGE_FLAGS[a];
             assertEquals(android.text.format.DateUtils.formatDateTime(ctx, millis, flags),
@@ -151,6 +159,7 @@ public class TestDateUtils extends InstrumentationTestCase {
         }
     }
 
+    @Test
     public void testFormatDateRange() {
         Calendar startPartialCal = new GregorianCalendar(TimeZone.getTimeZone("America/Chicago"));
         startPartialCal.set(1985, 10, 27, 0, 0, 0);
@@ -174,7 +183,7 @@ public class TestDateUtils extends InstrumentationTestCase {
         DateTime startDateTime = new DateTime(1985, 11, 27, 5, 23, 5, DateTimeZone.forID("America/Chicago"));
         DateTime endDateTime = new DateTime(1985, 12, 25, 20, 14, 25, DateTimeZone.forID("America/Chicago"));
 
-        Context ctx = getInstrumentation().getContext();
+        Context ctx = InstrumentationRegistry.getContext();
 
         for (int a = 0; a < FORMAT_DATE_RANGE_FLAGS.length; a++) {
             int flags = FORMAT_DATE_RANGE_FLAGS[a];
@@ -195,6 +204,7 @@ public class TestDateUtils extends InstrumentationTestCase {
         }
     }
 
+    @Test
     public void testFormatElapsedTime() {
         assertEquals("00:00", DateUtils.formatElapsedTime(Duration.standardSeconds(0)));
         assertEquals("00:05", DateUtils.formatElapsedTime(Duration.standardSeconds(5)));
@@ -205,6 +215,7 @@ public class TestDateUtils extends InstrumentationTestCase {
         assertEquals("292:35:33", DateUtils.formatElapsedTime(Duration.standardSeconds(1053333)));
     }
 
+    @Test
     public void testIsToday() {
         LocalDate today = LocalDate.now();
         LocalDate yesterday = today.minusDays(1);
@@ -247,8 +258,9 @@ public class TestDateUtils extends InstrumentationTestCase {
         }
     }
 
+    @Test
     public void testGetRelativeTimeSpanString() {
-        Context ctx = getInstrumentation().getContext();
+        Context ctx = InstrumentationRegistry.getContext();
 
         // Test all output strings
         assertEquals("in 1 second", DateUtils.getRelativeTimeSpanString(ctx, DateTime.now().plusSeconds(1)));
@@ -330,8 +342,9 @@ public class TestDateUtils extends InstrumentationTestCase {
             DateUtils.FORMAT_ABBREV_RELATIVE));
     }
 
+    @Test
     public void testGetRelativeTimeSpanStringWithPreposition() {
-        Context ctx = getInstrumentation().getContext();
+        Context ctx = InstrumentationRegistry.getContext();
 
         LocalDate today = LocalDate.now();
         LocalDate tomorrow = today.plusDays(1);
@@ -356,8 +369,9 @@ public class TestDateUtils extends InstrumentationTestCase {
         assertEquals("on 10/22/1996", DateUtils.getRelativeTimeSpanString(ctx, nextYearDt, true));
     }
 
+    @Test
     public void testGetRelativeDateTimeString() {
-        Context ctx = getInstrumentation().getContext();
+        Context ctx = InstrumentationRegistry.getContext();
 
         assertEquals("0 seconds ago, 12:35", DateUtils.getRelativeDateTimeString(ctx, mNow, null, 0));
         assertEquals("in 30 seconds, 12:35", DateUtils.getRelativeDateTimeString(ctx, mNow.plusSeconds(30), null, 0));
@@ -398,8 +412,9 @@ public class TestDateUtils extends InstrumentationTestCase {
         }
     }
 
+    @Test
     public void testFormatDuration() {
-        Context ctx = getInstrumentation().getContext();
+        Context ctx = InstrumentationRegistry.getContext();
 
         assertEquals("1 second", DateUtils.formatDuration(ctx, Duration.standardSeconds(1)));
         assertEquals("-1 seconds", DateUtils.formatDuration(ctx, Duration.standardSeconds(-1)));

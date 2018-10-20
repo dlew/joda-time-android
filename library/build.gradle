@@ -1,13 +1,14 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 27
-    buildToolsVersion '27.0.3'
+    compileSdkVersion 28
+    buildToolsVersion '28.0.3'
     resourcePrefix 'joda_'
 
     defaultConfig {
         minSdkVersion 9
         consumerProguardFiles 'proguard-rules.txt'
+        testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
 
     lintOptions {
@@ -27,7 +28,11 @@ repositories {
 }
 
 dependencies {
-    api 'joda-time:joda-time:2.9.9:no-tzdb'
+    api 'joda-time:joda-time:2.10:no-tzdb'
+
+    androidTestImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+    androidTestImplementation 'com.android.support.test:rules:1.0.2'
 }
 
 tzdata {
