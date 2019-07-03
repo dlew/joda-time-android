@@ -28,7 +28,7 @@ repositories {
 }
 
 dependencies {
-    api 'joda-time:joda-time:2.10.1:no-tzdb'
+    api 'joda-time:joda-time:2.10.2:no-tzdb'
 
     androidTestImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
