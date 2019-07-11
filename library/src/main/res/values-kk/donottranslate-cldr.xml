@@ -1,0 +1,4 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="joda_time_android_date_time">%2$s, %1$s</string>
+</resources>
