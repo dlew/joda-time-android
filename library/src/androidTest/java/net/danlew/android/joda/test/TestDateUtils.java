@@ -11,6 +11,8 @@ import android.support.test.runner.AndroidJUnit4;
 
 import net.danlew.android.joda.DateUtils;
 import net.danlew.android.joda.JodaTimeAndroid;
+import net.danlew.android.joda.ResourceZoneInfoProvider;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeUtils;
 import org.joda.time.DateTimeZone;
@@ -86,7 +88,7 @@ public class TestDateUtils {
     public void setUp() throws Exception {
         // Init zone info
         Context context = InstrumentationRegistry.getContext();
-        JodaTimeAndroid.init(context);
+        DateTimeZone.setProvider(new ResourceZoneInfoProvider(context));
 
         // Force the system into 24-hour time for tests
         ContentResolver cr = context.getContentResolver();

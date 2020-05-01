@@ -177,8 +177,13 @@ public class TestDateTimeZone {
 
     @After
     public void tearDown() throws Exception {
-        Locale.setDefault(locale);
-        DateTimeZone.setDefault(zone);
+        // Weird emulators can fail to get default locales/zones, don't try setting these if null
+        if (locale != null) {
+            Locale.setDefault(locale);
+        }
+        if (zone != null) {
+            DateTimeZone.setDefault(zone);
+        }
     }
 
     //-----------------------------------------------------------------------
