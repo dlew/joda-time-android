@@ -1,5 +1,12 @@
 # Changelog
 
+# 2.10.6 *(2020-05-03)*
+
+* [#243](https://github.com/dlew/joda-time-android/pull/243) Updated to joda-time 2.10.6
+* [#249](https://github.com/dlew/joda-time-android/pull/249) Updated to tzdata 2020a
+* [#250](https://github.com/dlew/joda-time-android/pull/250) Added JodaTimeAndroid.TZ_DATA_VERSION
+* [#251](https://github.com/dlew/joda-time-android/pull/251) Ensure we keep all R.raw resources
+
 # 2.10.3 *(2019-09-16)*
 
 * [#233](https://github.com/dlew/joda-time-android/pull/233) Updated to joda-time 2.10.3
