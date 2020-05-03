@@ -6,7 +6,7 @@ android {
     resourcePrefix 'joda_'
 
     defaultConfig {
-        minSdkVersion 9
+        minSdkVersion 14
         consumerProguardFiles 'proguard-rules.txt'
         testInstrumentationRunner 'android.support.test.runner.AndroidJUnitRunner'
     }
@@ -31,8 +31,10 @@ dependencies {
     api 'joda-time:joda-time:2.10.6:no-tzdb'
 
     androidTestImplementation 'junit:junit:4.13'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test:rules:1.0.2'
+    androidTestImplementation 'androidx.test:core:1.2.0'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test:rules:1.2.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
 }
 
 tzdata {
