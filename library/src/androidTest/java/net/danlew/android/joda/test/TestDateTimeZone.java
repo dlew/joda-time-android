@@ -27,6 +27,7 @@ import org.joda.time.DateTimeUtils;
 import org.joda.time.DateTimeZone;
 import org.joda.time.Instant;
 import org.joda.time.JodaTimePermission;
+import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
 import org.joda.time.tz.DefaultNameProvider;
 import org.joda.time.tz.NameProvider;
@@ -1130,6 +1131,84 @@ public class TestDateTimeZone {
     }
 
     //-----------------------------------------------------------------------
+    public void testToronto() {
+        DateTimeZone zone = DateTimeZone.forID("America/Toronto");
+        DateTime start = new DateTime(1927, 1, 1, 0, 0, 0, 0, zone);
+        assertEquals(-5 * 3600000, zone.getStandardOffset(start.getMillis()));
+        assertEquals(-5 * 3600000, zone.getOffset(start.getMillis()));
+
+        DateTime summer1927 = new DateTime(zone.nextTransition(start.getMillis()), zone);
+        assertEquals(-4 * 3600000, zone.getOffset(summer1927.getMillis()));
+        assertEquals(new LocalDate(1927, 5, 1), summer1927.toLocalDate());
+        assertEquals(DateTimeConstants.SUNDAY, summer1927.getDayOfWeek());
+
+        DateTime winter1927 = new DateTime(zone.nextTransition(summer1927.getMillis()), zone);
+        assertEquals(-5 * 3600000, zone.getOffset(winter1927.getMillis()));
+        assertEquals(new LocalDate(1927, 9, 25), winter1927.toLocalDate());
+        assertEquals(DateTimeConstants.SUNDAY, winter1927.getDayOfWeek());
+
+        DateTime summer1928 = new DateTime(zone.nextTransition(winter1927.getMillis()), zone);
+        assertEquals(-4 * 3600000, zone.getOffset(summer1928.getMillis()));
+        assertEquals(new LocalDate(1928, 4, 29), summer1928.toLocalDate());
+        assertEquals(DateTimeConstants.SUNDAY, summer1928.getDayOfWeek());
+
+        DateTime winter1928 = new DateTime(zone.nextTransition(summer1928.getMillis()), zone);
+        assertEquals(-5 * 3600000, zone.getOffset(winter1928.getMillis()));
+        assertEquals(new LocalDate(1928, 9, 30), winter1928.toLocalDate());
+        assertEquals(DateTimeConstants.SUNDAY, winter1928.getDayOfWeek());
+
+        DateTime summer1929 = new DateTime(zone.nextTransition(winter1928.getMillis()), zone);
+        assertEquals(-4 * 3600000, zone.getOffset(summer1929.getMillis()));
+        assertEquals(new LocalDate(1929, 4, 28), summer1929.toLocalDate());
+        assertEquals(DateTimeConstants.SUNDAY, summer1929.getDayOfWeek());
+
+        DateTime winter1929 = new DateTime(zone.nextTransition(summer1929.getMillis()), zone);
+        assertEquals(-5 * 3600000, zone.getOffset(winter1929.getMillis()));
+        assertEquals(new LocalDate(1929, 9, 29), winter1929.toLocalDate());
+        assertEquals(DateTimeConstants.SUNDAY, winter1929.getDayOfWeek());
+
+        DateTime summer1930 = new DateTime(zone.nextTransition(winter1929.getMillis()), zone);
+        assertEquals(-4 * 3600000, zone.getOffset(summer1930.getMillis()));
+        assertEquals(new LocalDate(1930, 4, 27), summer1930.toLocalDate());
+        assertEquals(DateTimeConstants.SUNDAY, summer1930.getDayOfWeek());
+
+        DateTime winter1930 = new DateTime(zone.nextTransition(summer1930.getMillis()), zone);
+        assertEquals(-5 * 3600000, zone.getOffset(winter1930.getMillis()));
+        assertEquals(new LocalDate(1930, 9, 28), winter1930.toLocalDate());
+        assertEquals(DateTimeConstants.SUNDAY, winter1930.getDayOfWeek());
+
+        DateTime summer1931 = new DateTime(zone.nextTransition(winter1930.getMillis()), zone);
+        assertEquals(-4 * 3600000, zone.getOffset(summer1931.getMillis()));
+        assertEquals(new LocalDate(1931, 4, 26), summer1931.toLocalDate());
+        assertEquals(DateTimeConstants.SUNDAY, summer1931.getDayOfWeek());
+
+        DateTime winter1931 = new DateTime(zone.nextTransition(summer1931.getMillis()), zone);
+        assertEquals(-5 * 3600000, zone.getOffset(winter1931.getMillis()));
+        assertEquals(new LocalDate(1931, 9, 27), winter1931.toLocalDate());
+        assertEquals(DateTimeConstants.SUNDAY, winter1931.getDayOfWeek());
+
+        DateTime summer1932 = new DateTime(zone.nextTransition(winter1931.getMillis()), zone);
+        assertEquals(-4 * 3600000, zone.getOffset(summer1932.getMillis()));
+        assertEquals(new LocalDate(1932, 5, 1), summer1932.toLocalDate());
+        assertEquals(DateTimeConstants.SUNDAY, summer1932.getDayOfWeek());
+
+        DateTime winter1932 = new DateTime(zone.nextTransition(summer1932.getMillis()), zone);
+        assertEquals(-5 * 3600000, zone.getOffset(winter1932.getMillis()));
+        assertEquals(new LocalDate(1932, 9, 25), winter1932.toLocalDate());
+        assertEquals(DateTimeConstants.SUNDAY, winter1932.getDayOfWeek());
+
+        DateTime summer1933 = new DateTime(zone.nextTransition(winter1932.getMillis()), zone);
+        assertEquals(-4 * 3600000, zone.getOffset(summer1933.getMillis()));
+        assertEquals(new LocalDate(1933, 4, 30), summer1933.toLocalDate());
+        assertEquals(DateTimeConstants.SUNDAY, summer1933.getDayOfWeek());
+
+        DateTime winter1933 = new DateTime(zone.nextTransition(summer1933.getMillis()), zone);
+        assertEquals(-5 * 3600000, zone.getOffset(winter1933.getMillis()));
+        assertEquals(new LocalDate(1933, 10, 1), winter1933.toLocalDate());
+        assertEquals(DateTimeConstants.SUNDAY, winter1933.getDayOfWeek());
+    }
+
+    //-----------------------------------------------------------------------
     @Test
     public void testSerialization1() throws Exception {
         DateTimeZone zone = DateTimeZone.forID("Europe/Paris");
@@ -1146,6 +1225,20 @@ public class TestDateTimeZone {
         ois.close();
         
         assertSame(zone, result);
+    }
+
+    //-----------------------------------------------------------------------
+    // rule of style "Fri <= 1"
+    public void testJerusalem() {
+        DateTimeZone zone = DateTimeZone.forID("Asia/Jerusalem");
+        DateTime winter = new DateTime(2006, 1, 1, 0, 0, 0, 0, zone);
+        assertEquals(true, zone.isStandardOffset(winter.getMillis()));
+
+        DateTime cutover = new DateTime(zone.nextTransition(winter.getMillis()), zone);
+        assertEquals(false, zone.isStandardOffset(cutover.getMillis()));
+        assertEquals(5, cutover.getDayOfWeek());
+        assertEquals(31, cutover.getDayOfMonth());
+        assertEquals(3, cutover.getMonthOfYear());
     }
 
     //-----------------------------------------------------------------------
