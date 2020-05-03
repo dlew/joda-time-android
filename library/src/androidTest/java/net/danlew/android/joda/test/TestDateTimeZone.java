@@ -16,8 +16,9 @@
 package net.danlew.android.joda.test;
 
 import android.content.Context;
-import android.support.test.InstrumentationRegistry;
-import android.support.test.runner.AndroidJUnit4;
+
+import androidx.test.ext.junit.runners.AndroidJUnit4;
+import androidx.test.platform.app.InstrumentationRegistry;
 
 import net.danlew.android.joda.ResourceZoneInfoProvider;
 import org.joda.time.DateTime;
@@ -163,7 +164,7 @@ public class TestDateTimeZone {
 
     @Before
     public void setUp() throws Exception {
-        Context context = InstrumentationRegistry.getContext();
+        Context context = InstrumentationRegistry.getInstrumentation().getContext();
         DateTimeZone.setProvider(new ResourceZoneInfoProvider(context));
 
         // Need to initialize these after ResourceZoneInfoProvider.init()
