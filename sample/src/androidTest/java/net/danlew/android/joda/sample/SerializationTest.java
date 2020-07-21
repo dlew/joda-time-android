@@ -42,7 +42,7 @@ public class SerializationTest {
 
     @Test
     public void testSerialization2() throws Exception {
-        DateTimeZone zone = DateTimeZone.forID("01:00");
+        DateTimeZone zone = DateTimeZone.forID("+01:00");
 
         assertEquals(zone, serializeObjectAndBack(zone));
     }
