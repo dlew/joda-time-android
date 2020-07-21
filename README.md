@@ -52,7 +52,7 @@ or
 
 > Duplicate files copied in APK META-INF/NOTICE.txt
 
-__A: We can safely exclude thoses files from our build. You need to specify these two `exclude`s in your `build.gradle` file and you will be good to go:__
+__A: We can safely exclude those files from our build. You need to specify these two `exclude`s in your `build.gradle` file and you will be good to go:__
 
 ```
 android {
