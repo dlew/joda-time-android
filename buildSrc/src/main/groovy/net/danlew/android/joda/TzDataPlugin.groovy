@@ -51,7 +51,7 @@ class TzDataPlugin implements Plugin<Project> {
                 @Override
                 boolean accept(File pathname) {
                     // Dumb check: if it has a dot, ignore it
-                    return !pathname.absolutePath.contains(".")
+                    return !pathname.name.contains(".")
                 }
             })
 

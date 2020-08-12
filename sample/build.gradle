@@ -11,6 +11,7 @@ android {
         targetSdkVersion 28
 
         proguardFiles getDefaultProguardFile('proguard-android.txt')
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     // We're enabling proguard just to prove we don't have to do anything
@@ -36,4 +37,8 @@ repositories {
 
 dependencies {
     implementation project(':library')
+
+    androidTestImplementation 'junit:junit:4.13'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
 }
