@@ -1,14 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
-    buildToolsVersion '28.0.3'
+    compileSdkVersion 29
 
     defaultConfig {
         versionCode 1
         versionName '1.0'
         minSdkVersion 14
-        targetSdkVersion 28
+        targetSdkVersion 29
 
         proguardFiles getDefaultProguardFile('proguard-android.txt')
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
