@@ -4,8 +4,8 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.1'
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.29.0'
+        classpath 'com.android.tools.build:gradle:4.0.2'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.33.0'
     }
 }
 
