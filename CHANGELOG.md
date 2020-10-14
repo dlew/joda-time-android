@@ -1,5 +1,9 @@
 # Changelog
 
+# 2.10.6.2 *(2020-10-13)*
+
+* [#259](https://github.com/dlew/joda-time-android/pull/259) Updated to tzdata 2020b
+
 # 2.10.6.1 *(2020-08-14)*
 
 * [#255](https://github.com/dlew/joda-time-android/pull/255) Fix NotSerializableException thrown when using Proguard/R8
