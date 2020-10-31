@@ -1,5 +1,9 @@
 # Changelog
 
+# 2.10.7.1 *(2020-10-22)*
+
+* [#266](https://github.com/dlew/joda-time-android/pull/266) Updated JodaTimeAndroid.TZ_DATA_VERSION
+
 # 2.10.7 *(2020-10-22)*
 
 * [#263](https://github.com/dlew/joda-time-android/pull/263) Updated to joda-time 2.10.7
