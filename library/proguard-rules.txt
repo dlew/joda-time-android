@@ -9,8 +9,8 @@
 # Joda classes use the writeObject special method for Serializable, so
 # if it's stripped, we'll run into NotSerializableExceptions.
 # https://www.guardsquare.com/en/products/proguard/manual/examples#serializable
--keepnames class * implements java.io.Serializable
--keepclassmembers class * implements java.io.Serializable {
+-keepnames class org.joda.** implements java.io.Serializable
+-keepclassmembers class org.joda.** implements java.io.Serializable {
     static final long serialVersionUID;
     private static final java.io.ObjectStreamField[] serialPersistentFields;
     !static !transient <fields>;
