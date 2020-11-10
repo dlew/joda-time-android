@@ -1,5 +1,9 @@
 # Changelog
 
+# 2.10.7.2 *(2020-11-09)*
+
+* [#269](https://github.com/dlew/joda-time-android/pull/269) Scope ProGuard rules to library
+
 # 2.10.7.1 *(2020-10-22)*
 
 * [#266](https://github.com/dlew/joda-time-android/pull/266) Updated JodaTimeAndroid.TZ_DATA_VERSION
