@@ -88,7 +88,6 @@ public class TestDateUtils {
     public void setUp() throws Exception {
         // Init zone info
         Context context = InstrumentationRegistry.getInstrumentation().getContext();
-        JodaTimeAndroid.init(context);
 
         // Force the system into 24-hour time for tests
         ContentResolver cr = context.getContentResolver();

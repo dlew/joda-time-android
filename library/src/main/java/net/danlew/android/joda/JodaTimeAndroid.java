@@ -1,24 +1,13 @@
 package net.danlew.android.joda;
 
 import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import org.joda.time.DateTimeZone;
-
-import java.io.IOException;
 
 /**
- * Provides a method to initialize the {@link ResourceZoneInfoProvider}
- * and register a {@link TimeZoneChangedReceiver} to receive
- * android.intent.action.TIMEZONE_CHANGED broadcasts while the application
- * process is running.
+ * Provides metadata about joda-time-android.
  */
 public final class JodaTimeAndroid {
 
     public static String TZ_DATA_VERSION = "2020d";
-
-    /** Whether the JodaTimeAndroid.init() method has been called. */
-    private static boolean sInitCalled = false;
 
     private JodaTimeAndroid() {
         // no instances
@@ -26,25 +15,9 @@ public final class JodaTimeAndroid {
     }
 
     /**
-     * Initializes ResourceZoneInfoProvider and registers an instance of
-     * {@link TimeZoneChangedReceiver} to receive android.intent.action.TIMEZONE_CHANGED
-     * broadcasts. This method does nothing if previously called.
+     * @deprecated This library self-initializes itself now; calling this method does nothing
      */
+    @Deprecated
     public static void init(Context context) {
-        if (sInitCalled) {
-            return;
-        }
-
-        sInitCalled = true;
-
-        try {
-            DateTimeZone.setProvider(new ResourceZoneInfoProvider(context));
-        }
-        catch (IOException e) {
-            throw new RuntimeException("Could not read ZoneInfoMap. You are probably using Proguard wrong.", e);
-        }
-
-        context.getApplicationContext()
-            .registerReceiver(new TimeZoneChangedReceiver(), new IntentFilter(Intent.ACTION_TIMEZONE_CHANGED));
     }
 }
