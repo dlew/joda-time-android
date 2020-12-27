@@ -1,8 +1,8 @@
 apply plugin: 'groovy'
 
 dependencies {
-    compile gradleApi()
-    compile localGroovy()
+    implementation gradleApi()
+    implementation localGroovy()
 }
 
 repositories {
@@ -10,5 +10,5 @@ repositories {
 }
 
 dependencies {
-    compile 'joda-time:joda-time:2.10.8'
+    implementation 'joda-time:joda-time:2.10.8'
 }
