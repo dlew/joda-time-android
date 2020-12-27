@@ -29,7 +29,7 @@ repositories {
 dependencies {
     api 'joda-time:joda-time:2.10.7:no-tzdb'
 
-    androidTestImplementation 'junit:junit:4.13'
+    androidTestImplementation 'junit:junit:4.13.1'
     androidTestImplementation 'androidx.test:core:1.3.0'
     androidTestImplementation 'androidx.test:runner:1.3.0'
     androidTestImplementation 'androidx.test:rules:1.3.0'
