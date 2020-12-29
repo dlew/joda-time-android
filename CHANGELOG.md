@@ -1,5 +1,13 @@
 # Changelog
 
+# 2.10.9 *(2020-12-29)*
+
+* [#274](https://github.com/dlew/joda-time-android/pull/274) Use App Startup to initialize joda-time-android
+
+    Due to this change, it is no longer necessary to call `JodaTimeAndroid.init()` in your `Application` (as it does nothing now).
+
+* [#275](https://github.com/dlew/joda-time-android/pull/275) Updated to tzdata 2020e
+
 # 2.10.7.2 *(2020-11-09)*
 
 * [#269](https://github.com/dlew/joda-time-android/pull/269) Scope ProGuard rules to library
