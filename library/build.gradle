@@ -27,7 +27,7 @@ repositories {
 }
 
 dependencies {
-    api 'joda-time:joda-time:2.10.7:no-tzdb'
+    api 'joda-time:joda-time:2.10.9:no-tzdb'
 
     implementation "androidx.startup:startup-runtime:1.0.0"
     implementation 'androidx.annotation:annotation:1.1.0'
