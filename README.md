@@ -30,18 +30,6 @@ dependencies {
 }
 ```
 
-Once that's done, you **must** initialize the library before using it by calling `JodaTimeAndroid.init()`. I suggest putting this code in `Application.onCreate()`:
-
-```java
-public class MyApp extends Application {
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        JodaTimeAndroid.init(this);
-    }
-}
-```
-
 Troubleshooting
 ===============
 __Q: My build fails with an error about a duplicate file__
