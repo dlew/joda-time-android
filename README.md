@@ -30,6 +30,28 @@ dependencies {
 }
 ```
 
+Multi-Process Apps
+===============
+
+Due to using App Startup, joda-time-android will not automatically initialize in non-main processes.
+
+If you would like to automatically run App Startup in other processes, add this to your manifest:
+
+```xml
+<provider
+    android:name="androidx.startup.InitializationProvider"
+    android:authorities="${applicationId}.androidx-startup"
+    android:exported="false"
+    android:process="[your-process-name-here]"
+    tools:node="merge" />
+```
+
+Alternatively, you can call [`AppInitializer`](https://developer.android.com/reference/kotlin/androidx/startup/AppInitializer) directly to initialize just joda-time-android:
+
+```kotlin
+AppInitializer.getInstance(this).initializeComponent(JodaTimeInitializer::class.java)
+```
+
 Troubleshooting
 ===============
 __Q: My build fails with an error about a duplicate file__
