@@ -1,5 +1,9 @@
 # Changelog
 
+# 2.10.9.1 *(2021-01-25)*
+
+* [#280](https://github.com/dlew/joda-time-android/pull/280) Updated to tzdata 2021a
+
 # 2.10.9 *(2020-12-29)*
 
 * [#274](https://github.com/dlew/joda-time-android/pull/274) Use App Startup to initialize joda-time-android
