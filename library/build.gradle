@@ -18,7 +18,7 @@ android {
 }
 
 apply plugin: net.danlew.android.joda.TzDataPlugin
-apply from: 'gradle-mvn-push.gradle'
+apply plugin: "com.vanniktech.maven.publish"
 
 repositories {
     google()
