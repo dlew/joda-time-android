@@ -1,13 +1,16 @@
 buildscript {
     repositories {
-        jcenter()
+        mavenCentral()
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:4.0.2'
-        classpath 'com.github.ben-manes:gradle-versions-plugin:0.36.0'
+        classpath 'com.android.tools.build:gradle:4.2.2'
+        classpath 'com.vanniktech:gradle-maven-publish-plugin:0.18.0'
     }
 }
 
-apply plugin: 'com.github.ben-manes.versions'
+plugins {
+    id "com.github.ben-manes.versions" version "0.39.0"
+}
+
 apply plugin: 'android-reporting'

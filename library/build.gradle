@@ -1,7 +1,7 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 31
     resourcePrefix 'joda_'
 
     defaultConfig {
@@ -18,25 +18,24 @@ android {
 }
 
 apply plugin: net.danlew.android.joda.TzDataPlugin
-apply from: 'gradle-mvn-push.gradle'
+apply plugin: "com.vanniktech.maven.publish"
 
 repositories {
     google()
-    jcenter()
     mavenCentral()
 }
 
 dependencies {
-    api 'joda-time:joda-time:2.10.9:no-tzdb'
+    api 'joda-time:joda-time:2.10.12:no-tzdb'
 
-    implementation "androidx.startup:startup-runtime:1.0.0"
-    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation "androidx.startup:startup-runtime:1.1.0"
+    implementation 'androidx.annotation:annotation:1.2.0'
 
-    androidTestImplementation 'junit:junit:4.13.1'
-    androidTestImplementation 'androidx.test:core:1.3.0'
-    androidTestImplementation 'androidx.test:runner:1.3.0'
-    androidTestImplementation 'androidx.test:rules:1.3.0'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'junit:junit:4.13.2'
+    androidTestImplementation 'androidx.test:core:1.4.0'
+    androidTestImplementation 'androidx.test:runner:1.4.0'
+    androidTestImplementation 'androidx.test:rules:1.4.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
 }
 
 tzdata {
