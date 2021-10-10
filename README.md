@@ -26,7 +26,7 @@ Add the following dependency to `build.gradle`:
 
 ```groovy
 dependencies {
-    implementation 'net.danlew:android.joda:2.10.9.1'
+    implementation 'net.danlew:android.joda:2.10.12'
 }
 ```
 
