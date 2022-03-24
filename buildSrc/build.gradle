@@ -10,5 +10,5 @@ repositories {
 }
 
 dependencies {
-    implementation 'joda-time:joda-time:2.10.13'
+    implementation 'joda-time:joda-time:2.10.14'
 }
