@@ -26,16 +26,20 @@ repositories {
 }
 
 dependencies {
-    api 'joda-time:joda-time:2.10.14:no-tzdb'
+    api(libs.jodaTime) {
+        artifact {
+            classifier = "no-tzdb"
+        }
+    }
 
-    implementation "androidx.startup:startup-runtime:1.1.1"
-    implementation 'androidx.annotation:annotation:1.4.0'
+    implementation libs.androidx.startup
+    implementation libs.androidx.annotation
 
-    androidTestImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test:core:1.4.0'
-    androidTestImplementation 'androidx.test:runner:1.4.0'
-    androidTestImplementation 'androidx.test:rules:1.4.0'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation libs.junit
+    androidTestImplementation libs.androidx.test.core
+    androidTestImplementation libs.androidx.test.runner
+    androidTestImplementation libs.androidx.test.rules
+    androidTestImplementation libs.androidx.test.ext.junit
 }
 
 tzdata {
