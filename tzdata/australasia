@@ -252,10 +252,14 @@ Zone Antarctica/Macquarie 0	-	-00	1899 Nov
 			10:00	AT	AE%sT
 
 # Christmas
-# See Asia/Bangkok.
+# Zone	NAME		STDOFF	RULES	FORMAT	[UNTIL]
+Zone Indian/Christmas	7:02:52 -	LMT	1895 Feb
+			7:00	-	+07
 
 # Cocos (Keeling) Is
-# See Asia/Yangon.
+# Zone	NAME		STDOFF	RULES	FORMAT	[UNTIL]
+Zone	Indian/Cocos	6:27:40	-	LMT	1900
+			6:30	-	+0630
 
 
 # Fiji
@@ -466,16 +470,11 @@ Zone	Pacific/Guam	-14:21:00 -	LMT	1844 Dec 31
 			 9:00	-	+09	1944 Jul 31
 			10:00	Guam	G%sT	2000 Dec 23
 			10:00	-	ChST	# Chamorro Standard Time
-Link Pacific/Guam Pacific/Saipan # N Mariana Is
 
 # Kiribati
 # Zone	NAME		STDOFF	RULES	FORMAT	[UNTIL]
 Zone Pacific/Tarawa	 11:32:04 -	LMT	1901 # Bairiki
 			 12:00	-	+12
-Link Pacific/Tarawa Pacific/Funafuti
-Link Pacific/Tarawa Pacific/Majuro
-Link Pacific/Tarawa Pacific/Wake
-Link Pacific/Tarawa Pacific/Wallis
 
 Zone Pacific/Kanton	  0	-	-00	1937 Aug 31
 			-12:00	-	-12	1979 Oct
@@ -487,10 +486,24 @@ Zone Pacific/Kiritimati	-10:29:20 -	LMT	1901
 			 14:00	-	+14
 
 # N Mariana Is
-# See Pacific/Guam.
+# Zone	NAME		STDOFF	RULES	FORMAT	[UNTIL]
+Zone Pacific/Saipan	-14:17:00 -	LMT	1844 Dec 31
+			 9:43:00 -	LMT	1901
+			 9:00	-	+09	1969 Oct
+			10:00	-	+10	2000 Dec 23
+			10:00	-	ChST	# Chamorro Standard Time
 
 # Marshall Is
-# See Pacific/Tarawa for most locations.
+# Zone	NAME		STDOFF	RULES	FORMAT	[UNTIL]
+Zone Pacific/Majuro	 11:24:48 -	LMT	1901
+			 11:00	-	+11	1914 Oct
+			  9:00	-	+09	1919 Feb  1
+			 11:00	-	+11	1937
+			 10:00	-	+10	1941 Apr  1
+			  9:00	-	+09	1944 Jan 30
+			 11:00	-	+11	1969 Oct
+			 12:00	-	+12
+
 # Zone	NAME		STDOFF	RULES	FORMAT	[UNTIL]
 Zone Pacific/Kwajalein	 11:09:20 -	LMT	1901
 			 11:00	-	+11	1937
@@ -501,8 +514,25 @@ Zone Pacific/Kwajalein	 11:09:20 -	LMT	1901
 			 12:00	-	+12
 
 # Micronesia
-# For Chuuk and Yap see Pacific/Port_Moresby.
-# For Pohnpei see Pacific/Guadalcanal.
+# Zone	NAME		STDOFF	RULES	FORMAT	[UNTIL]
+Zone Pacific/Chuuk	-13:52:52 -	LMT	1844 Dec 31
+			 10:07:08 -	LMT	1901
+			 10:00	-	+10	1914 Oct
+			  9:00	-	+09	1919 Feb  1
+			 10:00	-	+10	1941 Apr  1
+			  9:00	-	+09	1945 Aug
+			 10:00	-	+10
+
+# Zone	NAME		STDOFF	RULES	FORMAT	[UNTIL]
+Zone Pacific/Pohnpei	-13:27:08 -	LMT	1844 Dec 31	# Kolonia
+			 10:32:52 -	LMT	1901
+			 11:00	-	+11	1914 Oct
+			  9:00	-	+09	1919 Feb  1
+			 11:00	-	+11	1937
+			 10:00	-	+10	1941 Apr  1
+			  9:00	-	+09	1945 Aug
+			 11:00	-	+11
+
 # Zone	NAME		STDOFF	RULES	FORMAT	[UNTIL]
 Zone Pacific/Kosrae	-13:08:04 -	LMT	1844 Dec 31
 			 10:51:56 -	LMT	1901
@@ -573,7 +603,9 @@ Rule	Chatham	2008	max	-	Apr	Sun>=1	2:45s	0	-
 Zone Pacific/Auckland	11:39:04 -	LMT	1868 Nov  2
 			11:30	NZ	NZ%sT	1946 Jan  1
 			12:00	NZ	NZ%sT
-Link Pacific/Auckland Antarctica/McMurdo
+# Zone	NAME		STDOFF	RULES	FORMAT	[UNTIL]
+Zone Antarctica/McMurdo	0	-	-00	1956
+			12:00	NZ	NZ%sT
 
 Zone Pacific/Chatham	12:13:48 -	LMT	1868 Nov  2
 			12:15	-	+1215	1946 Jan  1
@@ -672,8 +704,6 @@ Zone Pacific/Palau	-15:02:04 -	LMT	1844 Dec 31	# Koror
 Zone Pacific/Port_Moresby 9:48:40 -	LMT	1880
 			9:48:32	-	PMMT	1895 # Port Moresby Mean Time
 			10:00	-	+10
-Link Pacific/Port_Moresby Antarctica/DumontDUrville
-Link Pacific/Port_Moresby Pacific/Chuuk
 #
 # From Paul Eggert (2014-10-13):
 # Base the Bougainville entry on the Arawa-Kieta region, which appears to have
@@ -709,7 +739,6 @@ Zone Pacific/Pitcairn	-8:40:20 -	LMT	1901        # Adamstown
 Zone Pacific/Pago_Pago	 12:37:12 -	LMT	1892 Jul  5
 			-11:22:48 -	LMT	1911
 			-11:00	-	SST	            # S=Samoa
-Link Pacific/Pago_Pago Pacific/Midway # in US minor outlying islands
 
 # Samoa (formerly and also known as Western Samoa)
 
@@ -801,7 +830,6 @@ Zone Pacific/Apia	 12:33:04 -	LMT	1892 Jul  5
 # Zone	NAME		STDOFF	RULES	FORMAT	[UNTIL]
 Zone Pacific/Guadalcanal 10:39:48 -	LMT	1912 Oct # Honiara
 			11:00	-	+11
-Link Pacific/Guadalcanal Pacific/Pohnpei
 
 # Tokelau
 #
@@ -842,7 +870,9 @@ Zone Pacific/Tongatapu	12:19:12 -	LMT	1945 Sep 10
 			13:00	Tonga	+13/+14
 
 # Tuvalu
-# See Pacific/Tarawa.
+# Zone	NAME		STDOFF	RULES	FORMAT	[UNTIL]
+Zone Pacific/Funafuti	11:56:52 -	LMT	1901
+			12:00	-	+12
 
 
 # US minor outlying islands
@@ -895,13 +925,19 @@ Zone Pacific/Tongatapu	12:19:12 -	LMT	1945 Sep 10
 # uninhabited
 
 # Midway
-# See Pacific/Pago_Pago.
+# Zone	NAME		STDOFF	RULES	FORMAT	[UNTIL]
+Zone Pacific/Midway	-11:49:28 -	LMT	1901
+			-11:00	-	-11	1956 Jun  3
+			-11:00	1:00	-10	1956 Sep  2
+			-11:00	-	-11
 
 # Palmyra
 # uninhabited since World War II; was probably like Pacific/Kiritimati
 
 # Wake
-# See Pacific/Tarawa.
+# Zone	NAME		STDOFF	RULES	FORMAT	[UNTIL]
+Zone	Pacific/Wake	11:06:28 -	LMT	1901
+			12:00	-	+12
 
 
 # Vanuatu
@@ -940,7 +976,9 @@ Zone	Pacific/Efate	11:13:16 -	LMT	1912 Jan 13 # Vila
 			11:00	Vanuatu	+11/+12
 
 # Wallis and Futuna
-# See Pacific/Tarawa.
+# Zone	NAME		STDOFF	RULES	FORMAT	[UNTIL]
+Zone	Pacific/Wallis	12:15:20 -	LMT	1901
+			12:00	-	+12
 
 ###############################################################################
 

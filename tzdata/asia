@@ -150,7 +150,11 @@ Zone	Asia/Baku	3:19:24 -	LMT	1924 May  2
 			4:00	Azer	+04/+05
 
 # Bahrain
-# See Asia/Qatar.
+# Zone	NAME		STDOFF	RULES	FORMAT	[UNTIL]
+Zone	Asia/Bahrain	3:22:20 -	LMT	1941 Jul 20  # Manamah
+			3:30	-	+0330	1944 Jan  1
+			4:00	-	+04	1972 Jun
+			3:00	-	+03
 
 # Bangladesh
 # From Alexander Krivenyshev (2009-05-13):
@@ -255,7 +259,10 @@ Zone	Indian/Chagos	4:49:40	-	LMT	1907
 			6:00	-	+06
 
 # Brunei
-# See Asia/Kuching.
+# Zone	NAME		STDOFF	RULES	FORMAT	[UNTIL]
+Zone	Asia/Brunei	7:39:40 -	LMT	1926 Mar # Bandar Seri Begawan
+			7:30	-	+0730	1933
+			8:00	-	+08
 
 # Burma / Myanmar
 
@@ -273,10 +280,15 @@ Zone	Asia/Yangon	6:24:47 -	LMT	1880        # or Rangoon
 			6:30	-	+0630	1942 May
 			9:00	-	+09	1945 May  3
 			6:30	-	+0630
-Link Asia/Yangon Indian/Cocos
 
 # Cambodia
-# See Asia/Bangkok.
+# Zone	NAME		STDOFF	RULES	FORMAT	[UNTIL]
+Zone	Asia/Phnom_Penh	6:59:40 -	LMT	1906 Jul  1
+			7:06:30	-	PLMT	1911 May  1
+			7:00	-	+07	1942 Dec 31 23:00
+			8:00	-	+08	1945 Mar 14 23:00
+			9:00	-	+09	1945 Sep  2
+			7:00	-	+07
 
 
 # China
@@ -667,7 +679,6 @@ Zone	Asia/Shanghai	8:05:43	-	LMT	1901
 # / Wulumuqi.  (Please use Asia/Shanghai if you prefer Beijing time.)
 Zone	Asia/Urumqi	5:50:20	-	LMT	1928
 			6:00	-	+06
-Link Asia/Urumqi Antarctica/Vostok
 
 
 # Hong Kong
@@ -2695,10 +2706,20 @@ Zone	Asia/Pyongyang	8:23:00 -	LMT	1908 Apr  1
 ###############################################################################
 
 # Kuwait
-# See Asia/Riyadh.
+# Zone	NAME		STDOFF	RULES	FORMAT	[UNTIL]
+Zone	Asia/Kuwait	3:11:56 -	LMT	1950
+			3:00	-	+03
 
 # Laos
-# See Asia/Bangkok.
+# Zone	NAME		STDOFF	RULES	FORMAT	[UNTIL]
+Zone	Asia/Vientiane	6:50:24 -	LMT	1906 Jul  1
+			7:06:30	-	PLMT	1911 May  1
+			7:00	-	+07	1942 Dec 31 23:00
+			8:00	-	+08	1945 Mar 14 23:00
+			9:00	-	+09	1945 Sep  2
+			7:00	-	+07	1947 Apr  1
+			8:00	-	+08	1955 Apr 15
+			7:00	-	+07
 
 
 # Lebanon
@@ -2736,7 +2757,18 @@ Zone	Asia/Beirut	2:22:00 -	LMT	1880
 Rule	NBorneo	1935	1941	-	Sep	14	0:00	0:20	-
 Rule	NBorneo	1935	1941	-	Dec	14	0:00	0	-
 #
-# For peninsular Malaysia see Asia/Singapore.
+# Peninsular Malaysia
+# Zone	NAME		STDOFF	RULES	FORMAT	[UNTIL]
+Zone Asia/Kuala_Lumpur	6:46:46 -	LMT	1901 Jan  1
+			6:55:25	-	SMT	1905 Jun  1 # Singapore M.T.
+			7:00	-	+07	1933 Jan  1
+			7:00	0:20	+0720	1936 Jan  1
+			7:20	-	+0720	1941 Sep  1
+			7:30	-	+0730	1942 Feb 16
+			9:00	-	+09	1945 Sep 12
+			7:30	-	+0730	1982 Jan  1
+			8:00	-	+08
+
 #
 # Sabah & Sarawak
 # From Paul Eggert (2014-08-12):
@@ -2748,14 +2780,12 @@ Zone Asia/Kuching	7:21:20	-	LMT	1926 Mar
 			8:00 NBorneo  +08/+0820	1942 Feb 16
 			9:00	-	+09	1945 Sep 12
 			8:00	-	+08
-Link Asia/Kuching Asia/Brunei
 
 # Maldives
 # Zone	NAME		STDOFF	RULES	FORMAT	[UNTIL]
 Zone	Indian/Maldives	4:54:00 -	LMT	1880 # Malé
 			4:54:00	-	MMT	1960 # Malé Mean Time
 			5:00	-	+05
-Link Indian/Maldives Indian/Kerguelen
 
 # Mongolia
 
@@ -2919,7 +2949,9 @@ Zone	Asia/Kathmandu	5:41:16 -	LMT	1920
 			5:45	-	+0545
 
 # Oman
-# See Asia/Dubai.
+# Zone	NAME		STDOFF	RULES	FORMAT	[UNTIL]
+Zone	Asia/Muscat	3:54:24 -	LMT	1920
+			4:00	-	+04
 
 # Pakistan
 
@@ -3526,7 +3558,6 @@ Zone	Asia/Manila	-15:56:00 -	LMT	1844 Dec 31
 Zone	Asia/Qatar	3:26:08 -	LMT	1920     # Al Dawhah / Doha
 			4:00	-	+04	1972 Jun
 			3:00	-	+03
-Link Asia/Qatar Asia/Bahrain
 
 # Saudi Arabia
 #
@@ -3573,9 +3604,6 @@ Link Asia/Qatar Asia/Bahrain
 # Zone	NAME		STDOFF	RULES	FORMAT	[UNTIL]
 Zone	Asia/Riyadh	3:06:52 -	LMT	1947 Mar 14
 			3:00	-	+03
-Link Asia/Riyadh Antarctica/Syowa
-Link Asia/Riyadh Asia/Aden	# Yemen
-Link Asia/Riyadh Asia/Kuwait
 
 # Singapore
 # taken from Mok Ly Yng (2003-10-30)
@@ -3590,7 +3618,6 @@ Zone	Asia/Singapore	6:55:25 -	LMT	1901 Jan  1
 			9:00	-	+09	1945 Sep 12
 			7:30	-	+0730	1982 Jan  1
 			8:00	-	+08
-Link Asia/Singapore Asia/Kuala_Lumpur
 
 # Spratly Is
 # no information
@@ -3833,9 +3860,6 @@ Zone	Asia/Dushanbe	4:35:12 -	LMT	1924 May  2
 Zone	Asia/Bangkok	6:42:04	-	LMT	1880
 			6:42:04	-	BMT	1920 Apr # Bangkok Mean Time
 			7:00	-	+07
-Link Asia/Bangkok Asia/Phnom_Penh	# Cambodia
-Link Asia/Bangkok Asia/Vientiane	# Laos
-Link Asia/Bangkok Indian/Christmas
 
 # Turkmenistan
 # From Shanks & Pottenger.
@@ -3850,9 +3874,6 @@ Zone	Asia/Ashgabat	3:53:32 -	LMT	1924 May  2 # or Ashkhabad
 # Zone	NAME		STDOFF	RULES	FORMAT	[UNTIL]
 Zone	Asia/Dubai	3:41:12 -	LMT	1920
 			4:00	-	+04
-Link Asia/Dubai Asia/Muscat	# Oman
-Link Asia/Dubai Indian/Mahe
-Link Asia/Dubai Indian/Reunion
 
 # Uzbekistan
 # Byalokoz 1919 says Uzbekistan was 4:27:53.
@@ -3949,4 +3970,7 @@ Zone Asia/Ho_Chi_Minh	7:06:30 -	LMT	1906 Jul  1
 
 
 # Yemen
-# See Asia/Riyadh.
+# Zone	NAME		STDOFF	RULES	FORMAT	[UNTIL]
+Zone	Asia/Aden	2:59:54	-	LMT	1950
+			3:00	-	+03
+
