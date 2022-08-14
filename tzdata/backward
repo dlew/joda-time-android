@@ -14,13 +14,13 @@
 # typically use this file for backward compatibility.
 
 # Link	TARGET			LINK-NAME
-Link	Africa/Nairobi		Africa/Asmera
-Link	Africa/Abidjan		Africa/Timbuktu
+Link	Africa/Asmara	Africa/Asmera
+Link	Africa/Bamako	Africa/Timbuktu
 Link	America/Argentina/Catamarca	America/Argentina/ComodRivadavia
 Link	America/Adak		America/Atka
 Link	America/Argentina/Buenos_Aires	America/Buenos_Aires
 Link	America/Argentina/Catamarca	America/Catamarca
-Link	America/Panama		America/Coral_Harbour
+Link	America/Atikokan	America/Coral_Harbour
 Link	America/Argentina/Cordoba	America/Cordoba
 Link	America/Tijuana		America/Ensenada
 Link	America/Indiana/Indianapolis	America/Fort_Wayne
@@ -35,8 +35,8 @@ Link	America/Rio_Branco	America/Porto_Acre
 Link	America/Argentina/Cordoba	America/Rosario
 Link	America/Tijuana		America/Santa_Isabel
 Link	America/Denver		America/Shiprock
-Link	America/Puerto_Rico	America/Virgin
-Link	Pacific/Auckland	Antarctica/South_Pole
+Link	America/St_Thomas	America/Virgin
+Link	Antarctica/McMurdo	Antarctica/South_Pole
 Link	Asia/Ashgabat		Asia/Ashkhabad
 Link	Asia/Kolkata		Asia/Calcutta
 Link	Asia/Shanghai		Asia/Chongqing
@@ -53,7 +53,7 @@ Link	Asia/Thimphu		Asia/Thimbu
 Link	Asia/Makassar		Asia/Ujung_Pandang
 Link	Asia/Ulaanbaatar	Asia/Ulan_Bator
 Link	Atlantic/Faroe		Atlantic/Faeroe
-Link	Europe/Berlin		Atlantic/Jan_Mayen
+Link	Europe/Oslo		Atlantic/Jan_Mayen
 Link	Australia/Sydney	Australia/ACT
 Link	Australia/Sydney	Australia/Canberra
 Link	Australia/Hobart	Australia/Currie
@@ -97,7 +97,7 @@ Link	Etc/GMT			GMT-0
 Link	Etc/GMT			GMT0
 Link	Etc/GMT			Greenwich
 Link	Asia/Hong_Kong		Hongkong
-Link	Africa/Abidjan		Iceland
+Link	Atlantic/Reykjavik	Iceland
 Link	Asia/Tehran		Iran
 Link	Asia/Jerusalem		Israel
 Link	America/Jamaica		Jamaica
@@ -113,10 +113,10 @@ Link	America/Denver		Navajo
 Link	Asia/Shanghai		PRC
 Link	Pacific/Kanton		Pacific/Enderbury
 Link	Pacific/Honolulu	Pacific/Johnston
-Link	Pacific/Guadalcanal	Pacific/Ponape
+Link	Pacific/Pohnpei		Pacific/Ponape
 Link	Pacific/Pago_Pago	Pacific/Samoa
-Link	Pacific/Port_Moresby	Pacific/Truk
-Link	Pacific/Port_Moresby	Pacific/Yap
+Link	Pacific/Chuuk		Pacific/Truk
+Link	Pacific/Chuuk		Pacific/Yap
 Link	Europe/Warsaw		Poland
 Link	Europe/Lisbon		Portugal
 Link	Asia/Taipei		ROC
