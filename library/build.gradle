@@ -29,6 +29,7 @@ dependencies {
     api(libs.jodaTime) {
         artifact {
             classifier = "no-tzdb"
+            extension = "jar"
         }
     }
 
