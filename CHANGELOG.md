@@ -1,5 +1,10 @@
 # Changelog
 
+# 2.11.0.1 *(2022-08-24)*
+
+* [#314](https://github.com/dlew/joda-time-android/pull/314) Updated to tzdata 2022cgtz
+* [#313](https://github.com/dlew/joda-time-android/pull/313) Fixed issue with Gradle dependency selectors
+
 # 2.11.0 *(2022-08-14)*
 
 * [#310](https://github.com/dlew/joda-time-android/pull/310) Updated to tzdata2022bgtz and joda-time 2.11.0
