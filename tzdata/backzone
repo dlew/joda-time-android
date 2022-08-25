@@ -1184,6 +1184,16 @@ Zone Pacific/Johnston	-10:00	-	HST
 # Also see Pacific/Chuuk and commentary for Micronesia in 'australasia'.
 
 # N Mariana Is
+#
+# From Paul Eggert (2022-08-16):
+# Although Shanks & Pottenger say Saipan used +09 and then switched
+# to Guam time in October 1969, this is surely wrong.
+# Saipan used Guam time in the late 1950s; see page 4 of the minutes on the
+# conference of the 12th Saipan Legislature and the Select Committee on
+# Saipan Mission, 5th Guam Legislature (1959-09-11):
+# http://www.nmhcouncil.org/nmhc_archives/U.S.%20Navy%20Civil%20Affairs%20Files%201944-1962/1959/1959%2009%2017%20letter,%20minutes%20of%20conference,%20Borja.pdf
+# For now, assume Saipan switched to Guam time after the Battle of Saipan.
+#
 
 
 # Wake
