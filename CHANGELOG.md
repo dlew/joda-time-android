@@ -1,5 +1,9 @@
 # Changelog
 
+# 2.12.0 *(2022-10-13)*
+
+* [#321](https://github.com/dlew/joda-time-android/pull/321) Updated to tzdata 2022egtz / joda-time to 2.12.0
+
 # 2.11.2 *(2022-09-25)*
 
 * [#317](https://github.com/dlew/joda-time-android/pull/317) Updated to tzdata 2022dgtz
