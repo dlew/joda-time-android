@@ -17,7 +17,7 @@
 ** limitations under the License.
 */
 -->
-<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+<resources xmlns:tools="http://schemas.android.com/tools" xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
 
     <!-- This is used to express that something occurred some number of seconds in the past (e.g., 5 seconds ago). -->
     <plurals name="joda_time_android_num_seconds_ago">
@@ -125,17 +125,17 @@
     <string name="joda_time_android_relative_time">"<xliff:g example="4 hours ago" id="date">%1$s</xliff:g>, <xliff:g example="11:00 am" id="time">%2$s</xliff:g>"</string>
 
     <!-- Phrase describing a time duration using seconds [CHAR LIMIT=16] -->
-    <plurals name="joda_time_android_duration_seconds">
+    <plurals name="joda_time_android_duration_seconds" tools:ignore="MissingTranslation">
         <item quantity="one">1 second</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> seconds</item>
     </plurals>
     <!-- Phrase describing a time duration using minutes [CHAR LIMIT=16] -->
-    <plurals name="joda_time_android_duration_minutes">
+    <plurals name="joda_time_android_duration_minutes" tools:ignore="MissingTranslation">
         <item quantity="one">1 minute</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> minutes</item>
     </plurals>
     <!-- Phrase describing a time duration using hours [CHAR LIMIT=16] -->
-    <plurals name="joda_time_android_duration_hours">
+    <plurals name="joda_time_android_duration_hours" tools:ignore="MissingTranslation">
         <item quantity="one">1 hour</item>
         <item quantity="other"><xliff:g id="count">%d</xliff:g> hours</item>
     </plurals>
