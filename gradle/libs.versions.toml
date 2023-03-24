@@ -1,21 +1,21 @@
 [versions]
-androidx-test = "1.4.0"
+androidx-test = "1.5.0"
 
 [libraries]
 android-gradlePlugin = "com.android.tools.build:gradle:7.2.2"
 
-androidx-annotation = "androidx.annotation:annotation:1.5.0"
+androidx-annotation = "androidx.annotation:annotation:1.6.0"
 androidx-startup = "androidx.startup:startup-runtime:1.1.1"
 androidx-test-core = { module = "androidx.test:core", version.ref = "androidx-test" }
 androidx-test-runner = { module = "androidx.test:runner", version.ref = "androidx-test" }
 androidx-test-rules = { module = "androidx.test:rules", version.ref = "androidx-test" }
-androidx-test-ext-junit = "androidx.test.ext:junit:1.1.3"
+androidx-test-ext-junit = "androidx.test.ext:junit:1.1.5"
 
-gradleMavenPublishPlugin = "com.vanniktech:gradle-maven-publish-plugin:0.22.0"
+gradleMavenPublishPlugin = "com.vanniktech:gradle-maven-publish-plugin:0.24.0"
 
-jodaTime = "joda-time:joda-time:2.12.1"
+jodaTime = "joda-time:joda-time:2.12.4"
 
 junit = "junit:junit:4.13.2"
 
 [plugins]
-versions = "com.github.ben-manes.versions:0.42.0"
+versions = "com.github.ben-manes.versions:0.46.0"
