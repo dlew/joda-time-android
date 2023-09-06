@@ -2,7 +2,7 @@
 androidx-test = "1.5.0"
 
 [libraries]
-android-gradlePlugin = "com.android.tools.build:gradle:7.2.2"
+android-gradlePlugin = "com.android.tools.build:gradle:8.1.1"
 
 androidx-annotation = "androidx.annotation:annotation:1.6.0"
 androidx-startup = "androidx.startup:startup-runtime:1.1.1"

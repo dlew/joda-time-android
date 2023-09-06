@@ -9,12 +9,14 @@ android {
         consumerProguardFiles 'proguard-rules.txt'
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
-
-    lintOptions {
+    namespace 'net.danlew.android.joda'
+    testNamespace 'net.danlew.android.joda.test'
+    lint {
         lintConfig file('lint.xml')
+        textOutput file('stdout')
         textReport true
-        textOutput 'stdout'
     }
+
 }
 
 apply plugin: net.danlew.android.joda.TzDataPlugin

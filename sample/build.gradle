@@ -21,11 +21,11 @@ android {
             shrinkResources true
         }
     }
-
-    lintOptions {
-        // We don't care THAT much about lint issues with our sample
+    namespace 'net.danlew.android.joda.sample'
+    lint {
         abortOnError false
     }
+
 }
 
 repositories {
