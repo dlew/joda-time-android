@@ -13,17 +13,9 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
-    // We're enabling proguard just to prove we don't have to do anything
-    // special to get this build to work with proguard.
-    buildTypes {
-        debug {
-            minifyEnabled true
-            shrinkResources true
-        }
-    }
+    namespace 'net.danlew.android.joda.sample'
 
-    lintOptions {
-        // We don't care THAT much about lint issues with our sample
+    lint {
         abortOnError false
     }
 }

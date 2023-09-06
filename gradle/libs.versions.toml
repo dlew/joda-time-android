@@ -1,14 +1,11 @@
-[versions]
-androidx-test = "1.5.0"
-
 [libraries]
-android-gradlePlugin = "com.android.tools.build:gradle:7.2.2"
+android-gradlePlugin = "com.android.tools.build:gradle:8.1.1"
 
 androidx-annotation = "androidx.annotation:annotation:1.6.0"
 androidx-startup = "androidx.startup:startup-runtime:1.1.1"
-androidx-test-core = { module = "androidx.test:core", version.ref = "androidx-test" }
-androidx-test-runner = { module = "androidx.test:runner", version.ref = "androidx-test" }
-androidx-test-rules = { module = "androidx.test:rules", version.ref = "androidx-test" }
+androidx-test-core = "androidx.test:core:1.5.0"
+androidx-test-runner = "androidx.test:runner:1.5.2"
+androidx-test-rules = "androidx.test:rules:1.5.0"
 androidx-test-ext-junit = "androidx.test.ext:junit:1.1.5"
 
 gradleMavenPublishPlugin = "com.vanniktech:gradle-maven-publish-plugin:0.24.0"
