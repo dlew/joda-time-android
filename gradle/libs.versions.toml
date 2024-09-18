@@ -10,7 +10,7 @@ androidx-test-ext-junit = "androidx.test.ext:junit:1.1.5"
 
 gradleMavenPublishPlugin = "com.vanniktech:gradle-maven-publish-plugin:0.27.0"
 
-jodaTime = "joda-time:joda-time:2.12.7"
+jodaTime = "joda-time:joda-time:2.13.0"
 
 junit = "junit:junit:4.13.2"
 
