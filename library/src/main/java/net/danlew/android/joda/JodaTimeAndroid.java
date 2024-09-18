@@ -7,7 +7,7 @@ import android.content.Context;
  */
 public final class JodaTimeAndroid {
 
-    public static String TZ_DATA_VERSION = "2024agtz";
+    public static String TZ_DATA_VERSION = "2024bgtz";
 
     private JodaTimeAndroid() {
         // no instances
