@@ -3,6 +3,12 @@ joda-time-android
 
 This library is a version of [Joda-Time](https://github.com/JodaOrg/joda-time) built with Android in mind.
 
+-----
+
+**Warning: joda-time-android is no longer a recommended solution for datetime handling on Android.** Instead, I recommend using `java.time.*` package (w/ [desugaring](https://developer.android.com/studio/write/java8-support#library-desugaring) if necessary).
+
+*joda-time-android will continue to get tzdb updates for the foreseeable future to support any project that doesn't want to switch datetime handling.*
+
 Why Joda-Time?
 ==============
 
