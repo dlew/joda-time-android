@@ -1,7 +1,9 @@
+import net.danlew.android.joda.TzDataPlugin
+
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 32
+    compileSdkVersion 36
     resourcePrefix 'joda_'
 
     defaultConfig {
@@ -19,7 +21,7 @@ android {
 
 }
 
-apply plugin: net.danlew.android.joda.TzDataPlugin
+apply plugin: TzDataPlugin
 apply plugin: "com.vanniktech.maven.publish"
 
 repositories {
@@ -47,4 +49,38 @@ dependencies {
 
 tzdata {
     tzDataDir = new File(project.rootDir, 'tzdata')
+}
+
+mavenPublishing {
+    coordinates("net.danlew", "android.joda", "2.13.1-SNAPSHOT")
+
+    pom {
+        name = "joda-time-android Library"
+        description = "Joda-Time library with Android specialization"
+        inceptionYear = "2014"
+        url = "https://github.com/dlew/joda-time-android"
+        licenses {
+            license {
+                name = "The Apache License, Version 2.0"
+                url = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+                distribution = "http://www.apache.org/licenses/LICENSE-2.0.txt"
+            }
+        }
+        developers {
+            developer {
+                id = "danlew"
+                name = "Dan Lew"
+                url = "https://github.com/dlew/"
+            }
+        }
+        scm {
+            url = "https://github.com/dlew/joda-time-android"
+            connection = "scm:git@github.com:dlew/joda-time-android.git"
+            developerConnection = "scm:git@github.com:dlew/joda-time-android.git"
+        }
+    }
+
+    publishToMavenCentral()
+
+    signAllPublications()
 }
