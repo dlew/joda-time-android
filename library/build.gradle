@@ -52,7 +52,7 @@ tzdata {
 }
 
 mavenPublishing {
-    coordinates("net.danlew", "android.joda", "2.13.1-SNAPSHOT")
+    coordinates("net.danlew", "android.joda", "2.14.0-SNAPSHOT")
 
     pom {
         name = "joda-time-android Library"

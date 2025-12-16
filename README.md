@@ -32,7 +32,7 @@ Add the following dependency to `build.gradle`:
 
 ```groovy
 dependencies {
-    implementation 'net.danlew:android.joda:2.13.1'
+    implementation 'net.danlew:android.joda:2.14.0'
 }
 ```
 
